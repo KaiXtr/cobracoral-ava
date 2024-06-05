@@ -1,0 +1,95 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+:root {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Rubik", sans-serif;
+  margin: 0px;
+}
+
+a {
+  color: #471313;
+  text-decoration: none;
+}
+
+header, div.inicio-banner, nav, footer {
+  max-width: 100%;
+}
+
+header {
+  background-color: #ff3434;
+  padding: 5vh 10vw 5vh 10vw;
+  max-height: 20vh;
+
+  h1 {
+    width: 30%;
+    display: inline-block;
+  }
+  ul {
+    width: 60%;
+    text-align: right;
+    display: inline-block;
+
+    li {
+      margin-right: 1rem;
+      display: inline-block;
+
+      a {
+        transition-duration: .2s;
+        border-radius: 20px;
+        padding: 10px;
+        background-color: rgba(255, 118, 118, 0);
+      }
+    }
+
+    li:hover a {
+      background-color: rgba(255, 118, 118, 100);
+    }
+  }
+}
+
+div.inicio-banner {
+  background-color: #ff3434;
+  min-height: 70vh;
+}
+
+nav {
+  padding: 5vh 10vw 5vh 10vw;
+
+  p {
+    padding-bottom: 5vh;
+    margin-bottom: 5vh;
+    border-bottom: 1px #ffbfbf solid;
+  }
+
+  button.act-button {
+    border: 0px;
+    border-radius: 20rem;
+    padding: 1rem;
+    cursor: pointer;
+  }
+}
+
+footer {
+  text-align: center;
+  padding: 10vh 10vw 10vh 10vw;
+  background-color: #d13f3f;
+}
