@@ -7,9 +7,39 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "pages", "data-turbo-track": "reload" %>
   </head>
 
   <body>
+    <header>
+      <div class="header-logo">
+          <%= show_svg('cobracoral-logo.svg') %>
+          <h1>Cobracoral</h1>
+      </div>
+      <ul>
+          <li>
+              <a href="/">Início</a>
+          </li>
+          <li>
+              <a href="#sobre">Sobre</a>
+          </li>
+          <li>
+              <a href="#experimentar">Experimentar</a>
+          </li>
+          <li>
+              <a href="#download">Download</a>
+          </li>
+          <li>
+              <a href="/aprender">Aprender</a>
+          </li>
+          <li>
+              <a href="#publicar">Publicar</a>
+          </li>
+      </ul>
+    </header>
     <%= yield %>
+    <footer>
+        Ewerton Bramos - 2024
+    </footer>
   </body>
 </html>
