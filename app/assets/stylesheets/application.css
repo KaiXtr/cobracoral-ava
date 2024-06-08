@@ -40,13 +40,18 @@ header, div.inicio-banner, nav, footer {
 }
 
 svg.cobracoral-icon {
+  width: 10vw;
   max-height: 8vh;
 
   .g-mask path {
     transform-origin: center;
     animation: cobracoral-logo 1s ease-out forwards;
     transform: rotate(-80deg);
+    transition-duration: .2s;
 
+    &:hover {
+      filter: brightness(150%);
+    }
     &:nth-child(2){
       animation-delay: .1s;
     }
@@ -56,39 +61,74 @@ svg.cobracoral-icon {
   }
 }
 
+button.act-button {
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
+  border: 3px solid #ff3434;
+  background-color: rgba(0,0,0,0);
+  padding: 1rem;
+  cursor: pointer;
+  transition-duration: .2s;
+  position: relative;
+  
+  &:before {
+    content: '';
+    background-color: #ff3434;
+    width: 0%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    transition: .2s;
+    z-index: -1;
+  }
+  &:hover {
+    color: #ffffff;
+
+    &:before{
+      width: 100%;
+    }
+  }
+}
+
 header {
   background-color: #ff3434;
   padding: 5vh 10vw 5vh 10vw;
   max-height: 20vh;
+  align-items: center;
+  display: flex;
 
   div.header-logo {
-    width: 30%;
+    width: 20%;
     align-items: center;
-    display: inline-block;
+    flex: 1;
 
     h1, svg {
       display: inline-block;
     }
+    h1 {
+      transition-duration: .2s;
+      &:hover {
+        filter: brightness(200%);
+      }
+    }
   }
   ul {
-    width: 60%;
+    width: 70%;
     text-align: right;
-    display: inline-block;
+    flex: 2;
 
     li {
       margin-right: 1rem;
       display: inline-block;
 
-      a {
-        transition-duration: .2s;
-        border-radius: 20px;
-        padding: 10px;
-        background-color: rgba(255, 118, 118, 0);
-      }
-    }
+      button.act-button {
+        border-color: #000000;
 
-    li:hover a {
-      background-color: rgba(255, 118, 118, 100);
+        &:before {
+          background-color: #000000;
+        }
+      }
     }
   }
 }
@@ -101,18 +141,11 @@ div.inicio-banner {
 nav {
   padding: 5vh 10vw 5vh 10vw;
 
-  p {
+  section {
     line-height: 25pt;
     padding-bottom: 5vh;
     margin-bottom: 5vh;
     border-bottom: 1px #ffbfbf solid;
-  }
-
-  button.act-button {
-    border: 0px;
-    border-radius: 20rem;
-    padding: 1rem;
-    cursor: pointer;
   }
 }
 

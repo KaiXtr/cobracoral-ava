@@ -3,3 +3,39 @@ iframe#python-console-embedded {
     height: 50vh;
     border: none;
 }
+
+div.cards-container {
+    div.card {
+        border: 3px solid #ff3434;
+        width: 30%;
+        height: 20vh;
+        display: inline-block;
+
+        div.card-frente {
+            padding: 10px;
+        }
+        div.card-verso {
+            width: 0%;
+            height: fit-content;
+            color: #ffffff;
+            background-color: #ff3434;
+            transition-duration: .2s;
+            display: none;
+
+            p {
+                margin: 0px;
+                border: none;
+            }
+        }
+
+        &:hover {
+            div.card-frente {
+                display: none;
+            }
+            div.card-verso {
+                width: 100%;
+                display: block;
+            }
+        }
+    }
+}
