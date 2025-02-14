@@ -1,10 +1,10 @@
 class SessionsController < ApplicationController
 	def criar
-		usario = Usuario.find_by(nome_completo: params[:session][:nome_completo])
+		usuario = Usuario.find_by(email: params[:session][:email])
 		if usuario
 			logar(usuario)
 		else
-			render 'new'
+			render 'nova'
 		end
 	end
 	

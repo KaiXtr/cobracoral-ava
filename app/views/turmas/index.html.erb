@@ -1,0 +1,12 @@
+<h1>Turma#index</h1>
+<p>Find me in app/views/turmas/index.html.erb</p>
+
+<div class='container'>
+	<h3> Bem vindo, <%= @current_user.nome_completo %> </h3>
+	
+	<h4> Usuários </h4>
+	<%= render @usuarios %>
+	
+	<h4> Turmas </h4>
+	<%= render @turmas %>
+</div>

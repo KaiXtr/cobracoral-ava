@@ -7,6 +7,15 @@
             <span class="word-sort">sensacional</span>
         </h1>
     </section>
+
+	<h3> Bem vindo, <%= @current_user.nome_completo %> </h3>
+	
+	<h4> Usuários </h4>
+	<%= render @usuarios %>
+	
+	<h4> Turmas </h4>
+	<%= render @turmas %>
+    
     <h1>O que é Cobracoral?</h1>
     <section id="sobre">
         Cobracoral foi feito por Ewerton Bramos em 2022, inicialmente como um passatempo para compreender o funcionamento das linguagens de programação.
