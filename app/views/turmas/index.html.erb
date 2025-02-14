@@ -5,8 +5,14 @@
 	<h3> Bem vindo, <%= @current_user.nome_completo %> </h3>
 	
 	<h4> Usuários </h4>
-	<%= render @usuarios %>
-	
+	<%= turbo_stream_from "usuarios" %>
+	<div id="usuarios">
+		<%= render @usuarios %>
+	</div>
+
 	<h4> Turmas </h4>
-	<%= render @turmas %>
+	<%= turbo_stream_from "turmas" %>
+	<div id="turmas">
+		<%= render @turmas %>
+	</div>
 </div>
