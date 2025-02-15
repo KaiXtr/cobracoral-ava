@@ -1,6 +1,15 @@
-<a href=<%= conteudo_path %>>
-  <div id="<%= dom_id conteudo %>" class="conteudo-button">
-    <h5><%= conteudo.nome_conteudo %></h5>
-    Progresso:
-  </div>
-</a>
+<% if @estaEditando == true %>
+  <a href="/conteudos/<%= conteudo.id %>/edit">
+    <div id="<%= dom_id conteudo %>" class="conteudo-button">
+      <h5><%= conteudo.nome_conteudo %></h5>
+      Editar
+    </div>
+  </a>
+<% else %>
+  <a href="/conteudos/<%= conteudo.id %>">
+    <div id="<%= dom_id conteudo %>" class="conteudo-button">
+      <h5><%= conteudo.nome_conteudo %></h5>
+      Progresso:
+    </div>
+  </a>
+<% end %>

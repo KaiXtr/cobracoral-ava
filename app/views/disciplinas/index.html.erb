@@ -1,14 +1,11 @@
 <nav>
   <p style="color: green"><%= notice %></p>
 
-  <h1>Disciplinas</h1>
+  <h1>Todas as disciplinas</h1>
 
-  <div id="disciplinas">
+  <div id="disciplinas" class="disciplinas-container">
     <% @disciplinas.each do |disciplina| %>
       <%= render disciplina %>
-      <p>
-        <%= link_to "Show this disciplina", disciplina %>
-      </p>
     <% end %>
   </div>
 

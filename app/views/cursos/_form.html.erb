@@ -1,0 +1,16 @@
+<%= form_with(model: curso) do |form| %>
+  <h1>
+    <%= form.text_field :nome_curso, class: "titulo-pagina page-edit-input" %>
+  </h1>
+  <h3>Descrição do curso</h3>
+  <%= form.text_field '' %>
+
+  <div class="button-group">
+    <a href="/cursos/<%= @curso.id %>">
+      <button class="act-button">
+        Cancelar
+      </button>
+    </a>
+    <%= form.submit "Salvar", class: "act-button" %>
+  </div>
+<% end %>

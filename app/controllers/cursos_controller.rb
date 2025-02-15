@@ -17,4 +17,10 @@ class CursosController < ApplicationController
 		@turmas = Turma.all
 		@disciplinas = Disciplina.all
 	end
+
+	def edit
+		@curso = Curso.find(params[:id])
+		@turmas = Turma.all
+		@disciplinas = Disciplina.all
+	end
 end

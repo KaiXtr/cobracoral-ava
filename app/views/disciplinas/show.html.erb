@@ -1,44 +1,44 @@
 <nav>
-  <p style="color: green"><%= notice %></p>
+  <div class="deslizar-transition">
+    <p style="color: green"><%= notice %></p>
+    
+    <a href="/cursos/1">
+      Voltar para <strong>Ciência da Computação</strong>
+    </a>
 
-  <div>
-    <%= link_to "Edit this disciplina", edit_disciplina_path(@disciplina) %> |
-    <%= link_to "Back to disciplinas", disciplinas_path %>
-
-    <%= button_to "Destroy this disciplina", @disciplina, method: :delete %>
-  </div>
-
-  <div class="disciplina_info_container">
-    <div class="disciplina_info">
-      <h1 class="titulo-disciplina">
-        <%= @disciplina.nome_disciplina %>
-      </h1>
-      Nome do professor
-      <br>
-      Local da sala de aula
-    </div>
-    <div class="disciplina_medidores">
-      <div class="medidor-container">
-        <div class="medidor-grafico">
-          <div class="medidor-grafico-max"></div>
-          <div class="medidor-grafico-atual"></div>
-          <span class="medidor-grafico-valor">100%</span>
-        </div>
-        <h5>Presenças</h5>
+    <div class="disciplina_info_container">
+      <div class="disciplina_info">
+        <h1 class="titulo-disciplina">
+          <%= @disciplina.nome_disciplina %>
+          <%= link_to "Editar", edit_disciplina_path(@disciplina) %>
+        </h1>
+        Nome do professor
+        <br>
+        Local da sala de aula
       </div>
-      <div class="medidor-container">
-        <div class="medidor-grafico">
-          <div class="medidor-grafico-max"></div>
-          <div class="medidor-grafico-atual"></div>
-          <span class="medidor-grafico-valor">10%</span>
+      <div class="disciplina_medidores">
+        <div class="medidor-container">
+          <div class="medidor-grafico">
+            <div class="medidor-grafico-max"></div>
+            <div class="medidor-grafico-atual"></div>
+            <span class="medidor-grafico-valor">100%</span>
+          </div>
+          <h5>Presenças</h5>
         </div>
-        <h5>Notas</h5>
+        <div class="medidor-container">
+          <div class="medidor-grafico">
+            <div class="medidor-grafico-max"></div>
+            <div class="medidor-grafico-atual"></div>
+            <span class="medidor-grafico-valor">10%</span>
+          </div>
+          <h5>Notas</h5>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="disciplina_conteudos_container">
-    <ol>
-      <%= render @unidades_disciplina %>
-    </ol>
+    <div class="disciplina_conteudos_container">
+      <ol>
+        <%= render @unidades_disciplina %>
+      </ol>
+    </div>
   </div>
 </nav>

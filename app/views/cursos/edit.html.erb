@@ -1,0 +1,21 @@
+<nav>
+  <%= button_to "Destroy this curso", @curso, method: :delete %>
+  <%= render "form", curso: @curso %>
+    <div>
+        <h2>Minhas turmas</h2>
+        <h5>Criar Turma</h4>
+        <%= render partial: "layouts/nova_turma_form" %>
+        <%= render @turmas %>
+    </div>
+    <div>
+        <h2>Minhas disciplinas</h2>
+        <h3>Semestre</h3>
+        <div class="disciplinas-container">
+            <%= render @disciplinas %>
+        </div>
+        <h3>Semestre</h3>
+        <div class="disciplinas-container">
+            <%= render @disciplinas %>
+        </div>
+    </div>
+</nav>

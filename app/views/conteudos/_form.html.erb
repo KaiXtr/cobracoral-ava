@@ -11,17 +11,20 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :unidade_disciplina_id, style: "display: block" %>
-    <%= form.text_field :unidade_disciplina_id %>
-  </div>
+  <h1>
+    <%= form.text_field :nome_conteudo, class: "titulo-pagina page-edit-input" %>
+  </h1>
 
   <div>
-    <%= form.label :nome_conteudo, style: "display: block" %>
-    <%= form.text_field :nome_conteudo %>
+    <%= form.text_area '' %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="button-group">
+    <a href="/conteudos/<%= @conteudo.id %>">
+      <button class="act-button">
+        Cancelar
+      </button>
+    </a>
+    <%= form.submit "Salvar", class: "act-button" %>
   </div>
 <% end %>

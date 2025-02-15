@@ -15,17 +15,17 @@
   <div class="disciplina_info_container">
     <div class="disciplina_info">
       <h1>
-        <%= form.text_field :nome_disciplina, class: "titulo-disciplina edit" %>
+        <%= form.text_field :nome_disciplina, class: "titulo-pagina page-edit-input" %>
       </h1>
       <div>
         Nome prof
-        <%= form.label :nome_disciplina, style: "display: block" %>
-        <%= form.text_field :nome_disciplina %>
+        <%= form.label :nome_disciplina %>
+        <%= form.text_field :nome_disciplina, class: "page-edit-input" %>
       </div>
       <div>
         Local sala
-        <%= form.label :nome_disciplina, style: "display: block" %>
-        <%= form.text_field :nome_disciplina %>
+        <%= form.label :nome_disciplina %>
+        <%= form.text_field :nome_disciplina, class: "page-edit-input" %>
       </div>
     </div>
     <div class="disciplina_medidores">
@@ -36,7 +36,12 @@
   <div class="disciplina_conteudos_container">
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="button-group">
+    <a href="/disciplinas/<%= @disciplina.id %>">
+      <button class="act-button">
+        Cancelar
+      </button>
+    </a>
+    <%= form.submit "Salvar", class: "act-button" %>
   </div>
 <% end %>

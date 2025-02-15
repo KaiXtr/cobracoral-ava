@@ -1,24 +1,37 @@
 <nav>
-  <p style="color: green"><%= notice %></p>
+  <div class="deslizar-transition">
+    <p style="color: green"><%= notice %></p>
+    <a href="/disciplinas/<%= @disciplina_conteudo.id %>">
+      Voltar para <strong><%= @disciplina_conteudo.nome_disciplina %></strong>
+    </a>
+    <h1>
+      <%= @conteudo.nome_conteudo %>
+      <%= link_to "Editar", edit_conteudo_path(@conteudo) %>
+    </h1>
 
-  <h1><%= @conteudo.nome_conteudo %></h1>
+    <div class="conteudo-elementos">
+      <p class="conteudo-texto">
+        Mussum Ipsum, cacilds vidis litro abertis.  Casamentiss faiz malandris se pirulitá. Negão é teu passadis, eu sou faxa pretis. Tá deprimidis, eu conheço uma cachacis que pode alegrar sua vidis. Sapien in monti palavris qui num significa nadis i pareci latim.
+      </p>
+      <p class="conteudo-texto">
+        Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis. Manduma pindureta quium dia nois paga. Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. Sed non consequat odio. Aenean aliquam molestie leo, vitae iaculis nisl.
+      </p>
+      <p class="conteudo-texto">
+        Negão é teu passadis, eu sou faxa pretis. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis. Aenean aliquam molestie leo, vitae iaculis nisl. Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. Sed non consequat odio.
+      </p>
+    </div>
 
-  <div class="conteudo-elementos">
-    <p class="conteudo-texto">
-      Mussum Ipsum, cacilds vidis litro abertis.  Casamentiss faiz malandris se pirulitá. Negão é teu passadis, eu sou faxa pretis. Tá deprimidis, eu conheço uma cachacis que pode alegrar sua vidis. Sapien in monti palavris qui num significa nadis i pareci latim.
-    </p>
-    <p class="conteudo-texto">
-      Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis. Manduma pindureta quium dia nois paga. Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. Sed non consequat odio. Aenean aliquam molestie leo, vitae iaculis nisl.
-    </p>
-    <p class="conteudo-texto">
-      Negão é teu passadis, eu sou faxa pretis. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis. Aenean aliquam molestie leo, vitae iaculis nisl. Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. Sed non consequat odio.
-    </p>
-  </div>
-
-  <div>
-    <%= link_to "Edit this conteudo", edit_conteudo_path(@conteudo) %> |
-    <%= link_to "Back to conteudos", conteudos_path %>
-
-    <%= button_to "Destroy this conteudo", @conteudo, method: :delete %>
+    <div class="button-group">
+      <% if @conteudo.id - 1 > 0 %>
+        <a href="/conteudos/<%= @conteudo.id - 1 %>">
+          <button class="act-button">Conteúdo anterior</button>
+        </a>
+      <% end %>
+      <% if @conteudo.id + 1 < 10 %>
+        <a href="/conteudos/<%= @conteudo.id + 1 %>">
+          <button class="act-button">Próximo conteúdo</button>
+        </a>
+      <% end %>
+    </div>
   </div>
 </nav>

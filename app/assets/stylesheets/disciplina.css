@@ -5,8 +5,15 @@
 
 .disciplinas-container .disciplina-thumbnail {
     display: inline-block;
+    border-radius: 50px;
+    transition-duration: .2s;
+    transform: translateY(0px);
     width: 30vw;
     margin: 5px;
+}
+
+.disciplinas-container .disciplina-thumbnail:hover {
+    transform: translateY(-10px);
 }
 
 .disciplinas-container .disciplina-thumbnail .disciplina-thumbnail-img {
@@ -26,11 +33,11 @@
     margin: 0px;
 }
 
-.titulo-disciplina {
+.titulo-pagina {
     font-size: 26pt;
 }
 
-.titulo-disciplina.edit {
+.page-edit-input {
     border: none;
     border-bottom: 2px solid black;
 }
@@ -96,8 +103,13 @@
 .conteudo-button {
     background-color: ghostwhite;
     border-radius: 50px;
+    transition-duration: .2s;
     padding: 20px 50px 20px 50px;
     margin-bottom: 10px;
+}
+
+.conteudo-button:hover {
+    transform: translateX(10px);
 }
 
 .conteudo-button h5 {

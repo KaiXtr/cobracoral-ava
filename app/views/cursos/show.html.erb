@@ -1,17 +1,26 @@
 <nav>
-    <h1>
-        <%= @curso.nome_curso %>
-    </h1>
-	<div>
-        <h2>Minhas turmas</h2>
-        <h5>Criar Turma</h4>
-        <%= render partial: "layouts/nova_turma_form" %>
-        <%= render @turmas %>
-    </div>
-    <div>
-        <h2>Minhas disciplinas</h2>
-        <div class="disciplinas-container">
-            <%= render @disciplinas %>
+    <div class="deslizar-transition">
+        <h1>
+            <%= @curso.nome_curso %>
+            <%= link_to "Editar", edit_curso_path(@curso) %>
+        </h1>
+        <p>
+        Mussum Ipsum, cacilds vidis litro abertis.  Casamentiss faiz malandris se pirulitá. Negão é teu passadis, eu sou faxa pretis. Tá deprimidis, eu conheço uma cachacis que pode alegrar sua vidis. Sapien in monti palavris qui num significa nadis i pareci latim.
+        </p>
+        <div>
+            <h2>Minhas turmas</h2>
+            <%= render @turmas %>
+        </div>
+        <div>
+            <h2>Minhas disciplinas</h2>
+            <h3>Semestre</h3>
+            <div class="disciplinas-container">
+                <%= render @disciplinas %>
+            </div>
+            <h3>Semestre</h3>
+            <div class="disciplinas-container">
+                <%= render @disciplinas %>
+            </div>
         </div>
     </div>
 </nav>

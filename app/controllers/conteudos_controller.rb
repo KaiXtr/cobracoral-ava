@@ -8,6 +8,9 @@ class ConteudosController < ApplicationController
 
   # GET /conteudos/1 or /conteudos/1.json
   def show
+    conteudo = Conteudo.find(params[:id])
+    unidade_do_conteudo = UnidadeDisciplina.find_by(id: conteudo.unidade_disciplina_id)
+    @disciplina_conteudo = Disciplina.find_by(id: unidade_do_conteudo.disciplina_id)
   end
 
   # GET /conteudos/new
