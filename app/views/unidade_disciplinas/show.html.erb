@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @unidade_disciplina %>
+
+<div>
+  <%= link_to "Edit this unidade disciplina", edit_unidade_disciplina_path(@unidade_disciplina) %> |
+  <%= link_to "Back to unidade disciplinas", unidade_disciplinas_path %>
+
+  <%= button_to "Destroy this unidade disciplina", @unidade_disciplina, method: :delete %>
+</div>

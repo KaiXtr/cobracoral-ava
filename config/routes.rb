@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :unidade_disciplinas
   resources :usuarios
   resources :cursos
   resources :turmas
