@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_15_155714) do
+ActiveRecord::Schema[7.0].define(version: 2025_02_15_155842) do
+  create_table "conteudos", force: :cascade do |t|
+    t.integer "unidade_disciplina_id", null: false
+    t.string "nome_conteudo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["unidade_disciplina_id"], name: "index_conteudos_on_unidade_disciplina_id"
+  end
+
   create_table "cursos", force: :cascade do |t|
     t.integer "cod_curso"
     t.string "nome_curso"
@@ -60,6 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_155714) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "conteudos", "unidade_disciplinas"
   add_foreign_key "mensagems", "turmas"
   add_foreign_key "mensagems", "usuarios"
   add_foreign_key "unidade_disciplinas", "disciplinas"

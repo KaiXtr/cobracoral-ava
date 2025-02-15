@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Conteudos</h1>
+
+<div id="conteudos">
+  <% @conteudos.each do |conteudo| %>
+    <%= render conteudo %>
+    <p>
+      <%= link_to "Show this conteudo", conteudo %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New conteudo", new_conteudo_path %>

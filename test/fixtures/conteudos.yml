@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  unidade_disciplina: one
+  nome_conteudo: MyString
+
+two:
+  unidade_disciplina: two
+  nome_conteudo: MyString
