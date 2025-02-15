@@ -7,6 +7,7 @@ class TurmasController < ApplicationController
 		@turma = Turma.new
 		@turmas = Turma.all
 		@usuarios = Usuario.all_except(@usuario_autenticado)
+		@cursos = Curso.all
 	end
 
 	def create

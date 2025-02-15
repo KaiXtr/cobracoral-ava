@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :turmas
   resources :usuarios
+  resources :cursos
+  resources :turmas
+  resources :disciplinas
   
   root "inicio#index"
 

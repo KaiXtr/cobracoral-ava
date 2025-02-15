@@ -4,7 +4,8 @@ class CursosController < ApplicationController
 		@usuario_autenticado = usuario_atual
 		redirect_to '/entrar' unless @usuario_autenticado
 
-		@curso = Turma.new
+		@curso = Curso.new
+		@cursos = Curso.all
 	end
 
 	def create
@@ -13,5 +14,7 @@ class CursosController < ApplicationController
 
 	def show
 		@curso = Curso.find(params[:id])
+		@turmas = Turma.all
+		@disciplinas = Disciplina.all
 	end
 end
