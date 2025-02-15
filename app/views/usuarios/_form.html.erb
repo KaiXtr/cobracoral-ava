@@ -1,0 +1,17 @@
+<%= form_with(model: usuario) do |f| %>
+    <div class="form_group">
+        <%= f.label :nome_completo, 'Nome completo' %>
+        <%= f.text_field :nome_completo %>
+    </div>
+    <div class="form_group">
+        <%= f.label :email, 'Email institucional' %>
+        <%= f.email_field :email %>
+    </div>
+    <div class="form_group">
+        <%= f.label :telefone, 'Telefone' %>
+        <%= f.text_field :telefone %>
+    </div>
+    <div class="button_group">
+        <%= f.submit 'Salvar' %>
+    </div>
+<% end %>

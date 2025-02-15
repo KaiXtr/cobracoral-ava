@@ -6,12 +6,20 @@ Rails.application.routes.draw do
   resources :unidade_disciplinas
   resources :conteudos
   
-  root "inicio#index"
-
-  get "/instalar", to: "inicio#instalar"
-  get "/aprender", to: "inicio#aprender"
+  root 'cursos#index'
   
   get '/entrar', to: 'sessions#login'
   post '/entrar', to: 'sessions#create'
   get '/sair', to: 'sessions#destroy'
+
+  get '/comunicados', to: 'cursos#index'
+  get '/curso', to: 'cursos#index'
+  get '/ide', to: 'cursos#index'
+  get '/tarefas', to: 'cursos#index'
+  get '/mensagens', to: 'cursos#index'
+  get '/perfil', to: 'usuarios#show'
+
+  get '/sobre', to: 'sobre#index'
+  get '/instalar', to: 'sobre#instalar'
+  get '/aprender', to: 'sobre#aprender'
 end

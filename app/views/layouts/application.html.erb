@@ -20,28 +20,40 @@
       </div>
       <ul>
           <li>
-              <a href="/"><button class="act-button">Início</button></a>
+              <a href="/comunicados"><button class="act-button">Comunicados</button></a>
           </li>
           <li>
-              <a href="/#sobre"><button class="act-button">Sobre</button></a>
+              <a href="/curso"><button class="act-button">Curso</button></a>
           </li>
           <li>
-              <a href="/#experimentar"><button class="act-button">Experimentar</button></a>
+              <a href="/ide"><button class="act-button">IDE</button></a>
           </li>
           <li>
-              <a href="/instalar"><button class="act-button">Instalar</button></a>
+              <a href="/tarefas"><button class="act-button">Tarefas</button></a>
           </li>
           <li>
-              <a href="/aprender"><button class="act-button">Aprender</button></a>
+              <a href="/mensagens"><button class="act-button">Mensagens</button></a>
           </li>
           <li>
-              <a href="/#publicar"><button class="act-button">Publicar</button></a>
+              <a href="/perfil"><button class="act-button">Perfil</button></a>
+          </li>
+          <li>
+              <a href="/sair"><button class="act-button">Sair</button></a>
           </li>
       </ul>
     </header>
     <%= yield %>
     <footer>
-        Ewerton Bramos - 2024
+        <div>
+            <a href="/sobre"><button class="act-button">Sobre</button></a>
+            <a href="/sobre#experimentar"><button class="act-button">Experimentar</button></a>
+            <a href="/instalar"><button class="act-button">Instalar</button></a>
+            <a href="/aprender"><button class="act-button">Aprender</button></a>
+            <a href="/sobre#publicar"><button class="act-button">Publicar</button></a>
+        </div>
+        <span>
+            Ewerton Bramos - 2024
+        </span>
     </footer>
   </body>
 </html>

@@ -1,21 +1,12 @@
 <nav>
-    <h1>Editar perfil</h1>
-
-    <%= form_for @usuario, url: @done do |f| %>
-        <div class="form_group">
-            <%= f.label (:nome_completo), 'Nome completo' %>
-            <%= f.text_field (:nome_completo) %>
-        </div>
-        <div class="form_group">
-            <%= f.label (:email), 'Email institucional' %>
-            <%= f.email_field (:email) %>
-        </div>
-        <div class="form_group">
-            <%= f.label (:telefone), 'Telefone' %>
-            <%= f.text_field (:telefone) %>
-        </div>
-        <div class="button_group">
-            <%= f.submit 'Salvar' %>
-        </div>
-    <% end %>
+    <h1><%= @usuario.nome_completo %></h1>
+    
+    <ul>
+        <li>
+            Email institucional: <%= @usuario.email %>
+        </li>
+        <li>
+            Telefone: <%= @usuario.telefone %>
+        </li>
+    </ul>
 </nav>

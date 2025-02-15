@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
+	layout 'login'
+	
 	def index
-		@login_fail = ''
 	end
 
 	def create

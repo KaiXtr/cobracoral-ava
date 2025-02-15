@@ -1,16 +1,16 @@
-<div class="login_form_container">
+<div class="login-form-container">
 	<%= @login_fail %>
 	<%= form_for (:session) do |f| %>
 		<div class="form_group">
-			<%= f.label :nome_completo, 'Email institucional: '%>
-			<%= f.text_field :nome_completo, autocomplete: 'on', required: 'true' %>
+			<%= f.label :email, 'Email institucional: '%>
+			<%= f.text_field :email, autocomplete: 'on', required: 'true' %>
 		</div>
 		<div class="form_group">
 			<%= f.label :senha, 'Senha: '%>
 			<%= f.password_field :senha, required: 'true' %>
 		</div>
 		<div class="button_group">
-			<%= f.submit 'Entrar' %>
+			<%= f.submit 'Entrar', id: 'act-button' %>
 		</div>
 	<% end %>
 </div>

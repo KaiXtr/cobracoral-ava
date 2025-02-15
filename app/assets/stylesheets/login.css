@@ -1,0 +1,43 @@
+body {
+    background-color: #ff3434;
+    font-family: "Rubik", sans-serif;
+    margin: 0px;
+}
+
+.login-form-container {
+    background-color: ghostwhite;
+    border-radius: 20px;
+    padding: 5vw;
+    margin: 10vw 30vw 10vw 30vw;
+}
+
+
+.act-button {
+    font-family: "Rubik", sans-serif;
+    font-weight: bold;
+    border: 3px solid #ff3434;
+    background-color: rgba(0,0,0,0);
+    padding: 1rem;
+    cursor: pointer;
+    transition-duration: .2s;
+    position: relative;
+
+    &:before {
+        content: '';
+        background-color: #ff3434;
+        width: 0%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+        transition: .2s;
+        z-index: -1;
+    }
+    &:hover {
+        color: #ffffff;
+
+        &:before{
+        width: 100%;
+        }
+    }
+    }

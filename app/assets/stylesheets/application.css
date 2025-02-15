@@ -21,6 +21,7 @@
 }
 
 body {
+  background-color: #ff3434;
   font-family: "Rubik", sans-serif;
   margin: 0px;
 }
@@ -41,7 +42,7 @@ header, div.inicio-banner, nav, footer {
 
 svg.cobracoral-icon {
   width: 10vw;
-  max-height: 8vh;
+  max-height: 4vw;
 
   .g-mask path {
     transform-origin: center;
@@ -93,7 +94,7 @@ button.act-button {
 
 header {
   background-color: #ff3434;
-  padding: 5vh 10vw 5vh 10vw;
+  padding: 0vw 10vw 0vw 10vw;
   max-height: 20vh;
   align-items: center;
   display: flex;
@@ -106,6 +107,7 @@ header {
     h1, svg {
       display: inline-block;
     }
+    
     h1 {
       transition-duration: .2s;
       &:hover {
@@ -113,6 +115,7 @@ header {
       }
     }
   }
+
   ul {
     width: 70%;
     text-align: right;
@@ -139,6 +142,7 @@ div.inicio-banner {
 }
 
 nav {
+  background-color: white;
   padding: 5vh 10vw 5vh 10vw;
 
   section {
@@ -152,5 +156,5 @@ nav {
 footer {
   text-align: center;
   padding: 10vh 10vw 10vh 10vw;
-  background-color: #d13f3f;
+  background-color: #ff3434;
 }
