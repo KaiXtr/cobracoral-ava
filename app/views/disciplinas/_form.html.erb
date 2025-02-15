@@ -11,14 +11,30 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :cod_disciplina, style: "display: block" %>
-    <%= form.text_field :cod_disciplina %>
-  </div>
 
-  <div>
-    <%= form.label :nome_disciplina, style: "display: block" %>
-    <%= form.text_field :nome_disciplina %>
+  <div class="disciplina_info_container">
+    <div class="disciplina_info">
+      <div>
+        <%= form.label :nome_disciplina, style: "display: block" %>
+        <%= form.text_field :nome_disciplina %>
+      </div>
+      <div>
+        Nome prof
+        <%= form.label :nome_disciplina, style: "display: block" %>
+        <%= form.text_field :nome_disciplina %>
+      </div>
+      <div>
+        Local sala
+        <%= form.label :nome_disciplina, style: "display: block" %>
+        <%= form.text_field :nome_disciplina %>
+      </div>
+    </div>
+    <div class="disciplina_medidores">
+      <button>Lançar presenças</button>
+      <button>Lançar notas</button>
+    </div>
+  </div>
+  <div class="disciplina_conteudos_container">
   </div>
 
   <div>
