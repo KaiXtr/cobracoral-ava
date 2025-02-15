@@ -1,8 +1,8 @@
 class InicioController < ApplicationController
   def index
-    @current_user = usuario_atual
-    redirect_to '/entrar' unless @current_user
+    @usuario_autenticado = usuario_autenticado
+    redirect_to '/entrar' unless @usuario_autenticado
     @turmas = Turma.all
-    @usuarios = Usuario.all_except(@current_user)
+    @usuarios = Usuario.all_except(@usuario_autenticado)
   end
 end

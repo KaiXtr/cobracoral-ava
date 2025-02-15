@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   resources :turmas
   resources :usuarios
   
-  get 'turmas/index'
   root "inicio#index"
 
   get "/inicio", to: "inicio#index"
@@ -12,4 +11,6 @@ Rails.application.routes.draw do
   get '/entrar', to: 'sessions#nova'
   post '/entrar', to: 'sessions#criar'
   delete '/sair', to: 'sessions#destroy'
+
+  get '/turmas', to: 'turmas#index'
 end

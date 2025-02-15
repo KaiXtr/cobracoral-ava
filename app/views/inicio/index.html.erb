@@ -8,22 +8,9 @@
         </h1>
     </section>
 
-	<h3> Bem vindo, <%= @current_user.nome_completo %> </h3>
+	<h3> Bem vindo, <%= @usuario_autenticado.nome_completo %> </h3>
 	
-	<h4> Usuários </h4>
-	<%= render @usuarios %>
-	
-	<h4> Turmas </h4>
-	<%= render @turmas %>
-
-    <h4>Criar Turma</h4>
-    <%= render partial: "layouts/nova_turma_form" %>
-
-    <div>
-        <% if @turma_unica %>
-            <h4 class="text-center"> <%= @turma_unica.nome_turma %> </h4>
-        <% end %>
-    </div>
+    <a href="/turmas">Ir para turmas</a>
 
     
     <h1>O que é Cobracoral?</h1>

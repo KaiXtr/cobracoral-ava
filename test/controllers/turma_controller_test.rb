@@ -1,6 +1,6 @@
 require "test_helper"
 
-class TurmaControllerTest < ActionDispatch::IntegrationTest
+class TurmasControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get turma_index_url
     assert_response :success

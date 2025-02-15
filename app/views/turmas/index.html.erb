@@ -1,18 +1,22 @@
-<h1>Turma#index</h1>
-<p>Find me in app/views/turmas/index.html.erb</p>
+<nav>
+	<h1>Turma#index</h1>
+	<p>Find me in app/views/turmas/index.html.erb</p>
 
-<div class='container'>
-	<h3> Bem vindo, <%= @current_user.nome_completo %> </h3>
-	
-	<h4> Usuários </h4>
-	<%= turbo_stream_from "usuarios" %>
-	<div id="usuarios">
+	<div class='container'>
+		<h3> Bem vindo, <%= @usuario_autenticado.nome_completo %> </h3>
+		
+		<h4> Usuários </h4>
 		<%= render @usuarios %>
-	</div>
-
-	<h4> Turmas </h4>
-	<%= turbo_stream_from "turmas" %>
-	<div id="turmas">
+		
+		<h4> Turmas </h4>
+		<h5>Criar Turma</h4>
+		<%= render partial: "layouts/nova_turma_form" %>
 		<%= render @turmas %>
+
+		<div>
+			<% if @turma_unica %>
+				<h4 class="text-center"> <%= @turma_unica.nome_turma %> </h4>
+			<% end %>
+		</div>
 	</div>
-</div>
+</nav>
