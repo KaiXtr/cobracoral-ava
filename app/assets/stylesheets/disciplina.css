@@ -1,0 +1,77 @@
+.titulo-disciplina {
+    font-size: 26pt;
+}
+
+.titulo-disciplina.edit {
+    border: none;
+    border-bottom: 2px solid black;
+}
+
+.disciplina_info_container {
+    display: block;
+}
+
+.disciplina_info_container .disciplina_info {
+    width: 70%;
+    display: inline-block;
+}
+
+.disciplina_info_container .disciplina_medidores {
+    width: 20%;
+    display: inline-block;
+}
+
+.disciplina_info_container .disciplina_medidores h5 {
+    min-width: 5vw;
+    margin: none;
+}
+
+.disciplina_info_container .disciplina_medidores .medidor-container {
+    text-align: center;
+    display: inline-block;
+    margin: 1vw;
+}
+
+.disciplina_info_container .disciplina_medidores .medidor-container .medidor-grafico {
+    min-width: 5vw;
+    min-height: 5vw;
+    position: relative;
+}
+
+.disciplina_info_container .disciplina_medidores .medidor-container .medidor-grafico .medidor-grafico-max {
+    border: 10px solid gray;
+    border-radius: 100%;
+    position: absolute;
+    min-width: 5vw;
+    min-height: 5vw;
+    top: 0px;
+}
+
+.disciplina_info_container .disciplina_medidores .medidor-container .medidor-grafico .medidor-grafico-atual {
+    border: 10px solid red;
+    border-radius: 100%;
+    position: absolute;
+    min-width: 5vw;
+    min-height: 5vw;
+    top: 0px;
+}
+
+.disciplina_info_container .disciplina_medidores .medidor-container .medidor-grafico .medidor-grafico-valor {
+    text-align: center;
+    font-weight: bold;
+    min-width: 5vw;
+    top: 2.5vw;
+    left: 0.7vw;
+    position: absolute;
+}
+
+.conteudo-button {
+    background-color: ghostwhite;
+    border-radius: 50px;
+    padding: 20px 50px 20px 50px;
+    margin-bottom: 10px;
+}
+
+.conteudo-button h5 {
+    margin: 0px;
+}

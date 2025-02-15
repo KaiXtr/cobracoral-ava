@@ -23,6 +23,8 @@ class DisciplinasController < ApplicationController
 
   # GET /disciplinas/1/edit
   def edit
+    @unidades_disciplina = UnidadeDisciplina.all
+    @conteudos = Conteudo.all
   end
 
   # POST /disciplinas or /disciplinas.json

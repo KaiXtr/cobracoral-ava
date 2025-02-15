@@ -1,9 +1,11 @@
 <nav>
-  <h1><%= render @disciplina %> (editando)</h1>
-
   <%= render "form", disciplina: @disciplina %>
 
-  <br>
+  <div class="disciplina_conteudos_container">
+    <ol>
+      <%= render @unidades_disciplina %>
+    </ol>
+  </div>
 
   <div>
     <%= link_to "Show this disciplina", @disciplina %> |

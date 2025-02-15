@@ -10,13 +10,28 @@
 
   <div class="disciplina_info_container">
     <div class="disciplina_info">
-      <h1><%= render @disciplina %></h1>
-      <h5>Nome do professor</h5>
-      <h5>Local da sala de aula</h5>
+      <h1 class="titulo-disciplina"><%= render @disciplina %></h1>
+      Nome do professor
+      <br>
+      Local da sala de aula
     </div>
     <div class="disciplina_medidores">
-      <h5>Presenças</h5>
-      <h5>Notas</h5>
+      <div class="medidor-container">
+        <div class="medidor-grafico">
+          <div class="medidor-grafico-max"></div>
+          <div class="medidor-grafico-atual"></div>
+          <span class="medidor-grafico-valor">100%</span>
+        </div>
+        <h5>Presenças</h5>
+      </div>
+      <div class="medidor-container">
+        <div class="medidor-grafico">
+          <div class="medidor-grafico-max"></div>
+          <div class="medidor-grafico-atual"></div>
+          <span class="medidor-grafico-valor">10%</span>
+        </div>
+        <h5>Notas</h5>
+      </div>
     </div>
   </div>
   <div class="disciplina_conteudos_container">
