@@ -12,8 +12,13 @@ class DisciplinasController < ApplicationController
   # GET /disciplinas/1 or /disciplinas/1.json
   def show
     @disciplina_atual = Disciplina.find(params[:id])
-    @unidades_disciplina = UnidadeDisciplina.all
-    @conteudos = Conteudo.all
+    @unidades_disciplina = UnidadeDisciplina.where(disciplina_id: @disciplina_atual.id)
+    @conteudos = Conteudo.joins(:unidade_disciplina)
+      .where(
+        unidade_disciplina: { 
+          disciplina_id: @disciplina_atual.id
+        }
+      )
   end
 
   # GET /disciplinas/new
@@ -23,8 +28,8 @@ class DisciplinasController < ApplicationController
 
   # GET /disciplinas/1/edit
   def edit
-    @unidades_disciplina = UnidadeDisciplina.all
-    @conteudos = Conteudo.all
+    @unidades_disciplina = UnidadeDisciplina.where(disciplina_id: @disciplina_atual.id)
+    @conteudos = Conteudo.where(unidade_disciplina_id: @disciplina_atual.id)
   end
 
   # POST /disciplinas or /disciplinas.json

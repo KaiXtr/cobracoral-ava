@@ -1,7 +1,7 @@
 class TurmasController < ApplicationController
 	def index
 		# Redirecionar usuário não autenticado
-		@usuario_autenticado = usuario_atual
+		@usuario_autenticado = usuario_autenticado
 		redirect_to '/entrar' unless @usuario_autenticado
 
 		@turma = Turma.new
