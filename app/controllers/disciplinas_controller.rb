@@ -3,11 +3,17 @@ class DisciplinasController < ApplicationController
 
   # GET /disciplinas or /disciplinas.json
   def index
+    @disciplina_atual = Disciplina.new
     @disciplinas = Disciplina.all
+    @unidades_disciplina = UnidadeDisciplina.new
+    @conteudos = Conteudo.new
   end
 
   # GET /disciplinas/1 or /disciplinas/1.json
   def show
+    @disciplina_atual = Disciplina.find(params[:id])
+    @unidades_disciplina = UnidadeDisciplina.all
+    @conteudos = Conteudo.all
   end
 
   # GET /disciplinas/new

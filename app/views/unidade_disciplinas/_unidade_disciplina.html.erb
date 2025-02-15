@@ -1,12 +1,8 @@
-<div id="<%= dom_id unidade_disciplina %>">
-  <p>
-    <strong>Disciplina:</strong>
-    <%= unidade_disciplina.disciplina_id %>
-  </p>
-
-  <p>
-    <strong>Nome unidade:</strong>
-    <%= unidade_disciplina.nome_unidade %>
-  </p>
-
-</div>
+<li>
+  <div id="<%= dom_id unidade_disciplina %>">
+    <h3><%= unidade_disciplina.nome_unidade %></h3>
+    <div class="conteudos_disciplina_container">
+      <%= render @conteudos %>
+    </div>
+  </div>
+</li>

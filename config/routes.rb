@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  resources :conteudos
-  resources :unidade_disciplinas
   resources :usuarios
   resources :cursos
   resources :turmas
-  resources :disciplinas
+  resources :disciplinas do
+    resources :unidade_disciplinas do
+      resources :conteudos
+    end
+  end
   
   root "inicio#index"
 

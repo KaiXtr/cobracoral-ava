@@ -4,10 +4,12 @@ class UnidadeDisciplinasController < ApplicationController
   # GET /unidade_disciplinas or /unidade_disciplinas.json
   def index
     @unidade_disciplinas = UnidadeDisciplina.all
+    @conteudos = Conteudo.new
   end
 
   # GET /unidade_disciplinas/1 or /unidade_disciplinas/1.json
   def show
+    @conteudos = Conteudo.find(params[:id])
   end
 
   # GET /unidade_disciplinas/new

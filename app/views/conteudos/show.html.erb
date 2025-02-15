@@ -1,10 +1,12 @@
-<p style="color: green"><%= notice %></p>
+<nav>
+  <p style="color: green"><%= notice %></p>
 
-<%= render @conteudo %>
+  <%= render @conteudo %>
 
-<div>
-  <%= link_to "Edit this conteudo", edit_conteudo_path(@conteudo) %> |
-  <%= link_to "Back to conteudos", conteudos_path %>
+  <div>
+    <%= link_to "Edit this conteudo", edit_conteudo_path(@conteudo) %> |
+    <%= link_to "Back to conteudos", conteudos_path %>
 
-  <%= button_to "Destroy this conteudo", @conteudo, method: :delete %>
-</div>
+    <%= button_to "Destroy this conteudo", @conteudo, method: :delete %>
+  </div>
+</nav>
