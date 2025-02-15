@@ -1,3 +1,16 @@
-<div>
-	<%= link_to disciplina.nome_disciplina, disciplina %>
-</div>
+<a href='/disciplinas/<%= disciplina.id %>'>
+	<div class="disciplina-thumbnail">
+		<div class="disciplina-thumbnail-img"></div>
+		<div class="disciplina-thumbnail-info">
+			<h3>
+				<%= disciplina.nome_disciplina %>
+			</h3>
+			<p>
+				Nome do professor
+			</p>
+			<p>
+				Semestre
+			</p>
+		</div>
+	</div>
+</a>

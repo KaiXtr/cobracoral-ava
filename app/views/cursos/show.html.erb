@@ -3,13 +3,15 @@
         <%= @curso.nome_curso %>
     </h1>
 	<div>
-        <h2>Minhas Turmas</h2>
+        <h2>Minhas turmas</h2>
         <h5>Criar Turma</h4>
         <%= render partial: "layouts/nova_turma_form" %>
         <%= render @turmas %>
     </div>
     <div>
         <h2>Minhas disciplinas</h2>
-        <%= render @disciplinas %>
+        <div class="disciplinas-container">
+            <%= render @disciplinas %>
+        </div>
     </div>
 </nav>

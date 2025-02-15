@@ -1,3 +1,31 @@
+.disciplinas-container {
+    display: block;
+    margin: 0px 5vw 0px 5vw;
+}
+
+.disciplinas-container .disciplina-thumbnail {
+    display: inline-block;
+    width: 30vw;
+    margin: 5px;
+}
+
+.disciplinas-container .disciplina-thumbnail .disciplina-thumbnail-img {
+    background-color: black;
+    border-radius: 50px 50px 0px 0px;
+    min-width: 100%;
+    min-height: 10vw;
+}
+
+.disciplinas-container .disciplina-thumbnail .disciplina-thumbnail-info {
+    background-color: ghostwhite;
+    border-radius: 0px 0px 50px 50px;
+    padding: 30px;
+}
+
+.disciplinas-container .disciplina-thumbnail .disciplina-thumbnail-info h3 {
+    margin: 0px;
+}
+
 .titulo-disciplina {
     font-size: 26pt;
 }
