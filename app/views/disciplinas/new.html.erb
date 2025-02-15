@@ -1,9 +1,6 @@
-<h1>New disciplina</h1>
-
-<%= render "form", disciplina: @disciplina %>
-
-<br>
-
-<div>
+<div class="modal-adicionar">
   <%= link_to "Back to disciplinas", disciplinas_path %>
+  <h3>Adicionar disciplina</h3>
+
+  <%= render "form", disciplina: @disciplina %>
 </div>

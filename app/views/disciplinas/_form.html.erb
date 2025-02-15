@@ -1,8 +1,6 @@
 <%= form_with(model: disciplina) do |form| %>
   <% if disciplina.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(disciplina.errors.count, "error") %> prohibited this disciplina from being saved:</h2>
-
       <ul>
         <% disciplina.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,29 +9,17 @@
     </div>
   <% end %>
 
-
-  <div class="disciplina_info_container">
-    <div class="disciplina_info">
-      <h1>
-        <%= form.text_field :nome_disciplina, class: "titulo-pagina page-edit-input" %>
-      </h1>
-      <div>
-        Nome prof
-        <%= form.label :nome_disciplina %>
-        <%= form.text_field :nome_disciplina, class: "page-edit-input" %>
-      </div>
-      <div>
-        Local sala
-        <%= form.label :nome_disciplina %>
-        <%= form.text_field :nome_disciplina, class: "page-edit-input" %>
-      </div>
-    </div>
-    <div class="disciplina_medidores">
-      <button>Lançar presenças</button>
-      <button>Lançar notas</button>
-    </div>
+  <div>
+    <%= form.label :curso_id %>
+    <%= form.text_field :curso_id %>
   </div>
-  <div class="disciplina_conteudos_container">
+  <div>
+    <%= form.label :nome_disciplina, "Nome da disciplina" %>
+    <%= form.text_field :nome_disciplina %>
+  </div>
+  <div>
+    <%= form.label :semestre %>
+    <%= form.text_field :semestre %>
   </div>
 
   <div class="button-group">

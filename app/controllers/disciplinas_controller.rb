@@ -57,7 +57,10 @@ class DisciplinasController < ApplicationController
   def update
     respond_to do |format|
       if @disciplina.update(disciplina_params)
-        format.html { redirect_to disciplina_url(@disciplina), notice: "Disciplina was successfully updated." }
+        format.html {
+            redirect_to disciplina_url(@disciplina),
+            notice: "Todas as alterações foram salvas."
+          }
         format.json { render :show, status: :ok, location: @disciplina }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -84,6 +87,6 @@ class DisciplinasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def disciplina_params
-      params.require(:disciplina).permit(:cod_disciplina, :nome_disciplina)
+      params.require(:disciplina).permit(:nome_disciplina, :semestre)
     end
 end

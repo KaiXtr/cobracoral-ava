@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_15_155842) do
+ActiveRecord::Schema[7.0].define(version: 2025_02_15_220722) do
   create_table "conteudos", force: :cascade do |t|
     t.integer "unidade_disciplina_id", null: false
     t.string "nome_conteudo"
@@ -20,17 +20,19 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_155842) do
   end
 
   create_table "cursos", force: :cascade do |t|
-    t.integer "cod_curso"
     t.string "nome_curso"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "descricao"
   end
 
   create_table "disciplinas", force: :cascade do |t|
-    t.string "cod_disciplina"
     t.string "nome_disciplina"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "cursos_id", null: false
+    t.string "semestre"
+    t.index ["cursos_id"], name: "index_disciplinas_on_cursos_id"
   end
 
   create_table "mensagems", force: :cascade do |t|
@@ -44,7 +46,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_155842) do
   end
 
   create_table "turmas", force: :cascade do |t|
-    t.integer "cod_turma"
     t.string "nome_turma"
     t.string "senha_acesso"
     t.datetime "created_at", null: false
@@ -69,6 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_155842) do
   end
 
   add_foreign_key "conteudos", "unidade_disciplinas"
+  add_foreign_key "disciplinas", "cursos", column: "cursos_id"
   add_foreign_key "mensagems", "turmas"
   add_foreign_key "mensagems", "usuarios"
   add_foreign_key "unidade_disciplinas", "disciplinas"

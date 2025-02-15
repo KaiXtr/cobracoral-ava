@@ -1,21 +1,5 @@
 <nav>
-	<h1>Turma#index</h1>
-	<p>Find me in app/views/turmas/index.html.erb</p>
-
-	<div class='container'>
-		<h3> Bem vindo, <%= @usuario_autenticado.nome_completo %> </h3>
-		<a href="/sair">Sair</a>
-
-		<h4> Usuários </h4>
-		<%= render @usuarios %>
-
-		<h4> Cursos </h4>
-		<%= render @cursos %>
-
-		<div>
-			<% if @turma_unica %>
-				<h4 class="text-center"> <%= @turma_unica.nome_turma %> </h4>
-			<% end %>
-		</div>
-	</div>
+    <%= link_to "Voltar para todos os cursos", cursos_path %>
+	<h1>Todas as turmas</h1>
+	<%= render @turmas %>
 </nav>

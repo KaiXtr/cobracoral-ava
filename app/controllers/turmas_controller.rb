@@ -1,13 +1,12 @@
 class TurmasController < ApplicationController
+	before_action :set_turma, only: %i[ show edit update destroy ]
+
 	def index
 		# Redirecionar usuário não autenticado
 		@usuario_autenticado = usuario_autenticado
 		redirect_to '/entrar' unless @usuario_autenticado
 
-		@turma = Turma.new
 		@turmas = Turma.all
-		@usuarios = Usuario.all_except(@usuario_autenticado)
-		@cursos = Curso.all
 	end
 
 	def create
@@ -15,6 +14,21 @@ class TurmasController < ApplicationController
 	end
 
 	def show
+		@turma = Turma.find(params[:id])
+	end
+
+	def destroy
+		@turma.destroy
+	
+		respond_to do |format|
+		  format.html { redirect_to turma_url, notice: "Turma deletada com sucesso." }
+		  format.json { head :no_content }
+		end
+	end
+
+	private
+
+	def set_turma
 		@turma = Turma.find(params[:id])
 	end
 end

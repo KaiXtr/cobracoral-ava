@@ -1,0 +1,4 @@
+$(body).append('<div id="<%= @id %>" class="modal"></div>');
+var element = $('#<%= @id %>');
+element.html('<%= j(render partial: @partial) %>');
+element.modal('show');

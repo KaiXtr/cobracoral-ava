@@ -3,10 +3,10 @@
     <%= form.text_field :nome_curso, class: "titulo-pagina page-edit-input" %>
   </h1>
   <h3>Descrição do curso</h3>
-  <%= form.text_field '' %>
-
+  <%= form.text_area :descricao, cols: 130, rows: 5 %>
+  
   <div class="button-group">
-    <a href="/cursos/<%= @curso.id %>">
+    <a href="/cursos/">
       <button class="act-button">
         Cancelar
       </button>

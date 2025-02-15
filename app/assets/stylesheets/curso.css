@@ -1,3 +1,12 @@
+.modal-adicionar {
+    background-color: ghostwhite;
+    border-radius: 20px;
+    padding: 5vw;
+    margin: 5vw 30vw 5vw 30vw;
+    position: absolute;
+    z-index: 10;
+}
+
 .disciplinas-container {
     display: block;
     margin: 0px 5vw 0px 5vw;
