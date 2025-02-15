@@ -4,13 +4,10 @@ Rails.application.routes.draw do
   
   root "inicio#index"
 
-  get "/inicio", to: "inicio#index"
   get "/instalar", to: "inicio#instalar"
   get "/aprender", to: "inicio#aprender"
   
-  get '/entrar', to: 'sessions#nova'
-  post '/entrar', to: 'sessions#criar'
-  delete '/sair', to: 'sessions#destroy'
-
-  get '/turmas', to: 'turmas#index'
+  get '/entrar', to: 'sessions#login'
+  post '/entrar', to: 'sessions#create'
+  get '/sair', to: 'sessions#destroy'
 end

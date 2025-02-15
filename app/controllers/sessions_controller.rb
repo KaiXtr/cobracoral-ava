@@ -1,14 +1,19 @@
 class SessionsController < ApplicationController
-	def criar
-		usuario = Usuario.find_by(email: params[:session][:email])
+	def index
+		@login_fail = ''
+	end
+
+	def create
+		usuario = Usuario.find_by(
+			email: params[:session][:email])
 		if usuario
 			logar(usuario)
 		else
-			render 'nova'
+			@login_fail = "Email ou senha incorretos"
 		end
 	end
 	
-	def destruir
+	def destroy
 		logout if logado?
 		redirect_to root_path
 	end

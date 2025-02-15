@@ -4,7 +4,8 @@
 
 	<div class='container'>
 		<h3> Bem vindo, <%= @usuario_autenticado.nome_completo %> </h3>
-		
+		<a href="/sair">Sair</a>
+
 		<h4> Usuários </h4>
 		<%= render @usuarios %>
 		
