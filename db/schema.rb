@@ -35,16 +35,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_220722) do
     t.index ["cursos_id"], name: "index_disciplinas_on_cursos_id"
   end
 
-  create_table "mensagems", force: :cascade do |t|
-    t.integer "usuario_id", null: false
-    t.integer "turma_id", null: false
-    t.text "conteudo"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["turma_id"], name: "index_mensagems_on_turma_id"
-    t.index ["usuario_id"], name: "index_mensagems_on_usuario_id"
-  end
-
   create_table "turmas", force: :cascade do |t|
     t.string "nome_turma"
     t.string "senha_acesso"
@@ -71,7 +61,5 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_220722) do
 
   add_foreign_key "conteudos", "unidade_disciplinas"
   add_foreign_key "disciplinas", "cursos", column: "cursos_id"
-  add_foreign_key "mensagems", "turmas"
-  add_foreign_key "mensagems", "usuarios"
   add_foreign_key "unidade_disciplinas", "disciplinas"
 end
