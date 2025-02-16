@@ -28,6 +28,16 @@ class TurmasController < ApplicationController
 
 	def show
 		@turma = Turma.find(params[:id])
+		@curso_turma = Curso.find(@turma.curso_id)
+		@turno_turma = TurnoTurma.find(@turma.turno_turma_id)
+		@modalidade_turma = ModalidadeTurma.find(@turma.modalidade_turma_id)
+		
+		@estudantes_turma = Usuario.joins(:matricula).where(
+			matricula: { turma_id: @turma.id }
+		)
+		@disciplinas_turma = Disciplina.where(
+			turma_id: @turma.id
+		)
 	end
 
 	def destroy

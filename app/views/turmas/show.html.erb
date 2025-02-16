@@ -1,6 +1,32 @@
 <nav>
-    <%= button_to "Deletar", @turma, method: :delete %>
-    <h1>
-        <%= @turma.nome_turma %>
-    </h1>
+    <div class="deslizar-transition">
+        <%= button_to "Deletar", @turma, method: :delete %>
+        <h1>
+            <a href='/cursos/<%= @curso_turma.id %>'>
+                <%= @curso_turma.nome_curso %>
+            </a>
+        </h1>
+        <h2>
+            <%= @turma.nome_turma %>
+        </h2>
+        <div>
+            <div>
+                Turno: <%= @turno_turma.enumTurno %>
+            </div>
+            <div>
+                Modalidade: <%= @modalidade_turma.enumModalidade %>
+            </div>
+            </div>
+        <div>
+            <h2>Estudantes matriculados</h2>
+            <%= render @estudantes_turma %>
+        </div>
+        <div>
+            <h2>Minhas disciplinas</h2>
+            <h3>Semestre</h3>
+            <div class="disciplinas-container">
+                <%= render @disciplinas_turma %>
+            </div>
+        </div>
+    </div>
 </nav>

@@ -1,4 +1,4 @@
 class UnidadeDisciplina < ApplicationRecord
   belongs_to :disciplina
-  has_many :conteudos
+  has_many :conteudo
 end

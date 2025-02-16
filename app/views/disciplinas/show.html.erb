@@ -12,9 +12,15 @@
           <%= @disciplina.nome_disciplina %>
           <%= link_to "Editar", edit_disciplina_path(@disciplina) %>
         </h1>
-        Nome do professor
+				<a href='/usuarios/<%= professor_disciplina(@disciplina).id %>'>
+					<strong>
+						<%= professor_disciplina(@disciplina).nome_completo %>
+					</strong>
+				</a>
         <br>
-        Local da sala de aula
+        <%= turma_disciplina(@disciplina) %>
+        <br>
+        <%= @disciplina.sala_aula %>
         <br>
         Semestre: <%= @disciplina.semestre %>
       </div>

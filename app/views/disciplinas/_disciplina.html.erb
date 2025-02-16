@@ -6,10 +6,15 @@
 				<%= disciplina.nome_disciplina %>
 			</h3>
 			<p>
-				Nome do professor
-			</p>
-			<p>
-				<%= disciplina.semestre %>
+				<a href='/usuarios/<%= professor_disciplina(disciplina).id %>'>
+					<strong>
+						<%= professor_disciplina(disciplina).nome_completo %>
+					</strong>
+				</a>
+				<br>
+				<%= turma_disciplina(disciplina) %> |
+				<%= disciplina.semestre %> |
+				<%= disciplina.sala_aula %>
 			</p>
 		</div>
 	</div>
