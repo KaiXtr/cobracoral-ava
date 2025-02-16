@@ -1,12 +1,40 @@
+<div class="inicio-banner">
+    <img src="<%= @usuario.profile_pic %>" alt="">
+</div>
 <nav>
     <h1><%= @usuario.nome_completo %></h1>
-    
-    <ul>
-        <li>
-            Email institucional: <%= @usuario.email %>
-        </li>
-        <li>
+    <p>
+        <%= @usuario.biografia %>
+    </p>
+    <div>
+        Cargo: <%= cargo_usuario(@usuario) %>
+        <br>
+        Pronomes: <%= pronomes_usuario(@usuario).enumPronomes %>
+        <br>
+        Turmas: <% for turma in turmas_usuario(@usuario) %>
+            <a href="/turmas/<%= turma.id %>">
+                <%= turma.nome_turma %>, 
+            </a>
+        <% end %>
+        <br>
+        Email institucional: <a href="/usuarios/<%= @usuario.email %>/caixa">
+            <%= @usuario.email %>
+        </a>
+        <br>
+        <% if @usuario.telefone %>
             Telefone: <%= @usuario.telefone %>
-        </li>
-    </ul>
+        <% end %>
+        <br>
+        <% if @usuario.lattes_id %>
+        Lattes: <a href="<%= @link_lattes %>">
+            <%= @usuario.lattes_id %>
+        </a>
+        <% end %>
+        <br>
+        <% if @usuario.orcid_id %>
+        Orcid: <a href="<%= @link_orcid %>">
+            <%= @usuario.orcid_id %>
+        </a>
+        <% end %>
+    </div>
 </nav>

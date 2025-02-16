@@ -13,6 +13,8 @@ class UsuariosController < ApplicationController
 
     def show
         @usuario = Usuario.find(params[:id])
+        @link_lattes = "https://lattes.cnpq.br/" + @usuario.lattes_id.to_s
+        @link_orcid = "https://orcid.org/" + @usuario.orcid_id.to_s
     end
 
     def perfil

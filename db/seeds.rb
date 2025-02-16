@@ -6,6 +6,10 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+PronomesUsuario.create(id: 1, enumPronomes: 'Ela/dela')
+PronomesUsuario.create(id: 2, enumPronomes: 'Ele/dele')
+PronomesUsuario.create(id: 3, enumPronomes: 'Elu/delu')
+
 MatriculaCargo.create(id: 1,
     enumCargoFeminino: 'Coordenadora', enumCargoMasculino: 'Coordenador')
 MatriculaCargo.create(id: 2,
@@ -21,66 +25,111 @@ MatriculaCargo.create(id: 6,
 
 Usuario.create(
     id: 1,
+    pronomes_usuarios_id: 2,
     nome_completo: "Ewerton Matheus Bezerra Ramos",
     email: "ewerton.ramos@cobracoral.edu.br",
     telefone: "997773322",
-    senha: "12345678"
+    senha: "12345678",
+    profile_pic: nil,
+    biografia: 'Sou estudante de ciência da computação',
+    lattes_id: '2274633017966563',
+    orcid_id: '0009-0002-5894-0401'
 )
 Usuario.create(
     id: 2,
+    pronomes_usuarios_id: 1,
     nome_completo: "Professora de autômatos",
     email: "professora.automatos@cobracoral.edu.br",
     telefone: "997773322",
-    senha: "12345678"
+    senha: "12345678",
+    profile_pic: nil,
+    biografia: nil,
+    lattes_id: nil,
+    orcid_id: nil
 )
 Usuario.create(
     id: 3,
+    pronomes_usuarios_id: 2,
     nome_completo: "Professor de IHC",
     email: "professor.ihc@cobracoral.edu.br",
     telefone: "997773322",
-    senha: "12345678"
+    senha: "12345678",
+    profile_pic: nil,
+    biografia: nil,
+    lattes_id: nil,
+    orcid_id: nil
 )
 Usuario.create(
     id: 4,
+    pronomes_usuarios_id: 1,
     nome_completo: "Professora de Design",
     email: "professora.design@cobracoral.edu.br",
     telefone: "997773322",
-    senha: "12345678"
+    senha: "12345678",
+    profile_pic: nil,
+    biografia: nil,
+    lattes_id: nil,
+    orcid_id: nil
 )
 Usuario.create(
     id: 5,
+    pronomes_usuarios_id: 1,
     nome_completo: "Representante da turma CC2 Noturno",
     email: "representante.cc2n@cobracoral.edu.br",
     telefone: "997773322",
-    senha: "12345678"
+    senha: "12345678",
+    profile_pic: nil,
+    biografia: nil,
+    lattes_id: nil,
+    orcid_id: nil
 )
 Usuario.create(
     id: 6,
+    pronomes_usuarios_id: 2,
     nome_completo: "Estagiário da turma CC2 Vespertino",
     email: "monitor.cc2v@cobracoral.edu.br",
     telefone: "997773322",
-    senha: "12345678"
+    senha: "12345678",
+    profile_pic: nil,
+    biografia: nil,
+    lattes_id: nil,
+    orcid_id: nil
 )
 Usuario.create(
     id: 7,
+    pronomes_usuarios_id: 2,
     nome_completo: "Monitor da turma CC2 Vespertino",
     email: "monitor.cc2v@cobracoral.edu.br",
     telefone: "997773322",
-    senha: "12345678"
+    senha: "12345678",
+    profile_pic: nil,
+    biografia: nil,
+    lattes_id: nil,
+    orcid_id: nil
 )
 Usuario.create(
     id: 8,
+    pronomes_usuarios_id: 3,
     nome_completo: "Representante da turma DG1 Diruno",
     email: "representante.dg1d@cobracoral.edu.br",
     telefone: "997773322",
-    senha: "12345678"
+    senha: "12345678",
+    profile_pic: nil,
+    biografia: nil,
+    lattes_id: nil,
+    orcid_id: nil
 )
 Usuario.create(
     id: 9,
+    pronomes_usuarios_id: 1,
     nome_completo: "Coordenadora do curso de Ciência da Computação",
     email: "coordenadora.cc@cobracoral.edu.br",
     telefone: "997773322",
-    senha: "12345678"
+    senha: "12345678",
+    profile_pic: nil,
+    biografia: nil,
+    lattes_id: nil,
+    orcid_id: nil
 )
 
 Curso.create(
@@ -119,6 +168,10 @@ Turma.create(id: 8, curso_id: 2, turno_turma_id: 3,
     modalidade_turma_id: 1, nome_turma: 'DG2 Noturno', senha_acesso: '12345678')
 
 Matricula.create(usuario_id: 1, turma_id: 1, matricula_cargo_id: 6)
+Matricula.create(usuario_id: 2, turma_id: 1, matricula_cargo_id: 2)
+Matricula.create(usuario_id: 3, turma_id: 1, matricula_cargo_id: 2)
+Matricula.create(usuario_id: 4, turma_id: 6, matricula_cargo_id: 2)
+Matricula.create(usuario_id: 4, turma_id: 5, matricula_cargo_id: 2)
 Matricula.create(usuario_id: 5, turma_id: 4, matricula_cargo_id: 3)
 Matricula.create(usuario_id: 6, turma_id: 3, matricula_cargo_id: 4)
 Matricula.create(usuario_id: 7, turma_id: 3, matricula_cargo_id: 5)
@@ -146,7 +199,7 @@ Disciplina.create(
     id: 3,
     curso_id: 2,
     turma_id: 6,
-    usuario_id: 3,
+    usuario_id: 4,
     nome_disciplina: 'Design UI/UX',
     sala_aula: 'Bloco AC Sala 201',
     semestre: '2025/1',
