@@ -12,8 +12,8 @@ class CursosController < ApplicationController
 
 	def show
 		@curso = Curso.find(params[:id])
-		@turmas = Turma.all
-		@disciplinas = Disciplina.all
+		@turmas = Turma.where(curso_id: @curso.id)
+		@disciplinas = Disciplina.where(curso_id: @curso.id)
 	end
 
 	def new
@@ -22,8 +22,8 @@ class CursosController < ApplicationController
 
 	def edit
 		@curso = Curso.find(params[:id])
-		@turmas = Turma.all
-		@disciplinas = Disciplina.all
+		@turmas = Turma.where(curso_id: @curso.id)
+		@disciplinas = Disciplina.where(curso_id: @curso.id)
 	end
 
 	def create

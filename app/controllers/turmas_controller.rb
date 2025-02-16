@@ -10,7 +10,20 @@ class TurmasController < ApplicationController
 	end
 
 	def create
-		@turma = Turma.create(nome_turma: params["turma"]["nome_turma"])
+		@turma = Turma.new(turma_params)
+	
+		respond_to do |format|
+		  if @turma.save
+			format.html {
+				redirect_to turma_url(@turma),
+				notice: "A turma foi adicionada com sucesso."
+			}
+			format.json { render :show, status: :created, location: @turma }
+		  else
+			format.html { render :new, status: :unprocessable_entity }
+			format.json { render json: @turma.errors, status: :unprocessable_entity }
+		  end
+		end
 	end
 
 	def show
@@ -28,7 +41,11 @@ class TurmasController < ApplicationController
 
 	private
 
-	def set_turma
-		@turma = Turma.find(params[:id])
-	end
+		def set_turma
+			@turma = Turma.find(params[:id])
+		end
+
+		def turma_params
+			params.require(:turma).permit(:nome_turma)
+		end
 end

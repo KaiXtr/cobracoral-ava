@@ -4,13 +4,6 @@
   </h1>
   <h3>Descrição do curso</h3>
   <%= form.text_area :descricao, cols: 130, rows: 5 %>
-  
-  <div class="button-group">
-    <a href="/cursos/">
-      <button class="act-button">
-        Cancelar
-      </button>
-    </a>
-    <%= form.submit "Salvar", class: "act-button" %>
-  </div>
+
+  <%= form.submit %>
 <% end %>

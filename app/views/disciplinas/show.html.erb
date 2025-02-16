@@ -2,8 +2,8 @@
   <div class="deslizar-transition">
     <p style="color: green"><%= notice %></p>
     
-    <a href="/cursos/1">
-      Voltar para <strong>Ciência da Computação</strong>
+    <a href="/cursos/<%= @curso.id %>">
+      Voltar para <strong><%= @curso.nome_curso %></strong>
     </a>
 
     <div class="disciplina_info_container">
@@ -15,6 +15,8 @@
         Nome do professor
         <br>
         Local da sala de aula
+        <br>
+        Semestre: <%= @disciplina.semestre %>
       </div>
       <div class="disciplina_medidores">
         <div class="medidor-container">

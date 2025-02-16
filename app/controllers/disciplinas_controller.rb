@@ -3,20 +3,22 @@ class DisciplinasController < ApplicationController
 
   # GET /disciplinas or /disciplinas.json
   def index
-    @disciplina_atual = Disciplina.new
+    @disciplina = Disciplina.new
     @disciplinas = Disciplina.all
     @unidades_disciplina = UnidadeDisciplina.new
     @conteudos = Conteudo.new
+    @curso = Curso.new
   end
 
   # GET /disciplinas/1 or /disciplinas/1.json
   def show
-    @disciplina_atual = Disciplina.find(params[:id])
-    @unidades_disciplina = UnidadeDisciplina.where(disciplina_id: @disciplina_atual.id)
+    @disciplina = Disciplina.find(params[:id])
+    @curso = Curso.find_by(id: @disciplina.curso_id)
+    @unidades_disciplina = UnidadeDisciplina.where(disciplina_id: @disciplina.id)
     @conteudos = Conteudo.joins(:unidade_disciplina)
       .where(
         unidade_disciplina: { 
-          disciplina_id: @disciplina_atual.id
+          disciplina_id: @disciplina.id
         }
       )
   end
@@ -28,12 +30,12 @@ class DisciplinasController < ApplicationController
 
   # GET /disciplinas/1/edit
   def edit
-    @disciplina_atual = Disciplina.find(params[:id])
-    @unidades_disciplina = UnidadeDisciplina.where(disciplina_id: @disciplina_atual.id)
+    @disciplina = Disciplina.find(params[:id])
+    @unidades_disciplina = UnidadeDisciplina.where(disciplina_id: @disciplina.id)
     @conteudos = Conteudo.joins(:unidade_disciplina)
       .where(
         unidade_disciplina: { 
-          disciplina_id: @disciplina_atual.id
+          disciplina_id: @disciplina.id
         }
       )
   end

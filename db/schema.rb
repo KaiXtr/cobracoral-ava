@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_15_220722) do
+ActiveRecord::Schema[7.0].define(version: 2025_02_15_224632) do
   create_table "conteudos", force: :cascade do |t|
     t.integer "unidade_disciplina_id", null: false
     t.string "nome_conteudo"
@@ -21,18 +21,18 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_220722) do
 
   create_table "cursos", force: :cascade do |t|
     t.string "nome_curso"
+    t.string "descricao"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "descricao"
   end
 
   create_table "disciplinas", force: :cascade do |t|
     t.string "nome_disciplina"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "cursos_id", null: false
+    t.integer "curso_id", null: false
     t.string "semestre"
-    t.index ["cursos_id"], name: "index_disciplinas_on_cursos_id"
+    t.index ["curso_id"], name: "index_disciplinas_on_curso_id"
   end
 
   create_table "turmas", force: :cascade do |t|
@@ -40,6 +40,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_220722) do
     t.string "senha_acesso"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "curso_id", null: false
+    t.index ["curso_id"], name: "index_turmas_on_curso_id"
   end
 
   create_table "unidade_disciplinas", force: :cascade do |t|
@@ -60,6 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_220722) do
   end
 
   add_foreign_key "conteudos", "unidade_disciplinas"
-  add_foreign_key "disciplinas", "cursos", column: "cursos_id"
+  add_foreign_key "disciplinas", "cursos"
+  add_foreign_key "turmas", "cursos"
   add_foreign_key "unidade_disciplinas", "disciplinas"
 end

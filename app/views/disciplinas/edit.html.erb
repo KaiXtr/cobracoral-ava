@@ -1,12 +1,12 @@
 <nav>
   <%= button_to "Destroy this disciplina", @disciplina, method: :delete %>
-  <%= form_with(model: disciplina) do |form| %>
-    <% if disciplina.errors.any? %>
+  <%= form_with(model: @disciplina) do |form| %>
+    <% if @disciplina.errors.any? %>
       <div style="color: red">
-        <h2><%= pluralize(disciplina.errors.count, "error") %> prohibited this disciplina from being saved:</h2>
+        <h2><%= pluralize(@disciplina.errors.count, "error") %> prohibited this disciplina from being saved:</h2>
 
         <ul>
-          <% disciplina.errors.each do |error| %>
+          <% @disciplina.errors.each do |error| %>
             <li><%= error.full_message %></li>
           <% end %>
         </ul>
@@ -27,6 +27,10 @@
           Local sala
           <%= form.label :nome_disciplina %>
           <%= form.text_field :nome_disciplina, class: "page-edit-input" %>
+        </div>
+        <div>
+          <%= form.label :semestre %>
+          <%= form.text_field :semestre, class: "page-edit-input" %>
         </div>
       </div>
       <div class="disciplina_medidores">
