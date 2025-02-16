@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_16_204059) do
+ActiveRecord::Schema[7.0].define(version: 2025_02_16_215745) do
   create_table "conteudos", force: :cascade do |t|
     t.integer "unidade_disciplina_id", null: false
     t.string "nome_conteudo"
@@ -51,6 +51,13 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_16_204059) do
     t.datetime "updated_at", null: false
     t.index ["conteudo_id"], name: "index_leitura_conteudos_on_conteudo_id"
     t.index ["usuario_id"], name: "index_leitura_conteudos_on_usuario_id"
+  end
+
+  create_table "matricula_cargos", force: :cascade do |t|
+    t.string "enumCargoFeminino"
+    t.string "enumCargoMasculino"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "matriculas", force: :cascade do |t|

@@ -6,6 +6,19 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+MatriculaCargo.create(id: 1,
+    enumCargoFeminino: 'Coordenadora', enumCargoMasculino: 'Coordenador')
+MatriculaCargo.create(id: 2,
+    enumCargoFeminino: 'Professora', enumCargoMasculino: 'Professor')
+MatriculaCargo.create(id: 3,
+    enumCargoFeminino: 'Representante', enumCargoMasculino: 'Coordenador')
+MatriculaCargo.create(id: 4,
+    enumCargoFeminino: 'Estagiária', enumCargoMasculino: 'Estagiário')
+MatriculaCargo.create(id: 5,
+    enumCargoFeminino: 'Monitora', enumCargoMasculino: 'Monitor')
+MatriculaCargo.create(id: 6,
+    enumCargoFeminino: 'Estudante', enumCargoMasculino: 'Estudante')
+
 Usuario.create(
     id: 1,
     nome_completo: "Ewerton Matheus Bezerra Ramos",

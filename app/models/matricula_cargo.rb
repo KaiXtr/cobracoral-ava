@@ -1,0 +1,2 @@
+class MatriculaCargo < ApplicationRecord
+end
