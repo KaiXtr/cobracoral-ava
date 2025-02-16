@@ -118,11 +118,11 @@ Turma.create(id: 7, curso_id: 2, turno_turma_id: 2,
 Turma.create(id: 8, curso_id: 2, turno_turma_id: 3,
     modalidade_turma_id: 1, nome_turma: 'DG2 Noturno', senha_acesso: '12345678')
 
-Matricula.create(usuario_id: 1, turma_id: 1)
-Matricula.create(usuario_id: 5, turma_id: 4)
-Matricula.create(usuario_id: 6, turma_id: 3)
-Matricula.create(usuario_id: 7, turma_id: 3)
-Matricula.create(usuario_id: 8, turma_id: 5)
+Matricula.create(usuario_id: 1, turma_id: 1, matricula_cargo_id: 6)
+Matricula.create(usuario_id: 5, turma_id: 4, matricula_cargo_id: 3)
+Matricula.create(usuario_id: 6, turma_id: 3, matricula_cargo_id: 4)
+Matricula.create(usuario_id: 7, turma_id: 3, matricula_cargo_id: 5)
+Matricula.create(usuario_id: 8, turma_id: 5, matricula_cargo_id: 3)
 
 Disciplina.create(
     id: 1,

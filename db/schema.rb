@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_16_215745) do
+ActiveRecord::Schema[7.0].define(version: 2025_02_16_222239) do
   create_table "conteudos", force: :cascade do |t|
     t.integer "unidade_disciplina_id", null: false
     t.string "nome_conteudo"
@@ -65,12 +65,20 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_16_215745) do
     t.integer "usuario_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "matricula_cargo_id", null: false
+    t.index ["matricula_cargo_id"], name: "index_matriculas_on_matricula_cargo_id"
     t.index ["turma_id"], name: "index_matriculas_on_turma_id"
     t.index ["usuario_id"], name: "index_matriculas_on_usuario_id"
   end
 
   create_table "modalidade_turmas", force: :cascade do |t|
     t.string "enumModalidade"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pronomes_usuarios", force: :cascade do |t|
+    t.string "enumPronome"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -117,6 +125,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_16_215745) do
   add_foreign_key "disciplinas", "usuarios"
   add_foreign_key "leitura_conteudos", "conteudos"
   add_foreign_key "leitura_conteudos", "usuarios"
+  add_foreign_key "matriculas", "matricula_cargos"
   add_foreign_key "matriculas", "turmas"
   add_foreign_key "matriculas", "usuarios"
   add_foreign_key "turmas", "cursos"
