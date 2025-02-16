@@ -155,8 +155,93 @@ header {
           background-color: #000000;
         }
       }
+
+      button.abrir-menu:hover #menu-perfil{
+        visibility: visible;
+      }
+
+      #menu-perfil {
+        background-color: #ff3434;
+        transition-duration: .2s;
+        visibility: hidden;
+        position: absolute;
+        min-width: 15vw;
+        padding: 20px;
+        opacity: 0%;
+        top: 0vh;
+        right: 0px;
+
+        ul {
+          width: 100%;
+          padding: 0px;
+          
+          li {
+            text-align: left;
+            display: block;
+            margin: 0px;
+            margin-bottom: 5px;
+            width: 100%;
+
+            a {
+              color: #ffffff;
+              transition-duration: .2s;
+            }
+            a:hover {
+              color: #471313;
+            }
+          }
+        }
+      }
+
+      #menu-perfil:hover {
+        visibility: visible;
+        opacity: 100%;
+      }
     }
   }
+}
+
+.menu-perfil {
+  z-index: 20;
+}
+
+.menu-perfil .medidor-container {
+  text-align: center;
+  display: inline-block;
+  margin: 1vw;
+}
+
+.menu-perfil .medidor-container .medidor-grafico {
+  min-width: 5vw;
+  min-height: 5vw;
+  position: relative;
+}
+
+.menu-perfil .medidor-container .medidor-grafico .medidor-grafico-max {
+  border: 10px solid rgb(255, 255, 255);
+  border-radius: 100%;
+  position: absolute;
+  min-width: 5vw;
+  min-height: 5vw;
+  top: 0px;
+}
+
+.menu-perfil .medidor-container .medidor-grafico .medidor-grafico-atual {
+  border: 10px solid rgb(0, 0, 0);
+  border-radius: 100%;
+  position: absolute;
+  min-width: 5vw;
+  min-height: 5vw;
+  top: 0px;
+}
+
+.menu-perfil .medidor-container .medidor-grafico .medidor-grafico-valor {
+  text-align: center;
+  font-weight: bold;
+  min-width: 5vw;
+  top: 2.5vw;
+  left: 0.7vw;
+  position: absolute;
 }
 
 div.inicio-banner {

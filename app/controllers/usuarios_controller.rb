@@ -14,4 +14,13 @@ class UsuariosController < ApplicationController
     def show
         @usuario = Usuario.find(params[:id])
     end
+
+    def perfil
+        @usuario = usuario_autenticado
+        redirect_to edit_usuario_path(@usuario)
+    end
+
+    def caixa
+        redirect_to "https://mail.google.com/mail"
+    end
 end

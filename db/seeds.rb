@@ -13,6 +13,20 @@ Usuario.create(
     telefone: "997773322",
     senha: "12345678"
 )
+Usuario.create(
+    id: 2,
+    nome_completo: "Professora de autômatos",
+    email: "professora.automatos@cobracoral.edu.br",
+    telefone: "997773322",
+    senha: "12345678"
+)
+Usuario.create(
+    id: 3,
+    nome_completo: "Professor de IHC",
+    email: "professor.ihc@cobracoral.edu.br",
+    telefone: "997773322",
+    senha: "12345678"
+)
 
 Curso.create(
     id: 1,

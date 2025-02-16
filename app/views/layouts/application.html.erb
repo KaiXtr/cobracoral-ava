@@ -35,10 +35,25 @@
               <a href="/mensagens"><button class="act-button">Mensagens</button></a>
           </li>
           <li>
-              <a href="/perfil"><button class="act-button">Perfil</button></a>
-          </li>
-          <li>
-              <a href="/sair"><button class="act-button">Sair</button></a>
+            <button class="act-button abrir-menu">
+                Perfil
+                <div id="menu-perfil">
+                    <div class="medidor-container">
+                        <div class="medidor-grafico">
+                            <div class="medidor-grafico-max"></div>
+                            <div class="medidor-grafico-atual"></div>
+                            <span class="medidor-grafico-valor">15m</span>
+                        </div>
+                        <h3>Pomodoro</h3>
+                    </div>
+                    <ul>
+                        <li><a href="/usuarios/:id/caixa">Abrir caixa de entrada</a></li>
+                        <li><a href="/perfil">Editar perfil</a></li>
+                        <li><a href="/perfil">Preferências</a></li>
+                        <li><a href="/sair">Sair</a></li>
+                    </ul>
+                </div>
+            </button>
           </li>
       </ul>
     </header>

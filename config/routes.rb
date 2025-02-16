@@ -11,11 +11,13 @@ Rails.application.routes.draw do
   
   get '/entrar', to: 'sessions#login'
   post '/entrar', to: 'sessions#create'
+  get '/usuarios/:id/caixa', to: 'usuarios#caixa'
+  get '/perfil', to: 'usuarios#perfil'
   get '/sair', to: 'sessions#destroy'
 
   get '/comunicados', to: 'cursos#index'
   get '/curso', to: 'cursos#index'
-  get '/ide', to: 'cursos#index'
+  get '/ide', to: 'ide#index'
   get '/tarefas', to: 'leitura_conteudos#index'
   get '/mensagens', to: 'cursos#index'
 
