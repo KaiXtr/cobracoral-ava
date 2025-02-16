@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @leitura_conteudo %>
+
+<div>
+  <%= link_to "Edit this leitura conteudo", edit_leitura_conteudo_path(@leitura_conteudo) %> |
+  <%= link_to "Back to leitura conteudos", leitura_conteudos_path %>
+
+  <%= button_to "Destroy this leitura conteudo", @leitura_conteudo, method: :delete %>
+</div>

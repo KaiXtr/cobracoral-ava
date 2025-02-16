@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_15_224632) do
+ActiveRecord::Schema[7.0].define(version: 2025_02_16_002817) do
   create_table "conteudos", force: :cascade do |t|
     t.integer "unidade_disciplina_id", null: false
     t.string "nome_conteudo"
@@ -33,6 +33,16 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_224632) do
     t.integer "curso_id", null: false
     t.string "semestre"
     t.index ["curso_id"], name: "index_disciplinas_on_curso_id"
+  end
+
+  create_table "leitura_conteudos", force: :cascade do |t|
+    t.integer "conteudo_id", null: false
+    t.integer "usuario_id", null: false
+    t.integer "conclusao"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conteudo_id"], name: "index_leitura_conteudos_on_conteudo_id"
+    t.index ["usuario_id"], name: "index_leitura_conteudos_on_usuario_id"
   end
 
   create_table "turmas", force: :cascade do |t|
@@ -63,6 +73,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_224632) do
 
   add_foreign_key "conteudos", "unidade_disciplinas"
   add_foreign_key "disciplinas", "cursos"
+  add_foreign_key "leitura_conteudos", "conteudos"
+  add_foreign_key "leitura_conteudos", "usuarios"
   add_foreign_key "turmas", "cursos"
   add_foreign_key "unidade_disciplinas", "disciplinas"
 end

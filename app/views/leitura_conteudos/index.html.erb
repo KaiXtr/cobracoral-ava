@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Leitura conteudos</h1>
+
+<div id="leitura_conteudos">
+  <% @leitura_conteudos.each do |leitura_conteudo| %>
+    <%= render leitura_conteudo %>
+    <p>
+      <%= link_to "Show this leitura conteudo", leitura_conteudo %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New leitura conteudo", new_leitura_conteudo_path %>

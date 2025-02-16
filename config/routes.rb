@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :disciplinas
   resources :unidade_disciplinas
   resources :conteudos
+  resources :leitura_conteudos
   
   root 'cursos#index'
   
@@ -17,7 +18,8 @@ Rails.application.routes.draw do
   get '/ide', to: 'cursos#index'
   get '/tarefas', to: 'cursos#index'
   get '/mensagens', to: 'cursos#index'
-  get '/perfil', to: 'usuarios#show'
+
+  get '/conteudos/:id/salvar', to: 'conteudos#salvar'
 
   get '/sobre', to: 'sobre#index'
   get '/instalar', to: 'sobre#instalar'

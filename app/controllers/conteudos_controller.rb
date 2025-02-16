@@ -3,14 +3,50 @@ class ConteudosController < ApplicationController
 
   # GET /conteudos or /conteudos.json
   def index
+    usuario = usuario_autenticado
     @conteudos = Conteudo.all
   end
 
   # GET /conteudos/1 or /conteudos/1.json
   def show
+    usuario = usuario_autenticado
     conteudo = Conteudo.find(params[:id])
     unidade_do_conteudo = UnidadeDisciplina.find_by(id: conteudo.unidade_disciplina_id)
     @disciplina_conteudo = Disciplina.find_by(id: unidade_do_conteudo.disciplina_id)
+    
+    # Iniciar leitura do conteúdo e contabilizar conclusão
+    @conclusao_conteudo = 0
+    leitura_conteudo = LeituraConteudo.find_by(
+      conteudo_id: conteudo.id,
+      usuario_id: usuario.id
+    )
+    if leitura_conteudo then
+      @conclusao_conteudo = leitura_conteudo.conclusao
+    end
+  end
+
+  # Atualizar leitura do conteúdo
+  def salvar
+    usuario = usuario_autenticado
+    conteudo = Conteudo.find(params[:id])
+    leitura_conteudo = LeituraConteudo.find_by(
+      conteudo_id: conteudo.id,
+      usuario_id: usuario.id
+    )
+    if leitura_conteudo == nil then
+      leitura_conteudo = LeituraConteudo.new(
+        conteudo_id: conteudo.id,
+        usuario_id: usuario.id
+      )
+    end
+
+    leitura_conteudo.conclusao = 1
+    if leitura_conteudo.save then
+      x = 1
+    else
+      x = 'Falhou'
+    end
+    redirect_to conteudo_path(id: conteudo.id + 1)
   end
 
   # GET /conteudos/new

@@ -8,8 +8,20 @@
 <% else %>
   <a href="/conteudos/<%= conteudo.id %>">
     <div id="<%= dom_id conteudo %>" class="conteudo-button">
-      <h5><%= conteudo.nome_conteudo %></h5>
-      Progresso:
+      <div class="conteudo-button-info">
+        <h5>
+          <%= conteudo.nome_conteudo %>
+        </h5>
+      </div>
+      <div class="conteudo-button-conclusao">
+        <div class="conteudo-button-conclusao-max"></div>
+        <% if LeituraConteudo.find_by(
+          conteudo_id: conteudo.id,
+          usuario_id: @usuario.id
+        ) %>
+          <div class="conteudo-button-conclusao-atual"></div>
+        <% end %>
+      </div>
     </div>
   </a>
 <% end %>

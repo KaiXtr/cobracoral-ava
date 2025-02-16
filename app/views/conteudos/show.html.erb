@@ -21,6 +21,10 @@
       </p>
     </div>
 
+    <div class="progress-bar">
+      Progresso: <%= @conclusao_conteudo %>
+    </div>
+
     <div class="button-group">
       <% if @conteudo.id - 1 > 0 %>
         <a href="/conteudos/<%= @conteudo.id - 1 %>">
@@ -28,7 +32,7 @@
         </a>
       <% end %>
       <% if @conteudo.id + 1 < 10 %>
-        <a href="/conteudos/<%= @conteudo.id + 1 %>">
+        <a href="/conteudos/<%= @conteudo.id %>/salvar">
           <button class="act-button">Próximo conteúdo</button>
         </a>
       <% end %>

@@ -121,6 +121,36 @@
     transform: translateX(10px);
 }
 
-.conteudo-button h5 {
+.conteudo-button .conteudo-button-info {
+    width: 95%;
+    display: inline-block;
+}
+
+.conteudo-button .conteudo-button-info h5 {
     margin: 0px;
+}
+
+.conteudo-button .conteudo-button-conclusao {
+    min-width: 1.5vw;
+    min-height: 1.5vw;
+    display: inline-block;
+    position: relative;
+}
+
+.conteudo-button .conteudo-button-conclusao .conteudo-button-conclusao-max {
+    border: 5px solid gray;
+    border-radius: 100%;
+    position: absolute;
+    min-width: 1.5vw;
+    min-height: 1.5vw;
+    top: 0px;
+}
+
+.conteudo-button .conteudo-button-conclusao .conteudo-button-conclusao-atual {
+    border: 5px solid red;
+    border-radius: 100%;
+    position: absolute;
+    min-width: 1.5vw;
+    min-height: 1.5vw;
+    top: 0px;
 }
