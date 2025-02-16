@@ -12,6 +12,7 @@ class DisciplinasController < ApplicationController
 
   # GET /disciplinas/1 or /disciplinas/1.json
   def show
+    @estaEditando = false
     @usuario = usuario_autenticado
     @disciplina = Disciplina.find(params[:id])
     @curso = Curso.find_by(id: @disciplina.curso_id)
@@ -31,6 +32,8 @@ class DisciplinasController < ApplicationController
 
   # GET /disciplinas/1/edit
   def edit
+    @estaEditando = true
+    @usuario = usuario_autenticado
     @disciplina = Disciplina.find(params[:id])
     @unidades_disciplina = UnidadeDisciplina.where(disciplina_id: @disciplina.id)
     @conteudos = Conteudo.joins(:unidade_disciplina)

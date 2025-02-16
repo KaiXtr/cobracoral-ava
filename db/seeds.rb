@@ -77,45 +77,63 @@ UnidadeDisciplina.create(
 Conteudo.create(
     id: 1,
     unidade_disciplina_id: 1,
-    nome_conteudo: 'Introdução à autômatos'
+    nome_conteudo: 'Introdução à autômatos',
+    data_liberacao: DateTime.now,
+    data_vencimento: DateTime.now
 )
 Conteudo.create(
     id: 2,
     unidade_disciplina_id: 1,
-    nome_conteudo: 'O que são autômatos?'
+    nome_conteudo: 'O que são autômatos?',
+    data_liberacao: DateTime.now,
+    data_vencimento: DateTime.now
 )
 Conteudo.create(
     id: 3,
     unidade_disciplina_id: 1,
-    nome_conteudo: 'Vídeo: autômato de estado finito'
+    nome_conteudo: 'Vídeo: autômato de estado finito',
+    data_liberacao: DateTime.now,
+    data_vencimento: DateTime.now
 )
 Conteudo.create(
     id: 4,
     unidade_disciplina_id: 1,
-    nome_conteudo: 'Exercício 1'
+    nome_conteudo: 'Exercício 1',
+    data_liberacao: DateTime.now,
+    data_vencimento: DateTime.now
 )
 Conteudo.create(
     id: 5,
     unidade_disciplina_id: 2,
-    nome_conteudo: "Vídeo: Conway's Game of Life"
+    nome_conteudo: "Vídeo: Conway's Game of Life",
+    data_liberacao: DateTime.now,
+    data_vencimento: DateTime.now
 )
 Conteudo.create(
     id: 6,
     unidade_disciplina_id: 2,
-    nome_conteudo: 'Exercício 2'
+    nome_conteudo: 'Exercício 2',
+    data_liberacao: DateTime.now,
+    data_vencimento: DateTime.now
 )
 Conteudo.create(
     id: 7,
     unidade_disciplina_id: 3,
-    nome_conteudo: 'Introdução a IHC'
+    nome_conteudo: 'Introdução a IHC',
+    data_liberacao: DateTime.now,
+    data_vencimento: DateTime.now
 )
 Conteudo.create(
     id: 8,
     unidade_disciplina_id: 3,
-    nome_conteudo: 'Exercício 1 IHC'
+    nome_conteudo: 'Exercício 1 IHC',
+    data_liberacao: DateTime.now,
+    data_vencimento: DateTime.now
 )
 Conteudo.create(
     id: 9,
     unidade_disciplina_id: 4,
-    nome_conteudo: 'Introdução à design web'
+    nome_conteudo: 'Introdução à design web',
+    data_liberacao: DateTime.now,
+    data_vencimento: DateTime.now
 )

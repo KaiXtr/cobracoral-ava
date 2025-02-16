@@ -10,12 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_16_002817) do
+ActiveRecord::Schema[7.0].define(version: 2025_02_16_032058) do
   create_table "conteudos", force: :cascade do |t|
     t.integer "unidade_disciplina_id", null: false
     t.string "nome_conteudo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "url_conteudo"
+    t.datetime "data_liberacao"
+    t.datetime "data_vencimento"
     t.index ["unidade_disciplina_id"], name: "index_conteudos_on_unidade_disciplina_id"
   end
 

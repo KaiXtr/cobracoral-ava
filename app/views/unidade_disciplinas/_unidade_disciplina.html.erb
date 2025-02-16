@@ -3,8 +3,7 @@
     <h3><%= unidade_disciplina.nome_unidade %></h3>
     <div class="conteudos_disciplina_container">
       <%=
-        render @conteudos.where(unidade_disciplina_id: unidade_disciplina.id),
-        estaEditando: @estaEditando
+        render @conteudos.where(unidade_disciplina_id: unidade_disciplina.id)
       %>
     </div>
   </div>

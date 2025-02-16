@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get '/comunicados', to: 'cursos#index'
   get '/curso', to: 'cursos#index'
   get '/ide', to: 'cursos#index'
-  get '/tarefas', to: 'cursos#index'
+  get '/tarefas', to: 'leitura_conteudos#index'
   get '/mensagens', to: 'cursos#index'
 
   get '/conteudos/:id/salvar', to: 'conteudos#salvar'

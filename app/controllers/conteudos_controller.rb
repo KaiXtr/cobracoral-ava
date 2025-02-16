@@ -13,15 +13,25 @@ class ConteudosController < ApplicationController
     conteudo = Conteudo.find(params[:id])
     unidade_do_conteudo = UnidadeDisciplina.find_by(id: conteudo.unidade_disciplina_id)
     @disciplina_conteudo = Disciplina.find_by(id: unidade_do_conteudo.disciplina_id)
+    @proximoConteudo = Conteudo.joins(:unidade_disciplina).find_by(
+      id: conteudo.id + 1,
+      unidade_disciplina: { disciplina_id: @disciplina_conteudo.id }
+    )
     
     # Iniciar leitura do conteúdo e contabilizar conclusão
     @conclusao_conteudo = 0
-    leitura_conteudo = LeituraConteudo.find_by(
+    @leitura_conteudo = LeituraConteudo.find_by(
       conteudo_id: conteudo.id,
       usuario_id: usuario.id
     )
-    if leitura_conteudo then
-      @conclusao_conteudo = leitura_conteudo.conclusao
+    if @leitura_conteudo then
+      @conclusao_conteudo = @leitura_conteudo.conclusao
+    else
+      @leitura_conteudo = LeituraConteudo.new(
+        conteudo_id: conteudo.id,
+        usuario_id: usuario.id
+      )
+      @leitura_conteudo.save
     end
   end
 
@@ -29,24 +39,39 @@ class ConteudosController < ApplicationController
   def salvar
     usuario = usuario_autenticado
     conteudo = Conteudo.find(params[:id])
-    leitura_conteudo = LeituraConteudo.find_by(
+    @leitura_conteudo = LeituraConteudo.find_by(
       conteudo_id: conteudo.id,
       usuario_id: usuario.id
     )
-    if leitura_conteudo == nil then
-      leitura_conteudo = LeituraConteudo.new(
+    if @leitura_conteudo == nil then
+      @leitura_conteudo = LeituraConteudo.new(
         conteudo_id: conteudo.id,
         usuario_id: usuario.id
       )
     end
 
-    leitura_conteudo.conclusao = 1
-    if leitura_conteudo.save then
+    # Salvando conclusão da leitura do conteúdo
+    @leitura_conteudo.conclusao = 1
+    if @leitura_conteudo.save then
       x = 1
     else
       x = 'Falhou'
     end
-    redirect_to conteudo_path(id: conteudo.id + 1)
+
+    # Redirecionando para próximo conteúdo ou de volta à disciplina
+    unidade_do_conteudo = UnidadeDisciplina.find_by(id: conteudo.unidade_disciplina_id)
+    @disciplina_conteudo = Disciplina.find_by(id: unidade_do_conteudo.disciplina_id)
+    @proximoConteudo = Conteudo.joins(:unidade_disciplina).find_by(
+      id: conteudo.id + 1,
+      unidade_disciplina: { disciplina_id: @disciplina_conteudo.id }
+    )
+    if @proximoConteudo then
+      redirect_to conteudo_path(id: @proximoConteudo.id)
+    else
+      unidade_do_conteudo = UnidadeDisciplina.find_by(id: conteudo.unidade_disciplina_id)
+      @disciplina_conteudo = Disciplina.find_by(id: unidade_do_conteudo.disciplina_id)
+      redirect_to disciplina_path(@disciplina_conteudo)
+    end
   end
 
   # GET /conteudos/new

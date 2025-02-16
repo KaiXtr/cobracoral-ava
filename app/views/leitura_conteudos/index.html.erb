@@ -1,14 +1,26 @@
-<p style="color: green"><%= notice %></p>
+<nav>
+  <p style="color: green"><%= notice %></p>
 
-<h1>Leitura conteudos</h1>
+  <h1>Tarefas</h1>
 
-<div id="leitura_conteudos">
-  <% @leitura_conteudos.each do |leitura_conteudo| %>
-    <%= render leitura_conteudo %>
-    <p>
-      <%= link_to "Show this leitura conteudo", leitura_conteudo %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New leitura conteudo", new_leitura_conteudo_path %>
+  <div class="tarefas-container">
+    <div class="tarefa-coluna">
+      <h3>A fazer</h3>
+      <div class="tarefa-coluna-linha">
+        <%= render @tarefasAFazer %>
+      </div>
+    </div>
+    <div class="tarefa-coluna">
+      <h3>Fazendo</h3>
+      <div class="tarefa-coluna-linha">
+        <%= render @tarefasFazendo %>
+      </div>
+    </div>
+    <div class="tarefa-coluna">
+      <h3>Feitas</h3>
+      <div>
+        <%= render @tarefasFeitas %>
+      </div>
+    </div>
+  </div>
+</nav>

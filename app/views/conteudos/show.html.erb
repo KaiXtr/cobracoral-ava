@@ -31,11 +31,15 @@
           <button class="act-button">Conteúdo anterior</button>
         </a>
       <% end %>
-      <% if @conteudo.id + 1 < 10 %>
-        <a href="/conteudos/<%= @conteudo.id %>/salvar">
-          <button class="act-button">Próximo conteúdo</button>
-        </a>
-      <% end %>
+      <a href="/conteudos/<%= @conteudo.id %>/salvar">
+        <button class="act-button">
+          <% if @proximoConteudo %>
+            Próximo conteúdo: <%= @proximoConteudo.nome_conteudo %>
+          <% else %>
+            Voltar à disciplina
+          <% end %>
+        </button>
+      </a>
     </div>
   </div>
 </nav>
