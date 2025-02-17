@@ -3,7 +3,12 @@ module ConteudosHelper
         leitura_conteudo = LeituraConteudo.find_by(
             conteudo_id: conteudo.id,
             usuario_id: @usuario.id
-          )
-        return leitura_conteudo.conclusao == 1
+        )
+        
+        if leitura_conteudo then
+            return leitura_conteudo.conclusao == 1
+        else
+            return false
+        end
     end
 end

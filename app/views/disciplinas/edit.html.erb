@@ -18,15 +18,17 @@
         <h1>
           <%= form.text_field :nome_disciplina, class: "titulo-pagina page-edit-input" %>
         </h1>
+				<a href='/usuarios/<%= professor_disciplina(@disciplina).id %>'>
+					<strong>
+						<%= professor_disciplina(@disciplina).nome_completo %>
+					</strong>
+				</a>
         <div>
-          Nome prof
-          <%= form.label :nome_disciplina %>
-          <%= form.text_field :nome_disciplina, class: "page-edit-input" %>
+          <%= turma_disciplina(@disciplina) %>
         </div>
         <div>
-          Local sala
-          <%= form.label :nome_disciplina %>
-          <%= form.text_field :nome_disciplina, class: "page-edit-input" %>
+          <%= form.label :sala_aula %>
+          <%= form.text_field :sala_aula, class: "page-edit-input" %>
         </div>
         <div>
           <%= form.label :semestre %>

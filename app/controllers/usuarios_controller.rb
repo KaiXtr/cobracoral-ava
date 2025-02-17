@@ -19,7 +19,7 @@ class UsuariosController < ApplicationController
 
     def perfil
         @usuario = usuario_autenticado
-        redirect_to edit_usuario_path(@usuario)
+        redirect_to usuario_path(@usuario)
     end
 
     def caixa

@@ -1,5 +1,3 @@
-#helper_method: current_user
-
 class ApplicationController < ActionController::Base
 	def usuario_autenticado
 		if session[:usuario_id]
