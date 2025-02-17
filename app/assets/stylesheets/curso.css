@@ -13,6 +13,7 @@
 }
 
 .disciplinas-container .disciplina-thumbnail {
+    vertical-align: top;
     display: inline-block;
     border-radius: 50px;
     transition-duration: .2s;
