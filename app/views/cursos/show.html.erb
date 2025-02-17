@@ -2,7 +2,9 @@
     <div class="deslizar-transition">
         <h1>
             <%= @curso.nome_curso %>
-            <%= link_to "Editar", edit_curso_path(@curso) %>
+            <% if policy(@curso).edit? %>
+                <%= link_to "Editar", edit_curso_path(@curso) %>
+            <% end %>
         </h1>
         <p>
             <%= @curso.descricao %>

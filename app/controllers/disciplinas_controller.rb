@@ -98,4 +98,10 @@ class DisciplinasController < ApplicationController
     def disciplina_params
       params.require(:disciplina).permit(:nome_disciplina, :semestre)
     end
+    
+    def isUsuarioEstudante(usuario)
+        matricula = Matricula.find_by(usuario_id: usuario.id)
+        cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+        cargo.id > 2
+    end
 end

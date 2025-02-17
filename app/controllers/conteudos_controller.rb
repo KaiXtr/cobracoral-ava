@@ -20,18 +20,21 @@ class ConteudosController < ApplicationController
     
     # Iniciar leitura do conteúdo e contabilizar conclusão
     @conclusao_conteudo = 0
-    @leitura_conteudo = LeituraConteudo.find_by(
-      conteudo_id: conteudo.id,
-      usuario_id: usuario.id
-    )
-    if @leitura_conteudo then
-      @conclusao_conteudo = @leitura_conteudo.conclusao
-    else
-      @leitura_conteudo = LeituraConteudo.new(
+
+    if isUsuarioEstudante(usuario) then
+      @leitura_conteudo = LeituraConteudo.find_by(
         conteudo_id: conteudo.id,
         usuario_id: usuario.id
       )
-      @leitura_conteudo.save
+      if @leitura_conteudo then
+        @conclusao_conteudo = @leitura_conteudo.conclusao
+      else
+        @leitura_conteudo = LeituraConteudo.new(
+          conteudo_id: conteudo.id,
+          usuario_id: usuario.id
+        )
+        @leitura_conteudo.save
+      end
     end
   end
 
@@ -39,23 +42,26 @@ class ConteudosController < ApplicationController
   def salvar
     usuario = usuario_autenticado
     conteudo = Conteudo.find(params[:id])
-    @leitura_conteudo = LeituraConteudo.find_by(
-      conteudo_id: conteudo.id,
-      usuario_id: usuario.id
-    )
-    if @leitura_conteudo == nil then
-      @leitura_conteudo = LeituraConteudo.new(
+
+    if isUsuarioEstudante(usuario) then
+      @leitura_conteudo = LeituraConteudo.find_by(
         conteudo_id: conteudo.id,
         usuario_id: usuario.id
       )
-    end
+      if @leitura_conteudo == nil then
+        @leitura_conteudo = LeituraConteudo.new(
+          conteudo_id: conteudo.id,
+          usuario_id: usuario.id
+        )
+      end
 
-    # Salvando conclusão da leitura do conteúdo
-    @leitura_conteudo.conclusao = 1
-    if @leitura_conteudo.save then
-      x = 1
-    else
-      x = 'Falhou'
+      # Salvando conclusão da leitura do conteúdo
+      @leitura_conteudo.conclusao = 1
+      if @leitura_conteudo.save then
+        x = 1
+      else
+        x = 'Falhou'
+      end
     end
 
     # Redirecionando para próximo conteúdo ou de volta à disciplina
@@ -131,5 +137,11 @@ class ConteudosController < ApplicationController
     # Only allow a list of trusted parameters through.
     def conteudo_params
       params.require(:conteudo).permit(:unidade_disciplina_id, :nome_conteudo)
+    end
+
+    def isUsuarioEstudante(usuario)
+        matricula = Matricula.find_by(usuario_id: usuario.id)
+        cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+        cargo.id > 2
     end
 end
