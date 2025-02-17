@@ -35,6 +35,9 @@ class DisciplinasController < ApplicationController
     @estaEditando = true
     @usuario = usuario_autenticado
     @disciplina = Disciplina.find(params[:id])
+
+    authorize(@disciplina)
+
     @unidades_disciplina = UnidadeDisciplina.where(disciplina_id: @disciplina.id)
     @conteudos = Conteudo.joins(:unidade_disciplina)
       .where(
@@ -94,5 +97,11 @@ class DisciplinasController < ApplicationController
     # Only allow a list of trusted parameters through.
     def disciplina_params
       params.require(:disciplina).permit(:nome_disciplina, :semestre)
+    end
+    
+    def isUsuarioEstudante(usuario)
+        matricula = Matricula.find_by(usuario_id: usuario.id)
+        cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+        cargo.id > 2
     end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_16_204059) do
+ActiveRecord::Schema[7.0].define(version: 2025_02_16_222451) do
   create_table "conteudos", force: :cascade do |t|
     t.integer "unidade_disciplina_id", null: false
     t.string "nome_conteudo"
@@ -53,17 +53,32 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_16_204059) do
     t.index ["usuario_id"], name: "index_leitura_conteudos_on_usuario_id"
   end
 
+  create_table "matricula_cargos", force: :cascade do |t|
+    t.string "enumCargoFeminino"
+    t.string "enumCargoMasculino"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "matriculas", force: :cascade do |t|
     t.integer "turma_id", null: false
     t.integer "usuario_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "matricula_cargo_id", null: false
+    t.index ["matricula_cargo_id"], name: "index_matriculas_on_matricula_cargo_id"
     t.index ["turma_id"], name: "index_matriculas_on_turma_id"
     t.index ["usuario_id"], name: "index_matriculas_on_usuario_id"
   end
 
   create_table "modalidade_turmas", force: :cascade do |t|
     t.string "enumModalidade"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pronomes_usuarios", force: :cascade do |t|
+    t.string "enumPronomes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -102,6 +117,12 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_16_204059) do
     t.string "senha"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "pronomes_usuarios_id", null: false
+    t.string "profile_pic"
+    t.string "biografia"
+    t.string "lattes_id"
+    t.string "orcid_id"
+    t.index ["pronomes_usuarios_id"], name: "index_usuarios_on_pronomes_usuarios_id"
   end
 
   add_foreign_key "conteudos", "unidade_disciplinas"
@@ -110,10 +131,12 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_16_204059) do
   add_foreign_key "disciplinas", "usuarios"
   add_foreign_key "leitura_conteudos", "conteudos"
   add_foreign_key "leitura_conteudos", "usuarios"
+  add_foreign_key "matriculas", "matricula_cargos"
   add_foreign_key "matriculas", "turmas"
   add_foreign_key "matriculas", "usuarios"
   add_foreign_key "turmas", "cursos"
   add_foreign_key "turmas", "modalidade_turmas"
   add_foreign_key "turmas", "turno_turmas"
   add_foreign_key "unidade_disciplinas", "disciplinas"
+  add_foreign_key "usuarios", "pronomes_usuarios", column: "pronomes_usuarios_id"
 end

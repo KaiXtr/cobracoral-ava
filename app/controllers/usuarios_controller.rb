@@ -13,11 +13,13 @@ class UsuariosController < ApplicationController
 
     def show
         @usuario = Usuario.find(params[:id])
+        @link_lattes = "https://lattes.cnpq.br/" + @usuario.lattes_id.to_s
+        @link_orcid = "https://orcid.org/" + @usuario.orcid_id.to_s
     end
 
     def perfil
         @usuario = usuario_autenticado
-        redirect_to edit_usuario_path(@usuario)
+        redirect_to usuario_path(@usuario)
     end
 
     def caixa

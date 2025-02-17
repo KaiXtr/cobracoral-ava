@@ -1,0 +1,2 @@
+class PronomesUsuario < ApplicationRecord
+end

@@ -10,7 +10,9 @@
       <div class="disciplina_info">
         <h1 class="titulo-disciplina">
           <%= @disciplina.nome_disciplina %>
-          <%= link_to "Editar", edit_disciplina_path(@disciplina) %>
+          <% if policy(@disciplina).edit? %>
+            <%= link_to "Editar", edit_disciplina_path(@disciplina) %>
+          <% end %>
         </h1>
 				<a href='/usuarios/<%= professor_disciplina(@disciplina).id %>'>
 					<strong>

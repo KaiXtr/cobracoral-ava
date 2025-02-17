@@ -31,10 +31,23 @@ class TurmasController < ApplicationController
 		@curso_turma = Curso.find(@turma.curso_id)
 		@turno_turma = TurnoTurma.find(@turma.turno_turma_id)
 		@modalidade_turma = ModalidadeTurma.find(@turma.modalidade_turma_id)
-		
-		@estudantes_turma = Usuario.joins(:matricula).where(
-			matricula: { turma_id: @turma.id }
-		)
+
+		# Listar apenas usuários estudantes, excluindo professores
+		@estudantes_turma = Array.new
+		@professores_turma = Array.new
+		matriculas_estudantes = Matricula.where(turma_id: @turma.id)
+		for matricula in matriculas_estudantes do
+			cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+			estudante = Usuario.find(matricula.usuario_id)
+
+			if cargo.id > 2 then
+				@estudantes_turma.push(estudante)
+			else
+				@professores_turma.push(estudante)
+			end
+		end
+
+		# Listas disciplinas de turma, turno e modalidades específicas
 		@disciplinas_turma = Disciplina.where(
 			turma_id: @turma.id
 		)
