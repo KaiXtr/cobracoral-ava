@@ -6,7 +6,9 @@
     </a>
     <h1>
       <%= @conteudo.nome_conteudo %>
-      <%= link_to "Editar", edit_conteudo_path(@conteudo) %>
+      <% if policy(@conteudo).edit? %>
+        <%= link_to "Editar", edit_conteudo_path(@conteudo) %>
+      <% end %>
     </h1>
 
     <div class="conteudo-elementos">

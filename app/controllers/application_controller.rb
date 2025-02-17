@@ -1,8 +1,14 @@
 class ApplicationController < ActionController::Base
+	include Pundit
+
 	def usuario_autenticado
 		if session[:usuario_id]
 			@usuario_autenticado = Usuario.find(session[:usuario_id])
 		end
+	end
+
+	def current_user
+		usuario_autenticado
 	end
 
 	def logar(usuario)

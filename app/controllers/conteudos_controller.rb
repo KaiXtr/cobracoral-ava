@@ -81,6 +81,7 @@ class ConteudosController < ApplicationController
 
   # GET /conteudos/1/edit
   def edit
+    authorize @conteudo
   end
 
   # POST /conteudos or /conteudos.json

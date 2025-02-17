@@ -35,6 +35,9 @@ class DisciplinasController < ApplicationController
     @estaEditando = true
     @usuario = usuario_autenticado
     @disciplina = Disciplina.find(params[:id])
+
+    authorize(@disciplina)
+
     @unidades_disciplina = UnidadeDisciplina.where(disciplina_id: @disciplina.id)
     @conteudos = Conteudo.joins(:unidade_disciplina)
       .where(
