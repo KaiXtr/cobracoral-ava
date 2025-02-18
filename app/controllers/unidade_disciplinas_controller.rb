@@ -17,10 +17,6 @@ class UnidadeDisciplinasController < ApplicationController
     @unidade_disciplina = UnidadeDisciplina.new
   end
 
-  # GET /unidade_disciplinas/1/edit
-  def edit
-  end
-
   # POST /unidade_disciplinas or /unidade_disciplinas.json
   def create
     @unidade_disciplina = UnidadeDisciplina.new(unidade_disciplina_params)

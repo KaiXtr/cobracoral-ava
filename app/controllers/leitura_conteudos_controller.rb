@@ -12,20 +12,7 @@ class LeituraConteudosController < ApplicationController
       leitura_conteudo: { usuario_id: @usuario.id, conclusao: 1 })
     @tarefasAFazer = Conteudo.where.not(id: Conteudo.joins(:leitura_conteudo).all)
   end
-
-  # GET /leitura_conteudos/1 or /leitura_conteudos/1.json
-  def show
-  end
-
-  # GET /leitura_conteudos/new
-  def new
-    @leitura_conteudo = LeituraConteudo.new
-  end
-
-  # GET /leitura_conteudos/1/edit
-  def edit
-  end
-
+  
   # POST /leitura_conteudos or /leitura_conteudos.json
   def create
     @leitura_conteudo = LeituraConteudo.new(leitura_conteudo_params)
