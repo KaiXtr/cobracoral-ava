@@ -10,6 +10,8 @@ PronomesUsuario.create(id: 1, enumPronomes: 'Ela/dela')
 PronomesUsuario.create(id: 2, enumPronomes: 'Ele/dele')
 PronomesUsuario.create(id: 3, enumPronomes: 'Elu/delu')
 
+puts "= pronomes_usuarios populada."
+
 MatriculaCargo.create(id: 1,
     enumCargoFeminino: 'Coordenadora', enumCargoMasculino: 'Coordenador')
 MatriculaCargo.create(id: 2,
@@ -22,6 +24,8 @@ MatriculaCargo.create(id: 5,
     enumCargoFeminino: 'Monitora', enumCargoMasculino: 'Monitor')
 MatriculaCargo.create(id: 6,
     enumCargoFeminino: 'Estudante', enumCargoMasculino: 'Estudante')
+
+puts "= matricula_cargos populada."
 
 Usuario.create(
     id: 1,
@@ -131,24 +135,46 @@ Usuario.create(
     lattes_id: nil,
     orcid_id: nil
 )
+Usuario.create(
+    id: 10,
+    pronomes_usuarios_id: 2,
+    nome_completo: "Coordenador do curso de Design Gráfico",
+    email: "coordenador.dg@cobracoral.edu.br",
+    telefone: "997773322",
+    senha: "12345678",
+    profile_pic: nil,
+    biografia: nil,
+    lattes_id: nil,
+    orcid_id: nil
+)
+
+puts "= usuarios populada."
 
 Curso.create(
     id: 1,
+    usuario_id: 9,
     nome_curso: "Ciência da Computação",
     descricao: "Esta graduação é dedicada a formar e qualificar profissionais da área da tecnologia da informação."
 )
 Curso.create(
     id: 2,
+    usuario_id: 10,
     nome_curso: "Design Gráfico",
     descricao: "Esta graduação é dedicada a formar e qualificar profissionais da área do design e da tecnologia web."
 )
+
+puts "= cursos populada."
 
 TurnoTurma.create(id: 1, enumTurno: 'Diurno')
 TurnoTurma.create(id: 2, enumTurno: 'Vespertino')
 TurnoTurma.create(id: 3, enumTurno: 'Noturno')
 
+puts "= turno_turmas populada."
+
 ModalidadeTurma.create(id: 1, enumModalidade: 'Presencial')
 ModalidadeTurma.create(id: 2, enumModalidade: 'À distância')
+
+puts "= modalidade_turmas populada."
 
 Turma.create(id: 1, curso_id: 1, turno_turma_id: 1,
     modalidade_turma_id: 1, nome_turma: 'CC1 Diurno', senha_acesso: '12345678')
@@ -167,6 +193,8 @@ Turma.create(id: 7, curso_id: 2, turno_turma_id: 2,
 Turma.create(id: 8, curso_id: 2, turno_turma_id: 3,
     modalidade_turma_id: 1, nome_turma: 'DG2 Noturno', senha_acesso: '12345678')
 
+puts "= turmas populada."
+
 Matricula.create(usuario_id: 1, turma_id: 1, matricula_cargo_id: 6)
 Matricula.create(usuario_id: 2, turma_id: 1, matricula_cargo_id: 2)
 Matricula.create(usuario_id: 3, turma_id: 1, matricula_cargo_id: 2)
@@ -176,6 +204,8 @@ Matricula.create(usuario_id: 5, turma_id: 4, matricula_cargo_id: 3)
 Matricula.create(usuario_id: 6, turma_id: 3, matricula_cargo_id: 4)
 Matricula.create(usuario_id: 7, turma_id: 3, matricula_cargo_id: 5)
 Matricula.create(usuario_id: 8, turma_id: 5, matricula_cargo_id: 3)
+
+puts "= matriculas populada."
 
 Disciplina.create(
     id: 1,
@@ -205,6 +235,8 @@ Disciplina.create(
     semestre: '2025/1',
 )
 
+puts "= disciplinas populada."
+
 UnidadeDisciplina.create(
     id: 1,
     disciplina_id: 1,
@@ -225,6 +257,8 @@ UnidadeDisciplina.create(
     disciplina_id: 3,
     nome_unidade: 'Heurísticas de Nielsen'
 )
+
+puts "= unidade_disciplinas populada."
 
 Conteudo.create(
     id: 1,
@@ -298,3 +332,5 @@ Conteudo.create(
     data_liberacao: DateTime.now,
     data_vencimento: DateTime.now
 )
+
+puts "= conteudos populada."
