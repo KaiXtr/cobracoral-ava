@@ -1,0 +1,37 @@
+<nav>
+    <div class="deslizar-transition">
+        <%= button_to "Deletar", @turma, method: :delete %>
+        <%= form_with(model: @turma) do |form| %>
+            <h1>
+                <a href='/cursos/<%= @curso_turma.id %>'>
+                    <%= @curso_turma.nome_curso %>
+                </a>
+            </h1>
+            <h2>
+                <%= form.text_field :nome_turma, class: "titulo-pagina page-edit-input" %>
+            </h2>
+            <div>
+                <div>
+                    <%= form.label :turno_turma_id, "Turno" %>
+                    <%= form.select(:turno_turma_id, @turno_turmas) %>
+                </div>
+                <div>
+                    <%= form.label :modalidade_turma_id, "Modalidade" %>
+                    <%= form.select(:modalidade_turma_id, @modalidade_turmas) %>
+                </div>
+                </div>
+            <div>
+                <h2>Estudantes da turma</h2>
+                <%= render @estudantes_turma %>
+            </div>
+        <% end %>
+        <div>
+            <h2>Minhas disciplinas</h2>
+            <%= link_to "Adicionar disciplina", new_disciplina_path, remote: true %>
+            <h3>Semestre</h3>
+            <div class="disciplinas-container">
+                <%= render @disciplinas_turma %>
+            </div>
+        </div>
+    </div>
+</nav>

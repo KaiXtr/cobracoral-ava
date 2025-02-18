@@ -1,6 +1,5 @@
 <nav>
     <div class="deslizar-transition">
-        <%= button_to "Deletar", @turma, method: :delete %>
         <h1>
             <a href='/cursos/<%= @curso_turma.id %>'>
                 <%= @curso_turma.nome_curso %>
@@ -8,6 +7,9 @@
         </h1>
         <h2>
             <%= @turma.nome_turma %>
+            <% if policy(@turma).edit? %>
+                <%= link_to "Editar", edit_turma_path(@turma) %>
+            <% end %>
         </h2>
         <div>
             <div>
@@ -18,11 +20,7 @@
             </div>
             </div>
         <div>
-            <h2>Professores da turma</h2>
-            <%= render @professores_turma %>
-        </div>
-        <div>
-            <h2>Estudantes matriculados</h2>
+            <h2>Estudantes da turma</h2>
             <%= render @estudantes_turma %>
         </div>
         <div>

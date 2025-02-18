@@ -1,4 +1,34 @@
-<%= form_with(model: @turma, remote: true, class: "d-flex" ) do |f| %>
-  <%= f.text_field :nome_turma, class: "form-control", autocomplete: 'off' %>
-  <%= f.submit %>
+<%= form_with(model: turma) do |form| %>
+  <% if turma.errors.any? %>
+    <div style="color: red">
+      <ul>
+        <% turma.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :nome_turma, "Nome da turma" %>
+    <%= form.text_field :nome_turma %>
+  </div>
+  <div>
+    <%= form.label :curso, "Curso" %>
+    <%= form.select(:curso, @cursos) %>
+  </div>
+  <div>
+    <%= form.label :turno_turma, "Turno" %>
+    <%= form.select(:turno_turma, @turno_turmas) %>
+  </div>
+  <div>
+    <%= form.label :modalidade_turma, "Modalidade" %>
+    <%= form.select(:modalidade_turma, @modalidade_turmas) %>
+  </div>
+  <div>
+    <%= form.label :senha_acesso, "Senha de acesso" %>
+    <%= form.text_field :senha_acesso %>
+  </div>
+  
+  <%= form.submit %>
 <% end %>

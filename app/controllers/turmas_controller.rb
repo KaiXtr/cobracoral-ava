@@ -9,8 +9,67 @@ class TurmasController < ApplicationController
 		@turmas = Turma.all
 	end
 
+	def show
+		@turma = Turma.find(params[:id])
+		@curso_turma = Curso.find(@turma.curso_id)
+		@turno_turma = TurnoTurma.find(@turma.turno_turma_id)
+		@modalidade_turma = ModalidadeTurma.find(@turma.modalidade_turma_id)
+
+		# Listar apenas usuários estudantes, excluindo professores
+		@estudantes_turma = Array.new
+		matriculas_estudantes = Matricula.where(turma_id: @turma.id)
+		for matricula in matriculas_estudantes do
+			cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+			estudante = Usuario.find(matricula.usuario_id)
+
+			if cargo.id > 2 then
+				@estudantes_turma.push(estudante)
+			end
+		end
+
+		# Listas disciplinas de turma, turno e modalidades específicas
+		@disciplinas_turma = Disciplina.where(
+			turma_id: @turma.id
+		)
+	end
+
+	def new
+		@turma = Turma.new
+		@cursos = Curso.pluck(:nome_curso)
+		@turno_turmas = TurnoTurma.pluck(:enumTurno)
+		@modalidade_turmas = ModalidadeTurma.pluck(:enumModalidade)
+	end
+
+	def edit
+		@turma = Turma.find(params[:id])
+		@cursos = Curso.pluck(:nome_curso)
+		@curso_turma = Curso.find(@turma.curso_id)
+		@turno_turmas = TurnoTurma.pluck(:enumTurno)
+		@modalidade_turmas = ModalidadeTurma.pluck(:enumModalidade)
+
+		# Listar apenas usuários estudantes, excluindo professores
+		@estudantes_turma = Array.new
+		matriculas_estudantes = Matricula.where(turma_id: @turma.id)
+		for matricula in matriculas_estudantes do
+			cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+			estudante = Usuario.find(matricula.usuario_id)
+
+			if cargo.id > 2 then
+				@estudantes_turma.push(estudante)
+			end
+		end
+
+		# Listas disciplinas de turma, turno e modalidades específicas
+		@disciplinas_turma = Disciplina.where(
+			turma_id: @turma.id
+		)
+	end
+
 	def create
 		@turma = Turma.new(turma_params)
+		@cursos = Curso.pluck(:nome_curso)
+		@turno_turmas = TurnoTurma.pluck(:enumTurno)
+		@modalidade_turmas = ModalidadeTurma.pluck(:enumModalidade)
 	
 		respond_to do |format|
 		  if @turma.save
@@ -24,33 +83,6 @@ class TurmasController < ApplicationController
 			format.json { render json: @turma.errors, status: :unprocessable_entity }
 		  end
 		end
-	end
-
-	def show
-		@turma = Turma.find(params[:id])
-		@curso_turma = Curso.find(@turma.curso_id)
-		@turno_turma = TurnoTurma.find(@turma.turno_turma_id)
-		@modalidade_turma = ModalidadeTurma.find(@turma.modalidade_turma_id)
-
-		# Listar apenas usuários estudantes, excluindo professores
-		@estudantes_turma = Array.new
-		@professores_turma = Array.new
-		matriculas_estudantes = Matricula.where(turma_id: @turma.id)
-		for matricula in matriculas_estudantes do
-			cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
-			estudante = Usuario.find(matricula.usuario_id)
-
-			if cargo.id > 2 then
-				@estudantes_turma.push(estudante)
-			else
-				@professores_turma.push(estudante)
-			end
-		end
-
-		# Listas disciplinas de turma, turno e modalidades específicas
-		@disciplinas_turma = Disciplina.where(
-			turma_id: @turma.id
-		)
 	end
 
 	def destroy

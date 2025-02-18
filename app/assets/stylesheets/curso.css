@@ -1,3 +1,33 @@
+.usuario-button {
+    display: block;
+}
+
+.usuario-button .usuario-button-icon {
+    background-color: red;
+    border-radius: 100%;
+    min-width: 3vw;
+    min-height: 3vw;
+    display: inline-block;
+}
+
+.usuario-button .usuario-button-name {
+    display: inline-block;
+}
+
+.turma-button {
+    font-weight: bold;
+    background-color: ghostwhite;
+    border-radius: 20px;
+    padding: 1.5vw;
+    margin: 0.5vw;
+    display: inline-block;
+    transition-duration: .2s;
+}
+
+.turma-button:hover {
+    transform: scale(1.1);
+}
+
 .modal-adicionar {
     background-color: ghostwhite;
     border-radius: 20px;

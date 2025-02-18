@@ -1,3 +1,8 @@
-<div>
-	<%= link_to usuario.nome_completo, usuario %>
-</div>
+<a href="/usuarios/<%= usuario.id %>">
+	<div class="usuario-button">
+		<div class="usuario-button-icon"></div>
+		<div class="usuario-button-name">
+			<%= usuario.nome_completo %>
+		</div>
+	</div>
+</a>
