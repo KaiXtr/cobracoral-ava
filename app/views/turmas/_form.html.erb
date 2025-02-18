@@ -18,12 +18,24 @@
     <%= form.select(:curso, @cursos) %>
   </div>
   <div>
-    <%= form.label :turno_turma, "Turno" %>
-    <%= form.select(:turno_turma, @turno_turmas) %>
+    <%= form.label :turno_turma_id, "Turno" %>
+    <%= form.select :turno_turma_id,
+      options_for_select(@turno_turmas.map{ |t| [
+        t.enumTurno, t.id, {
+          'turno-id' => t.id
+        }
+      ]}, @turma.turno_turma_id)  
+    %>
   </div>
   <div>
-    <%= form.label :modalidade_turma, "Modalidade" %>
-    <%= form.select(:modalidade_turma, @modalidade_turmas) %>
+    <%= form.label :modalidade_turma_id, "Modalidade" %>
+    <%= form.select :modalidade_turma_id,
+      options_for_select(@modalidade_turmas.map{ |t| [
+        t.enumModalidade, t.id, {
+          'modalidade-id' => t.id
+        }
+      ]}, @turma.modalidade_turma_id)
+    %>
   </div>
   <div>
     <%= form.label :senha_acesso, "Senha de acesso" %>

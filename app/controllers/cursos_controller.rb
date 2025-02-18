@@ -3,14 +3,15 @@ class CursosController < ApplicationController
 
 	def index
 		# Redirecionar usuário não autenticado
-		@usuario_autenticado = usuario_autenticado
-		redirect_to '/entrar' unless @usuario_autenticado
+		@usuario = usuario_autenticado
+		redirect_to '/entrar' unless @usuario
 
 		@curso = Curso.new
 		@cursos = Curso.all
 	end
 
 	def show
+		@usuario = usuario_autenticado
 		@curso = Curso.find(params[:id])
 		@turmas = Turma.where(curso_id: @curso.id)
 		@disciplinas = Disciplina.where(curso_id: @curso.id)

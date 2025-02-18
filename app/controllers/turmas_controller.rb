@@ -10,6 +10,7 @@ class TurmasController < ApplicationController
 	end
 
 	def show
+		@usuario = usuario_autenticado
 		@turma = Turma.find(params[:id])
 		@curso_turma = Curso.find(@turma.curso_id)
 		@turno_turma = TurnoTurma.find(@turma.turno_turma_id)
@@ -33,19 +34,14 @@ class TurmasController < ApplicationController
 		)
 	end
 
-	def new
-		@turma = Turma.new
-		@cursos = Curso.pluck(:nome_curso)
-		@turno_turmas = TurnoTurma.pluck(:enumTurno)
-		@modalidade_turmas = ModalidadeTurma.pluck(:enumModalidade)
-	end
-
 	def edit
 		@turma = Turma.find(params[:id])
+		authorize(@turma)
+
 		@cursos = Curso.pluck(:nome_curso)
 		@curso_turma = Curso.find(@turma.curso_id)
-		@turno_turmas = TurnoTurma.pluck(:enumTurno)
-		@modalidade_turmas = ModalidadeTurma.pluck(:enumModalidade)
+		@turno_turmas = TurnoTurma.all
+		@modalidade_turmas = ModalidadeTurma.all
 
 		# Listar apenas usuários estudantes, excluindo professores
 		@estudantes_turma = Array.new
@@ -65,11 +61,16 @@ class TurmasController < ApplicationController
 		)
 	end
 
+	def new
+		@turma = Turma.new
+		@cursos = Curso.pluck(:nome_curso)
+		@turno_turmas = TurnoTurma.all
+		@modalidade_turmas = ModalidadeTurma.all
+	end
+
 	def create
 		@turma = Turma.new(turma_params)
 		@cursos = Curso.pluck(:nome_curso)
-		@turno_turmas = TurnoTurma.pluck(:enumTurno)
-		@modalidade_turmas = ModalidadeTurma.pluck(:enumModalidade)
 	
 		respond_to do |format|
 		  if @turma.save
@@ -83,6 +84,21 @@ class TurmasController < ApplicationController
 			format.json { render json: @turma.errors, status: :unprocessable_entity }
 		  end
 		end
+	end
+
+	def update
+	  respond_to do |format|
+		if @turma.update(turma_params)
+		  format.html {
+			  redirect_to turma_url(@turma),
+			  notice: "Todas as alterações foram salvas."
+			}
+		  format.json { render :show, status: :ok, location: @turma }
+		else
+		  format.html { render :edit, status: :unprocessable_entity }
+		  format.json { render json: @turma.errors, status: :unprocessable_entity }
+		end
+	  end
 	end
 
 	def destroy
@@ -101,6 +117,6 @@ class TurmasController < ApplicationController
 		end
 
 		def turma_params
-			params.require(:turma).permit(:nome_turma)
+			params.require(:turma).permit(:curso_id, :nome_turma, :turno_turma_id, :modalidade_turma_id)
 		end
 end

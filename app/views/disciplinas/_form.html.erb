@@ -10,8 +10,8 @@
   <% end %>
 
   <div>
-    <%= form.label :curso_id %>
-    <%= form.text_field :curso_id %>
+    <%= form.label :curso, "Curso" %>
+    <%= form.select(:curso, @cursos) %>
   </div>
   <div>
     <%= form.label :nome_disciplina, "Nome da disciplina" %>

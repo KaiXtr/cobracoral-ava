@@ -16,6 +16,10 @@ class TurmaPolicy
     temCargoCoordenador? || permissaoProfessor? || permissaoRepresentante?
   end
 
+  def new_disciplina?
+    temCargoCoordenador?
+  end
+
   def create?
     temCargoCoordenador? || permissaoProfessor? || permissaoRepresentante?
   end

@@ -9,5 +9,7 @@
     <% end %>
   </div>
 
-  <%= link_to "Adicionar disciplina", new_disciplina_path, remote: true %>
+  <% if policy(@disciplina).new? %>
+    <%= link_to "Adicionar disciplina", new_disciplina_path, remote: true %>
+  <% end %>
 </nav>
