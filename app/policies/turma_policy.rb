@@ -60,7 +60,12 @@ class TurmaPolicy
   end
 
   def permissaoRepresentante?
-    criouConteudo? && temCargoRepresentante?
+    matriculadoTurma? && temCargoRepresentante?
+  end
+
+  def matriculadoTurma?
+    matricula = Matricula.find_by(usuario_id: usuario.id)
+    matricula.turma_id == turma.id
   end
 
   def temCargoRepresentante?
