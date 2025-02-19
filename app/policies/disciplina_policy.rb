@@ -12,20 +12,24 @@ class DisciplinaPolicy
     @disciplina = disciplina
   end
 
-  def new?
-    temCargoCoordenador?
+  def index?
+    disciplinaEstaEmCursoCoordenadoPor?
   end
 
-  def create?
-    temCargoCoordenador?
+  def new?
+    index?
+  end
+
+  def show?
+    true
   end
   
   def edit?
     temCargoCoordenador? || permissaoProfessor?
   end
 
-  def show?
-    true
+  def create?
+    temCargoCoordenador?
   end
   
   def update?
@@ -38,10 +42,23 @@ class DisciplinaPolicy
 
   private
 
+  def disciplinaEstaEmCursoCoordenadoPor?
+    disciplinas = Disciplina.all
+    temCoordenador = false
+
+    for disciplina in disciplinas do
+      curso_disciplina = Curso.find(disciplina.curso_id)
+      if !temCoordenador then
+        temCoordenador = curso_disciplina.usuario_id == @usuario.id
+      end
+    end
+
+    return temCoordenador
+  end
+
   def temCargoCoordenador?
-    matricula = Matricula.find_by(usuario_id: usuario.id)
-    cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
-    cargo.id == 1
+    curso = Curso.find(@disciplina.curso_id)
+    curso.usuario_id = @usuario.id
   end
 
   def permissaoProfessor?

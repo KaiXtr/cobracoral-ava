@@ -3,13 +3,13 @@
 
   <h1>Todas as disciplinas</h1>
 
+  <% if policy(@disciplina).new? %>
+    <%= link_to "Adicionar disciplina", new_disciplina_path, remote: true %>
+  <% end %>
+
   <div id="disciplinas" class="disciplinas-container">
     <% @disciplinas.each do |disciplina| %>
       <%= render disciplina %>
     <% end %>
   </div>
-
-  <% if policy(@disciplina).new? %>
-    <%= link_to "Adicionar disciplina", new_disciplina_path, remote: true %>
-  <% end %>
 </nav>

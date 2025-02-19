@@ -10,17 +10,25 @@
   <% end %>
 
   <div>
-    <%= form.label :curso, "Curso" %>
-    <%= form.select(:curso, @cursos) %>
-  </div>
-  <div>
     <%= form.label :nome_disciplina, "Nome da disciplina" %>
     <%= form.text_field :nome_disciplina %>
+  </div>
+  <div>
+    <%= form.label :curso_id, "Curso" %>
+    <%= form.select :curso_id,
+      options_for_select(@cursos.map{ |c| [
+        c.nome_curso, c.id, {
+          'curso-id' => c.id
+        }
+      ]}, @disciplina.curso_id)  
+    %>
   </div>
   <div>
     <%= form.label :semestre %>
     <%= form.text_field :semestre %>
   </div>
+  
+  <%= form.submit %>
 
   <div class="button-group">
     <a href="/disciplinas/<%= @disciplina.id %>">
@@ -28,6 +36,5 @@
         Cancelar
       </button>
     </a>
-    <%= form.submit "Salvar", class: "act-button" %>
   </div>
 <% end %>

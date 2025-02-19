@@ -63,6 +63,7 @@ class TurmasController < ApplicationController
 
 	def new
 		@turma = Turma.new
+		authorize(@turma)
 		@cursos = Curso.pluck(:nome_curso)
 		@turno_turmas = TurnoTurma.all
 		@modalidade_turmas = ModalidadeTurma.all
@@ -70,7 +71,7 @@ class TurmasController < ApplicationController
 
 	def create
 		@turma = Turma.new(turma_params)
-		@cursos = Curso.pluck(:nome_curso)
+		authorize(@turma)
 	
 		respond_to do |format|
 		  if @turma.save

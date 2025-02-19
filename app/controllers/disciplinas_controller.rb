@@ -30,7 +30,7 @@ class DisciplinasController < ApplicationController
   def new
     @disciplina = Disciplina.new
     authorize(@disciplina)
-		@cursos = Curso.pluck(:nome_curso)
+		@cursos = Curso.all
   end
 
   # GET /disciplinas/1/edit
@@ -57,7 +57,10 @@ class DisciplinasController < ApplicationController
 
     respond_to do |format|
       if @disciplina.save
-        format.html { redirect_to disciplina_url(@disciplina), notice: "Disciplina was successfully created." }
+        format.html {
+            redirect_to disciplina_url(@disciplina),
+            notice: "Disciplina was successfully created."
+          }
         format.json { render :show, status: :created, location: @disciplina }
       else
         format.html { render :new, status: :unprocessable_entity }

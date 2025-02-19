@@ -39,9 +39,7 @@ class CursoPolicy
   private
 
   def temCargoCoordenador?
-    matricula = Matricula.find_by(usuario_id: usuario.id)
-    cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
-    cargo.id == 1
+    @curso.usuario_id = @usuario.id
   end
 
   class Scope < ApplicationPolicy::Scope

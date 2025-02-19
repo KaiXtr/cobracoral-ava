@@ -43,9 +43,8 @@ class TurmaPolicy
   private
 
   def temCargoCoordenador?
-    matricula = Matricula.find_by(usuario_id: usuario.id)
-    cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
-    cargo.id == 1
+    curso = Turma.find(@turma.curso_id)
+    curso.usuario_id = @usuario.id
   end
 
   def permissaoProfessor?
