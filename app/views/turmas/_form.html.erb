@@ -14,8 +14,14 @@
     <%= form.text_field :nome_turma %>
   </div>
   <div>
-    <%= form.label :curso, "Curso" %>
-    <%= form.select(:curso, @cursos) %>
+    <%= form.label :curso_id, "Curso" %>
+    <%= form.select :curso_id,
+      options_for_select(@cursos.map{ |c| [
+        c.nome_curso, c.id, {
+          'curso-id' => c.id
+        }
+      ]}, @turma.curso_id)  
+    %>
   </div>
   <div>
     <%= form.label :turno_turma_id, "Turno" %>
@@ -30,9 +36,9 @@
   <div>
     <%= form.label :modalidade_turma_id, "Modalidade" %>
     <%= form.select :modalidade_turma_id,
-      options_for_select(@modalidade_turmas.map{ |t| [
-        t.enumModalidade, t.id, {
-          'modalidade-id' => t.id
+      options_for_select(@modalidade_turmas.map{ |m| [
+        m.enumModalidade, m.id, {
+          'modalidade-id' => m.id
         }
       ]}, @turma.modalidade_turma_id)
     %>
@@ -42,5 +48,14 @@
     <%= form.text_field :senha_acesso %>
   </div>
   
-  <%= form.submit %>
+  <div class="button-group">
+    <a href="/turmas">
+      <button class="act-button">
+        Cancelar
+      </button>
+    </a>
+    <button type="submit" class="act-button">
+      Salvar
+    </button>
+  </div>
 <% end %>

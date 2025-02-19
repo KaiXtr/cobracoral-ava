@@ -27,8 +27,6 @@
     <%= form.label :semestre %>
     <%= form.text_field :semestre %>
   </div>
-  
-  <%= form.submit %>
 
   <div class="button-group">
     <a href="/disciplinas/<%= @disciplina.id %>">
@@ -36,5 +34,8 @@
         Cancelar
       </button>
     </a>
+    <button type="submit" class="act-button">
+      Salvar
+    </button>
   </div>
 <% end %>

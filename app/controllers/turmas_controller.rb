@@ -7,6 +7,7 @@ class TurmasController < ApplicationController
 		redirect_to '/entrar' unless @usuario_autenticado
 
 		@turmas = Turma.all
+		@turma = Turma.find(1)
 	end
 
 	def show
@@ -64,9 +65,9 @@ class TurmasController < ApplicationController
 	def new
 		@turma = Turma.new
 		authorize(@turma)
-		@cursos = Curso.pluck(:nome_curso)
 		@turno_turmas = TurnoTurma.all
 		@modalidade_turmas = ModalidadeTurma.all
+		@cursos = Curso.all
 	end
 
 	def create
