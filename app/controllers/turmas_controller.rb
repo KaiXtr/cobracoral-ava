@@ -96,6 +96,11 @@ class TurmasController < ApplicationController
 		end
 	end
 
+	def delete
+		@usuario = usuario_autenticado
+		@turma = Turma.find(params[:id])
+	end
+
 	def create
 		@turma = Turma.new(turma_params)
 		authorize(@turma)

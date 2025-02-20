@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get '/tarefas', to: 'leitura_conteudos#index'
   get '/mensagens', to: 'cursos#index'
 
+  get '/turmas/:id/delete', to: 'turmas#delete'
   get '/conteudos/:id/salvar', to: 'conteudos#salvar'
 
   get '/sobre', to: 'sobre#index'
