@@ -1,10 +1,12 @@
 <nav>
     <div>
-        <a href="/turmas/<%= @turma.id %>/deletar">
-            <button class="act-button">
-                Deletar
-            </button>
-        </a>
+        <% if policy(@turma).destroy? %>
+            <a href="/turmas/<%= @turma.id %>/deletar">
+                <button class="act-button">
+                    Deletar
+                </button>
+            </a>
+        <% end %>
         <%= form_with(model: @turma) do |form| %>
             <h1>
                 <%= form.text_field :nome_turma, class: "titulo-pagina page-edit-input" %>

@@ -45,7 +45,7 @@ class TurmaPolicy
   end
   
   def destroy?
-    eCoordenadorDoCurso? || permissaoProfessor? || permissaoRepresentante?
+    eCoordenadorDoCurso?
   end
 
   private
