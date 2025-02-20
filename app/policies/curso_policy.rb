@@ -13,15 +13,15 @@ class CursoPolicy
   end
 
   def index?
-    temCargoCoordenador?
+    naoEstudante? || temCargoProfessor?
   end
 
   def new?
-    temCargoCoordenador?
+    naoEstudante?
   end
 
   def create?
-    temCargoCoordenador?
+    naoEstudante?
   end
   
   def edit?
@@ -56,10 +56,33 @@ class CursoPolicy
     eCoordenadorDoCurso?
   end
 
+  def temCargoProfessor?
+    if usuario then
+      matricula = Matricula.find_by(usuario_id: usuario.id)
+      if matricula then
+        cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+        cargo.id == 2
+      else
+        false
+      end
+    else
+      false
+    end
+  end
+
   private
 
-  def temCargoCoordenador?
-    true
+  def naoEstudante?
+    if usuario then
+      matricula = Matricula.find_by(usuario_id: usuario.id)
+      if matricula then
+        false
+      else
+        true
+      end
+    else
+      false
+    end
   end
 
   def eCoordenadorDoCurso?
@@ -68,16 +91,6 @@ class CursoPolicy
 
   def criouConteudo?
     disciplina.usuario_id == usuario.id
-  end
-
-  def temCargoProfessor?
-    matricula = Matricula.find_by(usuario_id: usuario.id)
-    if matricula then
-      cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
-      cargo.id == 2
-    else
-      false
-    end
   end
 
   def permissaoRepresentante?

@@ -7,8 +7,23 @@ class CursosController < ApplicationController
 		redirect_to '/entrar' unless @usuario
 
 		@curso = Curso.new
-		@cursos = Curso.all
-		authorize(@curso)
+		
+		# Listar cursos de acordo com Coordenador(a)/Professor(a)
+		if policy(@curso).index? then
+			if policy(@curso).temCargoProfessor? then
+				@cursos = Curso.joins(:disciplina).where(
+					disciplina: { usuario_id: @usuario.id}
+				)
+			else
+				@cursos = Curso.all
+			end
+		# Redirecionar estudantes para suas turmas
+		else
+			if @usuario then
+				matricula = Matricula.find_by(usuario_id: @usuario.id)
+				redirect_to turma_path(matricula.turma_id)
+			end
+		end
 	end
 
 	def show
