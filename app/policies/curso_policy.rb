@@ -25,7 +25,7 @@ class CursoPolicy
   end
   
   def edit?
-    temCargoCoordenador?
+    eCoordenadorDoCurso?
   end
 
   def index_turmas?
@@ -33,15 +33,15 @@ class CursoPolicy
   end
 
   def index_disciplinas?
-    temCargoCoordenador? || permissaoProfessor?
+    eCoordenadorDoCurso? || temCargoProfessor?
   end
 
   def adicionar_turma?
-    temCargoCoordenador? || permissaoProfessor? || permissaoRepresentante?
+    eCoordenadorDoCurso? || temCargoProfessor? || permissaoRepresentante?
   end
 
   def adicionar_disciplina?
-    temCargoCoordenador?
+    eCoordenadorDoCurso?
   end
 
   def show?
@@ -49,21 +49,21 @@ class CursoPolicy
   end
   
   def update?
-    temCargoCoordenador?
+    eCoordenadorDoCurso?
   end
   
   def destroy?
-    temCargoCoordenador?
+    eCoordenadorDoCurso?
   end
 
   private
 
   def temCargoCoordenador?
-    @curso.usuario_id = @usuario.id
+    true
   end
 
-  def permissaoProfessor?
-    criouConteudo? && temCargoProfessor?
+  def eCoordenadorDoCurso?
+    @curso.usuario_id == @usuario.id
   end
 
   def criouConteudo?
@@ -72,8 +72,12 @@ class CursoPolicy
 
   def temCargoProfessor?
     matricula = Matricula.find_by(usuario_id: usuario.id)
-    cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
-    cargo.id == 2
+    if matricula then
+      cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+      cargo.id == 2
+    else
+      false
+    end
   end
 
   def permissaoRepresentante?
