@@ -12,6 +12,11 @@
             <% end %>
         </h1>
         <p>
+            <a href="<%= usuario_path(@coordenacao) %>">
+                <strong>Coordenação:</strong> <%= @coordenacao.nome_completo %>
+            </a>
+        </p>
+        <p>
             <%= @curso.descricao %>
         </p>
         <div>

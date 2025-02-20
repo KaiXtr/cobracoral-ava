@@ -15,6 +15,7 @@ class CursosController < ApplicationController
 		@usuario = usuario_autenticado
 		@curso = Curso.find(params[:id])
 		authorize(@curso)
+		@coordenacao = Usuario.find(@curso.usuario_id)
 		@turmas = Turma.where(curso_id: @curso.id)
 		@disciplinas = Disciplina.where(curso_id: @curso.id)
 	end
@@ -28,6 +29,7 @@ class CursosController < ApplicationController
 	def edit
 		@curso = Curso.find(params[:id])
 		authorize(@curso)
+		@coordenacao = Usuario.find(@curso.usuario_id)
 		@usuario = usuario_autenticado
 		@turmas = Turma.where(curso_id: @curso.id)
 		@disciplinas = Disciplina.where(curso_id: @curso.id)

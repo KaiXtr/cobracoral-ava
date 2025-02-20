@@ -2,6 +2,11 @@
   <h1>
     <%= form.text_field :nome_curso, class: "titulo-pagina page-edit-input" %>
   </h1>
+  <p>
+    <a href="<%= usuario_path(@coordenacao) %>">
+      <strong>Coordenação:</strong> <%= @coordenacao.nome_completo %>
+    </a>
+  </p>
   <h3>Descrição do curso</h3>
   <%= form.text_area :descricao, cols: 130, rows: 5 %>
 

@@ -67,7 +67,33 @@ class TurmasController < ApplicationController
 		authorize(@turma)
 		@turno_turmas = TurnoTurma.all
 		@modalidade_turmas = ModalidadeTurma.all
-		@cursos = Curso.all
+
+		# Verificando nível de acesso do usuário
+		usuario = usuario_autenticado
+		matricula = Matricula.find_by(usuario_id: usuario.id)
+
+		# Se professor ou representante, apenas cursos onde está matriculado
+		if matricula then
+			matriculaCargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+			if matriculaCargo.id == 2 || matriculaCargo.id == 3 then
+				turmas_matriculadas = Turma.joins(:matricula).where(
+					matricula: { turma_id: matricula.id }
+				)
+				@cursos = Array.new
+
+				# Adicionar cursos das turmas matriculadas do usuário
+				for turma_matriculada in turmas_matriculadas do
+					curso_da_turma = Curso.find(turma_matriculada.curso_id)
+					@cursos.push(curso_da_turma)
+				end
+			# Se não tiver acesso, não listar cursos
+			else
+				@cursos = nil
+			end
+		# Se coordenador, apenas cursos onde coordena
+		else
+			@cursos = Curso.where(usuario_id: @usuario.id)
+		end
 	end
 
 	def create
