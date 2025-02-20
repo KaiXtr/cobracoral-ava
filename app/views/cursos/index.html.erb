@@ -1,6 +1,6 @@
 <nav>
     <div>
-        <h1>Meus Cursos</h1>
+        <h1>Todos os Cursos</h1>
         <% if policy(@curso).create? %>
             <%= link_to "Adicionar curso", new_curso_path, remote: true %>
         <% end %>

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get '/sair', to: 'sessions#destroy'
 
   get '/comunicados', to: 'cursos#index'
-  get '/curso', to: 'cursos#index'
+  get '/cursos', to: 'cursos#index'
   get '/ide', to: 'ide#index'
   get '/tarefas', to: 'leitura_conteudos#index'
   get '/mensagens', to: 'cursos#index'
