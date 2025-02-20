@@ -1,6 +1,6 @@
 <nav>
     <div class="deslizar-transition">
-        <a href="/turmas/<%= @turma.id %>/delete">
+        <a href="/turmas/<%= @turma.id %>/deletar">
             <button class="act-button">
                 Deletar
             </button>
@@ -37,7 +37,14 @@
                 </div>
             <div>
                 <h2>Estudantes da turma</h2>
-                <%= render @estudantes_turma %>
+                <a href="/turmas/<%= @turma.id %>/matricular">
+                    <button class="act-button">
+                        Matricular estudantes
+                    </button>
+                </a>
+                <div>
+                    <%= render @estudantes_turma %>
+                </div>
             </div>
 
             <div>

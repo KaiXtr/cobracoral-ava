@@ -1,0 +1,12 @@
+<nav>
+    <h1>Matricular estudantes</h1>
+    <div>
+        <% for estudante in @estudantes %>
+            <div>
+                <a href="/usuarios/<%= estudante.id %>/matricular">
+                    <%= estudante.nome_completo %>
+                </a>
+            </div>
+        <% end %>
+    </div>
+</nav>
