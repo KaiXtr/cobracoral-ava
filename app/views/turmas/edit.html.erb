@@ -1,5 +1,5 @@
 <nav>
-    <div class="deslizar-transition">
+    <div>
         <a href="/turmas/<%= @turma.id %>/deletar">
             <button class="act-button">
                 Deletar
@@ -7,12 +7,12 @@
         </a>
         <%= form_with(model: @turma) do |form| %>
             <h1>
+                <%= form.text_field :nome_turma, class: "titulo-pagina page-edit-input" %>
+            </h1>
+            <h2>
                 <a href='/cursos/<%= @curso_turma.id %>'>
                     <%= @curso_turma.nome_curso %>
                 </a>
-            </h1>
-            <h2>
-                <%= form.text_field :nome_turma, class: "titulo-pagina page-edit-input" %>
             </h2>
             <div>
                 <div>
@@ -37,13 +37,6 @@
                 </div>
             <div>
                 <h2>Estudantes da turma</h2>
-                <a href="/turmas/<%= @turma.id %>/matricular">
-                    <% if policy(@turma).matricular? %>
-                        <button class="act-button">
-                            Matricular estudantes
-                        </button>
-                    <% end %>
-                </a>
                 <div>
                     <%= render @estudantes_turma %>
                 </div>

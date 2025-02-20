@@ -1,15 +1,15 @@
 <nav>
     <div class="deslizar-transition">
         <h1>
-            <a href='/cursos/<%= @curso_turma.id %>'>
-                <%= @curso_turma.nome_curso %>
-            </a>
-        </h1>
-        <h2>
             <%= @turma.nome_turma %>
             <% if policy(@turma).edit? %>
                 <%= link_to "Editar", edit_turma_path(@turma) %>
             <% end %>
+        </h1>
+        <h2>
+            <a href='/cursos/<%= @curso_turma.id %>'>
+                <%= @curso_turma.nome_curso %>
+            </a>
         </h2>
         <div>
             <div>
@@ -21,7 +21,16 @@
             </div>
         <div>
             <h2>Estudantes da turma</h2>
-            <%= render @estudantes_turma %>
+            <a href="/turmas/<%= @turma.id %>/matricular">
+                <% if policy(@turma).matricular? %>
+                    <button class="act-button">
+                        Matricular estudantes
+                    </button>
+                <% end %>
+            </a>
+            <div>
+                <%= render @estudantes_turma %>
+            </div>
         </div>
         <div>
             <h2>Minhas disciplinas</h2>
