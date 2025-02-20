@@ -98,7 +98,7 @@ class TurmasController < ApplicationController
 
 	def matricular
 		@usuario = usuario_autenticado
-
+		@turma = Turma.find(params[:id])
 		@estudantes = Usuario.all
 	end
 

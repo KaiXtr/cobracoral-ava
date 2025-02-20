@@ -18,10 +18,14 @@ class UsuariosController < ApplicationController
     end
 
     def matricular
-        usuario = usuario_autenticado
+        usuario = Usuario.find(params[:usuario_id])
+        turma = Turma.find(params[:turma_id])
+        matricula_cargo = MatriculaCargo.find(6)
+
         matricula = Matricula.new
         matricula.usuario_id = usuario.id
         matricula.turma_id = turma.id
+        matricula.matricula_cargo_id = matricula_cargo.id
 
 		respond_to do |format|
 		  if matricula.save

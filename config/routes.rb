@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   get '/tarefas', to: 'leitura_conteudos#index'
   get '/mensagens', to: 'cursos#index'
 
-  get '/usuarios/:id/matricular', to: 'usuarios#matricular'
+  get '/usuarios/:usuario_id/:turma_id/matricular', to: 'usuarios#matricular'
 
   get '/turmas/:id/matricular', to: 'turmas#matricular'
   get '/turmas/:id/deletar', to: 'turmas#delete'

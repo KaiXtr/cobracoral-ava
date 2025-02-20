@@ -3,7 +3,7 @@
     <div>
         <% for estudante in @estudantes %>
             <div>
-                <a href="/usuarios/<%= estudante.id %>/matricular">
+                <a href="/usuarios/<%= estudante.id %>/<%= @turma.id %>/matricular">
                     <%= estudante.nome_completo %>
                 </a>
             </div>
