@@ -102,7 +102,10 @@ class TurmasController < ApplicationController
 		
 		if policy(@turma).matricular? then
 			@estudantes_matriculados = Usuario.joins(:matricula).where(
-				matricula: { turma_id: @turma.id }
+				matricula: {
+					turma_id: @turma.id,
+					matricula_cargo_id: 6
+				}
 			)
 			@estudantes_nao_matriculados = Array.new
 			for estudante in Usuario.all do

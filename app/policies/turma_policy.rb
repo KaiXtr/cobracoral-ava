@@ -37,7 +37,7 @@ class TurmaPolicy
   end
 
   def matricular?
-    eCoordenadorDoCurso? || permissaoProfessor?
+    eCoordenadorDoCurso? || permissaoProfessor? || permissaoRepresentante?
   end
   
   def update?
