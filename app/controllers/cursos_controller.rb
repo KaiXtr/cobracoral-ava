@@ -8,33 +8,44 @@ class CursosController < ApplicationController
 
 		@curso = Curso.new
 		@cursos = Curso.all
+		authorize(@curso)
 	end
 
 	def show
 		@usuario = usuario_autenticado
 		@curso = Curso.find(params[:id])
+		authorize(@curso)
 		@turmas = Turma.where(curso_id: @curso.id)
 		@disciplinas = Disciplina.where(curso_id: @curso.id)
 	end
 
 	def new
 		@curso = Curso.new
+		authorize(@curso)
+		@usuario = usuario_autenticado
 	end
 
 	def edit
 		@curso = Curso.find(params[:id])
+		authorize(@curso)
+		@usuario = usuario_autenticado
 		@turmas = Turma.where(curso_id: @curso.id)
 		@disciplinas = Disciplina.where(curso_id: @curso.id)
+
+		@turma_nova = Turma.new
+		@disciplina_nova = Disciplina.new
 	end
 
 	def create
 		@curso = Curso.new(curso_params)
+		authorize(@curso)
+		@curso.usuario_id = usuario_autenticado.id
 	
 		respond_to do |format|
 		  if @curso.save
 			format.html {
 				redirect_to curso_url(@curso),
-				notice: "O Curso foi adicionado com sucesso."
+				notice: "O curso " + @curso.nome_curso + " foi adicionado com sucesso."
 			}
 			format.json { render :show, status: :created, location: @curso }
 		  else
@@ -45,6 +56,7 @@ class CursosController < ApplicationController
 	end
 
 	def update
+		authorize(@curso)
 		respond_to do |format|
 		  if @curso.update(curso_params)
 			format.html {
@@ -60,6 +72,7 @@ class CursosController < ApplicationController
 	end
 
 	def destroy
+		authorize(@curso)
 		@curso.destroy
 	
 		respond_to do |format|

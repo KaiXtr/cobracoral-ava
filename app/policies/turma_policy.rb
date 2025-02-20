@@ -12,8 +12,12 @@ class TurmaPolicy
     @turma = turma
   end
 
+  def index?
+    true
+  end
+
   def new?
-    temCargoCoordenador? || permissaoProfessor? || permissaoRepresentante?
+    coordenadorCriaTurma? || permissaoProfessor? || permissaoRepresentante?
   end
 
   def new_disciplina?
@@ -42,8 +46,12 @@ class TurmaPolicy
 
   private
 
+  def coordenadorCriaTurma?
+    true
+  end
+
   def temCargoCoordenador?
-    curso = Turma.find(@turma.curso_id)
+    curso = Curso.find_by(@turma.curso_id)
     curso.usuario_id = @usuario.id
   end
 

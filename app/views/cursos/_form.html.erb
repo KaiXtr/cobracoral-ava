@@ -5,5 +5,23 @@
   <h3>Descrição do curso</h3>
   <%= form.text_area :descricao, cols: 130, rows: 5 %>
 
-  <%= form.submit %>
+  <div class="button-group">
+    <% if params[:action] == 'new' %>
+      <a href="/cursos">
+        <button class="act-button">
+          Cancelar
+        </button>
+      </a>
+    <% end %>
+    <% if params[:action] == 'edit' %>
+      <a href="/cursos/<%= @curso.id %>">
+        <button class="act-button">
+          Cancelar
+        </button>
+      </a>
+    <% end %>
+    <button type="submit" class="act-button">
+      Salvar
+    </button>
+  </div>
 <% end %>

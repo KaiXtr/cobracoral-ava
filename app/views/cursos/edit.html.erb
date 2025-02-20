@@ -3,11 +3,20 @@
   <%= render "form", curso: @curso %>
     <div>
         <h2>Minhas turmas</h2>
-        <%= link_to "Adicionar turma", new_turma_path, remote: true %>
-        <%= render @turmas %>
+        <% if policy(@curso).adicionar_turma? %>
+            <%= link_to "Adicionar turma", new_turma_path(@turma_nova) %>
+        <% end %>
+        <div>
+            <%= render @turmas %>
+        </div>
     </div>
     <div>
         <h2>Minhas disciplinas</h2>
+        <div>
+            <% if policy(@curso).adicionar_disciplina? %>
+                <%= link_to "Adicionar disciplina", new_disciplina_path(@disciplina_nova) %>
+            <% end %>
+        </div>
         <h3>Semestre</h3>
         <div class="disciplinas-container">
             <%= render @disciplinas %>

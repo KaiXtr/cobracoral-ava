@@ -12,6 +12,10 @@ class CursoPolicy
     @curso = curso
   end
 
+  def index?
+    temCargoCoordenador?
+  end
+
   def new?
     temCargoCoordenador?
   end
@@ -21,6 +25,22 @@ class CursoPolicy
   end
   
   def edit?
+    temCargoCoordenador?
+  end
+
+  def index_turmas?
+    true
+  end
+
+  def index_disciplinas?
+    temCargoCoordenador? || permissaoProfessor?
+  end
+
+  def adicionar_turma?
+    temCargoCoordenador? || permissaoProfessor? || permissaoRepresentante?
+  end
+
+  def adicionar_disciplina?
     temCargoCoordenador?
   end
 
@@ -40,6 +60,35 @@ class CursoPolicy
 
   def temCargoCoordenador?
     @curso.usuario_id = @usuario.id
+  end
+
+  def permissaoProfessor?
+    criouConteudo? && temCargoProfessor?
+  end
+
+  def criouConteudo?
+    disciplina.usuario_id == usuario.id
+  end
+
+  def temCargoProfessor?
+    matricula = Matricula.find_by(usuario_id: usuario.id)
+    cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+    cargo.id == 2
+  end
+
+  def permissaoRepresentante?
+    matriculadoTurma? && temCargoRepresentante?
+  end
+
+  def matriculadoTurma?
+    matricula = Matricula.find_by(usuario_id: usuario.id)
+    matricula.turma_id == turma.id
+  end
+
+  def temCargoRepresentante?
+    matricula = Matricula.find_by(usuario_id: usuario.id)
+    cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+    cargo.id == 3
   end
 
   class Scope < ApplicationPolicy::Scope

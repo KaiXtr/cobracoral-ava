@@ -1,5 +1,10 @@
 <nav>
     <div class="deslizar-transition">
+        <% if policy(@curso).index? %>
+            <a href="/cursos">
+                Voltar para <strong>todos os cursos</strong>
+            </a>
+        <% end %>
         <h1>
             <%= @curso.nome_curso %>
             <% if policy(@curso).edit? %>
@@ -11,10 +16,18 @@
         </p>
         <div>
             <h2>Minhas turmas</h2>
-            <%= render @turmas %>
+            <% if policy(@curso).index_turmas? %>
+                <%= link_to "Todas as turmas", turmas_path(@curso) %>
+            <% end %>
+            <div>
+                <%= render @turmas %>
+            </div>
         </div>
         <div>
             <h2>Minhas disciplinas</h2>
+            <% if policy(@curso).index_disciplinas? %>
+                <%= link_to "Todas as disciplinas", disciplinas_path(@curso) %>
+            <% end %>
             <h3>Semestre</h3>
             <div class="disciplinas-container">
                 <%= render @disciplinas %>

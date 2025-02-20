@@ -4,5 +4,7 @@
 	<% if policy(@turma).new? %>
 		<%= link_to "Adicionar turma", new_turma_path, remote: true %>
 	<% end %>
-	<%= render @turmas %>
+	<div>
+		<%= render @turmas %>
+	</div>
 </nav>
