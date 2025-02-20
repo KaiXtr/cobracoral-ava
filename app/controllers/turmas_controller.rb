@@ -99,7 +99,12 @@ class TurmasController < ApplicationController
 	def matricular
 		@usuario = usuario_autenticado
 		@turma = Turma.find(params[:id])
-		@estudantes = Usuario.all
+		
+		if policy(@turma).matricular? then
+			@estudantes = Usuario.all
+		else
+			redirect_to root_path
+		end
 	end
 
 	def delete

@@ -38,9 +38,11 @@
             <div>
                 <h2>Estudantes da turma</h2>
                 <a href="/turmas/<%= @turma.id %>/matricular">
-                    <button class="act-button">
-                        Matricular estudantes
-                    </button>
+                    <% if policy(@turma).matricular? %>
+                        <button class="act-button">
+                            Matricular estudantes
+                        </button>
+                    <% end %>
                 </a>
                 <div>
                     <%= render @estudantes_turma %>

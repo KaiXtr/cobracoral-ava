@@ -16,6 +16,10 @@ class TurmaPolicy
     true
   end
 
+  def show?
+    true
+  end
+
   def new?
     coordenadorCriaTurma? || permissaoProfessor? || permissaoRepresentante?
   end
@@ -32,8 +36,8 @@ class TurmaPolicy
     eCoordenadorDoCurso? || permissaoProfessor? || permissaoRepresentante?
   end
 
-  def show?
-    true
+  def matricular?
+    eCoordenadorDoCurso? || permissaoProfessor?
   end
   
   def update?
