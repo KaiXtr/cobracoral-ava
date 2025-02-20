@@ -12,16 +12,36 @@ class CursoPolicy
     @curso = curso
   end
 
+  def index?
+    naoEstudante? || temCargoProfessor?
+  end
+
   def new?
-    temCargoCoordenador?
+    naoEstudante?
   end
 
   def create?
-    temCargoCoordenador?
+    naoEstudante?
   end
   
   def edit?
-    temCargoCoordenador?
+    eCoordenadorDoCurso?
+  end
+
+  def index_turmas?
+    true
+  end
+
+  def index_disciplinas?
+    eCoordenadorDoCurso? || temCargoProfessor?
+  end
+
+  def adicionar_turma?
+    eCoordenadorDoCurso? || temCargoProfessor? || permissaoRepresentante?
+  end
+
+  def adicionar_disciplina?
+    eCoordenadorDoCurso?
   end
 
   def show?
@@ -29,19 +49,63 @@ class CursoPolicy
   end
   
   def update?
-    temCargoCoordenador?
+    eCoordenadorDoCurso?
   end
   
   def destroy?
-    temCargoCoordenador?
+    eCoordenadorDoCurso?
+  end
+
+  def temCargoProfessor?
+    if usuario then
+      matricula = Matricula.find_by(usuario_id: usuario.id)
+      if matricula then
+        cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+        cargo.id == 2
+      else
+        false
+      end
+    else
+      false
+    end
   end
 
   private
 
-  def temCargoCoordenador?
+  def naoEstudante?
+    if usuario then
+      matricula = Matricula.find_by(usuario_id: usuario.id)
+      if matricula then
+        false
+      else
+        true
+      end
+    else
+      false
+    end
+  end
+
+  def eCoordenadorDoCurso?
+    @curso.usuario_id == @usuario.id
+  end
+
+  def criouConteudo?
+    disciplina.usuario_id == usuario.id
+  end
+
+  def permissaoRepresentante?
+    matriculadoTurma? && temCargoRepresentante?
+  end
+
+  def matriculadoTurma?
+    matricula = Matricula.find_by(usuario_id: usuario.id)
+    matricula.turma_id == turma.id
+  end
+
+  def temCargoRepresentante?
     matricula = Matricula.find_by(usuario_id: usuario.id)
     cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
-    cargo.id == 1
+    cargo.id == 3
   end
 
   class Scope < ApplicationPolicy::Scope

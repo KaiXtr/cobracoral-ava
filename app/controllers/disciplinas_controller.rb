@@ -3,6 +3,7 @@ class DisciplinasController < ApplicationController
 
   # GET /disciplinas or /disciplinas.json
   def index
+		@usuario = usuario_autenticado
     @disciplina = Disciplina.new
     @disciplinas = Disciplina.all
     @unidades_disciplina = UnidadeDisciplina.new
@@ -28,6 +29,34 @@ class DisciplinasController < ApplicationController
   # GET /disciplinas/new
   def new
     @disciplina = Disciplina.new
+    authorize(@disciplina)
+
+		# Verificando nível de acesso do usuário
+		usuario = usuario_autenticado
+		matricula = Matricula.find_by(usuario_id: usuario.id)
+    
+		# Se professor ou representante, apenas cursos onde está matriculado
+		if matricula then
+			matriculaCargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+			if matriculaCargo.id == 2 || matriculaCargo.id == 3 then
+				turmas_matriculadas = Turma.joins(:matricula).where(
+					matricula: { turma_id: matricula.id }
+				)
+				@cursos = Array.new
+
+				# Adicionar cursos das turmas matriculadas do usuário
+				for turma_matriculada in turmas_matriculadas do
+					curso_da_turma = Curso.find(turma_matriculada.curso_id)
+					@cursos.push(curso_da_turma)
+				end
+			# Se não tiver acesso, não listar cursos
+			else
+				@cursos = nil
+			end
+		# Se coordenador, apenas cursos onde coordena
+		else
+			@cursos = Curso.where(usuario_id: @usuario.id)
+		end
   end
 
   # GET /disciplinas/1/edit
@@ -50,10 +79,14 @@ class DisciplinasController < ApplicationController
   # POST /disciplinas or /disciplinas.json
   def create
     @disciplina = Disciplina.new(disciplina_params)
+    authorize(@disciplina)
 
     respond_to do |format|
       if @disciplina.save
-        format.html { redirect_to disciplina_url(@disciplina), notice: "Disciplina was successfully created." }
+        format.html {
+            redirect_to disciplina_url(@disciplina),
+            notice: "Disciplina was successfully created."
+          }
         format.json { render :show, status: :created, location: @disciplina }
       else
         format.html { render :new, status: :unprocessable_entity }

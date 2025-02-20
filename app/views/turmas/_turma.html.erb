@@ -1,3 +1,5 @@
-<div>
-	<%= link_to turma.nome_turma, turma %>
-</div>
+<a href="/turmas/<%= turma.id %>">
+	<div class="turma-button">
+		<%= turma.nome_turma %>
+	</div>
+</a>

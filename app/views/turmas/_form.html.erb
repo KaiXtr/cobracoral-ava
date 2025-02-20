@@ -1,4 +1,61 @@
-<%= form_with(model: @turma, remote: true, class: "d-flex" ) do |f| %>
-  <%= f.text_field :nome_turma, class: "form-control", autocomplete: 'off' %>
-  <%= f.submit %>
+<%= form_with(model: turma) do |form| %>
+  <% if turma.errors.any? %>
+    <div style="color: red">
+      <ul>
+        <% turma.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :nome_turma, "Nome da turma" %>
+    <%= form.text_field :nome_turma %>
+  </div>
+  <div>
+    <%= form.label :curso_id, "Curso" %>
+    <%= form.select :curso_id,
+      options_for_select(@cursos.map{ |c| [
+        c.nome_curso, c.id, {
+          'curso-id' => c.id
+        }
+      ]}, @turma.curso_id)  
+    %>
+  </div>
+  <div>
+    <%= form.label :turno_turma_id, "Turno" %>
+    <%= form.select :turno_turma_id,
+      options_for_select(@turno_turmas.map{ |t| [
+        t.enumTurno, t.id, {
+          'turno-id' => t.id
+        }
+      ]}, @turma.turno_turma_id)  
+    %>
+  </div>
+  <div>
+    <%= form.label :modalidade_turma_id, "Modalidade" %>
+    <%= form.select :modalidade_turma_id,
+      options_for_select(@modalidade_turmas.map{ |m| [
+        m.enumModalidade, m.id, {
+          'modalidade-id' => m.id
+        }
+      ]}, @turma.modalidade_turma_id)
+    %>
+  </div>
+  <div>
+    <%= form.label :senha_acesso, "Senha de acesso" %>
+    <%= form.password_field :senha_acesso %>
+  </div>
+  
+  <div class="button-group">
+    <a href="/turmas">
+      <button class="act-button">
+        Cancelar
+      </button>
+    </a>
+    <button type="submit" class="act-button">
+      Salvar
+    </button>
+  </div>
 <% end %>

@@ -1,5 +1,10 @@
 <nav>
     <%= link_to "Voltar para todos os cursos", cursos_path %>
 	<h1>Todas as turmas</h1>
-	<%= render @turmas %>
+	<% if policy(@turma).new? %>
+		<%= link_to "Adicionar turma", new_turma_path, remote: true %>
+	<% end %>
+	<div>
+		<%= render @turmas %>
+	</div>
 </nav>

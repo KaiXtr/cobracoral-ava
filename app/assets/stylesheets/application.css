@@ -85,6 +85,13 @@ svg.cobracoral-icon {
   }
 }
 
+.button-group {
+  width: 100%;
+  text-align: center;
+  align-content: center;
+  margin: 10px;
+}
+
 .act-button {
   font-family: "Rubik", sans-serif;
   font-weight: bold;
@@ -259,6 +266,12 @@ nav {
     margin-bottom: 5vh;
     border-bottom: 1px #ffbfbf solid;
   }
+}
+
+.colunas-container .coluna {
+  width: 45%;
+  vertical-align: top;
+  display: inline-block;
 }
 
 footer {

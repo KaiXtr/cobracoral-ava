@@ -1,3 +1,8 @@
-<div>
-	<%= link_to curso.nome_curso, curso %>
-</div>
+<a href="/cursos/<%= curso.id %>">
+	<div class="curso-button">
+		<h3><%= curso.nome_curso %></h3>
+		<p>
+			<strong>Coordenação:</strong> <%= nome_coordenador(curso) %>
+		</p>
+	</div>
+</a>

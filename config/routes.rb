@@ -16,10 +16,16 @@ Rails.application.routes.draw do
   get '/sair', to: 'sessions#destroy'
 
   get '/comunicados', to: 'cursos#index'
-  get '/curso', to: 'cursos#index'
+  get '/cursos', to: 'cursos#index'
   get '/ide', to: 'ide#index'
   get '/tarefas', to: 'leitura_conteudos#index'
   get '/mensagens', to: 'cursos#index'
+
+  get '/usuarios/:usuario_id/:turma_id/matricular', to: 'usuarios#matricular'
+  get '/usuarios/:usuario_id/:turma_id/desmatricular', to: 'usuarios#desmatricular'
+
+  get '/turmas/:id/matricular', to: 'turmas#matricular'
+  get '/turmas/:id/deletar', to: 'turmas#delete'
 
   get '/conteudos/:id/salvar', to: 'conteudos#salvar'
 

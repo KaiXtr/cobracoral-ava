@@ -1,4 +1,4 @@
-class TurmaPolicy < ApplicationPolicy
+class TurmaPolicy
   # NOTE: Up to Pundit v2.3.1, the inheritance was declared as
   # `Scope < Scope` rather than `Scope < ApplicationPolicy::Scope`.
   # In most cases the behavior will be identical, but if updating existing
@@ -12,8 +12,20 @@ class TurmaPolicy < ApplicationPolicy
     @turma = turma
   end
 
+  def index?
+    true
+  end
+
+  def show?
+    true
+  end
+
   def new?
-    temCargoCoordenador? || permissaoProfessor? || permissaoRepresentante?
+    coordenadorCriaTurma? || permissaoProfessor? || permissaoRepresentante?
+  end
+
+  def new_disciplina?
+    temCargoCoordenador?
   end
 
   def create?
@@ -21,27 +33,35 @@ class TurmaPolicy < ApplicationPolicy
   end
   
   def edit?
-    temCargoCoordenador? || permissaoProfessor? || permissaoRepresentante?
+    eCoordenadorDoCurso? || permissaoProfessor? || permissaoRepresentante?
   end
 
-  def show?
-    true
+  def matricular?
+    eCoordenadorDoCurso? || permissaoProfessor? || permissaoRepresentante?
   end
   
   def update?
-    temCargoCoordenador? || permissaoProfessor? || permissaoRepresentante?
+    eCoordenadorDoCurso? || permissaoProfessor? || permissaoRepresentante?
   end
   
   def destroy?
-    temCargoCoordenador? || permissaoProfessor? || permissaoRepresentante?
+    eCoordenadorDoCurso?
   end
 
   private
 
+  def coordenadorCriaTurma?
+    true
+  end
+
+  def eCoordenadorDoCurso?
+    curso = Curso.find(@turma.curso_id)
+    curso.usuario_id == @usuario.id
+  end
+
   def temCargoCoordenador?
-    matricula = Matricula.find_by(usuario_id: usuario.id)
-    cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
-    cargo.id == 1
+    curso = Curso.find(@turma.curso_id)
+    curso.usuario_id = @usuario.id
   end
 
   def permissaoProfessor?
@@ -55,12 +75,25 @@ class TurmaPolicy < ApplicationPolicy
 
   def temCargoProfessor?
     matricula = Matricula.find_by(usuario_id: usuario.id)
-    cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
-    cargo.id == 2
+    if matricula then
+      cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+      cargo.id == 2
+    else
+      false
+    end
   end
 
   def permissaoRepresentante?
-    criouConteudo? && temCargoRepresentante?
+    matriculadoTurma? && temCargoRepresentante?
+  end
+
+  def matriculadoTurma?
+    matricula = Matricula.find_by(usuario_id: usuario.id)
+    if matricula then
+      matricula.turma_id == turma.id
+    else
+      false
+    end
   end
 
   def temCargoRepresentante?

@@ -1,0 +1,70 @@
+<nav>
+    <div>
+        <% if policy(@turma).destroy? %>
+            <a href="/turmas/<%= @turma.id %>/deletar">
+                <button class="act-button">
+                    Deletar
+                </button>
+            </a>
+        <% end %>
+        <%= form_with(model: @turma) do |form| %>
+            <h1>
+                <%= form.text_field :nome_turma, class: "titulo-pagina page-edit-input" %>
+            </h1>
+            <h2>
+                <a href='/cursos/<%= @curso_turma.id %>'>
+                    <%= @curso_turma.nome_curso %>
+                </a>
+            </h2>
+            <div>
+                <div>
+                    <%= form.label :turno_turma_id, "Turno" %>
+                    <%= form.select :turno_turma_id,
+                        options_for_select(@turno_turmas.map{ |t| [
+                            t.enumTurno, t.id, {
+                                'turno-id' => t.id
+                            }
+                        ]}, @turma.turno_turma_id)  
+                    %>
+                </div>
+                <div>
+                    <%= form.label :modalidade_turma_id, "Modalidade" %>
+                    <%= form.select :modalidade_turma_id,
+                        options_for_select(@modalidade_turmas.map{ |t| [
+                            t.enumModalidade, t.id, {
+                                'modalidade-id' => t.id
+                            }
+                        ]}, @turma.modalidade_turma_id)
+                    %>
+                </div>
+            <div>
+                <h2>Estudantes da turma</h2>
+                <div>
+                    <%= render @estudantes_turma %>
+                </div>
+            </div>
+
+            <div>
+                <h2>Minhas disciplinas</h2>
+                <% if policy(@turma).new_disciplina? %>
+                    <%= link_to "Adicionar disciplina", new_disciplina_path, remote: true %>
+                <% end %>
+                <h3>Semestre</h3>
+                <div class="disciplinas-container">
+                    <%= render @disciplinas_turma %>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <a href="/turmas/<%= @turma.id %>">
+                <button class="act-button">
+                    Cancelar
+                </button>
+                </a>
+                <button type="submit" class="act-button">
+                    Salvar
+                </button>
+            </div>
+        <% end %>
+    </div>
+</nav>

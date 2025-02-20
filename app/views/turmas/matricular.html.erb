@@ -1,0 +1,32 @@
+<nav>
+    <p style="color: green"><%= notice %></p>
+    <a href="/turmas/<%= @turma.id %>">
+      Voltar para <strong><%= @turma.nome_turma %></strong>
+    </a>
+    <div class="colunas-container">
+        <div class="coluna">
+            <h2>Matricular estudantes</h2>
+            <div>
+                <% for estudante in @estudantes_nao_matriculados %>
+                    <div>
+                        <a href="/usuarios/<%= estudante.id %>/<%= @turma.id %>/matricular">
+                            <%= estudante.nome_completo %>
+                        </a>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+        <div class="coluna">
+            <h2>Remover matriculados</h2>
+            <div>
+                <% for estudante in @estudantes_matriculados %>
+                    <div>
+                        <a href="/usuarios/<%= estudante.id %>/<%= @turma.id %>/desmatricular">
+                            <%= estudante.nome_completo %>
+                        </a>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</nav>

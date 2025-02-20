@@ -1,0 +1,15 @@
+<nav>
+    <%= link_to "Voltar para todos os cursos", cursos_path %>
+	<h1>Deseja realmente apagar a turma <%= @turma.nome_turma %>?</h1>
+    <p>
+        Não será possível desfazer as alterações.
+    </p>
+    <div class="button-group">
+        <a href="/turmas/<%= @turma.id %>/edit">
+            <button class="act-button">
+                Cancelar
+            </button>
+        </a>
+        <%= button_to "Deletar", @turma, class: "act-button", method: :delete %>
+    </div>
+</nav>
