@@ -29,7 +29,7 @@ class TurmaPolicy
   end
   
   def edit?
-    temCargoCoordenador? || permissaoProfessor? || permissaoRepresentante?
+    eCoordenadorDoCurso? || permissaoProfessor? || permissaoRepresentante?
   end
 
   def show?
@@ -37,11 +37,11 @@ class TurmaPolicy
   end
   
   def update?
-    temCargoCoordenador? || permissaoProfessor? || permissaoRepresentante?
+    eCoordenadorDoCurso? || permissaoProfessor? || permissaoRepresentante?
   end
   
   def destroy?
-    temCargoCoordenador? || permissaoProfessor? || permissaoRepresentante?
+    eCoordenadorDoCurso? || permissaoProfessor? || permissaoRepresentante?
   end
 
   private
@@ -50,8 +50,13 @@ class TurmaPolicy
     true
   end
 
+  def eCoordenadorDoCurso?
+    curso = Curso.find(@turma.curso_id)
+    curso.usuario_id == @usuario.id
+  end
+
   def temCargoCoordenador?
-    curso = Curso.find_by(@turma.curso_id)
+    curso = Curso.find(@turma.curso_id)
     curso.usuario_id = @usuario.id
   end
 
@@ -66,8 +71,12 @@ class TurmaPolicy
 
   def temCargoProfessor?
     matricula = Matricula.find_by(usuario_id: usuario.id)
-    cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
-    cargo.id == 2
+    if matricula then
+      cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+      cargo.id == 2
+    else
+      false
+    end
   end
 
   def permissaoRepresentante?
@@ -76,7 +85,11 @@ class TurmaPolicy
 
   def matriculadoTurma?
     matricula = Matricula.find_by(usuario_id: usuario.id)
-    matricula.turma_id == turma.id
+    if matricula then
+      matricula.turma_id == turma.id
+    else
+      false
+    end
   end
 
   def temCargoRepresentante?
