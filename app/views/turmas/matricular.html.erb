@@ -1,9 +1,19 @@
 <nav>
-    <h1>Matricular estudantes</h1>
+    <h2>Matricular estudantes</h2>
     <div>
-        <% for estudante in @estudantes %>
+        <% for estudante in @estudantes_nao_matriculados %>
             <div>
                 <a href="/usuarios/<%= estudante.id %>/<%= @turma.id %>/matricular">
+                    <%= estudante.nome_completo %>
+                </a>
+            </div>
+        <% end %>
+    </div>
+    <h2>Remover matriculados</h2>
+    <div>
+        <% for estudante in @estudantes_matriculados %>
+            <div>
+                <a href="/usuarios/<%= estudante.id %>/<%= @turma.id %>/desmatricular">
                     <%= estudante.nome_completo %>
                 </a>
             </div>

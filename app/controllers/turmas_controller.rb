@@ -101,7 +101,10 @@ class TurmasController < ApplicationController
 		@turma = Turma.find(params[:id])
 		
 		if policy(@turma).matricular? then
-			@estudantes = Usuario.all
+			@estudantes_nao_matriculados = Usuario.all
+			@estudantes_matriculados = Usuario.joins(:matricula).where(
+				matricula: { turma_id: @turma.id }
+			)
 		else
 			redirect_to root_path
 		end

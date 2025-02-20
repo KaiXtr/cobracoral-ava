@@ -30,8 +30,27 @@ class UsuariosController < ApplicationController
 		respond_to do |format|
 		  if matricula.save
 			format.html {
-				redirect_to turma_url(turma),
+				redirect_to "/turmas/" + turma.id.to_s + "/matricular",
 				notice: "O estudante " + usuario.nome_completo + " foi matriculado com sucesso na turma " + turma.nome_turma + "."
+			}
+			format.json { render :show, status: :created, location: turma }
+		  else
+			format.html { render :new, status: :unprocessable_entity }
+			format.json { render json: turma.errors, status: :unprocessable_entity }
+		  end
+		end
+    end
+
+    def desmatricular
+        usuario = Usuario.find(params[:usuario_id])
+        turma = Turma.find(params[:turma_id])
+        matricula = Matricula.find_by(usuario_id: usuario.id, turma_id: turma.id)
+
+		respond_to do |format|
+		  if matricula.destroy
+			format.html {
+				redirect_to "/turmas/" + turma.id.to_s + "/matricular",
+				notice: "O estudante " + usuario.nome_completo + " foi removido da turma " + turma.nome_turma + " com sucesso."
 			}
 			format.json { render :show, status: :created, location: turma }
 		  else
