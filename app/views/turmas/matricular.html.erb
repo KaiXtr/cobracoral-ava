@@ -1,22 +1,31 @@
 <nav>
-    <h2>Matricular estudantes</h2>
-    <div>
-        <% for estudante in @estudantes_nao_matriculados %>
+    <a href="/turmas/<%= @turma.id %>/edit">
+      Voltar para edição de <strong><%= @turma.nome_turma %></strong>
+    </a>
+    <div class="colunas-container">
+        <div class="coluna">
+            <h2>Matricular estudantes</h2>
             <div>
-                <a href="/usuarios/<%= estudante.id %>/<%= @turma.id %>/matricular">
-                    <%= estudante.nome_completo %>
-                </a>
+                <% for estudante in @estudantes_nao_matriculados %>
+                    <div>
+                        <a href="/usuarios/<%= estudante.id %>/<%= @turma.id %>/matricular">
+                            <%= estudante.nome_completo %>
+                        </a>
+                    </div>
+                <% end %>
             </div>
-        <% end %>
-    </div>
-    <h2>Remover matriculados</h2>
-    <div>
-        <% for estudante in @estudantes_matriculados %>
+        </div>
+        <div class="coluna">
+            <h2>Remover matriculados</h2>
             <div>
-                <a href="/usuarios/<%= estudante.id %>/<%= @turma.id %>/desmatricular">
-                    <%= estudante.nome_completo %>
-                </a>
+                <% for estudante in @estudantes_matriculados %>
+                    <div>
+                        <a href="/usuarios/<%= estudante.id %>/<%= @turma.id %>/desmatricular">
+                            <%= estudante.nome_completo %>
+                        </a>
+                    </div>
+                <% end %>
             </div>
-        <% end %>
+        </div>
     </div>
 </nav>

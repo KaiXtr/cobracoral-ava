@@ -101,10 +101,15 @@ class TurmasController < ApplicationController
 		@turma = Turma.find(params[:id])
 		
 		if policy(@turma).matricular? then
-			@estudantes_nao_matriculados = Usuario.all
 			@estudantes_matriculados = Usuario.joins(:matricula).where(
 				matricula: { turma_id: @turma.id }
 			)
+			@estudantes_nao_matriculados = Array.new
+			for estudante in Usuario.all do
+				if !estudante.in?(@estudantes_matriculados) then
+					@estudantes_nao_matriculados.push(estudante)
+				end
+			end
 		else
 			redirect_to root_path
 		end

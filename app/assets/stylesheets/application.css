@@ -268,6 +268,12 @@ nav {
   }
 }
 
+.colunas-container .coluna {
+  width: 45%;
+  vertical-align: top;
+  display: inline-block;
+}
+
 footer {
   text-align: center;
   padding: 10vh 10vw 10vh 10vw;
