@@ -47,7 +47,16 @@
                 </div>
             </div>
 
-            <%= form.submit %>
+            <div class="button-group">
+                <a href="/turmas/<%= @turma.id %>">
+                <button class="act-button">
+                    Cancelar
+                </button>
+                </a>
+                <button type="submit" class="act-button">
+                    Salvar
+                </button>
+            </div>
         <% end %>
     </div>
 </nav>
