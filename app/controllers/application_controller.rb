@@ -27,6 +27,7 @@ class ApplicationController < ActionController::Base
 	def logar(usuario)
 		session[:usuario_id] = usuario.id
 		@usuario_autenticado = usuario
+		Rails.logger.info "Criada sessão para o(a) usuário(a) com email " + params[:session][:email]
 		redirect_to root_path
 	end
 

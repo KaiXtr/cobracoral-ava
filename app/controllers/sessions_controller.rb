@@ -1,14 +1,10 @@
 class SessionsController < ApplicationController
 	layout 'login'
-	
-	def index
-	end
 
 	def create
-		usuario = Usuario.find_by(
-			email: params[:session][:email])
-		if usuario
-			Rails.logger.info "Criada sessão para o(a) usuário(a) com email " + params[:session][:email]
+		usuario = Usuario.find_by(email: params[:session][:email])
+
+		if usuario && usuario.authenticate(params[:session][:senha]) then
 			logar(usuario)
 		else
 			Rails.logger.error "Falha ao realizar autenticação do usuário"
