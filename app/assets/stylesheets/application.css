@@ -224,12 +224,16 @@ header#cobracoral-header {
             text-align: left;
             display: block;
             margin: 0px;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             width: 100%;
 
             a {
               color: #ffffff;
               transition-duration: .2s;
+
+              i {
+                margin-right: 10px;
+              }
             }
             a:hover {
               color: #471313;
