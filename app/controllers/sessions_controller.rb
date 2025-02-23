@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 		usuario = Usuario.find_by(
 			email: params[:session][:email])
 		if usuario
-			Rails.logger.info "Criada sessão para o usuário com email " + params[:session][:email]
+			Rails.logger.info "Criada sessão para o(a) usuário(a) com email " + params[:session][:email]
 			logar(usuario)
 		else
 			Rails.logger.error "Falha ao realizar autenticação do usuário"

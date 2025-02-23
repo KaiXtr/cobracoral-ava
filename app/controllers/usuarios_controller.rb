@@ -41,7 +41,7 @@ class UsuariosController < ApplicationController
                 format.json { render :show, status: :created, location: turma }
             else
                 logtxt = "Houve um erro ao matricular o(a) usuário(a) " + usuario.nome_completo + " na turma " + turma.nome_turma + "."
-                Rails.logger.error = logtxt
+                Rails.logger.error logtxt
                 format.html { render :new, status: :unprocessable_entity }
                 format.json { render json: turma.errors, status: :unprocessable_entity }
             end
@@ -64,7 +64,7 @@ class UsuariosController < ApplicationController
                 format.json { render :show, status: :created, location: turma }
             else
                 logtxt = "Houve um erro ao remover matricula do(a) usuário(a) " + usuario.nome_completo + " na turma " + turma.nome_turma + "."
-                Rails.logger.error = logtxt
+                Rails.logger.error logtxt
                 format.html { render :new, status: :unprocessable_entity }
                 format.json { render json: turma.errors, status: :unprocessable_entity }
             end
@@ -74,11 +74,12 @@ class UsuariosController < ApplicationController
     def perfil
         @usuario = usuario_autenticado
         redirect_to usuario_path(@usuario)
-        Rails.logger.info = "Exibindo perfil do(a) usuário(a) " + @usuario.nome_completo + "."
+        Rails.logger.info "Exibindo perfil do(a) usuário(a) " + @usuario.nome_completo + "."
     end
 
     def caixa
-        Rails.logger.info = "Redirecionando para caixa de correio eletrônico."
-        redirect_to "https://mail.google.com/mail"
+        @usuario = usuario_autenticado
+        Rails.logger.info "Redirecionando para caixa de entrada de " + @usuario.email + "."
+        redirect_to "https://mail.google.com/mail", allow_other_host: true
     end
 end

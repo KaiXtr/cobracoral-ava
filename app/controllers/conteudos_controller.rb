@@ -5,6 +5,7 @@ class ConteudosController < ApplicationController
   def index
     usuario = usuario_autenticado
     @conteudos = Conteudo.all
+    Rails.logger.info "Acessando todos os conteúdos."
   end
 
   # GET /conteudos/1 or /conteudos/1.json
@@ -36,12 +37,14 @@ class ConteudosController < ApplicationController
         @leitura_conteudo.save
       end
     end
+    Rails.logger.info "Acessando conteúdo " + conteudo.nome_conteudo + " da unidade " + unidade_disciplina.nome_unidade + "."
   end
 
   # Atualizar leitura do conteúdo
   def salvar
     usuario = usuario_autenticado
     conteudo = Conteudo.find(params[:id])
+    unidade_do_conteudo = UnidadeDisciplina.find_by(id: conteudo.unidade_disciplina_id)
 
     if isUsuarioEstudante(usuario) then
       @leitura_conteudo = LeituraConteudo.find_by(
@@ -58,24 +61,24 @@ class ConteudosController < ApplicationController
       # Salvando conclusão da leitura do conteúdo
       @leitura_conteudo.conclusao = 1
       if @leitura_conteudo.save then
-        x = 1
+        Rails.logger.info "Salvando progresso de leitura do conteúdo " + conteudo.nome_conteudo + " da unidade " + unidade_do_conteudo.nome_unidade + "."
       else
-        x = 'Falhou'
+        Rails.logger.error "Houve uma falha ao salvar progresso de leitura do conteúdo " + conteudo.nome_conteudo + " da unidade " + unidade_do_conteudo.nome_unidade + "."
       end
     end
 
     # Redirecionando para próximo conteúdo ou de volta à disciplina
-    unidade_do_conteudo = UnidadeDisciplina.find_by(id: conteudo.unidade_disciplina_id)
     @disciplina_conteudo = Disciplina.find_by(id: unidade_do_conteudo.disciplina_id)
     @proximoConteudo = Conteudo.joins(:unidade_disciplina).find_by(
       id: conteudo.id + 1,
       unidade_disciplina: { disciplina_id: @disciplina_conteudo.id }
     )
     if @proximoConteudo then
+      Rails.logger.info "Redirecionando para o próximo conteúdo da unidade " + unidade_do_conteudo.nome_unidade + "."
       redirect_to conteudo_path(id: @proximoConteudo.id)
     else
-      unidade_do_conteudo = UnidadeDisciplina.find_by(id: conteudo.unidade_disciplina_id)
       @disciplina_conteudo = Disciplina.find_by(id: unidade_do_conteudo.disciplina_id)
+      Rails.logger.info "Voltando para todos os conteúdos da disciplina " + disciplina_conteudo.nome_disciplina + "."
       redirect_to disciplina_path(@disciplina_conteudo)
     end
   end
@@ -83,11 +86,13 @@ class ConteudosController < ApplicationController
   # GET /conteudos/new
   def new
     @conteudo = Conteudo.new
+    Rails.logger.info "Criando novo conteúdo."
   end
 
   # GET /conteudos/1/edit
   def edit
     authorize @conteudo
+    Rails.logger.info "Editando conteúdo " + @conteudo.nome_conteudo + "."
   end
 
   # POST /conteudos or /conteudos.json
@@ -96,9 +101,12 @@ class ConteudosController < ApplicationController
 
     respond_to do |format|
       if @conteudo.save
-        format.html { redirect_to conteudo_url(@conteudo), notice: "Conteudo was successfully created." }
+        logtxt = "Conteúdo " + @conteudo.nome_conteudo + " atualizado com sucesso."
+        Rails.logger.info logtxt
+        format.html { redirect_to conteudo_url(@conteudo), notice: logtxt }
         format.json { render :show, status: :created, location: @conteudo }
       else
+			  Rails.logger.error "Houve um erro ao criar o conteúdo " + @conteudo.nome_conteudo + "."
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @conteudo.errors, status: :unprocessable_entity }
       end
@@ -109,9 +117,12 @@ class ConteudosController < ApplicationController
   def update
     respond_to do |format|
       if @conteudo.update(conteudo_params)
-        format.html { redirect_to conteudo_url(@conteudo), notice: "Conteudo was successfully updated." }
+        logtxt = "Conteúdo " + @conteudo.nome_conteudo + " atualizado com sucesso."
+        Rails.logger.info logtxt
+        format.html { redirect_to conteudo_url(@conteudo), notice: logtxt }
         format.json { render :show, status: :ok, location: @conteudo }
       else
+			  Rails.logger.error "Houve um erro ao atualizar o conteúdo " + @conteudo.nome_conteudo + "."
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @conteudo.errors, status: :unprocessable_entity }
       end
@@ -123,7 +134,9 @@ class ConteudosController < ApplicationController
     @conteudo.destroy
 
     respond_to do |format|
-      format.html { redirect_to conteudos_url, notice: "Conteudo was successfully destroyed." }
+			logtxt = "Conteúdo " + @conteudo.nome_conteudo + " deletado com sucesso."
+			Rails.logger.info logtxt
+      format.html { redirect_to conteudos_url, notice: logtxt }
       format.json { head :no_content }
     end
   end

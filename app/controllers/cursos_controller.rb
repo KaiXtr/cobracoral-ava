@@ -14,13 +14,16 @@ class CursosController < ApplicationController
 				@cursos = Curso.joins(:disciplina).where(
 					disciplina: { usuario_id: @usuario.id}
 				)
+				Rails.logger.info "Acessando todos os cursos do(a) professor(a) " + @usuario.nome_completo + "."
 			else
 				@cursos = Curso.all
+				Rails.logger.info "Acessando todos os cursos do(a) coordenador(a) " + @usuario.nome_completo + "."
 			end
 		# Redirecionar estudantes para suas turmas
 		else
 			if @usuario then
 				matricula = Matricula.find_by(usuario_id: @usuario.id)
+				Rails.logger.info "Redirecionando estudante " + @usuario.nome_completo + " para sua turma."
 				redirect_to turma_path(matricula.turma_id)
 			end
 		end
@@ -33,12 +36,17 @@ class CursosController < ApplicationController
 		@coordenacao = Usuario.find(@curso.usuario_id)
 		@turmas = Turma.where(curso_id: @curso.id)
 		@disciplinas = Disciplina.where(curso_id: @curso.id)
+
+		Rails.logger.info "Acessando curso " + @curso.nome_curso + "."
 	end
 
 	def new
 		@curso = Curso.new
 		authorize(@curso)
 		@usuario = usuario_autenticado
+		@coordenacao = usuario_autenticado
+
+		Rails.logger.info "Criando novo curso."
 	end
 
 	def edit
@@ -51,6 +59,8 @@ class CursosController < ApplicationController
 
 		@turma_nova = Turma.new
 		@disciplina_nova = Disciplina.new
+
+		Rails.logger.info "Editando curso " + @curso.nome_curso + "."
 	end
 
 	def create
@@ -60,12 +70,12 @@ class CursosController < ApplicationController
 	
 		respond_to do |format|
 		  if @curso.save
-			format.html {
-				redirect_to curso_url(@curso),
-				notice: "O curso " + @curso.nome_curso + " foi adicionado com sucesso."
-			}
+			logtxt = "Curso " + @curso.nome_curso + " adicionado com sucesso."
+			Rails.logger.info logtxt
+			format.html { redirect_to curso_url(@curso), notice: logtxt }
 			format.json { render :show, status: :created, location: @curso }
 		  else
+			Rails.logger.error "Houve um erro ao criar o curso " + @curso.nome_curso + "."
 			format.html { render :new, status: :unprocessable_entity }
 			format.json { render json: @curso.errors, status: :unprocessable_entity }
 		  end
@@ -76,12 +86,12 @@ class CursosController < ApplicationController
 		authorize(@curso)
 		respond_to do |format|
 		  if @curso.update(curso_params)
-			format.html {
-				redirect_to curso_url(@curso),
-				notice: "Todas as alterações foram salvas."
-			  }
+			logtxt = "Curso " + @curso.nome_curso + " atualizado com sucesso."
+			Rails.logger.info logtxt
+			format.html { redirect_to curso_url(@curso), notice: logtxt }
 			format.json { render :show, status: :ok, location: @curso }
 		  else
+			Rails.logger.error "Houve um erro ao atualizar o curso " + @curso.nome_curso + "."
 			format.html { render :edit, status: :unprocessable_entity }
 			format.json { render json: @curso.errors, status: :unprocessable_entity }
 		  end
@@ -93,8 +103,10 @@ class CursosController < ApplicationController
 		@curso.destroy
 	
 		respond_to do |format|
-		  format.html { redirect_to curso_url, notice: "Curso deletado com sucesso." }
-		  format.json { head :no_content }
+			logtxt = "Curso " + @curso.nome_curso + " deletado com sucesso."
+			Rails.logger.info logtxt
+			format.html { redirect_to curso_url, notice: logtxt }
+			format.json { head :no_content }
 		end
 	end
 
