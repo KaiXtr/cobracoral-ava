@@ -1,16 +1,74 @@
-<div class="login-form-container">
-	<%= @login_fail %>
-	<%= form_for (:session) do |f| %>
-		<div class="form_group">
+<div id="login-form-container" class="form-login-submit-in">
+	<script type="text/javascript">
+		const el = document.getElementById('login-form-container')
+		
+		function submitForm() {
+			let form = document.getElementById('login-form');
+			form.submit();
+		}
+
+		function triggerLoginSubmit() {
+			el.classList.remove('form-login-submit-in');
+			el.classList.add('form-login-submit-out');
+
+			setTimeout(submitForm, 500);
+		}
+		
+		function checarCaps(event) {
+			let campoCaps = document.getElementById("campo-caps");
+
+			if (campoCaps) {
+				if (event.getModifierState("CapsLock"))
+					campoCaps.style.visibility = "visible";  
+				else
+					campoCaps.style.visibility = "hidden";
+			}
+		}
+
+		addEventListener("keyup", function(event) { 
+			checarCaps(event);
+		});
+
+	</script>
+	<div id="cobracoral-icon-container">
+		<%= show_svg('cobracoral-logo.svg') %>
+	</div>
+	<div class="login-errors">
+		<%= notice %>
+	</div>
+	<%= form_for :session, html: { id: 'login-form' } do |f| %>
+		<div class="form-group">
 			<%= f.label :email, 'Email institucional: '%>
-			<%= f.text_field :email, autocomplete: 'on', required: 'true' %>
+			<%= f.text_field :email,
+				placeholder: 'Email institucional',
+				class: 'input-text',
+				autocomplete: 'on',
+				required: 'true'
+			%>
 		</div>
-		<div class="form_group">
+		<div class="form-group">
 			<%= f.label :senha, 'Senha: '%>
-			<%= f.password_field :senha, required: 'true' %>
+			<span id="campo-caps">Caps Lock ativada</span>
+			<%= f.password_field :senha,
+				placeholder: 'Senha',
+				id: 'campo-senha',
+				class: 'input-text',
+				required: 'true'
+			%>
 		</div>
-		<div class="button_group">
-			<%= f.submit 'Entrar', id: 'act-button' %>
+		<div class="form-group">
+			<a id="problemas-link" href="/recuperacao">Problemas para entrar?</a>
+		</div>
+		<div class="button-group" onclick="triggerLoginSubmit()">
+			<button type="button" class="act-button">
+				Entrar
+			</button>
+		</div>
+		<div class="login-info">
+            <%= ENV["COBRACORAL_VERSION"] %> | 
+            <%= ENV["COBRACORAL_AUTHOR"] %> - 
+			<%= ENV["COBRACORAL_YEAR"] %>, 
+			Todos os direitos reservados
 		</div>
 	<% end %>
 </div>

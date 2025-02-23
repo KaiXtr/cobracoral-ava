@@ -10,6 +10,12 @@
         <%= link_to "Editar", edit_conteudo_path(@conteudo) %>
       <% end %>
     </h1>
+    <span class="conteudo-data">
+      <%= formatar_data_liberacao(@conteudo.data_liberacao) %>
+    </span>
+    <span class="conteudo-data">
+      <%= formatar_data_vencimento(@conteudo.data_vencimento) %>
+    </span>
 
     <div class="conteudo-elementos">
       <p class="conteudo-texto">

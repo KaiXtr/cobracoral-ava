@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   
   get '/entrar', to: 'sessions#login'
   post '/entrar', to: 'sessions#create'
+  get '/recuperacao', to: 'sessions#recuperacao'
   get '/usuarios/:id/caixa', to: 'usuarios#caixa'
   get '/perfil', to: 'usuarios#perfil'
   get '/sair', to: 'sessions#destroy'

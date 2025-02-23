@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_18_233857) do
+ActiveRecord::Schema[7.0].define(version: 2025_02_23_200859) do
   create_table "conteudos", force: :cascade do |t|
     t.integer "unidade_disciplina_id", null: false
     t.string "nome_conteudo"
@@ -116,7 +116,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_18_233857) do
     t.string "nome_completo"
     t.string "email"
     t.integer "telefone"
-    t.string "senha"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "pronomes_usuarios_id", null: false
@@ -124,6 +123,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_18_233857) do
     t.string "biografia"
     t.string "lattes_id"
     t.string "orcid_id"
+    t.string "password_digest"
     t.index ["pronomes_usuarios_id"], name: "index_usuarios_on_pronomes_usuarios_id"
   end
 

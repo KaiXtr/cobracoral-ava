@@ -1,18 +1,27 @@
 class SessionsController < ApplicationController
 	layout 'login'
-	
-	def index
-	end
 
 	def create
-		usuario = Usuario.find_by(
-			email: params[:session][:email])
-		if usuario
-			Rails.logger.info "Criada sessão para o(a) usuário(a) com email " + params[:session][:email]
-			logar(usuario)
+		usuario = Usuario.find_by(email: params[:session][:email])
+
+		if usuario then
+			if usuario.authenticate(params[:session][:senha]) then
+				logar(usuario)
+			else
+				respond_to do |format|
+					logtxt = "Senha incorreta"
+					Rails.logger.error logtxt
+					format.html { redirect_to "/entrar", notice: logtxt }
+					format.json { render json: { error: logtxt }, status: :unauthorized }
+				end
+			end
 		else
-			Rails.logger.error "Falha ao realizar autenticação do usuário"
-			@login_fail = "Email ou senha incorretos"
+			respond_to do |format|
+				logtxt = "Não há usuário cadastrado com o email informado"
+				Rails.logger.error logtxt
+				format.html { redirect_to "/entrar", notice: logtxt }
+				format.json { render json: { error: logtxt }, status: :unauthorized }
+			end
 		end
 	end
 	

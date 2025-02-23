@@ -1,7 +1,8 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
 
-addEventListener('mouseup', (event) => {
-    let selected_text = window.getSelection();
-    console.log(selected_text);
-})
+const header = document.getElementById('cobracoral-header');
+if (header && document.referrer.includes('entrar')) {
+    header.style = "padding-top: 80vw";
+    header.classList.add('header-animation');
+}

@@ -122,7 +122,17 @@ svg.cobracoral-icon {
   }
 }
 
-header {
+@keyframes iniciarAVA {
+  0% { padding-top: 80vw; }
+  100% { padding-top: 0vw; }
+}
+
+.header-animation {
+  animation: iniciarAVA 1s ease-out;
+  animation-fill-mode: forwards;
+}
+
+header#cobracoral-header {
   background-color: #ff3434;
   padding: 0vw 10vw 0vw 10vw;
   max-height: 20vh;
@@ -187,6 +197,7 @@ header {
       }
 
       #menu-perfil {
+        color: #ffffff;
         background-color: #ff3434;
         transition-duration: .2s;
         visibility: hidden;
@@ -228,8 +239,8 @@ header {
   }
 }
 
-.menu-perfil {
-  z-index: 20;
+.menu-perfil-usuario-cargo {
+  margin-top: 0px;
 }
 
 .menu-perfil .medidor-container {
