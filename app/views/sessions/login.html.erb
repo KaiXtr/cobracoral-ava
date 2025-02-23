@@ -12,7 +12,8 @@
 		</div>
 		<div class="form-group">
 			<%= f.label :senha, 'Senha: '%>
-			<%= f.password_field :senha, required: 'true', class: 'input-text' %>
+			<span id="campo-caps">Caps Lock ativada</span>
+			<%= f.password_field :senha, required: 'true', id: 'campo-senha', class: 'input-text' %>
 		</div>
 		<div class="form-group">
 			<a href="/recuperacao">Problemas para entrar?</a>
