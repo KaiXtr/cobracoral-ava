@@ -4,11 +4,23 @@ body {
     margin: 0px;
 }
 
+a {
+    color: #471313;
+    text-decoration: none;
+}
+
 .login-form-container {
     background-color: ghostwhite;
     border-radius: 20px;
     padding: 5vw;
-    margin: 15vh 30vw 0vh 30vw;
+    margin: 8vh 30vw 0vh 30vw;
+}
+
+.recuperacao-form-container {
+    background-color: ghostwhite;
+    border-radius: 20px;
+    padding: 5vw;
+    margin: 15vh 20vw 0vh 20vw;
 }
 
 #cobracoral-icon-container {
