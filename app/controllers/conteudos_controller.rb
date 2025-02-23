@@ -1,4 +1,5 @@
 class ConteudosController < ApplicationController
+	before_action :redirecionar_nao_logado
   before_action :set_conteudo, only: %i[ show edit update destroy ]
 
   # GET /conteudos or /conteudos.json

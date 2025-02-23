@@ -1,16 +1,21 @@
 <div class="login-form-container">
+	<div id="cobracoral-icon-container">
+		<%= show_svg('cobracoral-logo.svg') %>
+	</div>
 	<%= @login_fail %>
 	<%= form_for (:session) do |f| %>
-		<div class="form_group">
+		<div class="form-group">
 			<%= f.label :email, 'Email institucional: '%>
-			<%= f.text_field :email, autocomplete: 'on', required: 'true' %>
+			<%= f.text_field :email, autocomplete: 'on', required: 'true', class: 'input-text' %>
 		</div>
-		<div class="form_group">
+		<div class="form-group">
 			<%= f.label :senha, 'Senha: '%>
-			<%= f.password_field :senha, required: 'true' %>
+			<%= f.password_field :senha, required: 'true', class: 'input-text' %>
 		</div>
-		<div class="button_group">
-			<%= f.submit 'Entrar', id: 'act-button' %>
+		<div class="button-group">
+			<button type="submit" class="act-button">
+				Entrar
+			</button>
 		</div>
 	<% end %>
 </div>
