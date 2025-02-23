@@ -35,9 +35,10 @@ class ConteudosController < ApplicationController
           usuario_id: usuario.id
         )
         @leitura_conteudo.save
+        Rails.logger.info "Criando progresso de leitura do conteúdo " + conteudo.nome_conteudo + "."
       end
     end
-    Rails.logger.info "Acessando conteúdo " + conteudo.nome_conteudo + " da unidade " + unidade_disciplina.nome_unidade + "."
+    Rails.logger.info "Acessando conteúdo " + conteudo.nome_conteudo + " da unidade " + unidade_do_conteudo.nome_unidade + "."
   end
 
   # Atualizar leitura do conteúdo
@@ -65,6 +66,8 @@ class ConteudosController < ApplicationController
       else
         Rails.logger.error "Houve uma falha ao salvar progresso de leitura do conteúdo " + conteudo.nome_conteudo + " da unidade " + unidade_do_conteudo.nome_unidade + "."
       end
+    else
+      Rails.logger.info "Coordenador(a)/Professor(a) não salva progresso de leitura."
     end
 
     # Redirecionando para próximo conteúdo ou de volta à disciplina
@@ -78,7 +81,7 @@ class ConteudosController < ApplicationController
       redirect_to conteudo_path(id: @proximoConteudo.id)
     else
       @disciplina_conteudo = Disciplina.find_by(id: unidade_do_conteudo.disciplina_id)
-      Rails.logger.info "Voltando para todos os conteúdos da disciplina " + disciplina_conteudo.nome_disciplina + "."
+      Rails.logger.info "Voltando para todos os conteúdos da disciplina " + @disciplina_conteudo.nome_disciplina + "."
       redirect_to disciplina_path(@disciplina_conteudo)
     end
   end
@@ -154,7 +157,11 @@ class ConteudosController < ApplicationController
 
     def isUsuarioEstudante(usuario)
         matricula = Matricula.find_by(usuario_id: usuario.id)
-        cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
-        cargo.id > 2
+        if matricula then
+          cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+          cargo.id > 2
+        else
+          false
+        end
     end
 end
