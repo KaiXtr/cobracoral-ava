@@ -2,7 +2,9 @@
 	<div id="cobracoral-icon-container">
 		<%= show_svg('cobracoral-logo.svg') %>
 	</div>
-	<%= @login_fail %>
+	<div class="login-errors">
+		<%= notice %>
+	</div>
 	<%= form_for (:session) do |f| %>
 		<div class="form-group">
 			<%= f.label :email, 'Email institucional: '%>
