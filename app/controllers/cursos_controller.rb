@@ -4,6 +4,7 @@ class CursosController < ApplicationController
 
 	def index
 		@curso = Curso.new
+		@usuario = usuario_autenticado
 		
 		# Listar cursos de acordo com Coordenador(a)/Professor(a)
 		if policy(@curso).index? then
