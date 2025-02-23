@@ -11,17 +11,23 @@ class LeituraConteudosController < ApplicationController
     @tarefasFeitas = Conteudo.joins(:leitura_conteudo).where(
       leitura_conteudo: { usuario_id: @usuario.id, conclusao: 1 })
     @tarefasAFazer = Conteudo.where.not(id: Conteudo.joins(:leitura_conteudo).all)
+
+    Rails.logger.info "Acessando tarefas do(a) usuário(a) " + @usuario.nome_completo + "."
   end
   
   # POST /leitura_conteudos or /leitura_conteudos.json
   def create
     @leitura_conteudo = LeituraConteudo.new(leitura_conteudo_params)
+    conteudo = Conteudo.find(@leitura_conteudo.conteudo_id)
 
     respond_to do |format|
       if @leitura_conteudo.save
-        format.html { redirect_to leitura_conteudo_url(@leitura_conteudo), notice: "Leitura conteudo was successfully created." }
+        logtxt = "Progresso de leitura do conteúdo " + conteudo.nome_conteudo + " adicionado com sucesso."
+        Rails.logger.info logtxt
+        format.html { redirect_to leitura_conteudo_url(@leitura_conteudo), notice: logtxt }
         format.json { render :show, status: :created, location: @leitura_conteudo }
       else
+			  Rails.logger.error "Houve um erro ao criar o progresso de leitura do conteudo " + @conteudo.nome_conteudo + "."
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @leitura_conteudo.errors, status: :unprocessable_entity }
       end
@@ -32,9 +38,12 @@ class LeituraConteudosController < ApplicationController
   def update
     respond_to do |format|
       if @leitura_conteudo.update(leitura_conteudo_params)
-        format.html { redirect_to leitura_conteudo_url(@leitura_conteudo), notice: "Leitura conteudo was successfully updated." }
+        logtxt = "Progresso de leitura do conteúdo " + conteudo.nome_conteudo + " atualizado com sucesso."
+        Rails.logger.info logtxt
+        format.html { redirect_to leitura_conteudo_url(@leitura_conteudo), notice: logtxt }
         format.json { render :show, status: :ok, location: @leitura_conteudo }
       else
+			  Rails.logger.error "Houve um erro ao atualizar o progresso de leitura do conteudo " + @conteudo.nome_conteudo + "."
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @leitura_conteudo.errors, status: :unprocessable_entity }
       end
@@ -46,7 +55,9 @@ class LeituraConteudosController < ApplicationController
     @leitura_conteudo.destroy
 
     respond_to do |format|
-      format.html { redirect_to leitura_conteudos_url, notice: "Leitura conteudo was successfully destroyed." }
+      logtxt = "Progresso de leitura do conteúdo " + @conteudo.nome_conteudo + " deletado com sucesso."
+			Rails.logger.error logtxt
+      format.html { redirect_to leitura_conteudos_url, notice: logtxt }
       format.json { head :no_content }
     end
   end
