@@ -1,9 +1,7 @@
 class UsuariosController < ApplicationController
-    def index
-        # Redirecionar usuário não autenticado
-        @usuario_autenticado = usuario_autenticado
-        redirect_to '/entrar' unless @usuario_autenticado
-        
+	before_action :redirecionar_nao_logado
+
+    def index    
         @usuarios = Usuario.all_except(@usuario_autenticado)
         Rails.logger.info "Exibindo todos(as) os(as) usuários(as)."
     end
@@ -14,8 +12,6 @@ class UsuariosController < ApplicationController
     end
 
     def show
-        @usuario = Usuario.find(params[:id])
-        @usuario_autenticado = usuario_autenticado
         @link_lattes = "https://lattes.cnpq.br/" + @usuario.lattes_id.to_s
         @link_orcid = "https://orcid.org/" + @usuario.orcid_id.to_s
         Rails.logger.info "Acessando perfil do(a) usuário(a) " + @usuario.nome_completo + "."
@@ -74,7 +70,6 @@ class UsuariosController < ApplicationController
 
     def perfil
         @usuario = usuario_autenticado
-        redirect_to usuario_path(@usuario)
         Rails.logger.info "Exibindo perfil do(a) usuário(a) " + @usuario.nome_completo + "."
     end
 

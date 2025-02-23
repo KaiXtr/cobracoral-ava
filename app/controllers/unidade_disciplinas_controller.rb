@@ -1,4 +1,5 @@
 class UnidadeDisciplinasController < ApplicationController
+	before_action :redirecionar_nao_logado
   before_action :set_unidade_disciplina, only: %i[ show edit update destroy ]
 
   # GET /unidade_disciplinas or /unidade_disciplinas.json

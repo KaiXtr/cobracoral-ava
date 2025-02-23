@@ -1,11 +1,8 @@
 class CursosController < ApplicationController
+	before_action :redirecionar_nao_logado
 	before_action :set_curso, only: %i[ show edit update destroy ]
 
 	def index
-		# Redirecionar usuário não autenticado
-		@usuario = usuario_autenticado
-		redirect_to '/entrar' unless @usuario
-
 		@curso = Curso.new
 		
 		# Listar cursos de acordo com Coordenador(a)/Professor(a)

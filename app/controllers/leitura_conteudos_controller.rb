@@ -1,4 +1,5 @@
 class LeituraConteudosController < ApplicationController
+	before_action :redirecionar_nao_logado
   before_action :set_leitura_conteudo, only: %i[ show edit update destroy ]
 
   # GET /leitura_conteudos or /leitura_conteudos.json

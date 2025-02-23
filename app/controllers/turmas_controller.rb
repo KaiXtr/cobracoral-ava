@@ -1,11 +1,8 @@
 class TurmasController < ApplicationController
+	before_action :redirecionar_nao_logado
 	before_action :set_turma, only: %i[ show edit update destroy ]
 
 	def index
-		# Redirecionar usuário não autenticado
-		@usuario = usuario_autenticado
-		redirect_to '/entrar' unless @usuario
-
 		@turmas = Turma.all
 		@turma = Turma.find(1)
 
@@ -13,9 +10,6 @@ class TurmasController < ApplicationController
 	end
 
 	def show
-		@usuario = usuario_autenticado
-		redirect_to '/entrar' unless @usuario
-
 		@turma = Turma.find(params[:id])
 		@curso_turma = Curso.find(@turma.curso_id)
 		@turno_turma = TurnoTurma.find(@turma.turno_turma_id)

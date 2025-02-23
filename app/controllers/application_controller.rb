@@ -7,6 +7,11 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+    def redirecionar_nao_logado
+        @usuario_autenticado = usuario_autenticado
+        redirect_to '/entrar' unless @usuario_autenticado
+    end
+
 	def current_user
 		usuario_autenticado
 	end
