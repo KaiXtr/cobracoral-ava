@@ -4,5 +4,7 @@ class SobreController < ApplicationController
     redirect_to '/entrar' unless @usuario_autenticado
     @turmas = Turma.all
     @usuarios = Usuario.all_except(@usuario_autenticado)
+
+		Rails.logger.info "Acessando tela 'Sobre'."
   end
 end
