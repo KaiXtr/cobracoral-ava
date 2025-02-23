@@ -10,6 +10,7 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "curso", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "pages", "data-turbo-track": "reload" %>
+    <script src="https://kit.fontawesome.com/597fea8ed7.js" crossorigin="anonymous"></script>
     <%= javascript_importmap_tags %>
   </head>
 
@@ -26,23 +27,43 @@
       </div>
       <ul>
           <li>
-              <a href="/comunicados"><button class="act-button">Comunicados</button></a>
+              <a href="/comunicados">
+                <button class="icon-button">
+                    <i class="fa-solid fa-bell fa-2xl"></i>
+                </button>
+              </a>
           </li>
           <li>
-              <a href="/cursos"><button class="act-button">Curso</button></a>
+              <a href="/cursos">
+                <button class="act-button">
+                    <i class="fa-solid fa-book-open fa-2xl"></i>
+                </button>
+              </a>
           </li>
           <li>
-              <a href="/ide"><button class="act-button">IDE</button></a>
+              <a href="/ide">
+                <button class="act-button">
+                    <i class="fa-solid fa-code fa-2xl"></i>
+                </button>
+              </a>
           </li>
           <li>
-              <a href="/tarefas"><button class="act-button">Tarefas</button></a>
+              <a href="/tarefas">
+                <button class="act-button">
+                    <i class="fa-solid fa-list-check fa-2xl"></i>
+                </button>
+              </a>
           </li>
           <li>
-              <a href="/mensagens"><button class="act-button">Mensagens</button></a>
+              <a href="/mensagens">
+                <button class="act-button">
+                    <i class="fa-solid fa-comment fa-2xl"></i>
+                </button>
+              </a>
           </li>
           <li>
             <button class="act-button abrir-menu">
-                Perfil
+                <i class="fa-solid fa-user fa-2xl"></i>
                 <div id="menu-perfil">
                     <div class="medidor-container">
                         <div class="medidor-grafico">

@@ -181,19 +181,25 @@ header#cobracoral-header {
     flex: 2;
 
     li {
-      margin-right: 1rem;
       display: inline-block;
 
-      button.act-button {
-        border-color: #000000;
+      button.icon-button {
+        background-color: #ff3434;
+        color: black;
+        border: none;
+        transition-duration: .2s;
+        width: 5vw;
+        height: 5vw;
+        cursor: pointer;
 
-        &:before {
-          background-color: #000000;
+        &:hover {
+          color: white;
         }
       }
 
       button.abrir-menu:hover #menu-perfil{
         visibility: visible;
+        opacity: 100%;
       }
 
       #menu-perfil {
@@ -205,9 +211,10 @@ header#cobracoral-header {
         min-width: 15vw;
         padding: 20px;
         opacity: 0%;
-        top: 0vh;
-        right: 0px;
+        top: 8vh;
+        right: -7vw;
         z-index: 10;
+        cursor: default;
 
         ul {
           width: 100%;
