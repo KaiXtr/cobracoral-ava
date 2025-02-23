@@ -197,3 +197,10 @@
     min-height: 1.5vw;
     top: 0px;
 }
+
+.conteudo-data {
+    font-size: 10pt;
+    color: gray;
+    display: block;
+    margin-bottom: 10px;
+}
