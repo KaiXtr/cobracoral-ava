@@ -1,15 +1,8 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
 
-function checarCaps(event) {
-    let campoCaps = document.getElementById("campo-caps");
-
-    if (event.getModifierState("CapsLock"))
-        campoCaps.style.visibility = "visible";  
-    else
-        campoCaps.style.visibility = "hidden"; 
+const header = document.getElementById('cobracoral-header');
+if (header && document.referrer.includes('entrar')) {
+    header.style = "padding-top: 80vw";
+    header.classList.add('header-animation');
 }
-
-addEventListener("keyup", function(event) { 
-    checarCaps(event);
-});

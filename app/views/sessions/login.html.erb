@@ -13,6 +13,22 @@
 
 			setTimeout(submitForm, 500);
 		}
+		
+		function checarCaps(event) {
+			let campoCaps = document.getElementById("campo-caps");
+
+			if (campoCaps) {
+				if (event.getModifierState("CapsLock"))
+					campoCaps.style.visibility = "visible";  
+				else
+					campoCaps.style.visibility = "hidden";
+			}
+		}
+
+		addEventListener("keyup", function(event) { 
+			checarCaps(event);
+		});
+
 	</script>
 	<div id="cobracoral-icon-container">
 		<%= show_svg('cobracoral-logo.svg') %>

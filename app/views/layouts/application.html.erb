@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
   <head>
     <title>Cobracoral</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -14,7 +14,7 @@
   </head>
 
   <body>
-    <header>
+    <header id="cobracoral-header">
       <div class="header-logo">
         <div class="header-logo-svg">
             <%= show_svg('cobracoral-logo.svg') %>
@@ -52,7 +52,7 @@
                         </div>
                         <h3>Pomodoro</h3>
                     </div>
-                    <h5>
+                    <h5 class="menu-perfil-usuario-cargo">
                         <%= cargo_usuario(@usuario_autenticado) %>
                     </h5>
                     <ul>

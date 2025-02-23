@@ -113,19 +113,19 @@
     margin: none;
 }
 
-.disciplina_info_container .disciplina_medidores .medidor-container {
+.medidor-container {
     text-align: center;
     display: inline-block;
     margin: 1vw;
 }
 
-.disciplina_info_container .disciplina_medidores .medidor-container .medidor-grafico {
+.medidor-container .medidor-grafico {
     min-width: 5vw;
     min-height: 5vw;
     position: relative;
 }
 
-.disciplina_info_container .disciplina_medidores .medidor-container .medidor-grafico .medidor-grafico-max {
+.medidor-container .medidor-grafico .medidor-grafico-max {
     border: 10px solid gray;
     border-radius: 100%;
     position: absolute;
@@ -134,7 +134,7 @@
     top: 0px;
 }
 
-.disciplina_info_container .disciplina_medidores .medidor-container .medidor-grafico .medidor-grafico-atual {
+.medidor-container .medidor-grafico .medidor-grafico-atual {
     border: 10px solid red;
     border-radius: 100%;
     position: absolute;
@@ -143,7 +143,7 @@
     top: 0px;
 }
 
-.disciplina_info_container .disciplina_medidores .medidor-container .medidor-grafico .medidor-grafico-valor {
+.medidor-container .medidor-grafico .medidor-grafico-valor {
     text-align: center;
     font-weight: bold;
     min-width: 5vw;
