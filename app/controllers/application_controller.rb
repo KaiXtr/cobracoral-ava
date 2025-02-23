@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-	include Pundit
+	include Pundit::Authorization
 
 	def usuario_autenticado
 		if session[:usuario_id]

@@ -3,15 +3,19 @@ class TurmasController < ApplicationController
 
 	def index
 		# Redirecionar usuário não autenticado
-		@usuario_autenticado = usuario_autenticado
-		redirect_to '/entrar' unless @usuario_autenticado
+		@usuario = usuario_autenticado
+		redirect_to '/entrar' unless @usuario
 
 		@turmas = Turma.all
 		@turma = Turma.find(1)
+
+		Rails.logger.info "Acessando todas as turmas"
 	end
 
 	def show
 		@usuario = usuario_autenticado
+		redirect_to '/entrar' unless @usuario
+
 		@turma = Turma.find(params[:id])
 		@curso_turma = Curso.find(@turma.curso_id)
 		@turno_turma = TurnoTurma.find(@turma.turno_turma_id)
@@ -33,6 +37,8 @@ class TurmasController < ApplicationController
 		@disciplinas_turma = Disciplina.where(
 			turma_id: @turma.id
 		)
+
+		Rails.logger.info "Acessando turma " + params[:id]
 	end
 
 	def edit
@@ -60,6 +66,8 @@ class TurmasController < ApplicationController
 		@disciplinas_turma = Disciplina.where(
 			turma_id: @turma.id
 		)
+
+		Rails.logger.info "Editando turma " + params[:id]
 	end
 
 	def new
@@ -94,6 +102,8 @@ class TurmasController < ApplicationController
 		else
 			@cursos = Curso.where(usuario_id: @usuario.id)
 		end
+
+		Rails.logger.info "Criando turma " + params[:id]
 	end
 
 	def matricular
@@ -116,11 +126,15 @@ class TurmasController < ApplicationController
 		else
 			redirect_to root_path
 		end
+
+		Rails.logger.info "Acessando matrículas da turma " + params[:id]
 	end
 
 	def delete
 		@usuario = usuario_autenticado
 		@turma = Turma.find(params[:id])
+
+		Rails.logger.info "Deletando turma " + params[:id]
 	end
 
 	def create
@@ -129,12 +143,14 @@ class TurmasController < ApplicationController
 	
 		respond_to do |format|
 		  if @turma.save
+			Rails.logger.info "Turma " + params[:id] + " foi adicionada com sucesso."
 			format.html {
 				redirect_to turma_url(@turma),
 				notice: "A turma foi adicionada com sucesso."
 			}
 			format.json { render :show, status: :created, location: @turma }
 		  else
+			Rails.logger.error "Houve um erro ao criar a turma " + params[:id]
 			format.html { render :new, status: :unprocessable_entity }
 			format.json { render json: @turma.errors, status: :unprocessable_entity }
 		  end
@@ -144,12 +160,14 @@ class TurmasController < ApplicationController
 	def update
 	  respond_to do |format|
 		if @turma.update(turma_params)
+		  Rails.logger.info "Turma " + params[:id] + " foi atualizada com sucesso."
 		  format.html {
 			  redirect_to turma_url(@turma),
 			  notice: "Todas as alterações foram salvas."
 			}
 		  format.json { render :show, status: :ok, location: @turma }
 		else
+		  Rails.logger.error "Houve um erro ao criar a turma " + params[:id]
 		  format.html { render :edit, status: :unprocessable_entity }
 		  format.json { render json: @turma.errors, status: :unprocessable_entity }
 		end
@@ -160,6 +178,7 @@ class TurmasController < ApplicationController
 		@turma.destroy
 	
 		respond_to do |format|
+		  Rails.logger.info "Turma " + params[:id] + " foi deletada com sucesso."
 		  format.html { redirect_to turma_url, notice: "Turma deletada com sucesso." }
 		  format.json { head :no_content }
 		end
