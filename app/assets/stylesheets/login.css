@@ -9,11 +9,34 @@ a {
     text-decoration: none;
 }
 
-.login-form-container {
+#login-form-container {
     background-color: ghostwhite;
     border-radius: 20px;
     padding: 5vw;
+    padding-bottom: 0px;
     margin: 8vh 30vw 0vh 30vw;
+}
+
+.form-login-submit-in {
+    animation: login-submit-in .8s ease-out;
+    animation-fill-mode: forwards;
+}
+
+.form-login-submit-out {
+    animation: login-submit-out .8s ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes login-submit-in {
+    0% { margin-top: 50vh; opacity: 0%; }
+    50% { opacity: 100%; }
+    100% { margin-top: 8vh }
+}
+
+@keyframes login-submit-out {
+    0% { margin-top: 8vh; }
+    50% { opacity: 100%; }
+    100% { margin-top: -50vh; opacity: 0%; }
 }
 
 .recuperacao-form-container {
@@ -43,11 +66,11 @@ a {
 }
 
 .input-text {
-    background-color: gray;
+    background-color: ghostwhite;
     font-size: 12pt;
     border: none;
-    border-radius: 10px;
-    padding: 0.5vw;
+    border-bottom: 2px solid black;
+    padding: 0.5vw 0px 0.5vw 0px;
     width: 100%;
     margin-top: 10px;
     display: block;
@@ -59,11 +82,15 @@ a {
     visibility: hidden;
 }
 
+#problemas-link {
+    font-size: 10pt;
+}
+
 .button-group {
     width: 100%;
     text-align: center;
     align-content: center;
-    margin-top: 5vh;
+    margin-top: 2vh;
 }
 
 .act-button {
@@ -94,4 +121,11 @@ a {
             width: 100%;
         }
     }
+}
+
+.login-info {
+    color: gray;
+    font-size: 8pt;
+    margin-top: 3vh;
+    padding-bottom: 2vh;
 }

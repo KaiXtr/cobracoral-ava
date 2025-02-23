@@ -1,27 +1,58 @@
-<div class="login-form-container">
+<div id="login-form-container" class="form-login-submit-in">
+	<script type="text/javascript">
+		const el = document.getElementById('login-form-container')
+		
+		function submitForm() {
+			let form = document.getElementById('login-form');
+			form.submit();
+		}
+
+		function triggerLoginSubmit() {
+			el.classList.remove('form-login-submit-in');
+			el.classList.add('form-login-submit-out');
+
+			setTimeout(submitForm, 500);
+		}
+	</script>
 	<div id="cobracoral-icon-container">
 		<%= show_svg('cobracoral-logo.svg') %>
 	</div>
 	<div class="login-errors">
 		<%= notice %>
 	</div>
-	<%= form_for (:session) do |f| %>
+	<%= form_for :session, html: { id: 'login-form' } do |f| %>
 		<div class="form-group">
 			<%= f.label :email, 'Email institucional: '%>
-			<%= f.text_field :email, autocomplete: 'on', required: 'true', class: 'input-text' %>
+			<%= f.text_field :email,
+				placeholder: 'Email institucional',
+				class: 'input-text',
+				autocomplete: 'on',
+				required: 'true'
+			%>
 		</div>
 		<div class="form-group">
 			<%= f.label :senha, 'Senha: '%>
 			<span id="campo-caps">Caps Lock ativada</span>
-			<%= f.password_field :senha, required: 'true', id: 'campo-senha', class: 'input-text' %>
+			<%= f.password_field :senha,
+				placeholder: 'Senha',
+				id: 'campo-senha',
+				class: 'input-text',
+				required: 'true'
+			%>
 		</div>
 		<div class="form-group">
-			<a href="/recuperacao">Problemas para entrar?</a>
+			<a id="problemas-link" href="/recuperacao">Problemas para entrar?</a>
 		</div>
-		<div class="button-group">
-			<button type="submit" class="act-button">
+		<div class="button-group" onclick="triggerLoginSubmit()">
+			<button type="button" class="act-button">
 				Entrar
 			</button>
+		</div>
+		<div class="login-info">
+            <%= ENV["COBRACORAL_VERSION"] %> | 
+            <%= ENV["COBRACORAL_AUTHOR"] %> - 
+			<%= ENV["COBRACORAL_YEAR"] %>, 
+			Todos os direitos reservados
 		</div>
 	<% end %>
 </div>
