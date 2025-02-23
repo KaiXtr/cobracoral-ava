@@ -1,17 +1,15 @@
 class TurmasController < ApplicationController
+	before_action :redirecionar_nao_logado
 	before_action :set_turma, only: %i[ show edit update destroy ]
 
 	def index
-		# Redirecionar usuário não autenticado
-		@usuario_autenticado = usuario_autenticado
-		redirect_to '/entrar' unless @usuario_autenticado
-
 		@turmas = Turma.all
 		@turma = Turma.find(1)
+
+		Rails.logger.info "Acessando todas as turmas"
 	end
 
 	def show
-		@usuario = usuario_autenticado
 		@turma = Turma.find(params[:id])
 		@curso_turma = Curso.find(@turma.curso_id)
 		@turno_turma = TurnoTurma.find(@turma.turno_turma_id)
@@ -33,6 +31,8 @@ class TurmasController < ApplicationController
 		@disciplinas_turma = Disciplina.where(
 			turma_id: @turma.id
 		)
+
+		Rails.logger.info "Acessando turma " + @turma.nome_turma
 	end
 
 	def edit
@@ -60,6 +60,8 @@ class TurmasController < ApplicationController
 		@disciplinas_turma = Disciplina.where(
 			turma_id: @turma.id
 		)
+
+		Rails.logger.info "Editando turma " + @turma.nome_turma
 	end
 
 	def new
@@ -86,13 +88,16 @@ class TurmasController < ApplicationController
 					curso_da_turma = Curso.find(turma_matriculada.curso_id)
 					@cursos.push(curso_da_turma)
 				end
+				Rails.logger.info "Criando nova turma com nível de usuário Professor(a)/Representante."
 			# Se não tiver acesso, não listar cursos
 			else
 				@cursos = nil
+				Rails.logger.warn "Usuário(a) não possui permissão para criar novas turmas."
 			end
 		# Se coordenador, apenas cursos onde coordena
 		else
 			@cursos = Curso.where(usuario_id: @usuario.id)
+			Rails.logger.info "Criando nova turma com nível de usuário Coordenador(a)."
 		end
 	end
 
@@ -113,7 +118,10 @@ class TurmasController < ApplicationController
 					@estudantes_nao_matriculados.push(estudante)
 				end
 			end
+
+			Rails.logger.info "Acessando matrículas da turma " + @turma.nome_turma + "."
 		else
+			Rails.logger.info "Usuário(a) não possui permissão para matricular estudantes."
 			redirect_to root_path
 		end
 	end
@@ -121,6 +129,8 @@ class TurmasController < ApplicationController
 	def delete
 		@usuario = usuario_autenticado
 		@turma = Turma.find(params[:id])
+
+		Rails.logger.info "Deletando turma " + @turma.nome_turma + "."
 	end
 
 	def create
@@ -129,12 +139,12 @@ class TurmasController < ApplicationController
 	
 		respond_to do |format|
 		  if @turma.save
-			format.html {
-				redirect_to turma_url(@turma),
-				notice: "A turma foi adicionada com sucesso."
-			}
+			logtxt = "Turma " + @turma.nome_turma + " adicionada com sucesso."
+			Rails.logger.info logtxt
+			format.html { redirect_to turma_url(@turma), notice: logtxt }
 			format.json { render :show, status: :created, location: @turma }
 		  else
+			Rails.logger.error "Houve um erro ao criar a turma " + @turma.nome_turma + "."
 			format.html { render :new, status: :unprocessable_entity }
 			format.json { render json: @turma.errors, status: :unprocessable_entity }
 		  end
@@ -144,12 +154,15 @@ class TurmasController < ApplicationController
 	def update
 	  respond_to do |format|
 		if @turma.update(turma_params)
+			logtxt = "Turma " + @turma.nome_turma + " atualizada com sucesso."
+		  Rails.logger.info logtxt
 		  format.html {
 			  redirect_to turma_url(@turma),
-			  notice: "Todas as alterações foram salvas."
+			  notice: logtxt
 			}
 		  format.json { render :show, status: :ok, location: @turma }
 		else
+		  Rails.logger.error "Houve um erro ao criar a turma " + @turma.nome_turma + "."
 		  format.html { render :edit, status: :unprocessable_entity }
 		  format.json { render json: @turma.errors, status: :unprocessable_entity }
 		end
@@ -160,8 +173,10 @@ class TurmasController < ApplicationController
 		@turma.destroy
 	
 		respond_to do |format|
-		  format.html { redirect_to turma_url, notice: "Turma deletada com sucesso." }
-		  format.json { head :no_content }
+			logtxt = "Turma " + @turma.nome_turma + " deletada com sucesso."
+			Rails.logger.info logtxt
+			format.html { redirect_to turma_url, notice: logtxt }
+			format.json { head :no_content }
 		end
 	end
 

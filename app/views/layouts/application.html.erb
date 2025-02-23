@@ -6,6 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= favicon_link_tag asset_path('favicon.png') %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "curso", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "pages", "data-turbo-track": "reload" %>
@@ -15,8 +16,13 @@
   <body>
     <header>
       <div class="header-logo">
-          <%= show_svg('cobracoral-logo.svg') %>
-          <a href="/"><h1>Cobracoral</h1></a>
+        <div class="header-logo-svg">
+            <%= show_svg('cobracoral-logo.svg') %>
+        </div>
+        <div class="header-logo-info">
+            <a href="/"><h1>Cobracoral</h1></a>
+            <span><%= ENV["COBRACORAL_VERSION"] %></span>
+        </div>
       </div>
       <ul>
           <li>
@@ -46,7 +52,9 @@
                         </div>
                         <h3>Pomodoro</h3>
                     </div>
-                    <h5><%= cargo_usuario(@usuario) %></h5>
+                    <h5>
+                        <%= cargo_usuario(@usuario_autenticado) %>
+                    </h5>
                     <ul>
                         <li><a href="/usuarios/:id/caixa">Abrir caixa de entrada</a></li>
                         <li><a href="/perfil">Editar perfil</a></li>
@@ -68,7 +76,7 @@
             <a href="/sobre#publicar"><button class="act-button">Publicar</button></a>
         </div>
         <span>
-            Ewerton Bramos - 2024
+            <%= ENV["COBRACORAL_AUTHOR"] %> - 2024
         </span>
     </footer>
   </body>

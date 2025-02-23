@@ -1,4 +1,5 @@
 class DisciplinasController < ApplicationController
+	before_action :redirecionar_nao_logado
   before_action :set_disciplina, only: %i[ show edit update destroy ]
 
   # GET /disciplinas or /disciplinas.json
@@ -9,6 +10,8 @@ class DisciplinasController < ApplicationController
     @unidades_disciplina = UnidadeDisciplina.new
     @conteudos = Conteudo.new
     @curso = Curso.new
+
+    Rails.logger.info "Acessando todas as disciplinas."
   end
 
   # GET /disciplinas/1 or /disciplinas/1.json
@@ -24,6 +27,8 @@ class DisciplinasController < ApplicationController
           disciplina_id: @disciplina.id
         }
       )
+
+    Rails.logger.info "Acessando disciplina " + @disciplina.nome_disciplina + "."
   end
 
   # GET /disciplinas/new
@@ -49,13 +54,17 @@ class DisciplinasController < ApplicationController
 					curso_da_turma = Curso.find(turma_matriculada.curso_id)
 					@cursos.push(curso_da_turma)
 				end
+
+        Rails.logger.info "Criando nova disciplina com nível de acesso Professor(a)/Representante."
 			# Se não tiver acesso, não listar cursos
 			else
 				@cursos = nil
+        Rails.logger.info "Usuário(a) não possui permissão para criar novas disciplinas."
 			end
 		# Se coordenador, apenas cursos onde coordena
 		else
 			@cursos = Curso.where(usuario_id: @usuario.id)
+      Rails.logger.info "Criando nova disciplina com nível de acesso Coordenador(a)."
 		end
   end
 
@@ -74,6 +83,8 @@ class DisciplinasController < ApplicationController
           disciplina_id: @disciplina.id
         }
       )
+      
+    Rails.logger.info "Editando disciplina " + @disciplina.nome_disciplina + "."
   end
 
   # POST /disciplinas or /disciplinas.json
@@ -83,12 +94,12 @@ class DisciplinasController < ApplicationController
 
     respond_to do |format|
       if @disciplina.save
-        format.html {
-            redirect_to disciplina_url(@disciplina),
-            notice: "Disciplina was successfully created."
-          }
+        logtxt = "Disciplina " + @disciplina.nome_disciplina + " adicionada com sucesso."
+        Rails.logger.info logtxt
+        format.html { redirect_to disciplina_url(@disciplina), notice: logtxt }
         format.json { render :show, status: :created, location: @disciplina }
       else
+			  Rails.logger.error "Houve um erro ao criar a disciplina " + @disciplina.nome_disciplina + "."
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @disciplina.errors, status: :unprocessable_entity }
       end
@@ -99,12 +110,12 @@ class DisciplinasController < ApplicationController
   def update
     respond_to do |format|
       if @disciplina.update(disciplina_params)
-        format.html {
-            redirect_to disciplina_url(@disciplina),
-            notice: "Todas as alterações foram salvas."
-          }
+        logtxt = "Disciplina " + @disciplina.nome_disciplina + " atualizada com sucesso."
+        Rails.logger.info logtxt
+        format.html { redirect_to disciplina_url(@disciplina), notice: logtxt }
         format.json { render :show, status: :ok, location: @disciplina }
       else
+			  Rails.logger.error "Houve um erro ao atualizar a disciplina " + @disciplina.nome_disciplina + "."
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @disciplina.errors, status: :unprocessable_entity }
       end
@@ -116,7 +127,9 @@ class DisciplinasController < ApplicationController
     @disciplina.destroy
 
     respond_to do |format|
-      format.html { redirect_to disciplinas_url, notice: "Disciplina was successfully destroyed." }
+      logtxt = "Disciplina " + @disciplina.nome_disciplina + " deletada com sucesso."
+      Rails.logger.info logtxt
+      format.html { redirect_to disciplinas_url, notice: logtxt }
       format.json { head :no_content }
     end
   end

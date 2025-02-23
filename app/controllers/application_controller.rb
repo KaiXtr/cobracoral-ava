@@ -1,27 +1,32 @@
 class ApplicationController < ActionController::Base
-	include Pundit
+	include Pundit::Authorization
 
 	def usuario_autenticado
 		if session[:usuario_id]
-			@usuario = Usuario.find(session[:usuario_id])
+			@usuario_autenticado = Usuario.find(session[:usuario_id])
 		end
 	end
+
+    def redirecionar_nao_logado
+        @usuario_autenticado = usuario_autenticado
+        redirect_to '/entrar' unless @usuario_autenticado
+    end
 
 	def current_user
 		usuario_autenticado
 	end
 
 	def index
-		@usuario = usuario_autenticado
+		@usuario_autenticado = usuario_autenticado
 	end
 
 	def show
-		@usuario = usuario_autenticado
+		@usuario_autenticado = usuario_autenticado
 	end
 
 	def logar(usuario)
 		session[:usuario_id] = usuario.id
-		@usuario = usuario
+		@usuario_autenticado = usuario
 		redirect_to root_path
 	end
 
@@ -31,6 +36,6 @@ class ApplicationController < ActionController::Base
 
 	def logout
 		session.delete(:usuario_id)
-		@usuario = nil
+		@usuario_autenticado = nil
 	end
 end

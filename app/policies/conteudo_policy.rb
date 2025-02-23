@@ -40,8 +40,12 @@ class ConteudoPolicy
 
   def temCargoCoordenador?
     matricula = Matricula.find_by(usuario_id: usuario.id)
-    cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
-    cargo.id == 1
+    if matricula then
+      cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+      cargo.id == 1
+    else
+      false
+    end
   end
 
   def permissaoProfessor?
