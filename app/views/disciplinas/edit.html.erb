@@ -1,6 +1,5 @@
 <nav>
   <p style="color: green"><%= notice %></p>
-  <%= button_to "Destroy this disciplina", @disciplina, method: :delete %>
   <%= form_with(model: @disciplina) do |form| %>
     <% if @disciplina.errors.any? %>
       <div style="color: red">
@@ -14,6 +13,12 @@
       </div>
     <% end %>
 
+    <% if policy(@disciplina).destroy? %>
+        <a href="/disciplinas/<%= @disciplina.id %>/deletar" class="delete-button">
+            <i class="fa-solid fa-trash fa-lg icon-button"></i>
+        </a>
+    <% end %>
+
     <div class="disciplina_info_container">
       <div class="disciplina_info">
         <h1>
@@ -25,7 +30,7 @@
 					</strong>
 				</a>
         <div>
-          <%= turma_disciplina(@disciplina) %>
+          <%= turma_disciplina(@disciplina).nome_turma %>
         </div>
         <div>
           <%= form.label :sala_aula %>
@@ -37,8 +42,8 @@
         </div>
       </div>
       <div class="disciplina_medidores">
-        <button>Lançar presenças</button>
-        <button>Lançar notas</button>
+        <button class="act-button">Lançar presenças</button>
+        <button class="act-button">Lançar notas</button>
       </div>
     </div>
     <div class="disciplina_conteudos_container">

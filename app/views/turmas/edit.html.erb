@@ -1,13 +1,11 @@
 <nav>
     <div>
-        <% if policy(@turma).destroy? %>
-            <a href="/turmas/<%= @turma.id %>/deletar">
-                <button class="act-button">
-                    Deletar
-                </button>
-            </a>
-        <% end %>
         <%= form_with(model: @turma) do |form| %>
+            <% if policy(@turma).destroy? %>
+                <a href="/turmas/<%= @turma.id %>/deletar" class="delete-button">
+                    <i class="fa-solid fa-trash fa-lg icon-button"></i>
+                </a>
+            <% end %>
             <h1>
                 <%= form.text_field :nome_turma, class: "titulo-pagina page-edit-input" %>
             </h1>
@@ -37,6 +35,19 @@
                         ]}, @turma.modalidade_turma_id)
                     %>
                 </div>
+            </div>
+
+            <div class="button-group">
+                <a href="/turmas/<%= @turma.id %>">
+                <button class="act-button">
+                    Cancelar
+                </button>
+                </a>
+                <button type="submit" class="act-button">
+                    Salvar
+                </button>
+            </div>
+
             <div>
                 <h2>Estudantes da turma</h2>
                 <div>
@@ -53,17 +64,6 @@
                 <div class="disciplinas-container">
                     <%= render @disciplinas_turma %>
                 </div>
-            </div>
-
-            <div class="button-group">
-                <a href="/turmas/<%= @turma.id %>">
-                <button class="act-button">
-                    Cancelar
-                </button>
-                </a>
-                <button type="submit" class="act-button">
-                    Salvar
-                </button>
             </div>
         <% end %>
     </div>

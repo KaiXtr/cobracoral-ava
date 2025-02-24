@@ -2,13 +2,16 @@
     <div class="deslizar-transition">
         <% if policy(@curso).index? %>
             <a href="/cursos">
+                <i class="fa-solid fa-arrow-left fa-sm"></i>
                 Voltar para <strong>todos os cursos</strong>
             </a>
         <% end %>
         <h1>
             <%= @curso.nome_curso %>
             <% if policy(@curso).edit? %>
-                <%= link_to "Editar", edit_curso_path(@curso) %>
+                <a href="/cursos/<%= @curso.id %>/editar">
+                    <i class="fa-solid fa-pen fa-sm icon-button"></i>
+                </a>
             <% end %>
         </h1>
         <p>

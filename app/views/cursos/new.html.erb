@@ -1,5 +1,8 @@
 <nav>
   <h1>Adicionar curso</h1>
-  <%= link_to "Back to cursos", cursos_path %>
+  <a href="<%= cursos_path %>">
+    <i class="fa-solid fa-arrow-left fa-sm"></i>
+    Voltar para <strong>todos os cursos</strong>
+  </a>
   <%= render "form", curso: @curso %>
 </nav>

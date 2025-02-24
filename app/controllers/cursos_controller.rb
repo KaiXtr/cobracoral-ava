@@ -61,6 +61,13 @@ class CursosController < ApplicationController
 		Rails.logger.info "Editando curso " + @curso.nome_curso + "."
 	end
 
+	def delete
+		@usuario = usuario_autenticado
+		@curso = Curso.find(params[:id])
+
+		Rails.logger.info "Deletando curso " + @curso.nome_curso + "."
+	end
+
 	def create
 		@curso = Curso.new(curso_params)
 		authorize(@curso)

@@ -25,10 +25,19 @@ Rails.application.routes.draw do
   get '/usuarios/:usuario_id/:turma_id/matricular', to: 'usuarios#matricular'
   get '/usuarios/:usuario_id/:turma_id/desmatricular', to: 'usuarios#desmatricular'
 
+  get '/cursos/:id/editar', to: 'cursos#edit'
+  get '/cursos/:id/deletar', to: 'cursos#delete'
+
   get '/turmas/:id/matricular', to: 'turmas#matricular'
+  get '/turmas/:id/editar', to: 'turmas#edit'
   get '/turmas/:id/deletar', to: 'turmas#delete'
 
+  get '/disciplinas/:id/editar', to: 'disciplinas#edit'
+  get '/disciplinas/:id/deletar', to: 'disciplinas#delete'
+
+  get '/conteudos/:id/editar', to: 'conteudos#edit'
   get '/conteudos/:id/salvar', to: 'conteudos#salvar'
+  get '/conteudos/:id/deletar', to: 'conteudos#delete'
 
   get '/sobre', to: 'sobre#index'
   get '/instalar', to: 'sobre#instalar'

@@ -87,6 +87,13 @@ class DisciplinasController < ApplicationController
     Rails.logger.info "Editando disciplina " + @disciplina.nome_disciplina + "."
   end
 
+	def delete
+		@usuario = usuario_autenticado
+		@disciplina = Disciplina.find(params[:id])
+
+		Rails.logger.info "Deletando disciplina " + @disciplina.nome_disciplina + "."
+	end
+
   # POST /disciplinas or /disciplinas.json
   def create
     @disciplina = Disciplina.new(disciplina_params)
