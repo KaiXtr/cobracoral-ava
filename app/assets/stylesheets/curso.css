@@ -11,8 +11,28 @@
     position: absolute;
 }
 
+.select-box {
+    display: inline-block;
+    position: relative;
+}
+
+.select-box select {
+    background-color: #ff3434;
+    font-size: 12pt;
+    border: none;
+    border-radius: 10px;
+    transition-duration: .2s;
+    padding: 1vw;
+}
+
+.select-box select:hover {
+    background-color: #ff7272;
+    cursor: pointer;
+}
+
 .usuario-button {
     display: block;
+    margin-bottom: 10px;
 }
 
 .usuario-button .usuario-button-icon {

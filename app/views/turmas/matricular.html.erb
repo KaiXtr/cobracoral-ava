@@ -1,6 +1,7 @@
 <nav>
     <p style="color: green"><%= notice %></p>
     <a href="/turmas/<%= @turma.id %>">
+      <i class="fa-solid fa-arrow-left fa-sm"></i>
       Voltar para <strong><%= @turma.nome_turma %></strong>
     </a>
     <div class="colunas-container">
@@ -8,9 +9,14 @@
             <h2>Matricular estudantes</h2>
             <div>
                 <% for estudante in @estudantes_nao_matriculados %>
-                    <div>
-                        <a href="/usuarios/<%= estudante.id %>/<%= @turma.id %>/matricular">
-                            <%= estudante.nome_completo %>
+                    <div class="usuario-button">
+                        <a href="/usuarios/<%= estudante.id %>/<%= @turma.id %>/matricular"  data-turbo-prefetch="false">
+                            <div class="usuario-button-icon">
+                                <i class="fa-solid fa-user fa-lg"></i>
+                            </div>
+                            <div class="usuario-button-name">
+                                <%= estudante.nome_completo %>
+                            </div>
                         </a>
                     </div>
                 <% end %>
@@ -20,9 +26,14 @@
             <h2>Remover matriculados</h2>
             <div>
                 <% for estudante in @estudantes_matriculados %>
-                    <div>
-                        <a href="/usuarios/<%= estudante.id %>/<%= @turma.id %>/desmatricular">
-                            <%= estudante.nome_completo %>
+                    <div class="usuario-button">
+                        <a href="/usuarios/<%= estudante.id %>/<%= @turma.id %>/desmatricular" data-turbo-prefetch="false">
+                            <div class="usuario-button-icon">
+                                <i class="fa-solid fa-user fa-lg"></i>
+                            </div>
+                            <div class="usuario-button-name">
+                                <%= estudante.nome_completo %>
+                            </div>
                         </a>
                     </div>
                 <% end %>

@@ -3,8 +3,10 @@
 		<div class="usuario-button-icon">
             <i class="fa-solid fa-user fa-lg"></i>
 		</div>
-		<div class="usuario-button-name">
-			<%= usuario.nome_completo %>
-		</div>
+		<% if !@estaNoKanban %>
+			<div class="usuario-button-name">
+				<%= usuario.nome_completo %>
+			</div>
+		<% end %>
 	</div>
 </a>

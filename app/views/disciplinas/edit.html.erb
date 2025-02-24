@@ -24,11 +24,11 @@
         <h1>
           <%= form.text_field :nome_disciplina, class: "titulo-pagina page-edit-input" %>
         </h1>
-				<a href='/usuarios/<%= professor_disciplina(@disciplina).id %>'>
-					<strong>
-						<%= professor_disciplina(@disciplina).nome_completo %>
-					</strong>
-				</a>
+        <a href='/usuarios/<%= professor_disciplina(@disciplina).id %>'>
+          <strong>
+            <%= professor_disciplina(@disciplina).nome_completo %>
+          </strong>
+        </a>
         <div>
           <%= turma_disciplina(@disciplina).nome_turma %>
         </div>
@@ -41,18 +41,11 @@
           <%= form.text_field :semestre, class: "page-edit-input" %>
         </div>
       </div>
+
       <div class="disciplina_medidores">
         <button class="act-button">Lançar presenças</button>
         <button class="act-button">Lançar notas</button>
       </div>
-    </div>
-    <div class="disciplina_conteudos_container">
-    </div>
-
-    <div class="disciplina_conteudos_container">
-      <ol>
-        <%= render @unidades_disciplina, estaEditando: true %>
-      </ol>
     </div>
 
     <div class="button-group">
@@ -64,6 +57,12 @@
       <button type="submit" class="act-button">
         Salvar
       </button>
+    </div>
+
+    <div class="disciplina_conteudos_container">
+      <ol>
+        <%= render @unidades_disciplina, estaEditando: true %>
+      </ol>
     </div>
   <% end %>
 </nav>
