@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @comunicado %>
+
+<div>
+  <%= link_to "Edit this comunicado", edit_comunicado_path(@comunicado) %> |
+  <%= link_to "Back to comunicados", comunicados_path %>
+
+  <%= button_to "Destroy this comunicado", @comunicado, method: :delete %>
+</div>

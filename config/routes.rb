@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comunicados
   resources :usuarios
   resources :cursos
   resources :turmas

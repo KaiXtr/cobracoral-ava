@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_23_200859) do
+ActiveRecord::Schema[7.0].define(version: 2025_02_24_031647) do
+  create_table "comunicados", force: :cascade do |t|
+    t.integer "usuario_id", null: false
+    t.integer "turma_id", null: false
+    t.text "conteudo"
+    t.string "url_img"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["turma_id"], name: "index_comunicados_on_turma_id"
+    t.index ["usuario_id"], name: "index_comunicados_on_usuario_id"
+  end
+
   create_table "conteudos", force: :cascade do |t|
     t.integer "unidade_disciplina_id", null: false
     t.string "nome_conteudo"
@@ -127,6 +138,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_23_200859) do
     t.index ["pronomes_usuarios_id"], name: "index_usuarios_on_pronomes_usuarios_id"
   end
 
+  add_foreign_key "comunicados", "turmas"
+  add_foreign_key "comunicados", "usuarios"
   add_foreign_key "conteudos", "unidade_disciplinas"
   add_foreign_key "cursos", "usuarios"
   add_foreign_key "disciplinas", "cursos"
