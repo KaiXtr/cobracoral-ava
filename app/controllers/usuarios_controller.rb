@@ -5,6 +5,10 @@ class UsuariosController < ApplicationController
         @usuarios = Usuario.all_except(@usuario_autenticado)
         Rails.logger.info "Exibindo todos(as) os(as) usuários(as)."
     end
+
+    def edit
+        @usuario = usuario_autenticado
+    end
   
     def create
         @usuario = Usuario.create(nome_completo: params["usuario"]["nome_completo"])

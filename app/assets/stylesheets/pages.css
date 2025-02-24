@@ -5,9 +5,20 @@
     width: 4vw;
     height: 4vw;
     margin: 0vw 46vw 0vw 46vw;
-    top: 20vh;
+    top: 15vh;
     padding: 2vw;
     position: relative;
+}
+
+.usuario-banner-icon.photo-upload .fa-camera {
+    transition-duration: .2s;
+    opacity: 50%;
+    z-index: 5;
+    position: relative;
+}
+
+.usuario-banner-icon.photo-upload:hover .fa-camera {
+    opacity: 100%;
 }
 
 .comunicado-container {

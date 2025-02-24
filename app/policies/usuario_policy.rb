@@ -5,15 +5,19 @@ class UsuarioPolicy
   # code, beware of possible changes to the ancestors:
   # https://gist.github.com/Burgestrand/4b4bc22f31c8a95c425fc0e30d7ef1f5
 
-  attr_reader :usuario, :disciplina
+  attr_reader :usuario
 
-  def initialize(usuario, disciplina)
-    @usuario = usuario  
-    @disciplina = disciplina
+  def initialize(usuario, usuario_atual)
+    @usuario = usuario
+    @usuario_atual = usuario_atual
   end
 
   def show?
     usuario.matricula_cargo.id == 2
+  end
+
+  def edit?
+    @usuario.id == @usuario_atual.id
   end
 
   def update?

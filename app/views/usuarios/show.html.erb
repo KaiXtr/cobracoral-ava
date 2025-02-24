@@ -5,7 +5,14 @@
     </div>
 </div>
 <nav>
-    <h1><%= @usuario.nome_completo %></h1>
+    <h1>
+        <%= @usuario.nome_completo %>
+        <% if policy(@usuario).edit? %>
+            <a href="/usuarios/<%= @usuario.id %>/editar">
+                <i class="fa-solid fa-pen fa-sm icon-button"></i>
+            </a>
+        <% end %>
+    </h1>
     <p>
         <%= @usuario.biografia %>
     </p>
