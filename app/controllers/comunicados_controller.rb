@@ -4,17 +4,33 @@ class ComunicadosController < ApplicationController
 
   # GET /comunicados or /comunicados.json
   def index
+    @usuario = usuario_autenticado
     @comunicado = Comunicado.new
     @comunicados = Comunicado.all
+
+    # Marcar visualização
+    for c in @comunicados do
+      if !ReacaoComunicado.find_by(usuario_id: @usuario.id, comunicado_id: c.id) then
+        reacao = ReacaoComunicado.new(
+            usuario_id: @usuario.id,
+            comunicado_id: c.id
+        )
+        reacao.save
+      end
+    end
+    Rails.logger.info "Acessando todos os comunicados."
   end
 
   # GET /comunicados/1 or /comunicados/1.json
   def show
+    @comunicado = Comunicado.find(params[:id])
+    Rails.logger.info "Acessando comunicado " + @comunicado.id + "."
   end
 
   # GET /comunicados/new
   def new
     @comunicado = Comunicado.new
+		Rails.logger.info "Criando novo comunicado."
   end
 
   # GET /comunicados/1/edit
@@ -29,9 +45,12 @@ class ComunicadosController < ApplicationController
 
     respond_to do |format|
       if @comunicado.save
-        format.html { redirect_to comunicado_url(@comunicado), notice: "Comunicado was successfully created." }
+        logtxt = "Comunicado adicionado com sucesso."
+        Rails.logger.info logtxt
+        format.html { redirect_to comunicado_url(@comunicado), notice: logtxt }
         format.json { render :show, status: :created, location: @comunicado }
       else
+        Rails.logger.error "Houve um erro ao criar o comunicado."
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @comunicado.errors, status: :unprocessable_entity }
       end
@@ -42,9 +61,12 @@ class ComunicadosController < ApplicationController
   def update
     respond_to do |format|
       if @comunicado.update(comunicado_params)
-        format.html { redirect_to comunicado_url(@comunicado), notice: "Comunicado was successfully updated." }
+        logtxt = "Comunicado atualizado com sucesso."
+        Rails.logger.info logtxt
+        format.html { redirect_to comunicado_url(@comunicado), notice: logtxt }
         format.json { render :show, status: :ok, location: @comunicado }
       else
+        Rails.logger.error "Houve um erro ao atualizar o comunicado."
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @comunicado.errors, status: :unprocessable_entity }
       end
@@ -56,7 +78,9 @@ class ComunicadosController < ApplicationController
     @comunicado.destroy
 
     respond_to do |format|
-      format.html { redirect_to comunicados_url, notice: "Comunicado was successfully destroyed." }
+			logtxt = "Comunicado deletado com sucesso."
+			Rails.logger.info logtxt
+      format.html { redirect_to comunicados_url, notice: logtxt }
       format.json { head :no_content }
     end
   end

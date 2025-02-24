@@ -19,8 +19,8 @@ module ComunicadosHelper
         data_hora.strftime("Publicado em %d/%m/%Y às %H:%M")
     end
 
-    def reacoes_comunicado(comunicado)
-        ReacaoComunicado.where(comunicado_id: comunicado.id)
+    def reacoes_coracao(comunicado)
+        ReacaoComunicado.where(comunicado_id: comunicado.id, emoji: '❤️').count()
     end
 
     def reagir_coracao(comunicado)

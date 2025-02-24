@@ -1,4 +1,7 @@
 <div class="comunicado-container">
+  <script type="text/javascript">
+    this.classList.add('novo')
+  </script>
   <div class="comunicado-info">
     <% usuario = usuario_comunicado(comunicado.usuario_id) %>
     <a href="/usuarios/<%= usuario.id %>">
@@ -36,8 +39,11 @@
   <p>
     <%= comunicado.url_img %>
   </p>
-  <% for reacao in reacoes_comunicado(comunicado) %>
-    <%= reacao.emoji %>
-  <% end %>
-  <button onclick="<%= reagir_coracao(comunicado) %>">Reagir</button>
+  <div class="comunicado-reacoes">
+    <%= turbo_stream_from "comunicados" %>
+    ❤️ <strong><%= reacoes_coracao(comunicado) %></strong>
+    <button onclick="<%= reagir_coracao(comunicado) %>">
+      Reagir
+    </button>
+  </div>
 </div>
