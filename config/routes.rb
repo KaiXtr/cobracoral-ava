@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   get '/usuarios/:usuario_id/:turma_id/matricular', to: 'usuarios#matricular'
   get '/usuarios/:usuario_id/:turma_id/desmatricular', to: 'usuarios#desmatricular'
 
+  get '/comunicados/:id/editar', to: 'comunicados#edit'
+
   get '/cursos/:id/editar', to: 'cursos#edit'
   get '/cursos/:id/deletar', to: 'cursos#delete'
 

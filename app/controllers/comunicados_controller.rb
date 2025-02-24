@@ -1,8 +1,10 @@
 class ComunicadosController < ApplicationController
+	before_action :redirecionar_nao_logado
   before_action :set_comunicado, only: %i[ show edit update destroy ]
 
   # GET /comunicados or /comunicados.json
   def index
+    @comunicado = Comunicado.new
     @comunicados = Comunicado.all
   end
 
@@ -21,7 +23,9 @@ class ComunicadosController < ApplicationController
 
   # POST /comunicados or /comunicados.json
   def create
+    @usuario = usuario_autenticado
     @comunicado = Comunicado.new(comunicado_params)
+    @comunicado.usuario_id = @usuario.id
 
     respond_to do |format|
       if @comunicado.save

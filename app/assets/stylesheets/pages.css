@@ -10,6 +10,41 @@
     position: relative;
 }
 
+.comunicado-container {
+    background-color: ghostwhite;
+    border-radius: 50px;
+    padding: 2vw;
+    margin: 1vh 10vw 1vh 10vw;
+}
+
+.comunicado-container .comunicado-info {
+    width: 90%;
+    display: inline-block;
+}
+
+.comunicado-container .comunicado-usuario-info {
+    font-size: 10pt;
+    color: gray;
+    display: block;
+}
+
+.comunicado-container .comunicado-data {
+    font-size: 10pt;
+    color: gray;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.comunicado-container .comunicado-actions {
+    text-align: right;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.comunicado-container p {
+    margin: 0px;
+}
+
 .tarefas-container {
     min-height: 80vh;
     display: block;

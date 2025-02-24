@@ -1,22 +1,39 @@
-<div id="<%= dom_id comunicado %>">
+<div class="comunicado-container">
+  <div class="comunicado-info">
+    <% usuario = usuario_comunicado(comunicado.usuario_id) %>
+    <a href="/usuarios/<%= usuario.id %>">
+      <div class="usuario-button">
+        <div class="usuario-button-icon icon-larger">
+          <i class="fa-solid fa-user fa-lg"></i>
+        </div>
+        <div class="usuario-button-name">
+          <%= usuario.nome_completo %>
+          <span class="comunicado-usuario-info">
+            <%= info_usuario(usuario) %>
+          </span>
+          <span class="comunicado-data">
+            <%= formatar_data_publicacao(comunicado.created_at) %>
+          </span>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="comunicado-actions">
+    <% if policy(comunicado).edit? %>
+      <a href="/comunicados/<%= @comunicado.id %>/editar">
+          <i class="fa-solid fa-pen fa-lg icon-button"></i>
+      </a>
+    <% end %>
+    <% if policy(comunicado).destroy? %>
+      <a href="/comunicados/<%= @comunicado.id %>/deletar" data-turbo-prefetch="false">
+          <i class="fa-solid fa-trash fa-lg icon-button"></i>
+      </a>
+    <% end %>
+  </div>
   <p>
-    <strong>Usuario:</strong>
-    <%= comunicado.usuario_id %>
-  </p>
-
-  <p>
-    <strong>Turma:</strong>
-    <%= comunicado.turma_id %>
-  </p>
-
-  <p>
-    <strong>Conteudo:</strong>
     <%= comunicado.conteudo %>
   </p>
-
   <p>
-    <strong>Url img:</strong>
     <%= comunicado.url_img %>
   </p>
-
 </div>

@@ -1,14 +1,13 @@
-<p style="color: green"><%= notice %></p>
+<nav>
+  <div class="deslizar-transition">
+    <p style="color: green"><%= notice %></p>
 
-<h1>Comunicados</h1>
-
-<div id="comunicados">
-  <% @comunicados.each do |comunicado| %>
-    <%= render comunicado %>
-    <p>
-      <%= link_to "Show this comunicado", comunicado %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New comunicado", new_comunicado_path %>
+    <h1>Comunicados</h1>
+    <% if policy(@comunicado).new? %>
+      <%= link_to "New comunicado", new_comunicado_path %>
+    <% end %>
+    <div>
+      <%= render @comunicados %>
+    </div>
+  </div>
+</nav>
