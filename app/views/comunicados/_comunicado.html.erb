@@ -36,4 +36,8 @@
   <p>
     <%= comunicado.url_img %>
   </p>
+  <% for reacao in reacoes_comunicado(comunicado) %>
+    <%= reacao.emoji %>
+  <% end %>
+  <button onclick="<%= reagir_coracao(comunicado) %>">Reagir</button>
 </div>

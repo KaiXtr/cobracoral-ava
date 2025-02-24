@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_24_031647) do
+ActiveRecord::Schema[7.0].define(version: 2025_02_24_042237) do
   create_table "comunicados", force: :cascade do |t|
     t.integer "usuario_id", null: false
     t.integer "turma_id", null: false
@@ -96,6 +96,16 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_24_031647) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reacao_comunicados", force: :cascade do |t|
+    t.integer "comunicado_id", null: false
+    t.integer "usuario_id", null: false
+    t.string "emoji"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comunicado_id"], name: "index_reacao_comunicados_on_comunicado_id"
+    t.index ["usuario_id"], name: "index_reacao_comunicados_on_usuario_id"
+  end
+
   create_table "turmas", force: :cascade do |t|
     t.string "nome_turma"
     t.string "senha_acesso"
@@ -150,6 +160,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_24_031647) do
   add_foreign_key "matriculas", "matricula_cargos"
   add_foreign_key "matriculas", "turmas"
   add_foreign_key "matriculas", "usuarios"
+  add_foreign_key "reacao_comunicados", "comunicados"
+  add_foreign_key "reacao_comunicados", "usuarios"
   add_foreign_key "turmas", "cursos"
   add_foreign_key "turmas", "modalidade_turmas"
   add_foreign_key "turmas", "turno_turmas"
