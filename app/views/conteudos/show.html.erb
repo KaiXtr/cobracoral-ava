@@ -2,12 +2,15 @@
   <div class="deslizar-transition">
     <p style="color: green"><%= notice %></p>
     <a href="/disciplinas/<%= @disciplina_conteudo.id %>">
+      <i class="fa-solid fa-arrow-left fa-sm"></i>
       Voltar para <strong><%= @disciplina_conteudo.nome_disciplina %></strong>
     </a>
     <h1>
       <%= @conteudo.nome_conteudo %>
       <% if policy(@conteudo).edit? %>
-        <%= link_to "Editar", edit_conteudo_path(@conteudo) %>
+        <a href="/conteudos/<%= @conteudo.id %>/editar">
+            <i class="fa-solid fa-pen fa-sm icon-button"></i>
+        </a>
       <% end %>
     </h1>
     <span class="conteudo-data">

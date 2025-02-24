@@ -1,8 +1,12 @@
 <a href="/usuarios/<%= usuario.id %>">
 	<div class="usuario-button">
-		<div class="usuario-button-icon"></div>
-		<div class="usuario-button-name">
-			<%= usuario.nome_completo %>
+		<div class="usuario-button-icon">
+            <i class="fa-solid fa-user fa-lg"></i>
 		</div>
+		<% if !@estaNoKanban %>
+			<div class="usuario-button-name">
+				<%= usuario.nome_completo %>
+			</div>
+		<% end %>
 	</div>
 </a>

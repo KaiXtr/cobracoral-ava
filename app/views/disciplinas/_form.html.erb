@@ -16,6 +16,7 @@
   <div>
     <%= form.label :curso_id, "Curso" %>
     <%= form.select :curso_id,
+      class: 'select-box',
       options_for_select(@cursos.map{ |c| [
         c.nome_curso, c.id, {
           'curso-id' => c.id

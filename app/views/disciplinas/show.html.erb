@@ -3,6 +3,7 @@
     <p style="color: green"><%= notice %></p>
     
     <a href="/cursos/<%= @curso.id %>">
+      <i class="fa-solid fa-arrow-left fa-sm"></i>
       Voltar para <strong><%= @curso.nome_curso %></strong>
     </a>
 
@@ -11,7 +12,9 @@
         <h1 class="titulo-disciplina">
           <%= @disciplina.nome_disciplina %>
           <% if policy(@disciplina).edit? %>
-            <%= link_to "Editar", edit_disciplina_path(@disciplina) %>
+            <a href="/disciplinas/<%= @disciplina.id %>/editar">
+                <i class="fa-solid fa-pen fa-sm icon-button"></i>
+            </a>
           <% end %>
         </h1>
 				<a href='/usuarios/<%= professor_disciplina(@disciplina).id %>'>
@@ -20,7 +23,9 @@
 					</strong>
 				</a>
         <br>
-        <%= turma_disciplina(@disciplina) %>
+        <a href="/turmas/<%= turma_disciplina(@disciplina).id %>">
+          <%= turma_disciplina(@disciplina).nome_turma %>
+        </a>
         <br>
         <%= @disciplina.sala_aula %>
         <br>
@@ -33,7 +38,12 @@
             <div class="medidor-grafico-atual"></div>
             <span class="medidor-grafico-valor">100%</span>
           </div>
-          <h5>Presenças</h5>
+          <h5>
+            Presenças
+            <a href="">
+              <i class="fa-solid fa-pie-chart fa-lg icon-button"></i>
+            </a>
+          </h5>
         </div>
         <div class="medidor-container">
           <div class="medidor-grafico">
@@ -41,7 +51,12 @@
             <div class="medidor-grafico-atual"></div>
             <span class="medidor-grafico-valor">10%</span>
           </div>
-          <h5>Notas</h5>
+          <h5>
+            Notas
+            <a href="">
+              <i class="fa-solid fa-pie-chart fa-lg icon-button"></i>
+            </a>
+          </h5>
         </div>
       </div>
     </div>

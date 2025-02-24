@@ -17,10 +17,10 @@
           <h5>
             <%= conteudo.nome_conteudo %>
           </h5>
-          <%= @usuario.nome_completo %>
           <span class="conteudo-data">
             <%= get_vencimento_restante(conteudo) %>
           </span>
+          <%= render @usuario %>
         </div>
       </div>
     </a>
