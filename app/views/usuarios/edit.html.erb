@@ -1,11 +1,59 @@
-<div class="inicio-banner">
-    <img src="<%= @usuario.profile_pic %>" alt="">
-    <div class="usuario-banner-icon photo-upload">
-        <i class="fa-solid fa-camera fa-lg"></i>
+<%= form_with(model: @usuario) do |f| %>
+    <div class="inicio-banner">
+        <% if @usuario.profile_pic.attached? %>
+            <img src="<%(url_for(@usuario.profile_pic))%>" alt="">
+        <% end %>
+        <div class="usuario-banner-icon photo-upload">
+            <i class="fa-solid fa-camera fa-lg"></i>
+            <%= f.file_field :profile_pic  %>
+        </div>
     </div>
-</div>
-<nav>
-    <h1>Editar perfil</h1>
+    <nav>
+        <h1>Editar perfil</h1>
+        <div class="form_group">
+            <%= f.label :biografia, 'Biografia' %>
+            <%= f.text_area :biografia, cols: 130, rows: 5 %>
+        </div>
+        <div class="form_group">
+            <%= f.label :pronomes_usuario_id, "Pronomes" %>
+            <%= f.select :pronomes_usuario_id,
+            options_for_select(@pronomes.map{ |p| [
+                p.enumPronomes, p.id, {
+                'pronomes-id' => p.id
+                }
+            ]}, @usuario.pronomes_usuarios_id)
+            %>
+        </div>
+        <div class="form_group">
+            <%= f.label :nome_completo, 'Nome completo' %>
+            <%= f.text_field :nome_completo %>
+        </div>
+        <div class="form_group">
+            <%= f.label :email, 'Email institucional' %>
+            <%= f.email_field :email %>
+        </div>
+        <div class="form_group">
+            <%= f.label :telefone, 'Telefone' %>
+            <%= f.text_field :telefone %>
+        </div>
+        <div class="form_group">
+            <%= f.label :lattes_id, 'Lattes' %>
+            <%= f.text_field :lattes_id %>
+        </div>
+        <div class="form_group">
+            <%= f.label :orcid_id, 'Orcid' %>
+            <%= f.text_field :orcid_id %>
+        </div>
 
-    <%= render "form", usuario: @usuario_autenticado %>
-</nav>
+        <div class="button-group">
+            <a href="/usuarios/<%= @usuario.id %>">
+            <button class="act-button">
+                Cancelar
+            </button>
+            </a>
+            <button type="submit" class="act-button">
+                Salvar
+            </button>
+        </div>
+    </nav>
+<% end %>

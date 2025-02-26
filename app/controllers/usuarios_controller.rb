@@ -8,6 +8,9 @@ class UsuariosController < ApplicationController
 
     def edit
         @usuario = usuario_autenticado
+        authorize(@usuario)
+        @pronomes = PronomesUsuario.all
+        Rails.logger.info "Editando usuário " + @usuario.nome_completo + "."
     end
   
     def create
@@ -20,6 +23,18 @@ class UsuariosController < ApplicationController
         @link_lattes = "https://lattes.cnpq.br/" + @usuario.lattes_id.to_s
         @link_orcid = "https://orcid.org/" + @usuario.orcid_id.to_s
         Rails.logger.info "Acessando perfil do(a) usuário(a) " + @usuario.nome_completo + "."
+    end
+
+    def perfil
+        @usuario = usuario_autenticado
+        Rails.logger.info "Exibindo perfil do(a) usuário(a) " + @usuario.nome_completo + "."
+        redirect_to usuario_path(@usuario)
+    end
+
+    def caixa
+        @usuario = usuario_autenticado
+        Rails.logger.info "Redirecionando para caixa de entrada de " + @usuario.email + "."
+        redirect_to "https://mail.google.com/mail", allow_other_host: true
     end
 
     def matricular
@@ -73,15 +88,32 @@ class UsuariosController < ApplicationController
         end
     end
 
-    def perfil
-        @usuario = usuario_autenticado
-        Rails.logger.info "Exibindo perfil do(a) usuário(a) " + @usuario.nome_completo + "."
-        redirect_to usuario_path(@usuario)
+    def update
+        @usuario = Usuario.find(params[:id])
+        @usuario.profile_pic.attach(params[:profile_pic])
+        Rails.logger.info params
+
+        respond_to do |format|
+            if @usuario.update(usuario_params)
+                logtxt = "Usuário " + @usuario.nome_completo + " atualizado com sucesso."
+                Rails.logger.info logtxt
+                format.html { redirect_to usuario_url(@usuario), notice: logtxt }
+                format.json { render :show, status: :ok, location: @usuario }
+            else
+                Rails.logger.error "Houve um erro ao atualizar o usuário " + @usuario.nome_completo + "."
+                format.html { render :edit, status: :unprocessable_entity }
+                format.json { render json: @usuario.errors, status: :unprocessable_entity }
+            end
+        end
     end
 
-    def caixa
-        @usuario = usuario_autenticado
-        Rails.logger.info "Redirecionando para caixa de entrada de " + @usuario.email + "."
-        redirect_to "https://mail.google.com/mail", allow_other_host: true
-    end
+    private
+
+        def usuario_params
+            params.require(:usuario).permit(
+                :profile_pic, :nome_completo, :biografia,
+                :email, :password, :pronomes_usuarios_id,
+                :telefone, :lattes_id, :orcid_id
+            )
+        end
 end

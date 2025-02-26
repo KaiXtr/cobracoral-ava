@@ -168,11 +168,11 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_24_211648) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "pronomes_usuarios_id", null: false
-    t.string "profile_pic"
     t.string "biografia"
     t.string "lattes_id"
     t.string "orcid_id"
     t.string "password_digest"
+    t.string "profile_pic"
     t.index ["pronomes_usuarios_id"], name: "index_usuarios_on_pronomes_usuarios_id"
   end
 

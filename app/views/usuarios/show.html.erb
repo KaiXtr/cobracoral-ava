@@ -1,50 +1,55 @@
 <div class="inicio-banner">
-    <img src="<%= @usuario.profile_pic %>" alt="">
+    <% if @usuario.profile_pic.attached? %>
+        <img src="<%(url_for(@usuario.profile_pic))%>" alt="">
+    <% end %>
     <div class="usuario-banner-icon">
         <i class="fa-solid fa-user fa-xl"></i>
     </div>
 </div>
 <nav>
-    <h1>
-        <%= @usuario.nome_completo %>
-        <% if policy(@usuario).edit? %>
-            <a href="/usuarios/<%= @usuario.id %>/editar">
-                <i class="fa-solid fa-pen fa-sm icon-button"></i>
+    <div class="deslizar-transition">
+        <p style="color: green"><%= notice %></p>
+        <h1>
+            <%= @usuario.nome_completo %>
+            <% if policy(@usuario).edit? %>
+                <a href="/usuarios/<%= @usuario.id %>/editar">
+                    <i class="fa-solid fa-pen fa-sm icon-button"></i>
+                </a>
+            <% end %>
+        </h1>
+        <p>
+            <%= @usuario.biografia %>
+        </p>
+        <div>
+            Cargo: <%= cargo_usuario(@usuario) %>
+            <br>
+            Pronomes: <%= pronomes_usuario(@usuario).enumPronomes %>
+            <br>
+            Turmas: <% for turma in turmas_usuario(@usuario) %>
+                <a href="/turmas/<%= turma.id %>">
+                    <%= turma.nome_turma %>, 
+                </a>
+            <% end %>
+            <br>
+            Email institucional: <a href="/usuarios/<%= @usuario.id %>/caixa">
+                <%= @usuario.email %>
             </a>
-        <% end %>
-    </h1>
-    <p>
-        <%= @usuario.biografia %>
-    </p>
-    <div>
-        Cargo: <%= cargo_usuario(@usuario) %>
-        <br>
-        Pronomes: <%= pronomes_usuario(@usuario).enumPronomes %>
-        <br>
-        Turmas: <% for turma in turmas_usuario(@usuario) %>
-            <a href="/turmas/<%= turma.id %>">
-                <%= turma.nome_turma %>, 
+            <br>
+            <% if @usuario.telefone %>
+                Telefone: <%= @usuario.telefone %>
+            <% end %>
+            <br>
+            <% if @usuario.lattes_id %>
+            Lattes: <a href="<%= @link_lattes %>">
+                <%= @usuario.lattes_id %>
             </a>
-        <% end %>
-        <br>
-        Email institucional: <a href="/usuarios/<%= @usuario.id %>/caixa">
-            <%= @usuario.email %>
-        </a>
-        <br>
-        <% if @usuario.telefone %>
-            Telefone: <%= @usuario.telefone %>
-        <% end %>
-        <br>
-        <% if @usuario.lattes_id %>
-        Lattes: <a href="<%= @link_lattes %>">
-            <%= @usuario.lattes_id %>
-        </a>
-        <% end %>
-        <br>
-        <% if @usuario.orcid_id %>
-        Orcid: <a href="<%= @link_orcid %>">
-            <%= @usuario.orcid_id %>
-        </a>
-        <% end %>
+            <% end %>
+            <br>
+            <% if @usuario.orcid_id %>
+            Orcid: <a href="<%= @link_orcid %>">
+                <%= @usuario.orcid_id %>
+            </a>
+            <% end %>
+        </div>
     </div>
 </nav>

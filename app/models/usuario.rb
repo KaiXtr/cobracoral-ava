@@ -1,6 +1,7 @@
 class Usuario < ApplicationRecord
 	has_many :matricula
 	has_many :matricula_cargo, through: :matricula
+	has_one_attached :profile_pic
 	has_secure_password
 
 	validates_presence_of :email
