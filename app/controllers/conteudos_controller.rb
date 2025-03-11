@@ -157,7 +157,7 @@ class ConteudosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def conteudo_params
-      params.require(:conteudo).permit(:unidade_disciplina_id, :nome_conteudo)
+      params.require(:conteudo).permit(:unidade_disciplina_id, :nome_conteudo, :corpo)
     end
 
     def isUsuarioEstudante(usuario)

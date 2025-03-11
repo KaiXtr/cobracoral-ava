@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'trix' %>
 <%= form_with(model: conteudo) do |form| %>
   <% if conteudo.errors.any? %>
     <div style="color: red">
@@ -16,7 +17,7 @@
   </h1>
 
   <div>
-    <%= form.text_area '', cols: 130, rows: 5 %>
+    <%= form.rich_text_area :corpo %>
   </div>
 
   <div class="button-group">
