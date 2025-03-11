@@ -9,9 +9,17 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :turma_id, style: "display: block" %>
-    <%= form.text_field :turma_id %>
+  <div class="form-group">
+      <%= form.label :turma_id, "Turma" %>
+      <div class="select-box">
+          <%= form.select :turma_id,
+              options_for_select(@turmas.map{ |t| [
+                  t.nome_turma, t.id, {
+                      'turma-id' => t.id
+                  }
+              ]}, comunicado.turma_id)
+          %>
+      </div>
   </div>
 
   <div>
@@ -20,8 +28,8 @@
   </div>
 
   <div>
-    <%= form.label :url_img, style: "display: block" %>
-    <%= form.text_field :url_img %>
+    <%= form.label :imagens, style: "display: block" %>
+    <%= form.file_field :imagens, multiple: true %>
   </div>
 
   <div class="button-group">

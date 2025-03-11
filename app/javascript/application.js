@@ -6,3 +6,5 @@ if (header && document.referrer.includes('entrar')) {
     header.style = "padding-top: 80vw";
     header.classList.add('header-animation');
 }
+import "trix"
+import "@rails/actiontext"

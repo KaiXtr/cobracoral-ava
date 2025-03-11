@@ -24,17 +24,19 @@ class ComunicadosController < ApplicationController
   # GET /comunicados/1 or /comunicados/1.json
   def show
     @comunicado = Comunicado.find(params[:id])
-    Rails.logger.info "Acessando comunicado " + @comunicado.id + "."
+    Rails.logger.info "Acessando comunicado " + @comunicado.id.to_s + "."
   end
 
   # GET /comunicados/new
   def new
     @comunicado = Comunicado.new
+    @turmas = Turma.all
 		Rails.logger.info "Criando novo comunicado."
   end
 
   # GET /comunicados/1/edit
   def edit
+    @turmas = Turma.all
   end
 
   # POST /comunicados or /comunicados.json
@@ -93,6 +95,6 @@ class ComunicadosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def comunicado_params
-      params.require(:comunicado).permit(:usuario_id, :turma_id, :conteudo, :url_img)
+      params.require(:comunicado).permit(:usuario_id, :turma_id, :conteudo, imagens: [])
     end
 end

@@ -23,12 +23,12 @@
   </div>
   <div class="comunicado-actions">
     <% if policy(comunicado).edit? %>
-      <a href="/comunicados/<%= @comunicado.id %>/editar">
+      <a href="/comunicados/<%= comunicado.id %>/editar">
           <i class="fa-solid fa-pen fa-lg icon-button"></i>
       </a>
     <% end %>
     <% if policy(comunicado).destroy? %>
-      <a href="/comunicados/<%= @comunicado.id %>/deletar" data-turbo-prefetch="false">
+      <a href="/comunicados/<%= comunicado.id %>/deletar" data-turbo-prefetch="false">
           <i class="fa-solid fa-trash fa-lg icon-button"></i>
       </a>
     <% end %>
@@ -36,13 +36,15 @@
   <p>
     <%= comunicado.conteudo %>
   </p>
-  <p>
-    <%= comunicado.url_img %>
-  </p>
+  <div class="comunicado-imagens">
+    <% comunicado.imagens.each do |imagem| %>
+      <%= image_tag(imagem) %>
+    <% end %>
+  </div>
   <div class="comunicado-reacoes">
     <%= turbo_stream_from "comunicados" %>
     ❤️ <strong><%= reacoes_coracao(comunicado) %></strong>
-    <button onclick="<%= reagir_coracao(comunicado) %>">
+    <button onclick="<%= reagir_coracao(comunicado) %>" data-turbo-prefetch="false">
       Reagir
     </button>
   </div>
