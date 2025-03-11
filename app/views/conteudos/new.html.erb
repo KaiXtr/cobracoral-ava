@@ -1,9 +1,7 @@
-<h1>New conteudo</h1>
-
-<%= render "form", conteudo: @conteudo %>
-
-<br>
-
-<div>
-  <%= link_to "Back to conteudos", conteudos_path %>
-</div>
+<nav>
+  <a href="/disciplinas/<%= @disciplina_conteudo.id %>">
+    <i class="fa-solid fa-arrow-left fa-sm"></i>
+    Voltar para <strong><%= @disciplina_conteudo.nome_disciplina %></strong>
+  </a>
+  <%= render "form", conteudo: @conteudo %>
+</nav>

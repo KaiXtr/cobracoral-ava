@@ -90,12 +90,15 @@ class UsuariosController < ApplicationController
 
     def update
         @usuario = Usuario.find(params[:id])
-        @usuario.profile_pic.attach(params[:profile_pic])
-        Rails.logger.info params
+        @usuario.avatar.attach(params[:avatar])
 
         respond_to do |format|
             if @usuario.update(usuario_params)
-                logtxt = "Usuário " + @usuario.nome_completo + " atualizado com sucesso."
+                if @usuario.pronomes_usuarios_id == 1 then
+                    logtxt = "Usuária " + @usuario.nome_completo + " atualizada com sucesso."
+                else
+                    logtxt = "Usuário " + @usuario.nome_completo + " atualizado com sucesso."
+                end
                 Rails.logger.info logtxt
                 format.html { redirect_to usuario_url(@usuario), notice: logtxt }
                 format.json { render :show, status: :ok, location: @usuario }
@@ -111,7 +114,7 @@ class UsuariosController < ApplicationController
 
         def usuario_params
             params.require(:usuario).permit(
-                :profile_pic, :nome_completo, :biografia,
+                :avatar, :nome_completo, :biografia,
                 :email, :password, :pronomes_usuarios_id,
                 :telefone, :lattes_id, :orcid_id
             )

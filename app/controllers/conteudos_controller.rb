@@ -90,6 +90,10 @@ class ConteudosController < ApplicationController
   # GET /conteudos/new
   def new
     @conteudo = Conteudo.new
+    @conteudo.nome_conteudo = "Nome do conteúdo "
+    professor = usuario_autenticado
+    
+    @disciplina_conteudo = Disciplina.find_by(usuario_id: professor.id)
     Rails.logger.info "Criando novo conteúdo."
   end
 

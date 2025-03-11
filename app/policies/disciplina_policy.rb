@@ -20,6 +20,10 @@ class DisciplinaPolicy
     index?
   end
 
+  def new_conteudo?
+    temCargoCoordenador? || permissaoProfessor?
+  end
+
   def show?
     true
   end

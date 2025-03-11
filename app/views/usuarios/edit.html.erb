@@ -1,11 +1,12 @@
 <%= form_with(model: @usuario) do |f| %>
     <div class="inicio-banner">
-        <% if @usuario.profile_pic.attached? %>
-            <img src="<%(url_for(@usuario.profile_pic))%>" alt="">
+        <% if @usuario.avatar.attached? %>
+            <img src="<%(url_for(@usuario.avatar))%>" alt="">
         <% end %>
         <div class="usuario-banner-icon photo-upload">
             <i class="fa-solid fa-camera fa-lg"></i>
-            <%= f.file_field :profile_pic  %>
+            <%= f.file_field :avatar  %>
+            <%= f.file_field :attachments, multiple: true, direct_upload: true %>
         </div>
     </div>
     <nav>

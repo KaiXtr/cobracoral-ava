@@ -1,6 +1,6 @@
 <div class="inicio-banner">
-    <% if @usuario.profile_pic.attached? %>
-        <img src="<%(url_for(@usuario.profile_pic))%>" alt="">
+    <% if @usuario.avatar.attached? %>
+        <%= image_tag @usuario.avatar.variant(:thumb) %>
     <% end %>
     <div class="usuario-banner-icon">
         <i class="fa-solid fa-user fa-xl"></i>
@@ -40,13 +40,13 @@
             <% end %>
             <br>
             <% if @usuario.lattes_id %>
-            Lattes: <a href="<%= @link_lattes %>">
+            Lattes: <a href="<%= @link_lattes %>" target="_blank">
                 <%= @usuario.lattes_id %>
             </a>
             <% end %>
             <br>
             <% if @usuario.orcid_id %>
-            Orcid: <a href="<%= @link_orcid %>">
+            Orcid: <a href="<%= @link_orcid %>" target="_blank">
                 <%= @usuario.orcid_id %>
             </a>
             <% end %>

@@ -61,6 +61,11 @@
       </div>
     </div>
     <div class="disciplina_conteudos_container">
+      <% if policy(@disciplina).new_conteudo? %>
+        <a href="/conteudos/new">
+            Adicionar conteúdo
+        </a>
+      <% end %>
       <ol>
         <%= render @unidades_disciplina %>
       </ol>
