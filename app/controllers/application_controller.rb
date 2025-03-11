@@ -1,5 +1,8 @@
+require "action_text"
+
 class ApplicationController < ActionController::Base
 	include Pundit::Authorization
+	helper ActionText::Engine.helpers
 
 	def usuario_autenticado
 		if session[:usuario_id]

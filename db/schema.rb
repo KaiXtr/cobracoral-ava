@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_03_11_042043) do
+ActiveRecord::Schema[7.0].define(version: 2025_03_11_044120) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -52,8 +52,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_11_042043) do
   create_table "comunicados", force: :cascade do |t|
     t.integer "usuario_id", null: false
     t.integer "turma_id", null: false
-    t.text "conteudo"
-    t.string "url_img"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["turma_id"], name: "index_comunicados_on_turma_id"
@@ -65,7 +63,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_11_042043) do
     t.string "nome_conteudo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "url_conteudo"
     t.datetime "data_liberacao"
     t.datetime "data_vencimento"
     t.index ["unidade_disciplina_id"], name: "index_conteudos_on_unidade_disciplina_id"
@@ -182,7 +179,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_11_042043) do
     t.string "lattes_id"
     t.string "orcid_id"
     t.string "password_digest"
-    t.string "profile_pic"
     t.index ["pronomes_usuarios_id"], name: "index_usuarios_on_pronomes_usuarios_id"
   end
 

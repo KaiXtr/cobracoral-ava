@@ -22,13 +22,10 @@
       </div>
   </div>
 
-  <div>
-    <%= form.label :conteudo, style: "display: block" %>
-    <%= form.text_area :conteudo %>
+  <div class="field">
+    <%= form.rich_text_area :corpo %>
   </div>
-
   <div>
-    <%= form.label :imagens, style: "display: block" %>
     <%= form.file_field :imagens, multiple: true %>
   </div>
 

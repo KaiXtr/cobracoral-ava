@@ -95,6 +95,6 @@ class ComunicadosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def comunicado_params
-      params.require(:comunicado).permit(:usuario_id, :turma_id, :conteudo, imagens: [])
+      params.require(:comunicado).permit(:usuario_id, :turma_id, :conteudo, :corpo, imagens: [])
     end
 end
