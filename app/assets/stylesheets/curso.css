@@ -41,8 +41,8 @@
     vertical-align: top;
     background-color: #ff3434;
     border-radius: 100%;
-    min-width: 2vw;
-    min-height: 2vw;
+    width: 2vw;
+    height: 2vw;
     margin-right: 10px;
     display: inline-block;
 }
@@ -51,6 +51,12 @@
     font-size: 22pt;
     min-width: 4vw;
     min-height: 4vw;
+}
+
+.usuario-button .usuario-button-icon img {
+    border-radius: 100%;
+    width: 2vw;
+    height: 2vw;
 }
 
 .usuario-button .usuario-button-icon i {
@@ -154,6 +160,7 @@
 .disciplina_info_container .disciplina_medidores {
     width: 20%;
     display: inline-block;
+    vertical-align: top;
 }
 
 .disciplina_info_container .disciplina_medidores h5 {

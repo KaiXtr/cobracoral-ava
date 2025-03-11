@@ -1,24 +1,44 @@
-.usuario-banner-icon {
+.usuario-banner-icon, .usuario-banner-photo {
     background-color: #a70606;
     border-radius: 100%;
     font-size: 32pt;
-    width: 4vw;
-    height: 4vw;
     margin: 0vw 46vw 0vw 46vw;
     top: 15vh;
-    padding: 2vw;
     position: relative;
 }
 
-.usuario-banner-icon.photo-upload .fa-camera {
+.usuario-banner-icon {
+    width: 4vw;
+    height: 4vw;
+    padding: 2vw;
+}
+
+.usuario-banner-photo {
+    width: 8vw;
+    height: 8vw;
+}
+
+.usuario-banner-photo img {
+    border-radius: 100%;
+    width: 8vw;
+    height: 8vw;
+    display: block;
+}
+
+.photo-upload {
+    position: relative;
+}
+
+.photo-upload .fa-camera {
     transition-duration: .2s;
     opacity: 50%;
     z-index: 5;
     position: relative;
 }
 
-.usuario-banner-icon.photo-upload:hover .fa-camera {
+.photo-upload:hover .fa-camera {
     opacity: 100%;
+    cursor: pointer;
 }
 
 .comunicado-container {

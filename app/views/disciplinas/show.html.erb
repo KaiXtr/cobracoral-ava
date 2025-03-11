@@ -17,12 +17,7 @@
             </a>
           <% end %>
         </h1>
-				<a href='/usuarios/<%= professor_disciplina(@disciplina).id %>'>
-					<strong>
-						<%= professor_disciplina(@disciplina).nome_completo %>
-					</strong>
-				</a>
-        <br>
+				<%= render professor_disciplina(@disciplina) %>
         <a href="/turmas/<%= turma_disciplina(@disciplina).id %>">
           <%= turma_disciplina(@disciplina).nome_turma %>
         </a>

@@ -1,7 +1,11 @@
 <a href="/usuarios/<%= usuario.id %>">
 	<div class="usuario-button">
 		<div class="usuario-button-icon">
-            <i class="fa-solid fa-user fa-lg"></i>
+			<% if usuario.avatar.attached? %>
+				<%= image_tag(usuario.avatar) %>
+			<% else %>
+				<i class="fa-solid fa-user fa-lg"></i>
+			<% end %>
 		</div>
 		<% if !@estaNoKanban %>
 			<div class="usuario-button-name">

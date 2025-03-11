@@ -12,8 +12,10 @@
 					</strong>
 				</a>
 				<br>
-				<%= turma_disciplina(disciplina).nome_turma
-				 %> |
+				<a href="/turmas/<%= turma_disciplina(disciplina).id %>">
+					<%= turma_disciplina(disciplina).nome_turma
+				 %>
+				</a> |
 				<%= disciplina.semestre %> |
 				<%= disciplina.sala_aula %>
 			</p>

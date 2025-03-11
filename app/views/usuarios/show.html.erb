@@ -1,10 +1,13 @@
 <div class="inicio-banner">
     <% if @usuario.avatar.attached? %>
-        <%= image_tag @usuario.avatar.variant(:thumb) %>
+        <div class="usuario-banner-photo">
+            <%= image_tag(@usuario.avatar) %>
+        </div>
+    <% else %>
+        <div class="usuario-banner-icon">
+            <i class="fa-solid fa-user fa-xl"></i>
+        </div>
     <% end %>
-    <div class="usuario-banner-icon">
-        <i class="fa-solid fa-user fa-xl"></i>
-    </div>
 </div>
 <nav>
     <div class="deslizar-transition">

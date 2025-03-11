@@ -1,13 +1,16 @@
 <%= form_with(model: @usuario) do |f| %>
     <div class="inicio-banner">
         <% if @usuario.avatar.attached? %>
-            <img src="<%(url_for(@usuario.avatar))%>" alt="">
+            <div class="usuario-banner-photo photo-upload">
+                <%= image_tag(@usuario.avatar) %>
+                <%= f.file_field :avatar %>
+            </div>
+        <% else %>
+            <div class="usuario-banner-icon photo-upload">
+                <i class="fa-solid fa-camera fa-lg"></i>
+                <%= f.file_field :avatar %>
+            </div>
         <% end %>
-        <div class="usuario-banner-icon photo-upload">
-            <i class="fa-solid fa-camera fa-lg"></i>
-            <%= f.file_field :avatar  %>
-            <%= f.file_field :attachments, multiple: true, direct_upload: true %>
-        </div>
     </div>
     <nav>
         <h1>Editar perfil</h1>
