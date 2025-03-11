@@ -49,7 +49,7 @@ class ComunicadosController < ApplicationController
       if @comunicado.save
         logtxt = "Comunicado adicionado com sucesso."
         Rails.logger.info logtxt
-        format.html { redirect_to comunicado_url(@comunicado), notice: logtxt }
+        format.html { redirect_to comunicados_url(@comunicado), notice: logtxt }
         format.json { render :show, status: :created, location: @comunicado }
       else
         Rails.logger.error "Houve um erro ao criar o comunicado."
