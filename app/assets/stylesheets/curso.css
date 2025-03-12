@@ -48,15 +48,24 @@
 }
 
 .usuario-button .usuario-button-icon.icon-larger {
-    font-size: 22pt;
+    font-size: 18pt;
     min-width: 4vw;
     min-height: 4vw;
+}
+
+.usuario-button .usuario-button-icon.icon-larger i {
+    margin-top: 1vw;
 }
 
 .usuario-button .usuario-button-icon img {
     border-radius: 100%;
     width: 2vw;
     height: 2vw;
+}
+
+.usuario-button .usuario-button-icon.icon-larger img {
+    width: 4vw;
+    height: 4vw;
 }
 
 .usuario-button .usuario-button-icon i {

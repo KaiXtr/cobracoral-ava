@@ -80,8 +80,20 @@
     margin: 0px;
 }
 
-.comunicado-imagens img {
+.comunicado-container .comunicado-imagens img {
     width: 100%;
+}
+
+.comunicado-container .comunicado-reacoes button.comunicado-reacao-button {
+    font-size: 12pt;
+    background-color: ghostwhite;
+    transition-duration: .2s;
+    border: none;
+}
+
+.comunicado-container .comunicado-reacoes button.comunicado-reacao-button:hover {
+    color: #ff3434;
+    cursor: pointer;
 }
 
 .tarefas-container {

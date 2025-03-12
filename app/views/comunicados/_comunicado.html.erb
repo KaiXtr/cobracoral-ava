@@ -7,7 +7,11 @@
     <a href="/usuarios/<%= usuario.id %>">
       <div class="usuario-button">
         <div class="usuario-button-icon icon-larger">
-          <i class="fa-solid fa-user fa-lg"></i>
+          <% if usuario.avatar.attached? %>
+            <%= image_tag(usuario.avatar) %>
+          <% else %>
+            <i class="fa-solid fa-user fa-lg"></i>
+          <% end %>
         </div>
         <div class="usuario-button-name">
           <%= usuario.nome_completo %>
@@ -43,9 +47,14 @@
   </div>
   <div class="comunicado-reacoes">
     <%= turbo_stream_from "comunicados" %>
-    ❤️ <strong><%= reacoes_coracao(comunicado) %></strong>
-    <button onclick="<%= reagir_coracao(comunicado) %>" data-turbo-prefetch="false">
-      Reagir
+    <button class="comunicado-reacao-button" onclick="<%= reagir_emoji(comunicado, '❤️') %>" data-turbo-prefetch="false">
+      ❤️ <strong><%= reacoes_quantidade(comunicado, '❤️') %></strong>
+    </button>
+    <button class="comunicado-reacao-button" onclick="<%= reagir_emoji(comunicado, '✔️') %>" data-turbo-prefetch="false">
+      ✔️ <strong><%= reacoes_quantidade(comunicado, '✔️') %></strong>
+    </button>
+    <button class="comunicado-reacao-button" onclick="<%= reagir_emoji(comunicado, '❌') %>" data-turbo-prefetch="false">
+      ❌ <strong><%= reacoes_quantidade(comunicado, '❌') %></strong>
     </button>
   </div>
 </div>
