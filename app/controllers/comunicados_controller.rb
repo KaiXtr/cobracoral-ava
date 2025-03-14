@@ -122,24 +122,24 @@ class ComunicadosController < ApplicationController
 
       usuarios = Array.new()
       comunicados = Array.new()
+
+      # Obtendo todos os comunicados da coordenação do curso
       curso_atual = helpers.current_curso(usuario_autenticado)
-
-      # Obtendo todos os comunicados da coordenação
       comunicados_da_coordenacao = Comunicado.where(
-        usuario_id: curso_atual.usuario_id
+        usuario_id: curso_atual.usuario_id,
+        visibilidade_comunicado_id: 1
       )
 
-      '''estudantes_do_curso = Matricula.joins(:turma).where(
-        turma: { curso_id: curso_atual.id }
-      )
+      # Obtendo todos os comunicados de professores (deve haver uma forma mais eficiente)
+      comunicados_de_professores = Array.new()
+      disciplinas_do_curso = Disciplina.where(curso_id: curso_atual.id)
+      disciplinas_do_curso.each do |d|
+        comunicados_de_professores += Comunicado.where(usuario_id: d.usuario_id)
+      end
 
-      comunicados_do_curso = Comunicado.joins(:usuario).where(
-        usuario: { id: id }
-      )'''
+      comunicados = comunicados_da_coordenacao + comunicados_de_professores
 
-      # comunicados.join(comunicados_da_coordenacao)
-
-      return comunicados_da_coordenacao
+      return comunicados
     end
 
     def get_visibilidades
