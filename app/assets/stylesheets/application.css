@@ -136,14 +136,13 @@ svg.cobracoral-icon {
 header#cobracoral-header {
   background-color: #ff3434;
   padding: 0vw 10vw 0vw 10vw;
-  max-height: 20vh;
+  max-height: 30vh;
   align-items: center;
   display: flex;
 
   div.header-logo {
-    width: 20vw;
+    width: 40vw;
     align-items: center;
-    flex: 1;
 
     div.header-logo-svg {
       max-width: 7vw;
@@ -155,7 +154,7 @@ header#cobracoral-header {
     }
 
     div.header-logo-info {
-      max-width: 20vw;
+      max-width: 30vw;
       display: inline-block;
       position: relative;
 

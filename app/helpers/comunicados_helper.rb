@@ -3,12 +3,28 @@ module ComunicadosHelper
         Usuario.find(usuario_id)
     end
 
-    def info_usuario(usuario)
+    def info_usuario(usuario, comunicado)
+        visibilidade = comunicado.visibilidade_comunicado_id
         disciplina = Disciplina.find_by(usuario_id: usuario.id)
+
+        # Professor(a) da disciplina
         if disciplina then
-            nome_disciplina = disciplina.nome_disciplina
-            turma_disciplina = Turma.find(disciplina.turma_id)
-            nome_disciplina + " | " + turma_disciplina.nome_turma
+            # Visível para todos da disciplina
+            if visibilidade == 4
+                nome_disciplina = disciplina.nome_disciplina
+                turma_disciplina = Turma.find(disciplina.turma_id)
+                nome_disciplina + " | " + turma_disciplina.nome_turma
+            else
+                # Visível para todos de uma turma
+                if visibilidade == 3
+                    turma_disciplina = Turma.find(comunicado.turma_id)
+                    turma_disciplina.nome_turma
+                # Visível para todas as turmas
+                else
+                    'Várias turmas'
+                end
+            end
+        # Coordenador(a) do curso
         else
             curso = Curso.find_by(usuario_id: usuario.id)
             if curso then

@@ -2,6 +2,7 @@ module UsuarioHelper
     def pronomes_usuario(usuario)
         return PronomesUsuario.find(usuario.pronomes_usuarios_id)
     end
+    
     def turmas_usuario(usuario)
         matriculas = Matricula.where(usuario_id: usuario.id)
         turmas = Array.new

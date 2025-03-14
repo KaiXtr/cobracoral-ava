@@ -17,7 +17,7 @@ MatriculaCargo.create(id: 1,
 MatriculaCargo.create(id: 2,
     enumCargoFeminino: 'Professora', enumCargoMasculino: 'Professor')
 MatriculaCargo.create(id: 3,
-    enumCargoFeminino: 'Representante', enumCargoMasculino: 'Coordenador')
+    enumCargoFeminino: 'Representante', enumCargoMasculino: 'Representante')
 MatriculaCargo.create(id: 4,
     enumCargoFeminino: 'Estagiária', enumCargoMasculino: 'Estagiário')
 MatriculaCargo.create(id: 5,
@@ -334,3 +334,48 @@ VisibilidadeComunicado.create(
 )
 
 puts "= visibilidade_comunicados populada."
+
+Comunicado.create(
+    id: 1,
+    usuario_id: 2,                   # Professora de autômatos
+    turma_id: 1,                     # CC1 Diurno
+    visibilidade_comunicado_id: 3    # Todos da turma
+)
+Comunicado.create(
+    id: 2,
+    usuario_id: 2,                   # Professora de autômatos
+    turma_id: 2,                     # CC1 Noturno
+    visibilidade_comunicado_id: 3    # Todos da turma
+)
+Comunicado.create(
+    id: 3,
+    usuario_id: 2,                   # Professora de autômatos
+    turma_id: 1,                     # CC1 Diurno e Noturno
+    visibilidade_comunicado_id: 2    # Todas as turmas
+)
+Comunicado.create(
+    id: 4,
+    usuario_id: 4,                   # Professora de Design
+    turma_id: 5,                     # DG1 Diurno
+    visibilidade_comunicado_id: 3    # Todos da turma
+)
+Comunicado.create(
+    id: 5,
+    usuario_id: 4,                   # Professora de Design
+    turma_id: 6,                     # DG1 Noturno
+    visibilidade_comunicado_id: 3    # Todos da turma
+)
+Comunicado.create(
+    id: 6,
+    usuario_id: 4,                   # Professora de Design
+    turma_id: 1,                     # DG1 Diurno e Noturno
+    visibilidade_comunicado_id: 2    # Todas as turmas
+)
+Comunicado.create(
+    id: 7,
+    usuario_id: 9,                   # Coordenadora do curso de ciência da computação
+    turma_id: 1,                     # DG1 Diurno e Noturno
+    visibilidade_comunicado_id: 1    # Todos do curso
+)
+
+puts "= comunicados populada."
