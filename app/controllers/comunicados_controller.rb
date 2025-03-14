@@ -6,7 +6,7 @@ class ComunicadosController < ApplicationController
   def index
     @usuario = usuario_autenticado
     @comunicado = Comunicado.new
-    @comunicados = Comunicado.all
+    @comunicados = get_comunicados(@usuario)
 
     # Marcar visualização
     for c in @comunicados do
@@ -115,6 +115,31 @@ class ComunicadosController < ApplicationController
     # Only allow a list of trusted parameters through.
     def comunicado_params
       params.require(:comunicado).permit(:usuario_id, :turma_id, :visibilidade_comunicado_id, :corpo, imagens: [])
+    end
+
+    def get_comunicados(usuario_autenticado)
+      # TODO possivelmente uma boa implementação de cache Redis
+
+      usuarios = Array.new()
+      comunicados = Array.new()
+      curso_atual = helpers.current_curso(usuario_autenticado)
+
+      # Obtendo todos os comunicados da coordenação
+      comunicados_da_coordenacao = Comunicado.where(
+        usuario_id: curso_atual.usuario_id
+      )
+
+      '''estudantes_do_curso = Matricula.joins(:turma).where(
+        turma: { curso_id: curso_atual.id }
+      )
+
+      comunicados_do_curso = Comunicado.joins(:usuario).where(
+        usuario: { id: id }
+      )'''
+
+      # comunicados.join(comunicados_da_coordenacao)
+
+      return comunicados_da_coordenacao
     end
 
     def get_visibilidades
