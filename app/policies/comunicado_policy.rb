@@ -43,16 +43,21 @@ class ComunicadoPolicy
     private
   
     def coordenadorCurso?
-        if Curso.where(usuario_id: @usuario.id) then
-            true
+        curso = Curso.find_by(usuario_id: @usuario.id)
+        if curso
+          true
         else
-            false
+          false
         end
     end
   
     def professorTurma?
-        disciplina = Disciplina.find_by(turma_id: @comunicado.turma_id)
-        disciplina.usuario_id == @usuario.id
+        disciplina = Disciplina.find_by(usuario_id: @usuario.id)
+        if (disciplina)
+          true
+        else
+          false
+        end
     end
   
     def representanteTurma?

@@ -36,14 +36,26 @@ class ComunicadosController < ApplicationController
 
   # GET /comunicados/new
   def new
+    @usuario = usuario_autenticado
     @comunicado = Comunicado.new
+    authorize(@comunicado)
+
     @turmas = Turma.all
+    @visibilidades = get_visibilidades()
+    
+    VisibilidadeComunicado.all
 		Rails.logger.info "Criando novo comunicado."
   end
 
   # GET /comunicados/1/edit
   def edit
+    @usuario = usuario_autenticado
+    @comunicado = Comunicado.find(params[:id])
+    authorize(@comunicado)
+
     @turmas = Turma.all
+    @visibilidades = get_visibilidades()
+		Rails.logger.info "Editando comunicado " + @comunicado.id + "."
   end
 
   # POST /comunicados or /comunicados.json
@@ -102,6 +114,69 @@ class ComunicadosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def comunicado_params
-      params.require(:comunicado).permit(:usuario_id, :turma_id, :corpo, imagens: [])
+      params.require(:comunicado).permit(:usuario_id, :turma_id, :visibilidade_comunicado_id, :corpo, imagens: [])
+    end
+
+    def get_visibilidades
+      visibilidades = Array.new()
+
+      if (visivelTodosCurso?)
+        visibilidades.push(VisibilidadeComunicado.find(1))
+      end
+      if (visivelTodasTurmas?)
+        visibilidades.push(VisibilidadeComunicado.find(2))
+      end
+      if (visivelTodosTurma?)
+        visibilidades.push(VisibilidadeComunicado.find(3))
+      end
+      if (visivelTodosDisciplinas?)
+        visibilidades.push(VisibilidadeComunicado.find(4))
+      end
+
+      return visibilidades
+    end
+
+    def visivelTodosCurso?
+      coordenadorCurso?
+    end
+
+    def visivelTodasTurmas?
+      coordenadorCurso? || professorTurma?
+    end
+
+    def visivelTodosTurma?
+      coordenadorCurso? || professorTurma? || representanteTurma?
+    end
+
+    def visivelTodosDisciplinas?
+      coordenadorCurso? || professorTurma?
+    end
+  
+    def coordenadorCurso?
+      curso = Curso.find_by(usuario_id: @usuario.id)
+      if curso
+        true
+      else
+        false
+      end
+    end
+  
+    def professorTurma?
+      disciplina = Disciplina.find_by(usuario_id: @usuario.id)
+      if (disciplina)
+        true
+      else
+        false
+      end
+    end
+  
+    def representanteTurma?
+      matricula = Matricula.find_by(usuario_id: @usuario.id)
+      if matricula then
+          cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+          cargo.id == 3
+      else
+          false
+      end
     end
 end

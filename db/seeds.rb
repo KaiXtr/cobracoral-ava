@@ -315,3 +315,22 @@ Conteudo.create(
 )
 
 puts "= conteudos populada."
+
+VisibilidadeComunicado.create(
+    id: 1,
+    enumVisibilidade: 'Todos do curso'
+)
+VisibilidadeComunicado.create(
+    id: 2,
+    enumVisibilidade: 'Todos das turmas'
+)
+VisibilidadeComunicado.create(
+    id: 3,
+    enumVisibilidade: 'Todos da turma'
+)
+VisibilidadeComunicado.create(
+    id: 4,
+    enumVisibilidade: 'Todos da disciplina'
+)
+
+puts "= visibilidade_comunicados populada."
