@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :conteudos
   resources :leitura_conteudos
   
-  root 'cursos#index'
+  root 'comunicados#index'
   
   get '/entrar', to: 'sessions#login'
   post '/entrar', to: 'sessions#create'
@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   get '/perfil', to: 'usuarios#perfil'
   get '/sair', to: 'sessions#destroy'
 
-  get '/comunicados', to: 'cursos#index'
   get '/cursos', to: 'cursos#index'
   get '/ide', to: 'ide#index'
   get '/tarefas', to: 'leitura_conteudos#index'
@@ -27,6 +26,7 @@ Rails.application.routes.draw do
   get '/usuarios/:usuario_id/:turma_id/matricular', to: 'usuarios#matricular'
   get '/usuarios/:usuario_id/:turma_id/desmatricular', to: 'usuarios#desmatricular'
 
+  get '/comunicados/:id/reagir/:emoji', to: 'comunicados#reagir'
   get '/comunicados/:id/editar', to: 'comunicados#edit'
   get '/comunicados/:id/deletar', to: 'comunicados#delete'
 

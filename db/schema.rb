@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_03_11_044120) do
+ActiveRecord::Schema[7.0].define(version: 2025_03_14_210808) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -24,8 +24,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_11_044120) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -44,7 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_11_044120) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+    t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -54,8 +54,10 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_11_044120) do
     t.integer "turma_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "visibilidade_comunicado_id", null: false
     t.index ["turma_id"], name: "index_comunicados_on_turma_id"
     t.index ["usuario_id"], name: "index_comunicados_on_usuario_id"
+    t.index ["visibilidade_comunicado_id"], name: "index_comunicados_on_visibilidade_comunicado_id"
   end
 
   create_table "conteudos", force: :cascade do |t|
@@ -182,10 +184,17 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_11_044120) do
     t.index ["pronomes_usuarios_id"], name: "index_usuarios_on_pronomes_usuarios_id"
   end
 
+  create_table "visibilidade_comunicados", force: :cascade do |t|
+    t.string "enumVisibilidade"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comunicados", "turmas"
   add_foreign_key "comunicados", "usuarios"
+  add_foreign_key "comunicados", "visibilidade_comunicados"
   add_foreign_key "conteudos", "unidade_disciplinas"
   add_foreign_key "cursos", "usuarios"
   add_foreign_key "disciplinas", "cursos"

@@ -34,7 +34,6 @@ Usuario.create(
     email: "ewerton.ramos@cobracoral.edu.br",
     telefone: "997773322",
     password: "C0br@c0r@l",
-    profile_pic: nil,
     biografia: 'Sou estudante de ciência da computação',
     lattes_id: '2274633017966563',
     orcid_id: '0009-0002-5894-0401'
@@ -46,7 +45,6 @@ Usuario.create(
     email: "professora.automatos@cobracoral.edu.br",
     telefone: "997773322",
     password: "C0br@c0r@l",
-    profile_pic: nil,
     biografia: nil,
     lattes_id: nil,
     orcid_id: nil
@@ -58,7 +56,6 @@ Usuario.create(
     email: "professor.ihc@cobracoral.edu.br",
     telefone: "997773322",
     password: "C0br@c0r@l",
-    profile_pic: nil,
     biografia: nil,
     lattes_id: nil,
     orcid_id: nil
@@ -70,7 +67,6 @@ Usuario.create(
     email: "professora.design@cobracoral.edu.br",
     telefone: "997773322",
     password: "C0br@c0r@l",
-    profile_pic: nil,
     biografia: nil,
     lattes_id: nil,
     orcid_id: nil
@@ -82,7 +78,6 @@ Usuario.create(
     email: "representante.cc2n@cobracoral.edu.br",
     telefone: "997773322",
     password: "C0br@c0r@l",
-    profile_pic: nil,
     biografia: nil,
     lattes_id: nil,
     orcid_id: nil
@@ -94,7 +89,6 @@ Usuario.create(
     email: "monitor.cc2v@cobracoral.edu.br",
     telefone: "997773322",
     password: "C0br@c0r@l",
-    profile_pic: nil,
     biografia: nil,
     lattes_id: nil,
     orcid_id: nil
@@ -106,7 +100,6 @@ Usuario.create(
     email: "monitor.cc2v@cobracoral.edu.br",
     telefone: "997773322",
     password: "C0br@c0r@l",
-    profile_pic: nil,
     biografia: nil,
     lattes_id: nil,
     orcid_id: nil
@@ -118,7 +111,6 @@ Usuario.create(
     email: "representante.dg1d@cobracoral.edu.br",
     telefone: "997773322",
     password: "C0br@c0r@l",
-    profile_pic: nil,
     biografia: nil,
     lattes_id: nil,
     orcid_id: nil
@@ -130,7 +122,6 @@ Usuario.create(
     email: "coordenadora.cc@cobracoral.edu.br",
     telefone: "997773322",
     password: "C0br@c0r@l",
-    profile_pic: nil,
     biografia: nil,
     lattes_id: nil,
     orcid_id: nil
@@ -142,7 +133,6 @@ Usuario.create(
     email: "coordenador.dg@cobracoral.edu.br",
     telefone: "997773322",
     password: "C0br@c0r@l",
-    profile_pic: nil,
     biografia: nil,
     lattes_id: nil,
     orcid_id: nil
@@ -264,7 +254,6 @@ Conteudo.create(
     id: 1,
     unidade_disciplina_id: 1,
     nome_conteudo: 'Introdução à autômatos',
-    url_conteudo: nil,
     data_liberacao: DateTime.now,
     data_vencimento: DateTime.now
 )
@@ -272,7 +261,6 @@ Conteudo.create(
     id: 2,
     unidade_disciplina_id: 1,
     nome_conteudo: 'O que são autômatos?',
-    url_conteudo: nil,
     data_liberacao: DateTime.now,
     data_vencimento: DateTime.now
 )
@@ -280,7 +268,6 @@ Conteudo.create(
     id: 3,
     unidade_disciplina_id: 1,
     nome_conteudo: 'Vídeo: autômato de estado finito',
-    url_conteudo: nil,
     data_liberacao: DateTime.now,
     data_vencimento: DateTime.now
 )
@@ -288,7 +275,6 @@ Conteudo.create(
     id: 4,
     unidade_disciplina_id: 1,
     nome_conteudo: 'Exercício 1',
-    url_conteudo: nil,
     data_liberacao: DateTime.now,
     data_vencimento: DateTime.now
 )
@@ -296,7 +282,6 @@ Conteudo.create(
     id: 5,
     unidade_disciplina_id: 2,
     nome_conteudo: "Vídeo: Conway's Game of Life",
-    url_conteudo: nil,
     data_liberacao: DateTime.now,
     data_vencimento: DateTime.now
 )
@@ -304,7 +289,6 @@ Conteudo.create(
     id: 6,
     unidade_disciplina_id: 2,
     nome_conteudo: 'Exercício 2',
-    url_conteudo: nil,
     data_liberacao: DateTime.now,
     data_vencimento: DateTime.now
 )
@@ -312,7 +296,6 @@ Conteudo.create(
     id: 7,
     unidade_disciplina_id: 3,
     nome_conteudo: 'Introdução a IHC',
-    url_conteudo: nil,
     data_liberacao: DateTime.now,
     data_vencimento: DateTime.now
 )
@@ -320,7 +303,6 @@ Conteudo.create(
     id: 8,
     unidade_disciplina_id: 3,
     nome_conteudo: 'Exercício 1 IHC',
-    url_conteudo: nil,
     data_liberacao: DateTime.now,
     data_vencimento: DateTime.now
 )
@@ -328,7 +310,6 @@ Conteudo.create(
     id: 9,
     unidade_disciplina_id: 4,
     nome_conteudo: 'Introdução à design web',
-    url_conteudo: nil,
     data_liberacao: DateTime.now,
     data_vencimento: DateTime.now
 )

@@ -21,6 +21,13 @@ class ComunicadosController < ApplicationController
     Rails.logger.info "Acessando todos os comunicados."
   end
 
+  def reagir
+    comunicado = Comunicado.find(params[:id])
+    emoji = params[:emoji]
+    helpers.reagir_emoji(comunicado, emoji)
+    redirect_to "/comunicados"
+  end
+
   # GET /comunicados/1 or /comunicados/1.json
   def show
     @comunicado = Comunicado.find(params[:id])
@@ -95,6 +102,6 @@ class ComunicadosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def comunicado_params
-      params.require(:comunicado).permit(:usuario_id, :turma_id, :conteudo, :corpo, imagens: [])
+      params.require(:comunicado).permit(:usuario_id, :turma_id, :corpo, imagens: [])
     end
 end

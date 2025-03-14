@@ -46,15 +46,12 @@
     <% end %>
   </div>
   <div class="comunicado-reacoes">
-    <%= turbo_stream_from "comunicados" %>
-    <button class="comunicado-reacao-button" onclick="<%= reagir_emoji(comunicado, '❤️') %>" data-turbo-prefetch="false">
-      ❤️ <strong><%= reacoes_quantidade(comunicado, '❤️') %></strong>
-    </button>
-    <button class="comunicado-reacao-button" onclick="<%= reagir_emoji(comunicado, '✔️') %>" data-turbo-prefetch="false">
-      ✔️ <strong><%= reacoes_quantidade(comunicado, '✔️') %></strong>
-    </button>
-    <button class="comunicado-reacao-button" onclick="<%= reagir_emoji(comunicado, '❌') %>" data-turbo-prefetch="false">
-      ❌ <strong><%= reacoes_quantidade(comunicado, '❌') %></strong>
-    </button>
+    <% for emoji in ['👍','❤️','✔️','❌',] %>
+      <a href="/comunicados/<%= comunicado.id %>/reagir/<%= emoji %>" data-turbo-prefetch="false">
+        <button class="comunicado-reacao-button">
+          <%= emoji %> <strong><%= reacoes_quantidade(comunicado, emoji) %></strong>
+        </button>
+      </a>
+    <% end %>
   </div>
 </div>

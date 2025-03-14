@@ -1,0 +1,2 @@
+class VisibilidadeComunicado < ApplicationRecord
+end
