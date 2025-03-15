@@ -74,3 +74,5 @@ end
 gem "pundit", "~> 2.4"
 
 gem "bcrypt", "~> 3.1"
+
+gem "whenever", "~> 1.0"
