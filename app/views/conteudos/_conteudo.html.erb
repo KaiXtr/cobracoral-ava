@@ -25,12 +25,19 @@
       </div>
     </a>
   <% else %>
-    <a href="/conteudos/<%= conteudo.id %>">
+    <a
+      href="/conteudos/<%= conteudo.id %>"
+      class="<%=
+        is_conteudo_indisponivel(conteudo) ? 'conteudo-disabled' : ''
+      %>">
       <div id="<%= dom_id conteudo %>" class="conteudo-button">
         <div class="conteudo-button-info">
           <h5>
             <%= conteudo.nome_conteudo %>
           </h5>
+          <span>
+            <%= get_vencimento_restante(conteudo) %>
+          </span>
         </div>
         <div class="conteudo-button-conclusao">
           <div class="conteudo-button-conclusao-max"></div>
