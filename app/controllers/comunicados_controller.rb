@@ -196,12 +196,7 @@ class ComunicadosController < ApplicationController
     end
   
     def representanteTurma?
-      matricula = Matricula.find_by(usuario_id: @usuario.id)
-      if matricula then
-          cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
-          cargo.id == 3
-      else
-          false
-      end
+        cargo = UsuarioCargo.find(usuario.usuario_cargo_id)
+        cargo.id == 3
     end
 end

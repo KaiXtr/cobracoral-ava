@@ -74,8 +74,7 @@ class DisciplinaPolicy
   end
 
   def temCargoProfessor?
-    matricula = Matricula.find_by(usuario_id: usuario.id)
-    cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+    cargo = UsuarioCargo.find(usuario.usuario_cargo_id)
     cargo.id == 2
   end
 

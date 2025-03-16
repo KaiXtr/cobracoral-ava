@@ -1,0 +1,2 @@
+class UsuarioCargo < ApplicationRecord
+end
