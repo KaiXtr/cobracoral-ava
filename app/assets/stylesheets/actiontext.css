@@ -29,3 +29,24 @@
   padding: 0 !important;
   max-width: 100% !important;
 }
+
+.trix-button-group {
+  border: none !important;
+}
+
+.trix-button {
+  background-color: #ff3434 !important;
+  transition-duration: .2s !important;
+  border-radius: 10px !important;
+  border: none !important;
+  padding: 10px !important;
+  margin: 3px !important;
+}
+
+.trix-button:hover {
+  background-color: #ff8989 !important;
+}
+
+.trix-button.trix-active {
+  background-color: #471313 !important;
+}
