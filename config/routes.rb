@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get '/recuperacao', to: 'sessions#recuperacao'
 
   get '/usuarios/:id/caixa', to: 'usuarios#caixa'
+  get '/usuarios/:id/lattes', to: 'usuarios#lattes'
+  get '/painel', to: 'painel#index'
   get '/perfil', to: 'usuarios#perfil'
   get '/sair', to: 'sessions#destroy'
 
