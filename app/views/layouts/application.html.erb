@@ -123,13 +123,19 @@
       </ul>
     </header>
     <div id="barra-lateral" style="visibility: hidden; opacity: 0%;" onclick="abrirBarraLateral()">
+        <%
+		    @matricula_estudante = Matricula.find_by(usuario_id: @usuario_autenticado.id)
+        %>
         <h2>
-            <a href="/turmas/<%= turma_estudante(@usuario_autenticado).id %>">
-                <%= turma_estudante(@usuario_autenticado).nome_turma %>
+            <a href="/turmas/<%= turma_estudante(@usuario_autenticado, @matricula_estudante).id %>">
+                <%= turma_estudante(@usuario_autenticado, @matricula_estudante).nome_turma %>
             </a>
         </h2>
+        <span>
+            Semestre <%= @matricula_estudante.semestre %>
+        </span>
         <ul>
-            <% disciplinas_turma(@usuario_autenticado).each do |disciplina| %>
+            <% disciplinas_turma(@usuario_autenticado, @matricula_estudante).each do |disciplina| %>
                 <li>
                     <a href="/disciplinas/<%= disciplina.id %>">
                         <h3><%= disciplina.nome_disciplina %></h3>

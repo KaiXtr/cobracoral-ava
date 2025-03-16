@@ -25,8 +25,7 @@ module ApplicationHelper
 		end
 	end
 
-	def turma_estudante(usuario_autenticado)
-		matricula = Matricula.find_by(usuario_id: usuario_autenticado.id)
+	def turma_estudante(usuario_autenticado, matricula)
 		if matricula then
 			return Turma.find(matricula.turma_id)
 		else
@@ -34,10 +33,12 @@ module ApplicationHelper
 		end
 	end
 
-	def disciplinas_turma(usuario_autenticado)
-		matricula = Matricula.find_by(usuario_id: usuario_autenticado.id)
+	def disciplinas_turma(usuario_autenticado, matricula)
 		if matricula then
-			return Disciplina.where(turma_id: matricula.turma_id)
+			return Disciplina.where(
+				turma_id: matricula.turma_id,
+				semestre: matricula.semestre
+				)
 		else
 			return nil
 		end
