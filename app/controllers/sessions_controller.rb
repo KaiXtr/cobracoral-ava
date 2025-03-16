@@ -49,25 +49,33 @@ class SessionsController < ApplicationController
 		if (usuario_autenticado[:new_password] == usuario_autenticado[:repeat_password])
 			usuario = Usuario.find(session[:primeiro_acesso])
 			senha_nova = BCrypt::Password.create(usuario_autenticado[:new_password])
+			usuario.password = usuario_autenticado[:new_password]
 			usuario.password_digest = senha_nova
 
 			if usuario.save then
 				Rails.logger.info "Senha do usuário alterada."
 				usuario.acessos_count += 1
 				usuario.save
-				
+
 				logar(usuario)
 			else
-				Rails.logger.error "Houve um erro ao salvar o usuário " + usuario.nome_completo + "."
-				format.html { render :edit, status: :unprocessable_entity }
-				format.json { render json: usuario.errors, status: :unprocessable_entity }
+				respond_to do |format|
+					if usuario.errors["password"] then
+						logtxt = "Senha não cumpre os requisitos"
+					else
+						logtxt = usuario.errors
+					end
+					Rails.logger.error logtxt
+					format.html { redirect_to "/primeiro-acesso", notice: logtxt }
+					format.json { render json: { error: usuario.errors }, status: :unauthorized }
+				end
 			end
 		else
 			respond_to do |format|
 				logtxt = "As senhas não conferem."
 				Rails.logger.error logtxt
 				format.html { redirect_to "/primeiro-acesso", notice: logtxt }
-				format.json { render json: { error: logtxt }, status: :unauthorized }
+				format.json { render json: { error: usuario.errors }, status: :unauthorized }
 			end
 		end
 	end

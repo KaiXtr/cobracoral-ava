@@ -25,8 +25,29 @@
 			}
 		}
 
+		function checarSenha(event) {
+			let campoSenha = document.getElementById("campo-senha");
+			let campoSenhaErros = document.getElementById("campo-senha-erros");
+
+			if (campoSenha && campoSenha.value && campoSenhaErros) {
+				if (campoSenha.value.length < 8)
+					campoSenhaErros.innerHTML = "Senha precisa conter no mínimo 8 caracteres"
+				else if (!/\d/.test(campoSenha.value))
+					campoSenhaErros.innerHTML = "Senha precisa conter no mínimo um número"
+				else if (!/[a-z]/.test(campoSenha.value))
+					campoSenhaErros.innerHTML = "Senha precisa conter no mínimo uma letra minúscula"
+				else if (!/[A-Z]/.test(campoSenha.value))
+					campoSenhaErros.innerHTML = "Senha precisa conter no mínimo uma letra maiúscula"
+				else
+					campoSenhaErros.innerHTML = ""
+			} else {
+				campoSenhaErros.innerHTML = ""
+			}
+		}
+
 		addEventListener("keyup", function(event) { 
 			checarCaps(event);
+			checarSenha(event);
 		});
 
 	</script>
@@ -35,7 +56,8 @@
 	</div>
 	<h2>Primeiro acesso do <%= @cargo %></h2>
 	<p>
-		Preencha seus dados e crie uma nova senha.
+		Verifique seus dados e crie uma nova senha de no mínimo 8 caracteres contendo
+		letras maiúsculas, letras minúsculas e números.
 	</p>
 	<div class="login-errors">
 		<%= notice %>
@@ -90,6 +112,8 @@
 				%>
 			</div>
 		</div>
+		<div id="campo-senha-erros" class="login-errors">
+		</div>
 		<div class="form-group">
 			<%= f.label :new_password, 'Nova senha: '%>
 			<span id="campo-caps">Caps Lock ativada</span>
@@ -105,7 +129,7 @@
 			<span id="campo-caps">Caps Lock ativada</span>
 			<%= f.password_field :repeat_password,
 				placeholder: 'Senha',
-				id: 'campo-senha',
+				id: 'campo-senha-repetir',
 				class: 'input-text',
 				required: 'true'
 			%>

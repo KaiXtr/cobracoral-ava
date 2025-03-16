@@ -8,6 +8,13 @@ class Usuario < ApplicationRecord
 	validates_uniqueness_of :email
 
 	validates_presence_of :password_digest
+
+	validates :password, format: /\A
+		(?=.{8,})
+		(?=.*\d)
+		(?=.*[a-z])
+		(?=.*[A-Z])
+	/x
 	
 	scope :all_except, -> (usuario) { where.not(id: usuario) }
 end
