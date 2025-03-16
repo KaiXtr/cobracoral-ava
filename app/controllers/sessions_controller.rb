@@ -1,6 +1,13 @@
 class SessionsController < ApplicationController
 	layout 'login'
 
+	def primeiroAcesso
+		@usuario_autenticado = usuario_autenticado
+		@pronomes = PronomesUsuario.all
+		@cargo = UsuarioCargo.find(@usuario_autenticado.usuario_cargo_id).enumCargoMasculino
+		render "primeiro-acesso"
+	end
+
 	def create
 		usuario = Usuario.find_by(email: params[:session][:email])
 

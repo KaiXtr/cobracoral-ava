@@ -160,7 +160,7 @@ Usuario.create(
     acessos_count: 0
 )
 Usuario.create(
-    id: 10,
+    id: 11,
     pronomes_usuarios_id: 2,
     nome_completo: "Administração do sistema",
     email: "administracao@cobracoral.edu.br",
