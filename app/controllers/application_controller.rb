@@ -31,15 +31,8 @@ class ApplicationController < ActionController::Base
 		session[:usuario_id] = usuario.id
 		@usuario_autenticado = usuario
 
-		Rails.logger.info "Criada sessão para o(a) usuário(a) com email " + params[:session][:email]
-
-		if (usuario.acessos_count == 0) then
-			Rails.logger.info "Primeiro acesso do usuário."
-			redirect_to "/primeiro-acesso"
-		else
-			usuario.acessos_count += 1
-			redirect_to root_path
-		end
+		Rails.logger.info "Criada sessão para o(a) usuário(a) com email " + usuario.email + "."
+		redirect_to root_path
 	end
 
 	def logado?

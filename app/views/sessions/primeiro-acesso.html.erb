@@ -91,9 +91,9 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<%= f.label :password, 'Nova senha: '%>
+			<%= f.label :new_password, 'Nova senha: '%>
 			<span id="campo-caps">Caps Lock ativada</span>
-			<%= f.password_field :senha,
+			<%= f.password_field :new_password,
 				placeholder: 'Senha',
 				id: 'campo-senha',
 				class: 'input-text',
@@ -101,9 +101,9 @@
 			%>
 		</div>
 		<div class="form-group">
-			<%= f.label :password, 'Repita a senha: '%>
+			<%= f.label :repeat_password, 'Repita a senha: '%>
 			<span id="campo-caps">Caps Lock ativada</span>
-			<%= f.password_field :senha,
+			<%= f.password_field :repeat_password,
 				placeholder: 'Senha',
 				id: 'campo-senha',
 				class: 'input-text',
@@ -112,7 +112,7 @@
 		</div>
 		<div class="button-group" onclick="triggerLoginSubmit()">
 			<button type="button" class="act-button">
-				Entrar
+				Atualizar e entrar
 			</button>
 		</div>
 		<div class="login-info">
