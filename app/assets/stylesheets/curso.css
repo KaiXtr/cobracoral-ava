@@ -112,6 +112,26 @@
     z-index: 10;
 }
 
+div.disciplinas-banner {
+    background-color: var(--red-main);
+    width: 100%;
+    max-height: 20vh;
+    z-index: -10;
+}
+
+div.disciplinas-banner .banner-crop {
+    width: 100%;
+    max-height: 20vh;
+    overflow: hidden;
+}
+
+div.disciplinas-banner img {
+    pointer-events: none;
+    width: 100%;
+    margin-top: -10vh;
+    filter: blur(2px);
+}
+
 .disciplinas-container {
     display: block;
     margin: 0px 5vw 0px 5vw;
@@ -136,6 +156,13 @@
     border-radius: 50px 50px 0px 0px;
     min-width: 100%;
     min-height: 10vw;
+    overflow: hidden;
+}
+
+.disciplinas-container .disciplina-thumbnail .disciplina-thumbnail-img img {
+    border-radius: 50px 50px 0px 0px;
+    width: 100%;
+    height: 10vw;
 }
 
 .disciplinas-container .disciplina-thumbnail .disciplina-thumbnail-info {

@@ -79,11 +79,15 @@ class DisciplinaPolicy
   end
 
   def estaNoSemestre?
-    matricula = Matricula.find_by(usuario_id: usuario.id)
-    if matricula then
-      return @disciplina.semestre == matricula.semestre
+    if usuario.usuario_cargo_id > 2 then
+      matricula = Matricula.find_by(usuario_id: usuario.id)
+      if matricula then
+        return @disciplina.semestre == matricula.semestre
+      else
+        return true
+      end
     else
-      return true
+      true
     end
   end
 
