@@ -1,6 +1,6 @@
 require "test_helper"
 
-class MatriculaCargoTest < ActiveSupport::TestCase
+class UsuarioCargoTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

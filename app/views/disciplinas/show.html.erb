@@ -17,6 +17,11 @@
             </a>
           <% end %>
         </h1>
+        <span>
+          <i class="fa-solid fa-arrow-right fa-sm"></i>
+          <strong>Plano de ensino</strong>
+          <%= render "dados_disciplina", disciplina: @disciplina %>
+        </span>
 				<%= render professor_disciplina(@disciplina) %>
         <a href="/turmas/<%= turma_disciplina(@disciplina).id %>">
           <%= turma_disciplina(@disciplina).nome_turma %>

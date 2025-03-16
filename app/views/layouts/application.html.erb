@@ -36,11 +36,25 @@
             <%= show_svg('cobracoral-logo.svg') %>
         </div>
         <div class="header-logo-info">
-            <a href="/"><h1><%= current_curso(@usuario_autenticado).nome_curso %></h1></a>
+            <a href="/">
+                <% if @usuario_autenticado.usuario_cargo_id < 3 %>
+                    <h1>SIGAA</h1>
+                <% end %>
+                <% if @usuario_autenticado.usuario_cargo_id > 2 %>
+                    <h1><%= current_curso(@usuario_autenticado).nome_curso %></h1>
+                <% end %>
+            </a>
             <span><%= ENV["COBRACORAL_VERSION"] %></span>
         </div>
       </div>
       <ul>
+          <li>
+            <a href="/painel" title="Painel">
+                <button class="icon-button">
+                    <i class="fa-solid fa-square-poll-horizontal fa-2xl"></i>
+                </button>
+            </a>
+          </li>
           <li>
               <a href="/comunicados" title="Comunicados">
                 <button class="icon-button">
@@ -93,17 +107,25 @@
                     </h5>
                     <ul>
                         <li>
-                            <a href="/usuarios/:id/caixa">
-                                <i class="fa-solid fa-envelope fa-xl"></i>
-                                <span>Abrir caixa de entrada</span>
-                            </a>
-                        </li>
-                        <li>
                             <a href="/perfil">
                                 <i class="fa-solid fa-smile fa-xl"></i>
                                 <span>Editar perfil</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="/usuarios/:id/caixa" target="_blank">
+                                <i class="fa-solid fa-envelope fa-xl"></i>
+                                <span>Abrir caixa de entrada</span>
+                            </a>
+                        </li>
+                        <% if @usuario_autenticado.lattes_id %>
+                            <li>
+                                <a href="/usuarios/:id/lattes" target="_blank">
+                                    <i class="fa-solid fa-file-lines fa-xl"></i>
+                                    <span>Acessar currículo lattes</span>
+                                </a>
+                            </li>
+                        <% end %>
                         <li>
                             <a href="/perfil">
                                 <i class="fa-solid fa-gear fa-xl"></i>

@@ -54,5 +54,8 @@
             </a>
             <% end %>
         </div>
+        <% if @usuario.usuario_cargo_id == 2 %>
+            <%= render "dados_docente", usuario: @usuario %>
+        <% end %>
     </div>
 </nav>

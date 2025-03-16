@@ -66,7 +66,7 @@ class ComunicadoPolicy
             turma_id: @comunicado.turma_id
         )
         if matricula then
-            cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+            cargo = UsuarioCargo.find(matricula.matricula_cargo_id)
             cargo.id == 3
         else
             false

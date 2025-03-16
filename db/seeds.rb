@@ -12,20 +12,22 @@ PronomesUsuario.create(id: 3, enumPronomes: 'Elu/delu')
 
 puts "= pronomes_usuarios populada."
 
-MatriculaCargo.create(id: 1,
+UsuarioCargo.create(id: 0,
+    enumCargoFeminino: 'Administradora', enumCargoMasculino: 'Administrador')
+UsuarioCargo.create(id: 1,
     enumCargoFeminino: 'Coordenadora', enumCargoMasculino: 'Coordenador')
-MatriculaCargo.create(id: 2,
+UsuarioCargo.create(id: 2,
     enumCargoFeminino: 'Professora', enumCargoMasculino: 'Professor')
-MatriculaCargo.create(id: 3,
+UsuarioCargo.create(id: 3,
     enumCargoFeminino: 'Representante', enumCargoMasculino: 'Representante')
-MatriculaCargo.create(id: 4,
+UsuarioCargo.create(id: 4,
     enumCargoFeminino: 'Estagiária', enumCargoMasculino: 'Estagiário')
-MatriculaCargo.create(id: 5,
+UsuarioCargo.create(id: 5,
     enumCargoFeminino: 'Monitora', enumCargoMasculino: 'Monitor')
-MatriculaCargo.create(id: 6,
+UsuarioCargo.create(id: 6,
     enumCargoFeminino: 'Estudante', enumCargoMasculino: 'Estudante')
 
-puts "= matricula_cargos populada."
+puts "= usuario_cargos populada."
 
 Usuario.create(
     id: 1,
@@ -36,7 +38,9 @@ Usuario.create(
     password: "C0br@c0r@l",
     biografia: 'Sou estudante de ciência da computação',
     lattes_id: '2274633017966563',
-    orcid_id: '0009-0002-5894-0401'
+    orcid_id: '0009-0002-5894-0401',
+    usuario_cargo_id: 6,
+    acessos_count: 0
 )
 Usuario.create(
     id: 2,
@@ -47,7 +51,9 @@ Usuario.create(
     password: "C0br@c0r@l",
     biografia: nil,
     lattes_id: nil,
-    orcid_id: nil
+    orcid_id: nil,
+    usuario_cargo_id: 2,
+    acessos_count: 0
 )
 Usuario.create(
     id: 3,
@@ -58,7 +64,9 @@ Usuario.create(
     password: "C0br@c0r@l",
     biografia: nil,
     lattes_id: nil,
-    orcid_id: nil
+    orcid_id: nil,
+    usuario_cargo_id: 2,
+    acessos_count: 0
 )
 Usuario.create(
     id: 4,
@@ -69,7 +77,9 @@ Usuario.create(
     password: "C0br@c0r@l",
     biografia: nil,
     lattes_id: nil,
-    orcid_id: nil
+    orcid_id: nil,
+    usuario_cargo_id: 2,
+    acessos_count: 0
 )
 Usuario.create(
     id: 5,
@@ -80,7 +90,9 @@ Usuario.create(
     password: "C0br@c0r@l",
     biografia: nil,
     lattes_id: nil,
-    orcid_id: nil
+    orcid_id: nil,
+    usuario_cargo_id: 3,
+    acessos_count: 0
 )
 Usuario.create(
     id: 6,
@@ -91,7 +103,9 @@ Usuario.create(
     password: "C0br@c0r@l",
     biografia: nil,
     lattes_id: nil,
-    orcid_id: nil
+    orcid_id: nil,
+    usuario_cargo_id: 4,
+    acessos_count: 0
 )
 Usuario.create(
     id: 7,
@@ -102,7 +116,9 @@ Usuario.create(
     password: "C0br@c0r@l",
     biografia: nil,
     lattes_id: nil,
-    orcid_id: nil
+    orcid_id: nil,
+    usuario_cargo_id: 5,
+    acessos_count: 0
 )
 Usuario.create(
     id: 8,
@@ -113,7 +129,9 @@ Usuario.create(
     password: "C0br@c0r@l",
     biografia: nil,
     lattes_id: nil,
-    orcid_id: nil
+    orcid_id: nil,
+    usuario_cargo_id: 3,
+    acessos_count: 0
 )
 Usuario.create(
     id: 9,
@@ -124,7 +142,9 @@ Usuario.create(
     password: "C0br@c0r@l",
     biografia: nil,
     lattes_id: nil,
-    orcid_id: nil
+    orcid_id: nil,
+    usuario_cargo_id: 1,
+    acessos_count: 0
 )
 Usuario.create(
     id: 10,
@@ -135,7 +155,22 @@ Usuario.create(
     password: "C0br@c0r@l",
     biografia: nil,
     lattes_id: nil,
-    orcid_id: nil
+    orcid_id: nil,
+    usuario_cargo_id: 1,
+    acessos_count: 0
+)
+Usuario.create(
+    id: 11,
+    pronomes_usuarios_id: 2,
+    nome_completo: "Administração do sistema",
+    email: "administracao@cobracoral.edu.br",
+    telefone: "997773322",
+    password: "C0br@c0r@l",
+    biografia: nil,
+    lattes_id: nil,
+    orcid_id: nil,
+    usuario_cargo_id: 0,
+    acessos_count: 0
 )
 
 puts "= usuarios populada."
@@ -185,15 +220,15 @@ Turma.create(id: 8, curso_id: 2, turno_turma_id: 3,
 
 puts "= turmas populada."
 
-Matricula.create(usuario_id: 1, turma_id: 1, matricula_cargo_id: 6, semestre: '2025/1')
-Matricula.create(usuario_id: 2, turma_id: 1, matricula_cargo_id: 2, semestre: '2025/1')
-Matricula.create(usuario_id: 3, turma_id: 1, matricula_cargo_id: 2, semestre: '2025/1')
-Matricula.create(usuario_id: 4, turma_id: 6, matricula_cargo_id: 2, semestre: '2025/1')
-Matricula.create(usuario_id: 4, turma_id: 5, matricula_cargo_id: 2, semestre: '2025/1')
-Matricula.create(usuario_id: 5, turma_id: 4, matricula_cargo_id: 3, semestre: '2025/1')
-Matricula.create(usuario_id: 6, turma_id: 3, matricula_cargo_id: 4, semestre: '2025/1')
-Matricula.create(usuario_id: 7, turma_id: 3, matricula_cargo_id: 5, semestre: '2025/1')
-Matricula.create(usuario_id: 8, turma_id: 5, matricula_cargo_id: 3, semestre: '2025/1')
+Matricula.create(usuario_id: 1, turma_id: 1, semestre: '2025/1')
+Matricula.create(usuario_id: 2, turma_id: 1, semestre: '2025/1')
+Matricula.create(usuario_id: 3, turma_id: 1, semestre: '2025/1')
+Matricula.create(usuario_id: 4, turma_id: 6, semestre: '2025/1')
+Matricula.create(usuario_id: 4, turma_id: 5, semestre: '2025/1')
+Matricula.create(usuario_id: 5, turma_id: 4, semestre: '2025/1')
+Matricula.create(usuario_id: 6, turma_id: 3, semestre: '2025/1')
+Matricula.create(usuario_id: 7, turma_id: 3, semestre: '2025/1')
+Matricula.create(usuario_id: 8, turma_id: 5, semestre: '2025/1')
 
 puts "= matriculas populada."
 

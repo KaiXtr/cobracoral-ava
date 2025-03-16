@@ -6,7 +6,15 @@ class DisciplinasController < ApplicationController
   def index
 		@usuario = usuario_autenticado
     @disciplina = Disciplina.new
-    @disciplinas = Disciplina.all
+		matricula = Matricula.find_by(usuario_id: usuario_autenticado.id)
+    if matricula then
+      @disciplinas = Disciplina.where(
+        turma_id: matricula.turma_id,
+        semestre: matricula.semestre
+      )
+    else
+      @disciplinas = Disciplina.all
+    end
     @unidades_disciplina = UnidadeDisciplina.new
     @conteudos = Conteudo.new
     @curso = Curso.new
@@ -41,14 +49,12 @@ class DisciplinasController < ApplicationController
 
 		# Verificando nível de acesso do usuário
 		usuario = usuario_autenticado
-		matricula = Matricula.find_by(usuario_id: usuario.id)
     
-		# Se professor ou representante, apenas cursos onde está matriculado
-		if matricula then
-			matriculaCargo = MatriculaCargo.find(matricula.matricula_cargo_id)
-			if matriculaCargo.id == 2 || matriculaCargo.id == 3 then
-				turmas_matriculadas = Turma.joins(:matricula).where(
-					matricula: { turma_id: matricula.id }
+		# Se professor, apenas cursos onde leciona
+		if usuario.usuario_cargo_id > 1 then
+			if usuario.usuario_cargo_id == 2 then
+				turmas_matriculadas = Turma.joins(:disciplina).where(
+					disciplina: { usuario_id: usuario.id }
 				)
 				@cursos = Array.new
 
@@ -58,7 +64,7 @@ class DisciplinasController < ApplicationController
 					@cursos.push(curso_da_turma)
 				end
 
-        Rails.logger.info "Criando nova disciplina com nível de acesso Professor(a)/Representante."
+        Rails.logger.info "Criando nova disciplina com nível de acesso Professor(a)."
 			# Se não tiver acesso, não listar cursos
 			else
 				@cursos = nil
@@ -157,7 +163,7 @@ class DisciplinasController < ApplicationController
     
     def isUsuarioEstudante(usuario)
         matricula = Matricula.find_by(usuario_id: usuario.id)
-        cargo = MatriculaCargo.find(matricula.matricula_cargo_id)
+        cargo = UsuarioCargo.find(usuario.usuario_cargo_id)
         cargo.id > 2
     end
 end
