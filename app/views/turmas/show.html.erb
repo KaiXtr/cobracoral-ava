@@ -1,9 +1,5 @@
 <nav>
     <p style="color: green"><%= notice %></p>
-    <a href="/cursos/<%= @curso_turma.id %>">
-      <i class="fa-solid fa-arrow-left fa-sm"></i>
-      Voltar para <strong><%= @curso_turma.nome_curso %></strong>
-    </a>
     <div class="deslizar-transition">
         <h1>
             <%= @turma.nome_turma %>
@@ -13,11 +9,11 @@
                 </a>
             <% end %>
         </h1>
-        <h2>
+        <h3>
             <a href='/cursos/<%= @curso_turma.id %>'>
                 <%= @curso_turma.nome_curso %>
             </a>
-        </h2>
+        </h3>
         <div>
             <div>
                 Turno: <%= @turno_turma.enumTurno %>

@@ -19,6 +19,7 @@ class DisciplinasController < ApplicationController
     @estaEditando = false
     @usuario = usuario_autenticado
     @disciplina = Disciplina.find(params[:id])
+    @turma = Turma.find(@disciplina.turma_id)
     @curso = Curso.find_by(id: @disciplina.curso_id)
     @unidades_disciplina = UnidadeDisciplina.where(disciplina_id: @disciplina.id)
     @conteudos = Conteudo.joins(:unidade_disciplina)

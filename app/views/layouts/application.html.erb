@@ -12,10 +12,25 @@
     <%= stylesheet_link_tag "pages", "data-turbo-track": "reload" %>
     <script src="https://kit.fontawesome.com/597fea8ed7.js" crossorigin="anonymous"></script>
     <%= javascript_importmap_tags %>
+    <script type="text/javascript">
+        function abrirBarraLateral() {
+            let barra = document.getElementById('barra-lateral');
+            if (barra.style.visibility == 'visible') {
+                barra.style.visibility = 'hidden';
+                barra.style.opacity = '0%';
+            } else {
+                barra.style.visibility = 'visible';
+                barra.style.opacity = '100%';
+            }
+        }
+    </script>
   </head>
 
   <body>
     <header id="cobracoral-header">
+      <button class="icon-button" onclick="abrirBarraLateral()">
+        <i class="fa-solid fa-bars fa-2xl"></i>
+      </button>
       <div class="header-logo">
         <div class="header-logo-svg">
             <%= show_svg('cobracoral-logo.svg') %>
@@ -40,13 +55,13 @@
                 </button>
               </a>
           </li>
-          <li>
+          <!--li>
               <a href="/ide" title="Ambiente integrado de desenvolvimento">
                 <button class="act-button">
                     <i class="fa-solid fa-code fa-2xl"></i>
                 </button>
               </a>
-          </li>
+          </li-->
           <li>
               <a href="/tarefas" title="Tarefas">
                 <button class="act-button">
@@ -107,6 +122,31 @@
           </li>
       </ul>
     </header>
+    <div id="barra-lateral" style="visibility: hidden; opacity: 0%;" onclick="abrirBarraLateral()">
+        <h2>
+            <a href="/turmas/<%= turma_estudante(@usuario_autenticado).id %>">
+                <%= turma_estudante(@usuario_autenticado).nome_turma %>
+            </a>
+        </h2>
+        <ul>
+            <% disciplinas_turma(@usuario_autenticado).each do |disciplina| %>
+                <li>
+                    <a href="/disciplinas/<%= disciplina.id %>">
+                        <h3><%= disciplina.nome_disciplina %></h3>
+                        <ol>
+                            <% unidades_disciplina(disciplina).each do |unidade| %>
+                                <a href="/disciplinas/<%= disciplina.id %>#<%= unidade.id %>">
+                                    <li>
+                                        <h4><%= unidade.nome_unidade %></h4>
+                                    </li>
+                                </a>
+                            <% end %>
+                        </ol>
+                    </a>
+                </li>
+            <% end %>
+        </ul>
+    </div>
     <%= yield %>
     <footer>
         <div>
