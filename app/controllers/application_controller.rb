@@ -37,6 +37,8 @@ class ApplicationController < ActionController::Base
 	end
 
 	def logar_EXT(usuario)
+		# USUÁRIO ADMINISTRADOR INFORMA API_KEY E SE LOGA COMO ADMINISTRADOR DO COBRACORAL
+
 		session[:usuario_id] = usuario.id
 		@usuario_autenticado = usuario
 

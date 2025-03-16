@@ -12,8 +12,6 @@ Rails.application.routes.draw do
   
   get '/entrar', to: 'sessions#login'
   post '/entrar', to: 'sessions#create'
-  get '/ext/entrar', to: 'sessions#get_auth_token'
-  post '/ext/entrar', to: 'sessions#create'
 
   get '/primeiro-acesso', to: 'sessions#primeiroAcesso'
   post '/primeiro-acesso', to: 'sessions#edit'
@@ -31,8 +29,10 @@ Rails.application.routes.draw do
   get '/usuarios/:usuario_id/editar', to: 'usuarios#edit'
   get '/usuarios/:usuario_id/:turma_id/matricular', to: 'usuarios#matricular'
   get '/usuarios/:usuario_id/:turma_id/desmatricular', to: 'usuarios#desmatricular'
-  get '/ext/usuarios', to: 'usuarios#get_usuarios'
-  post '/ext/usuarios/new', to: 'usuarios#create_usuario'
+  
+  get '/ext/entrar', to: 'usuarios_ext#get_auth_token'
+  get '/ext/usuarios', to: 'usuarios_ext#get_usuarios'
+  post '/ext/usuarios/new', to: 'usuarios_ext#create_usuario'
 
   get '/comunicados/:id/reagir/:emoji', to: 'comunicados#reagir'
   get '/comunicados/:id/editar', to: 'comunicados#edit'
