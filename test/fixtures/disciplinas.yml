@@ -1,9 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  cod_disciplina: MyString
-  nome_disciplina: MyString
+  curso: one
+  usuario: one
+  turma: one
+  nome_disciplina: Disciplina A
+  sala_aula: Bloco X Sala A
+  semestre: 2025/1
 
 two:
-  cod_disciplina: MyString
-  nome_disciplina: MyString
+  curso: two
+  usuario: two
+  turma: two
+  nome_disciplina: Disciplina A
+  sala_aula: Bloco Y Sala B
+  semestre: 2025/2

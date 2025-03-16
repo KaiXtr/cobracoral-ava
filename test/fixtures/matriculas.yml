@@ -3,7 +3,9 @@
 one:
   turma: one
   usuario: one
+  semestre: 2025/1
 
 two:
   turma: two
   usuario: two
+  semestre: 2025/2

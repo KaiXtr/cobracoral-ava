@@ -1,11 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  cod_turma: 1
-  nome_turma: MyString
+  nome_turma: Turma AB
   senha_acesso: MyString
 
 two:
-  cod_turma: 1
-  nome_turma: MyString
+  nome_turma: Turma CD
   senha_acesso: MyString

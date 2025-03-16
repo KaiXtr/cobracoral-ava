@@ -17,7 +17,7 @@ class ComunicadosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create comunicado" do
     assert_difference("Comunicado.count") do
-      post comunicados_url, params: { comunicado: { conteudo: @comunicado.conteudo, turma_id: @comunicado.turma_id, url_img: @comunicado.url_img, usuario_id: @comunicado.usuario_id } }
+      post comunicados_url, params: { comunicado: { corpo: @comunicado.corpo, turma_id: @comunicado.turma_id, usuario_id: @comunicado.usuario_id } }
     end
 
     assert_redirected_to comunicado_url(Comunicado.last)
@@ -34,7 +34,7 @@ class ComunicadosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update comunicado" do
-    patch comunicado_url(@comunicado), params: { comunicado: { conteudo: @comunicado.conteudo, turma_id: @comunicado.turma_id, url_img: @comunicado.url_img, usuario_id: @comunicado.usuario_id } }
+    patch comunicado_url(@comunicado), params: { comunicado: { corpo: @comunicado.corpo, turma_id: @comunicado.turma_id, usuario_id: @comunicado.usuario_id } }
     assert_redirected_to comunicado_url(@comunicado)
   end
 

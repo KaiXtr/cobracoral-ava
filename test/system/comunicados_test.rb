@@ -16,7 +16,6 @@ class ComunicadosTest < ApplicationSystemTestCase
 
     fill_in "Conteudo", with: @comunicado.conteudo
     fill_in "Turma", with: @comunicado.turma_id
-    fill_in "Url img", with: @comunicado.url_img
     fill_in "Usuario", with: @comunicado.usuario_id
     click_on "Create Comunicado"
 
@@ -30,7 +29,6 @@ class ComunicadosTest < ApplicationSystemTestCase
 
     fill_in "Conteudo", with: @comunicado.conteudo
     fill_in "Turma", with: @comunicado.turma_id
-    fill_in "Url img", with: @comunicado.url_img
     fill_in "Usuario", with: @comunicado.usuario_id
     click_on "Update Comunicado"
 

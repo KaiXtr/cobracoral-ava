@@ -2,8 +2,8 @@
 
 one:
   unidade_disciplina: one
-  nome_conteudo: MyString
+  nome_conteudo: Conteúdo X
 
 two:
   unidade_disciplina: two
-  nome_conteudo: MyString
+  nome_conteudo: Conteúdo Y

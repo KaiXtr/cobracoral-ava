@@ -3,9 +3,9 @@
 one:
   comunicado: one
   usuario: one
-  emoji: MyString
+  emoji: X
 
 two:
   comunicado: two
   usuario: two
-  emoji: MyString
+  emoji: Y

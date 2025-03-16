@@ -3,11 +3,7 @@
 one:
   usuario: one
   turma: one
-  conteudo: MyText
-  url_img: MyString
 
 two:
   usuario: two
   turma: two
-  conteudo: MyText
-  url_img: MyString

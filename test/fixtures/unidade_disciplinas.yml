@@ -2,8 +2,12 @@
 
 one:
   disciplina: one
-  nome_unidade: MyString
+  nome_unidade: Unidade 1
 
 two:
+  disciplina: one
+  nome_unidade: Unidade 2
+
+three:
   disciplina: two
-  nome_unidade: MyString
+  nome_unidade: Unidade 1
