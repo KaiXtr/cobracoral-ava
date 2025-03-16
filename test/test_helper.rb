@@ -1,4 +1,7 @@
 ENV["RAILS_ENV"] ||= "test"
+ENV["FIXTURE_ORDER"] = 
+  %w( pronomes_usuarios usuario_cargos usuarios turno_turmas modalidade_turmas turmas matriculas cursos disciplinas unidade_disciplinas conteudos leitura_conteudos comunicados reacao_comunicados ).join(' ')
+
 require_relative "../config/environment"
 require "rails/test_help"
 

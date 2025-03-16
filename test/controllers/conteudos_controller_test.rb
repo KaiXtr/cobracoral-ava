@@ -17,7 +17,12 @@ class ConteudosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create conteudo" do
     assert_difference("Conteudo.count") do
-      post conteudos_url, params: { conteudo: { nome_conteudo: @conteudo.nome_conteudo, unidade_disciplina_id: @conteudo.unidade_disciplina_id } }
+      post conteudos_url, params: {
+        conteudo: {
+            nome_conteudo: @conteudo.nome_conteudo,
+            unidade_disciplina_id: @conteudo.unidade_disciplina_id
+        }
+      }
     end
 
     assert_redirected_to conteudo_url(Conteudo.last)
@@ -34,7 +39,12 @@ class ConteudosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update conteudo" do
-    patch conteudo_url(@conteudo), params: { conteudo: { nome_conteudo: @conteudo.nome_conteudo, unidade_disciplina_id: @conteudo.unidade_disciplina_id } }
+    patch conteudo_url(@conteudo), params: {
+        conteudo: {
+            nome_conteudo: @conteudo.nome_conteudo,
+            unidade_disciplina_id: @conteudo.unidade_disciplina_id
+        }
+    }
     assert_redirected_to conteudo_url(@conteudo)
   end
 

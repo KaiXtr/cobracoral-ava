@@ -1,19 +1,22 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-zero:
-  nome_completo: Beltrano
-  email: beltrano@exemplo.com
+usuario_coordenadora:
+  nome_completo: Coordenadora
+  'pronomes_usuarios_id': pronomes_ela
+  email: coordenadora@exemplo.com
   telefone: 1
-  senha: 12345678
+  'usuario_cargo_id': cargo_coordenador
 
-one:
-  nome_completo: Fulano
-  email: fulano@exemplo.com
+usuario_professor:
+  nome_completo: Professor
+  'pronomes_usuarios_id': pronomes_ele
+  email: professor@exemplo.com
   telefone: 1
-  senha: 123abcde
+  'usuario_cargo_id': cargo_professor
 
-two:
-  nome_completo: Ciclano
-  email: ciclano@exemplo.com
+usuario_representante:
+  nome_completo: Representante
+  'pronomes_usuarios_id': pronomes_ela
+  email: representante@exemplo.com
   telefone: 1
-  senha: Abcd1234
+  'usuario_cargo_id': cargo_representante

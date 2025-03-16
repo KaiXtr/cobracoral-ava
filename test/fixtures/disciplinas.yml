@@ -1,17 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  curso: one
-  usuario: one
-  turma: one
+disciplina_A:
+  curso: curso_A
+  usuario: usuario_professor
+  turma: turma_AB
   nome_disciplina: Disciplina A
   sala_aula: Bloco X Sala A
   semestre: 2025/1
 
-two:
-  curso: two
-  usuario: two
-  turma: two
+disciplina_B:
+  curso: curso_A
+  usuario: usuario_professor
+  turma: turma_CD
   nome_disciplina: Disciplina A
   sala_aula: Bloco Y Sala B
   semestre: 2025/2

@@ -1,4 +1,9 @@
 # one:
-#   record: name_of_fixture (ClassOfFixture)
-#   name: content
-#   body: <p>In a <i>million</i> stars!</p>
+#   record: one
+#   name: rich text 1
+#   body: <p>Olá <b>Mundo!</b></p>
+
+# two:
+#   record: two
+#   name: rich text 2
+#  body: <p>Olá <b>Mundo!</b></p>

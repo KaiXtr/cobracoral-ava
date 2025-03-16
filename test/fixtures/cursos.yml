@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  usuario: one
+curso_A:
+  usuario_id: usuario_coordenadora
   nome_curso: Curso A
   descricao: Exemplo de descrição do curso A
 
-two:
-  usuario: two
+curso_B:
+  usuario_id: usuario_coordenadora
   nome_curso: Curso B
   descricao: Exemplo de descrição do curso B

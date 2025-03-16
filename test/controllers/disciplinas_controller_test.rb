@@ -17,7 +17,9 @@ class DisciplinasControllerTest < ActionDispatch::IntegrationTest
 
   test "should create disciplina" do
     assert_difference("Disciplina.count") do
-      post disciplinas_url, params: { disciplina: { cod_disciplina: @disciplina.cod_disciplina, nome_disciplina: @disciplina.nome_disciplina } }
+      post disciplinas_url, params: {
+        disciplina: { nome_disciplina: @disciplina.nome_disciplina }
+      }
     end
 
     assert_redirected_to disciplina_url(Disciplina.last)
@@ -34,7 +36,9 @@ class DisciplinasControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update disciplina" do
-    patch disciplina_url(@disciplina), params: { disciplina: { cod_disciplina: @disciplina.cod_disciplina, nome_disciplina: @disciplina.nome_disciplina } }
+    patch disciplina_url(@disciplina), params: {
+      disciplina: { nome_disciplina: @disciplina.nome_disciplina }
+    }
     assert_redirected_to disciplina_url(@disciplina)
   end
 

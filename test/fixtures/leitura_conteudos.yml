@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  conteudo: one
-  usuario: one
+leitura_A:
+  conteudo: conteudo_X
+  usuario: usuario_representante
   conclusao: 0
 
-two:
-  conteudo: two
-  usuario: two
+leitura_B:
+  conteudo: conteudo_Y
+  usuario: usuario_representante
   conclusao: 1

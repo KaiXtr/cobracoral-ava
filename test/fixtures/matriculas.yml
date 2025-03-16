@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  turma: one
-  usuario: one
+matricula_A:
+  turma: turma_AB
+  usuario: usuario_representante
   semestre: 2025/1
 
-two:
-  turma: two
-  usuario: two
+matricula_B:
+  turma: turma_CD
+  usuario: usuario_representante
   semestre: 2025/2

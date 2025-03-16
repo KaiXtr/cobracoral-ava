@@ -1,9 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  usuario: one
-  turma: one
+comunicado_A:
+  usuario: usuario_professor
+  turma: turma_AB
+  'visibilidade_comunicado_id': visibilidade_curso
 
-two:
-  usuario: two
-  turma: two
+comunicado_B:
+  usuario: usuario_representante
+  turma: turma_CD
+  'visibilidade_comunicado_id': visibilidade_turmas
