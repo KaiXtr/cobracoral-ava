@@ -6,7 +6,15 @@ class DisciplinasController < ApplicationController
   def index
 		@usuario = usuario_autenticado
     @disciplina = Disciplina.new
-    @disciplinas = Disciplina.all
+		matricula = Matricula.find_by(usuario_id: usuario_autenticado.id)
+    if matricula then
+      @disciplinas = Disciplina.where(
+        turma_id: matricula.turma_id,
+        semestre: matricula.semestre
+      )
+    else
+      @disciplinas = Disciplina.all
+    end
     @unidades_disciplina = UnidadeDisciplina.new
     @conteudos = Conteudo.new
     @curso = Curso.new

@@ -62,7 +62,7 @@ class DisciplinaPolicy
 
   def temCargoCoordenador?
     curso = Curso.find(@disciplina.curso_id)
-    curso.usuario_id = @usuario.id
+    curso.usuario_id == @usuario.id
   end
 
   def permissaoProfessor?
