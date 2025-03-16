@@ -28,8 +28,10 @@ class TurmasController < ApplicationController
 		end
 
 		# Listas disciplinas de turma, turno e modalidades específicas
+		matricula = Matricula.find_by(usuario_id: usuario_autenticado.id)
 		@disciplinas_turma = Disciplina.where(
-			turma_id: @turma.id
+			turma_id: @turma.id,
+			semestre: matricula.semestre
 		)
 
 		Rails.logger.info "Acessando turma " + @turma.nome_turma
