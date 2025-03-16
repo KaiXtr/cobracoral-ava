@@ -1,3 +1,11 @@
 COBRACORAL_VERSION: "Cobracoral Alfa"
 COBRACORAL_AUTHOR: "Ewerton B. Ramos"
 COBRACORAL_YEAR: "2024-2025"
+
+REDIS_URL: "redis://127.0.0.1"
+REDIS_PORT: 6379
+REDIS_DB: 0
+
+SENTINEL_URL: "redis://sentinel-master/1"
+SENTINEL_HOSTS: "sentinel-slave-1 sentinel-slave-2 sentinel-slave-3"
+SENTINEL_PORT: 26379

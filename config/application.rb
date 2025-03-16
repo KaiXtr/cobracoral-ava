@@ -19,18 +19,22 @@ module CobracoralWebsite
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    # Logger
-
-    config.logger = Logger.new("log/development.log")
-    config.log_level = :info
-
     # Abrir variáveis LOCAL_ENV
 
     config.before_configuration do
       env_file = File.join(Rails.root, 'config', 'local_env.yml')
       YAML.load(File.open(env_file)).each do |key, value|
-        ENV[key.to_s] = value
+        ENV[key.to_s] = value.to_s
       end if File.exist?(env_file)
     end
+
+    # Logger
+
+    config.logger = Logger.new("log/development.log")
+    config.log_level = :info
+
+    # Redis
+
+    config.cache_store = :redis_store, ENV['REDIS_URL'] + ':' + ENV['REDIS_PORT'] + '/' + ENV['REDIS_DB'] + '/cache', { expires_in: 90.minutes }
   end
 end
