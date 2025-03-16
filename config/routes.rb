@@ -28,10 +28,11 @@ Rails.application.routes.draw do
   get '/tarefas', to: 'leitura_conteudos#index'
   get '/mensagens', to: 'cursos#index'
 
-  get '/ext/usuarios', to: 'usuarios#get_usuarios'
   get '/usuarios/:usuario_id/editar', to: 'usuarios#edit'
   get '/usuarios/:usuario_id/:turma_id/matricular', to: 'usuarios#matricular'
   get '/usuarios/:usuario_id/:turma_id/desmatricular', to: 'usuarios#desmatricular'
+  get '/ext/usuarios', to: 'usuarios#get_usuarios'
+  post '/ext/usuarios/new', to: 'usuarios#create_usuario'
 
   get '/comunicados/:id/reagir/:emoji', to: 'comunicados#reagir'
   get '/comunicados/:id/editar', to: 'comunicados#edit'
