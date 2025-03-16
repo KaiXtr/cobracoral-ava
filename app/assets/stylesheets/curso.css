@@ -3,7 +3,7 @@
 }
 
 .icon-button:hover {
-    color: #ff3434;
+    color: var(--red-main);
 }
 
 .delete-button {
@@ -17,7 +17,7 @@
 }
 
 .select-box select {
-    background-color: #ff3434;
+    background-color: var(--red-main);
     font-size: 12pt;
     border: none;
     border-radius: 10px;
@@ -39,7 +39,7 @@
     text-align: center;
     align-items: center;
     vertical-align: top;
-    background-color: #ff3434;
+    background-color: var(--red-main);
     border-radius: 100%;
     width: 2vw;
     height: 2vw;
@@ -86,7 +86,7 @@
 }
 
 .curso-button:hover {
-    background-color: #ff3434;
+    background-color: var(--red-main);
 }
 
 .turma-button {

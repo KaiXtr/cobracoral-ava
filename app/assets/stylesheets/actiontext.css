@@ -35,7 +35,7 @@
 }
 
 .trix-button {
-  background-color: #ff3434 !important;
+  background-color: var(--red-main) !important;
   transition-duration: .2s !important;
   border-radius: 10px !important;
   border: none !important;
@@ -48,5 +48,5 @@
 }
 
 .trix-button.trix-active {
-  background-color: #471313 !important;
+  background-color: var(--red-dark) !important;
 }

@@ -17,18 +17,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 @import "./actiontext.css";
 
-:root {
-  scroll-behavior: smooth;
-}
-
 body {
-  background-color: #ff3434;
+  background-color: var(--red-main);
   font-family: "Rubik", sans-serif;
   margin: 0px;
 }
 
 a {
-  color: #471313;
+  color: var(--red-dark);
   text-decoration: none;
 }
 
@@ -96,7 +92,7 @@ svg.cobracoral-icon {
 .act-button {
   font-family: "Rubik", sans-serif;
   font-weight: bold;
-  border: 3px solid #ff3434;
+  border: 3px solid var(--red-main);
   background-color: rgba(0,0,0,0);
   padding: 1rem;
   cursor: pointer;
@@ -105,7 +101,7 @@ svg.cobracoral-icon {
   
   &:before {
     content: '';
-    background-color: #ff3434;
+    background-color: var(--red-main);
     width: 0%;
     height: 100%;
     top: 0;
@@ -115,7 +111,7 @@ svg.cobracoral-icon {
     z-index: -1;
   }
   &:hover {
-    color: #ffffff;
+    color: var(--white-main);
 
     &:before{
       width: 100%;
@@ -134,14 +130,14 @@ svg.cobracoral-icon {
 }
 
 header#cobracoral-header {
-  background-color: #ff3434;
+  background-color: var(--red-main);
   padding: 0vw 10vw 0vw 3vw;
   max-height: 30vh;
   align-items: center;
   display: flex;
 
   button.icon-button {
-    background-color: #ff3434;
+    background-color: var(--red-main);
     color: black;
     border: none;
     transition-duration: .2s;
@@ -150,7 +146,7 @@ header#cobracoral-header {
     cursor: pointer;
 
     &:hover {
-      color: white;
+      color: var(--white-main);
     }
   }
 
@@ -203,8 +199,8 @@ header#cobracoral-header {
       }
 
       #menu-perfil {
-        color: #ffffff;
-        background-color: #ff3434;
+        color: var(--white-main);
+        background-color: var(--red-main);
         transition-duration: .2s;
         visibility: hidden;
         position: absolute;
@@ -228,7 +224,7 @@ header#cobracoral-header {
             width: 100%;
 
             a {
-              color: #ffffff;
+              color: var(--white-main);
               transition-duration: .2s;
 
               i {
@@ -236,7 +232,7 @@ header#cobracoral-header {
               }
             }
             a:hover {
-              color: #471313;
+              color: var(--red-dark);
             }
           }
         }
@@ -294,7 +290,7 @@ header#cobracoral-header {
 }
 
 #barra-lateral {
-  color: ghostwhite;
+  color: var(--white-main);
   background-color: black;
   transition-duration: .2s;
   width: 30vw;
@@ -323,22 +319,22 @@ header#cobracoral-header {
 }
 
 #barra-lateral a {
-  color: ghostwhite;
+  color: var(--white-main);
   transition-duration: .2s;
   font-weight: bold;
 }
 
 #barra-lateral a:hover {
-  color: #471313;
+  color: var(--red-dark);
 }
 
 div.inicio-banner {
-  background-color: #ff3434;
+  background-color: var(--red-main);
   min-height: 30vh;
 }
 
 nav {
-  background-color: white;
+  background-color: var(--nav-bg);
   padding: 5vh 10vw 5vh 10vw;
 
   section {
@@ -358,5 +354,5 @@ nav {
 footer {
   text-align: center;
   padding: 10vh 10vw 10vh 10vw;
-  background-color: #ff3434;
+  background-color: var(--red-main);
 }
