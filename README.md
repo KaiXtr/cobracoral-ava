@@ -1,24 +1,7 @@
-# README
+# Cobracoral AVA
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![cobracoral-logo](https://github.com/user-attachments/assets/4c5b7db7-b9a4-488d-9fb6-22b6e6c35b2a)
 
-Things you may want to cover:
+Cobracoral é um Ambiente Virtual de Aprendizagem de código aberto voltado para o ensino superior, a educação profissional e tecnológica e o ensino à distância, conciliando recursos e funcionalidades de multimídia, interação em salas de aula virtuais, gestão de atividades acadêmicas, pesquisa e extensão.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Para mais informações, acesse a [Wiki do Cobracoral AVA](https://github.com/KaiXtr/cobracoral-ava/wiki/0.-P%C3%A1gina-inicial)
