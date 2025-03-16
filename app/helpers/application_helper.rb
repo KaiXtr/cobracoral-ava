@@ -24,4 +24,27 @@ module ApplicationHelper
 			end
 		end
 	end
+
+	def turma_estudante(usuario_autenticado, matricula)
+		if matricula then
+			return Turma.find(matricula.turma_id)
+		else
+			return nil
+		end
+	end
+
+	def disciplinas_turma(usuario_autenticado, matricula)
+		if matricula then
+			return Disciplina.where(
+				turma_id: matricula.turma_id,
+				semestre: matricula.semestre
+				)
+		else
+			return nil
+		end
+	end
+
+	def unidades_disciplina(disciplina)
+		return UnidadeDisciplina.where(disciplina_id: disciplina.id)
+	end
 end

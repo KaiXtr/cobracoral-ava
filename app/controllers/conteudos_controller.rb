@@ -11,10 +11,16 @@ class ConteudosController < ApplicationController
 
   # GET /conteudos/1 or /conteudos/1.json
   def show
+    authorize @conteudo
     usuario = usuario_autenticado
     conteudo = Conteudo.find(params[:id])
     unidade_do_conteudo = UnidadeDisciplina.find_by(id: conteudo.unidade_disciplina_id)
     @disciplina_conteudo = Disciplina.find_by(id: unidade_do_conteudo.disciplina_id)
+
+    if helpers.is_conteudo_indisponivel(@conteudo) then
+      redirect_to '/disciplinas/' + @disciplina_conteudo.id.to_s
+    end
+
     @proximoConteudo = Conteudo.joins(:unidade_disciplina).find_by(
       id: conteudo.id + 1,
       unidade_disciplina: { disciplina_id: @disciplina_conteudo.id }

@@ -224,8 +224,18 @@
     margin-bottom: 10px;
 }
 
+a.conteudo-disabled {
+    pointer-events: none;
+    cursor: default;
+    opacity: 50%;
+}
+
 .conteudo-button:hover {
     transform: translateX(10px);
+}
+
+a.conteudo-disabled:hover {
+    transform: translateX(0px);
 }
 
 .conteudo-button .conteudo-button-info {
@@ -237,11 +247,20 @@
     margin: 0px;
 }
 
+.conteudo-button .conteudo-button-info span {
+    font-size: 10pt;
+}
+
 .conteudo-button .conteudo-button-conclusao {
     min-width: 1.5vw;
     min-height: 1.5vw;
     display: inline-block;
+    vertical-align: top;
     position: relative;
+}
+
+.conteudo-disabled .conteudo-button .conteudo-button-conclusao {
+    display: none;
 }
 
 .conteudo-button .conteudo-button-conclusao .conteudo-button-conclusao-max {
