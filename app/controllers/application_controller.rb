@@ -32,7 +32,19 @@ class ApplicationController < ActionController::Base
 		@usuario_autenticado = usuario
 
 		Rails.logger.info "Criada sessão para o(a) usuário(a) com email " + usuario.email + "."
+		
 		redirect_to root_path
+	end
+
+	def logar_EXT(usuario)
+		session[:usuario_id] = usuario.id
+		@usuario_autenticado = usuario
+
+		Rails.logger.info "Criada sessão para o(a) usuário(a) com email " + usuario.email + "."
+		
+		respond_to do |format|
+			format.json { render json: { token: session }, status: :ok }
+		end
 	end
 
 	def logado?

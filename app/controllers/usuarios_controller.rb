@@ -1,7 +1,7 @@
 class UsuariosController < ApplicationController
 	before_action :redirecionar_nao_logado
 
-    def index    
+    def index
         @usuarios = Usuario.all_except(@usuario_autenticado)
         Rails.logger.info "Exibindo todos(as) os(as) usuários(as)."
     end
@@ -107,6 +107,12 @@ class UsuariosController < ApplicationController
                 format.json { render json: @usuario.errors, status: :unprocessable_entity }
             end
         end
+    end
+
+    def get_usuarios
+		respond_to do |format|
+			format.json { render json: { usuarios: Usuario.all }, status: :ok }
+		end
     end
 
     private

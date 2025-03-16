@@ -1,6 +1,21 @@
 class SessionsController < ApplicationController
 	layout 'login'
 
+	def get_auth_token
+		usuario = Usuario.find_by(email: params[:email])
+		auth = usuario.authenticate(params[:senha])
+
+		if auth then
+			logar_EXT(usuario)
+		else
+			respond_to do |format|
+				logtxt = "Senha incorreta"
+				Rails.logger.error "[EXT] Erro ao obter token de autenticação."
+				format.json { render json: { error: usuario.errors }, status: :unauthorized }
+			end
+		end
+	end
+
 	def create
 		usuario = Usuario.find_by(email: params[:session][:email])
 
