@@ -1,15 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 turma_AB:
-  'curso_id': curso_A
+  curso: curso_A
   nome_turma: Turma AB
   senha_acesso: MyString
-  'turno_turma_id': turno_matutino
-  'modalidade_turma_id': modalidade_presencial
+  turno_turma: turno_matutino
+  modalidade_turma: modalidade_presencial
 
 turma_CD:
-  'curso_id': curso_B
+  curso: curso_B
   nome_turma: Turma CD
   senha_acesso: MyString
-  'turno_turma_id': turno_vespertino
-  'modalidade_turma_id': modalidade_ead
+  turno_turma: turno_vespertino
+  modalidade_turma: modalidade_ead

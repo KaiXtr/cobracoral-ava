@@ -1,6 +1,14 @@
 class Usuario < ApplicationRecord
+	belongs_to :pronomes_usuario
+	belongs_to :usuario_cargo
+
+	has_many :curso
+	has_many :disciplina
 	has_many :matricula
-	has_many :matricula_cargo, through: :matricula
+	has_many :leitura_conteudo
+	has_many :comunicado
+	has_many :reacao_comunicado
+
 	has_one_attached :avatar
 	has_secure_password
 

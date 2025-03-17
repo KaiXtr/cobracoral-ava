@@ -2,21 +2,21 @@
 
 usuario_coordenadora:
   nome_completo: Coordenadora
-  'pronomes_usuarios_id': pronomes_ela
+  pronomes_usuario: pronomes_ela
   email: coordenadora@exemplo.com
   telefone: 1
-  'usuario_cargo_id': cargo_coordenador
+  usuario_cargo: cargo_coordenador
 
 usuario_professor:
   nome_completo: Professor
-  'pronomes_usuarios_id': pronomes_ele
+  pronomes_usuario: pronomes_ele
   email: professor@exemplo.com
   telefone: 1
-  'usuario_cargo_id': cargo_professor
+  usuario_cargo: cargo_professor
 
 usuario_representante:
   nome_completo: Representante
-  'pronomes_usuarios_id': pronomes_ela
+  pronomes_usuario: pronomes_ela
   email: representante@exemplo.com
   telefone: 1
-  'usuario_cargo_id': cargo_representante
+  usuario_cargo: cargo_representante

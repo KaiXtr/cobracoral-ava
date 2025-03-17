@@ -3,9 +3,9 @@
 comunicado_A:
   usuario: usuario_professor
   turma: turma_AB
-  'visibilidade_comunicado_id': visibilidade_curso
+  visibilidade_comunicado: visibilidade_curso
 
 comunicado_B:
   usuario: usuario_representante
   turma: turma_CD
-  'visibilidade_comunicado_id': visibilidade_turmas
+  visibilidade_comunicado: visibilidade_turmas

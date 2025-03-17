@@ -31,7 +31,7 @@ puts "= usuario_cargos populada."
 
 Usuario.create(
     id: 1,
-    pronomes_usuarios_id: 2,
+    pronomes_usuario_id: 2,
     nome_completo: "Ewerton Matheus Bezerra Ramos",
     email: "ewerton.ramos@cobracoral.edu.br",
     telefone: "997773322",
@@ -44,7 +44,7 @@ Usuario.create(
 )
 Usuario.create(
     id: 2,
-    pronomes_usuarios_id: 1,
+    pronomes_usuario_id: 1,
     nome_completo: "Professora de autômatos",
     email: "professora.automatos@cobracoral.edu.br",
     telefone: "997773322",
@@ -57,7 +57,7 @@ Usuario.create(
 )
 Usuario.create(
     id: 3,
-    pronomes_usuarios_id: 2,
+    pronomes_usuario_id: 2,
     nome_completo: "Professor de IHC",
     email: "professor.ihc@cobracoral.edu.br",
     telefone: "997773322",
@@ -70,7 +70,7 @@ Usuario.create(
 )
 Usuario.create(
     id: 4,
-    pronomes_usuarios_id: 1,
+    pronomes_usuario_id: 1,
     nome_completo: "Professora de Design",
     email: "professora.design@cobracoral.edu.br",
     telefone: "997773322",
@@ -83,7 +83,7 @@ Usuario.create(
 )
 Usuario.create(
     id: 5,
-    pronomes_usuarios_id: 1,
+    pronomes_usuario_id: 1,
     nome_completo: "Representante da turma CC2 Noturno",
     email: "representante.cc2n@cobracoral.edu.br",
     telefone: "997773322",
@@ -96,7 +96,7 @@ Usuario.create(
 )
 Usuario.create(
     id: 6,
-    pronomes_usuarios_id: 2,
+    pronomes_usuario_id: 2,
     nome_completo: "Estagiário da turma CC2 Vespertino",
     email: "monitor.cc2v@cobracoral.edu.br",
     telefone: "997773322",
@@ -109,7 +109,7 @@ Usuario.create(
 )
 Usuario.create(
     id: 7,
-    pronomes_usuarios_id: 2,
+    pronomes_usuario_id: 2,
     nome_completo: "Monitor da turma CC2 Vespertino",
     email: "monitor.cc2v@cobracoral.edu.br",
     telefone: "997773322",
@@ -122,7 +122,7 @@ Usuario.create(
 )
 Usuario.create(
     id: 8,
-    pronomes_usuarios_id: 3,
+    pronomes_usuario_id: 3,
     nome_completo: "Representante da turma DG1 Diruno",
     email: "representante.dg1d@cobracoral.edu.br",
     telefone: "997773322",
@@ -135,7 +135,7 @@ Usuario.create(
 )
 Usuario.create(
     id: 9,
-    pronomes_usuarios_id: 1,
+    pronomes_usuario_id: 1,
     nome_completo: "Coordenadora do curso de Ciência da Computação",
     email: "coordenadora.cc@cobracoral.edu.br",
     telefone: "997773322",
@@ -148,7 +148,7 @@ Usuario.create(
 )
 Usuario.create(
     id: 10,
-    pronomes_usuarios_id: 2,
+    pronomes_usuario_id: 2,
     nome_completo: "Coordenador do curso de Design Gráfico",
     email: "coordenador.dg@cobracoral.edu.br",
     telefone: "997773322",
@@ -161,7 +161,7 @@ Usuario.create(
 )
 Usuario.create(
     id: 11,
-    pronomes_usuarios_id: 2,
+    pronomes_usuario_id: 2,
     nome_completo: "Administração do sistema",
     email: "administracao@cobracoral.edu.br",
     telefone: "997773322",
