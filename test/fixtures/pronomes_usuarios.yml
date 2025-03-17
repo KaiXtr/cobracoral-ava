@@ -1,10 +1,10 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 pronomes_ela:
-  enumPronomes: ela/dela
+  enumPronomes: 'ela/dela'
 
 pronomes_ele:
-  enumPronomes: ele/dele
+  enumPronomes: 'ele/dele'
 
 pronomes_elu:
-  enumPronomes: elu/delu
+  enumPronomes: 'elu/delu'

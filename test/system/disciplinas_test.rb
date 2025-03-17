@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class DisciplinasTest < ApplicationSystemTestCase
   setup do
-    @disciplina = disciplinas(:one)
+    @disciplina = disciplinas(:disciplina_A)
   end
 
   test "visiting the index" do
