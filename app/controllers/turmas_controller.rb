@@ -29,10 +29,14 @@ class TurmasController < ApplicationController
 
 		# Listas disciplinas de turma, turno e modalidades específicas
 		matricula = Matricula.find_by(usuario_id: usuario_autenticado.id)
-		@disciplinas_turma = Disciplina.where(
-			turma_id: @turma.id,
-			semestre: matricula.semestre
-		)
+		if matricula then
+			@disciplinas_turma = Disciplina.where(
+				turma_id: @turma.id,
+				semestre: matricula.semestre
+			)
+		else
+			@disciplinas_turma = Disciplina.all
+		end
 
 		Rails.logger.info "Acessando turma " + @turma.nome_turma
 	end
@@ -109,10 +113,7 @@ class TurmasController < ApplicationController
 		
 		if policy(@turma).matricular? then
 			@estudantes_matriculados = Usuario.joins(:matricula).where(
-				matricula: {
-					turma_id: @turma.id,
-					matricula_cargo_id: 6
-				}
+				matricula: { turma_id: @turma.id }
 			)
 			@estudantes_nao_matriculados = Array.new
 			for estudante in Usuario.all do

@@ -1,6 +1,6 @@
 module UsuarioHelper
     def pronomes_usuario(usuario)
-        return PronomesUsuario.find(usuario.pronomes_usuarios_id)
+        return PronomesUsuario.find(usuario.pronomes_usuario_id)
     end
     
     def turmas_usuario(usuario)
@@ -16,7 +16,7 @@ module UsuarioHelper
 
     def cargo_usuario(usuario)
         cargo = UsuarioCargo.find(usuario.usuario_cargo_id)
-        pronomes = PronomesUsuario.find(usuario.pronomes_usuarios_id)
+        pronomes = PronomesUsuario.find(usuario.pronomes_usuario_id)
 
         if pronomes.id == 1 then
             return cargo.enumCargoFeminino
