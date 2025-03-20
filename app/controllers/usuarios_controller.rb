@@ -100,7 +100,7 @@ class UsuariosController < ApplicationController
 
         respond_to do |format|
             if @usuario.update(usuario_params)
-                if @usuario.pronomes_usuarios_id == 1 then
+                if @usuario.pronomes_usuario_id == 1 then
                     logtxt = "Usuária " + @usuario.nome_completo + " atualizada com sucesso."
                 else
                     logtxt = "Usuário " + @usuario.nome_completo + " atualizado com sucesso."
@@ -121,7 +121,7 @@ class UsuariosController < ApplicationController
         def usuario_params
             params.require(:usuario).permit(
                 :avatar, :nome_completo, :biografia,
-                :email, :password, :pronomes_usuarios_id,
+                :email, :password, :pronomes_usuario_id,
                 :telefone, :lattes_id, :orcid_id
             )
         end

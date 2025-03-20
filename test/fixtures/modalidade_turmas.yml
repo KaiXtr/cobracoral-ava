@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  enumModalidade: MyString
+modalidade_presencial:
+  enumModalidade: presencial
 
-two:
-  enumModalidade: MyString
+modalidade_ead:
+  enumModalidade: ead

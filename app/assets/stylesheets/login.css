@@ -1,16 +1,17 @@
 body {
-    background-color: #ff3434;
+    color: var(--text-color);
+    background-color: var(--login-bg);
     font-family: "Rubik", sans-serif;
     margin: 0px;
 }
 
 a {
-    color: #471313;
+    color: var(--red-dark);
     text-decoration: none;
 }
 
 #login-form-container {
-    background-color: ghostwhite;
+    background-color: var(--login-container-bg);
     border-radius: 20px;
     padding: 5vw;
     padding-bottom: 0px;
@@ -44,7 +45,7 @@ a {
 }
 
 .recuperacao-form-container {
-    background-color: ghostwhite;
+    background-color: var(--white-main);
     border-radius: 20px;
     padding: 5vw;
     margin: 15vh 20vw 0vh 20vw;
@@ -61,7 +62,7 @@ a {
 }
 
 .login-errors {
-    color: #ff3434;
+    color: var(--red-main);
     margin-top: 20px;
 }
 
@@ -76,7 +77,8 @@ a {
 }
 
 .input-text {
-    background-color: ghostwhite;
+    color: var(--text-color);
+    background-color: var(--login-container-bg);
     font-size: 12pt;
     border: none;
     border-bottom: 2px solid black;
@@ -92,7 +94,7 @@ a {
 }
 
 .select-box select {
-    background-color: #ff3434;
+    background-color: var(--red-main);
     font-size: 12pt;
     border: none;
     border-radius: 10px;
@@ -106,7 +108,7 @@ a {
 }
 
 #campo-caps {
-    color: #ff3434;
+    color: var(--red-main);
     font-size: 10pt;
     visibility: hidden;
 }
@@ -125,7 +127,7 @@ a {
 .act-button {
     font-family: "Rubik", sans-serif;
     font-weight: bold;
-    border: 3px solid #ff3434;
+    border: 3px solid var(--red-main);
     background-color: rgba(0,0,0,0);
     padding: 1rem;
     cursor: pointer;
@@ -133,8 +135,7 @@ a {
     position: relative;
 
     &:before {
-        content: '';
-        background-color: #ff3434;
+        background-color: var(--red-main);
         width: 0%;
         height: 100%;
         top: 0;
@@ -144,7 +145,7 @@ a {
         z-index: -1;
     }
     &:hover {
-        color: #ffffff;
+        color: var(--white-main);
 
         &:before{
             width: 100%;

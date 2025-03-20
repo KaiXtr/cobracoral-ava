@@ -14,11 +14,10 @@ class ComunicadosTest < ApplicationSystemTestCase
     visit comunicados_url
     click_on "New comunicado"
 
-    fill_in "Conteudo", with: @comunicado.conteudo
     fill_in "Turma", with: @comunicado.turma_id
-    fill_in "Url img", with: @comunicado.url_img
     fill_in "Usuario", with: @comunicado.usuario_id
-    click_on "Create Comunicado"
+    fill_in "Visibilidade", with: @comunicado.visibilidade_comunicado_id
+    click_on "Publicar"
 
     assert_text "Comunicado was successfully created"
     click_on "Back"
@@ -28,11 +27,10 @@ class ComunicadosTest < ApplicationSystemTestCase
     visit comunicado_url(@comunicado)
     click_on "Edit this comunicado", match: :first
 
-    fill_in "Conteudo", with: @comunicado.conteudo
     fill_in "Turma", with: @comunicado.turma_id
-    fill_in "Url img", with: @comunicado.url_img
     fill_in "Usuario", with: @comunicado.usuario_id
-    click_on "Update Comunicado"
+    fill_in "Visibilidade", with: @comunicado.visibilidade_comunicado_id
+    click_on "Publicar"
 
     assert_text "Comunicado was successfully updated"
     click_on "Back"

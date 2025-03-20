@@ -14,6 +14,9 @@
     <%= form.text_field :nome_disciplina %>
   </div>
   <div>
+    <%= f.file_field :banner %>
+  </div>
+  <div>
     <%= form.label :curso_id, "Curso" %>
     <%= form.select :curso_id,
       class: 'select-box',

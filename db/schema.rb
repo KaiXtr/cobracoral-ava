@@ -175,14 +175,14 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_16_141346) do
     t.integer "telefone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "pronomes_usuarios_id", null: false
+    t.integer "pronomes_usuario_id", null: false
     t.string "biografia"
     t.string "lattes_id"
     t.string "orcid_id"
     t.string "password_digest"
     t.integer "usuario_cargo_id", null: false
     t.integer "acessos_count"
-    t.index ["pronomes_usuarios_id"], name: "index_usuarios_on_pronomes_usuarios_id"
+    t.index ["pronomes_usuario_id"], name: "index_usuarios_on_pronomes_usuario_id"
     t.index ["usuario_cargo_id"], name: "index_usuarios_on_usuario_cargo_id"
   end
 
@@ -212,6 +212,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_16_141346) do
   add_foreign_key "turmas", "modalidade_turmas"
   add_foreign_key "turmas", "turno_turmas"
   add_foreign_key "unidade_disciplinas", "disciplinas"
-  add_foreign_key "usuarios", "pronomes_usuarios", column: "pronomes_usuarios_id"
+  add_foreign_key "usuarios", "pronomes_usuarios"
   add_foreign_key "usuarios", "usuario_cargos"
 end

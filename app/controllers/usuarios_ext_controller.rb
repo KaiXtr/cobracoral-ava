@@ -25,14 +25,14 @@ class UsuariosExtController < ApplicationController
         json_params = JSON.parse(request.raw_post)
         novo_usuario = Usuario.new
         novo_usuario.nome_completo = json_params['nome']
-        novo_usuario.pronomes_usuarios_id = json_params['pronomes']
+        novo_usuario.pronomes_usuario_id = json_params['pronomes']
         novo_usuario.email = json_params['email']
         novo_usuario.password = json_params['senha']
         novo_usuario.usuario_cargo_id = json_params['cargo']
         novo_usuario.acessos_count = 0
         
         if novo_usuario.save then
-            if novo_usuario.pronomes_usuarios_id == 1 then
+            if novo_usuario.pronomes_usuario_id == 1 then
                 logtxt = "[EXT] Usuária " + novo_usuario.nome_completo + " cadastrada com sucesso."
             else
                 logtxt = "[EXT] Usuário " + novo_usuario.nome_completo + " cadastrado com sucesso."

@@ -1,9 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  disciplina: one
-  nome_unidade: MyString
+unidade_A1:
+  disciplina: disciplina_A
+  nome_unidade: Unidade 1
 
-two:
-  disciplina: two
-  nome_unidade: MyString
+unidade_A2:
+  disciplina: disciplina_A
+  nome_unidade: Unidade 2
+
+unidade_B1:
+  disciplina: disciplina_B
+  nome_unidade: Unidade 1

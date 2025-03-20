@@ -1,6 +1,10 @@
 <a href='/disciplinas/<%= disciplina.id %>'>
 	<div class="disciplina-thumbnail">
-		<div class="disciplina-thumbnail-img"></div>
+		<div class="disciplina-thumbnail-img">
+			<% if disciplina.banner.attached? %>
+				<%= image_tag(disciplina.banner) %>
+			<% end %>
+		</div>
 		<div class="disciplina-thumbnail-info">
 			<h3>
 				<%= disciplina.nome_disciplina %>

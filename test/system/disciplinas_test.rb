@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class DisciplinasTest < ApplicationSystemTestCase
   setup do
-    @disciplina = disciplinas(:one)
+    @disciplina = disciplinas(:disciplina_A)
   end
 
   test "visiting the index" do
@@ -14,7 +14,6 @@ class DisciplinasTest < ApplicationSystemTestCase
     visit disciplinas_url
     click_on "New disciplina"
 
-    fill_in "Cod disciplina", with: @disciplina.cod_disciplina
     fill_in "Nome disciplina", with: @disciplina.nome_disciplina
     click_on "Create Disciplina"
 
@@ -26,7 +25,6 @@ class DisciplinasTest < ApplicationSystemTestCase
     visit disciplina_url(@disciplina)
     click_on "Edit this disciplina", match: :first
 
-    fill_in "Cod disciplina", with: @disciplina.cod_disciplina
     fill_in "Nome disciplina", with: @disciplina.nome_disciplina
     click_on "Update Disciplina"
 

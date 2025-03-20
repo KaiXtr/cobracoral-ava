@@ -1,7 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  enumTurno: MyString
+turno_matutino:
+  enumTurno: matutino
 
-two:
-  enumTurno: MyString
+turno_vespertino:
+  enumTurno: vespertino
+
+turno_noturno:
+  enumTurno: noturno
+

@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  comunicado: one
-  usuario: one
-  emoji: MyString
+reacao_X:
+  comunicado: comunicado_A
+  usuario: usuario_representante
+  emoji: X
 
-two:
-  comunicado: two
-  usuario: two
-  emoji: MyString
+reacao_Y:
+  comunicado: comunicado_A
+  usuario: usuario_representante
+  emoji: Y

@@ -55,7 +55,7 @@ class ComunicadosController < ApplicationController
 
     @turmas = Turma.all
     @visibilidades = get_visibilidades()
-		Rails.logger.info "Editando comunicado " + @comunicado.id + "."
+		Rails.logger.info "Editando comunicado " + @comunicado.id.to_s + "."
   end
 
   # POST /comunicados or /comunicados.json

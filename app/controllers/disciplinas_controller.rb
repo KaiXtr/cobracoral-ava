@@ -124,6 +124,9 @@ class DisciplinasController < ApplicationController
 
   # PATCH/PUT /disciplinas/1 or /disciplinas/1.json
   def update
+    @disciplina = Disciplina.find(params[:id])
+    @disciplina.banner.attach(params[:banner])
+
     respond_to do |format|
       if @disciplina.update(disciplina_params)
         logtxt = "Disciplina " + @disciplina.nome_disciplina + " atualizada com sucesso."
@@ -158,7 +161,7 @@ class DisciplinasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def disciplina_params
-      params.require(:disciplina).permit(:nome_disciplina, :semestre)
+      params.require(:disciplina).permit(:nome_disciplina, :banner, :sala_aula, :semestre)
     end
     
     def isUsuarioEstudante(usuario)

@@ -1,3 +1,10 @@
+<div class="disciplinas-banner">
+  <div class="banner-crop">
+    <% if @disciplina.banner.attached? %>
+      <%= image_tag(@disciplina.banner) %>
+    <% end %>
+  </div>
+</div>
 <nav>
   <div class="deslizar-transition">
     <p style="color: green"><%= notice %></p>
