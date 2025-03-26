@@ -4,12 +4,12 @@ turma_AB:
   curso: curso_A
   nome_turma: Turma AB
   senha_acesso: MyString
-  turno_turma: turno_matutino
-  modalidade_turma: modalidade_presencial
+  turno_turma: matutino
+  modalidade_turma: presencial
 
 turma_CD:
   curso: curso_B
   nome_turma: Turma CD
   senha_acesso: MyString
-  turno_turma: turno_vespertino
-  modalidade_turma: modalidade_ead
+  turno_turma: vespertino
+  modalidade_turma: ead

@@ -24,23 +24,23 @@
     %>
   </div>
   <div>
-    <%= form.label :turno_turma_id, "Turno" %>
-    <%= form.select :turno_turma_id,
-      options_for_select(@turno_turmas.map{ |t| [
-        t.enumTurno, t.id, {
-          'turno-id' => t.id
+    <%= form.label :turno_turma, "Turno" %>
+    <%= form.select :turno_turma,
+      options_for_select(Turma.turno_turmas.map{ |t| [
+        t[1], t[0], {
+          'turno-id' => t[0]
         }
-      ]}, @turma.turno_turma_id)  
+      ]}, @turma.turno_turma)  
     %>
   </div>
   <div>
-    <%= form.label :modalidade_turma_id, "Modalidade" %>
-    <%= form.select :modalidade_turma_id,
-      options_for_select(@modalidade_turmas.map{ |m| [
-        m.enumModalidade, m.id, {
-          'modalidade-id' => m.id
+    <%= form.label :modalidade_turma, "Modalidade" %>
+    <%= form.select :modalidade_turma,
+      options_for_select(Turma.modalidade_turmas.map{ |m| [
+        m[1], m[0], {
+          'modalidade-id' => m[0]
         }
-      ]}, @turma.modalidade_turma_id)
+      ]}, @turma.modalidade_turma)
     %>
   </div>
   <div>

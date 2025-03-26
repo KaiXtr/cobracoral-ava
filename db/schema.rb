@@ -141,11 +141,9 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_16_141346) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "curso_id", null: false
-    t.integer "turno_turma_id", null: false
-    t.integer "modalidade_turma_id", null: false
+    t.string "turno_turma", null: false
+    t.string "modalidade_turma", null: false
     t.index ["curso_id"], name: "index_turmas_on_curso_id"
-    t.index ["modalidade_turma_id"], name: "index_turmas_on_modalidade_turma_id"
-    t.index ["turno_turma_id"], name: "index_turmas_on_turno_turma_id"
   end
 
   create_table "turno_turmas", force: :cascade do |t|
@@ -209,8 +207,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_16_141346) do
   add_foreign_key "reacao_comunicados", "comunicados"
   add_foreign_key "reacao_comunicados", "usuarios"
   add_foreign_key "turmas", "cursos"
-  add_foreign_key "turmas", "modalidade_turmas"
-  add_foreign_key "turmas", "turno_turmas"
   add_foreign_key "unidade_disciplinas", "disciplinas"
   add_foreign_key "usuarios", "pronomes_usuarios"
   add_foreign_key "usuarios", "usuario_cargos"

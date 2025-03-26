@@ -21,8 +21,8 @@ class TurmasControllerTest < ActionDispatch::IntegrationTest
         turma: {
           curso: @turma.curso_id,
           nome_turma: @turma.nome_turma,
-          turno_turma: @turma.turno_turma_id,
-          modalidade_turma: @turma.modalidade_turma_id,
+          turno_turma: @turma.turno_turma,
+          modalidade_turma: @turma.modalidade_turma,
         }
       }
     end
@@ -45,8 +45,8 @@ class TurmasControllerTest < ActionDispatch::IntegrationTest
         turma: {
             curso: @turma.curso_id,
             nome_turma: @turma.nome_turma,
-            turno_turma: @turma.turno_turma_id,
-            modalidade_turma: @turma.modalidade_turma_id,
+            turno_turma: @turma.turno_turma,
+            modalidade_turma: @turma.modalidade_turma,
         }
     }
     assert_redirected_to turma_url(@turma)

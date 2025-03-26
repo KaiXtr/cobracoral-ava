@@ -201,22 +201,22 @@ ModalidadeTurma.create(id: 2, enumModalidade: 'À distância')
 
 puts "= modalidade_turmas populada."
 
-Turma.create(id: 1, curso_id: 1, turno_turma_id: 1,
-    modalidade_turma_id: 1, nome_turma: 'CC1 Diurno', senha_acesso: '12345678')
-Turma.create(id: 2, curso_id: 1, turno_turma_id: 3,
-    modalidade_turma_id: 1, nome_turma: 'CC1 Noturno', senha_acesso: '12345678')
-Turma.create(id: 3, curso_id: 1, turno_turma_id: 2,
-    modalidade_turma_id: 1, nome_turma: 'CC2 Vespertino', senha_acesso: '12345678')
-Turma.create(id: 4, curso_id: 1, turno_turma_id: 3,
-    modalidade_turma_id: 1, nome_turma: 'CC2 Noturno', senha_acesso: '12345678')
-Turma.create(id: 5, curso_id: 2, turno_turma_id: 1,
-    modalidade_turma_id: 1, nome_turma: 'DG1 Diurno', senha_acesso: '12345678')
-Turma.create(id: 6, curso_id: 2, turno_turma_id: 3,
-    modalidade_turma_id: 1, nome_turma: 'DG1 Noturno', senha_acesso: '12345678')
-Turma.create(id: 7, curso_id: 2, turno_turma_id: 2,
-    modalidade_turma_id: 1, nome_turma: 'DG2 Vespertino', senha_acesso: '12345678')
-Turma.create(id: 8, curso_id: 2, turno_turma_id: 3,
-    modalidade_turma_id: 1, nome_turma: 'DG2 Noturno', senha_acesso: '12345678')
+Turma.create(id: 1, curso_id: 1, turno_turma: :diurno,
+    modalidade_turma: :presencial, nome_turma: 'CC1 Diurno', senha_acesso: '12345678')
+Turma.create(id: 2, curso_id: 1, turno_turma: :noturno,
+    modalidade_turma: :presencial, nome_turma: 'CC1 Noturno', senha_acesso: '12345678')
+Turma.create(id: 3, curso_id: 1, turno_turma: :vespertino,
+    modalidade_turma: :presencial, nome_turma: 'CC2 Vespertino', senha_acesso: '12345678')
+Turma.create(id: 4, curso_id: 1, turno_turma: :noturno,
+    modalidade_turma: :presencial, nome_turma: 'CC2 Noturno', senha_acesso: '12345678')
+Turma.create(id: 5, curso_id: 2, turno_turma: :diurno,
+    modalidade_turma: :ead, nome_turma: 'DG1 Diurno', senha_acesso: '12345678')
+Turma.create(id: 6, curso_id: 2, turno_turma: :noturno,
+    modalidade_turma: :ead, nome_turma: 'DG1 Noturno', senha_acesso: '12345678')
+Turma.create(id: 7, curso_id: 2, turno_turma: :vespertino,
+    modalidade_turma: :ead, nome_turma: 'DG2 Vespertino', senha_acesso: '12345678')
+Turma.create(id: 8, curso_id: 2, turno_turma: :noturno,
+    modalidade_turma: :ead, nome_turma: 'DG2 Noturno', senha_acesso: '12345678')
 
 puts "= turmas populada."
 

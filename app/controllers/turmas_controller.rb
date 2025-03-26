@@ -12,8 +12,6 @@ class TurmasController < ApplicationController
 	def show
 		@turma = Turma.find(params[:id])
 		@curso_turma = Curso.find(@turma.curso_id)
-		@turno_turma = TurnoTurma.find(@turma.turno_turma_id)
-		@modalidade_turma = ModalidadeTurma.find(@turma.modalidade_turma_id)
 
 		# Listar apenas usuários estudantes, excluindo professores
 		@estudantes_turma = Array.new
@@ -47,18 +45,16 @@ class TurmasController < ApplicationController
 
 		@cursos = Curso.pluck(:nome_curso)
 		@curso_turma = Curso.find(@turma.curso_id)
-		@turno_turmas = TurnoTurma.all
-		@modalidade_turmas = ModalidadeTurma.all
 
 		# Listar apenas usuários estudantes, excluindo professores
 		@estudantes_turma = Array.new
 		matriculas_estudantes = Matricula.where(turma_id: @turma.id)
 		for matricula in matriculas_estudantes do
+			usuario = Usuario.find(matricula.usuario_id)
 			cargo = UsuarioCargo.find(usuario.usuario_cargo_id)
-			estudante = Usuario.find(matricula.usuario_id)
 
 			if cargo.id > 2 then
-				@estudantes_turma.push(estudante)
+				@estudantes_turma.push(usuario)
 			end
 		end
 
@@ -73,8 +69,6 @@ class TurmasController < ApplicationController
 	def new
 		@turma = Turma.new
 		authorize(@turma)
-		@turno_turmas = TurnoTurma.all
-		@modalidade_turmas = ModalidadeTurma.all
 
 		# Verificando nível de acesso do usuário
 		usuario = usuario_autenticado
@@ -190,6 +184,6 @@ class TurmasController < ApplicationController
 		end
 
 		def turma_params
-			params.require(:turma).permit(:curso_id, :nome_turma, :turno_turma_id, :modalidade_turma_id)
+			params.require(:turma).permit(:curso_id, :nome_turma, :turno_turma, :modalidade_turma)
 		end
 end

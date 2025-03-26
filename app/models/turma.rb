@@ -1,9 +1,18 @@
 class Turma < ApplicationRecord
     belongs_to :curso
-    belongs_to :turno_turma
-    belongs_to :modalidade_turma
 
     has_many :matricula
     has_many :disciplina
     has_many :comunicado
+
+	enum :turno_turma, {
+		diurno: 'Diurno',
+		vespertino: 'Vespertino',
+		noturno: 'Noturno',
+    }
+
+	enum :modalidade_turma, {
+		presencial: 'Presencial',
+		ead: 'EaD',
+    }
 end

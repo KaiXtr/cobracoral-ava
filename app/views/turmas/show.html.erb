@@ -16,10 +16,10 @@
         </h3>
         <div>
             <div>
-                Turno: <%= @turno_turma.enumTurno %>
+                Turno: <%= Turma.turno_turmas[@turma.turno_turma] %>
             </div>
             <div>
-                Modalidade: <%= @modalidade_turma.enumModalidade %>
+                Modalidade: <%= Turma.modalidade_turmas[@turma.modalidade_turma] %>
             </div>
             </div>
         <div>
