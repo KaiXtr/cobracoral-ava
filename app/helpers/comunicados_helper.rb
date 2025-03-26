@@ -4,7 +4,16 @@ module ComunicadosHelper
     end
     
     def enum_visibilidade(visibilidade)
-        return Comunicado.visibilidade_comunicado_strings[visibilidade + '_string']
+        hash = Comunicado.visibilidade_comunicado_strings.transform_keys(&:to_s)
+        return hash[visibilidade + '_string']
+    end
+
+    def select_visibilidade
+        Comunicado.visibilidade_comunicados.map{ |v| [
+            enum_visibilidade(v[0]), v[0], {
+                'visibilidade-id' => v[0]
+            }
+        ]}
     end
 
     def info_usuario(usuario, comunicado)

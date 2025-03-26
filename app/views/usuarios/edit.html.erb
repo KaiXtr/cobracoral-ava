@@ -21,11 +21,7 @@
         <div class="form_group">
             <%= f.label :pronomes_usuario, "Pronomes" %>
             <%= f.select :pronomes_usuario,
-            options_for_select(@pronomes.map{ |p| [
-                p.enumPronomes, p.id, {
-                'pronomes-id' => p.id
-                }
-            ]}, @usuario.pronomes_usuarios_id)
+                options_for_select(select_pronomes(), @usuario.pronomes_usuario)
             %>
         </div>
         <div class="form_group">

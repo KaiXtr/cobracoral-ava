@@ -16,10 +16,12 @@ class Comunicado < ApplicationRecord
     :todos_disciplina
   ]
 
-  enum :visibilidade_comunicado_string, {
-    todos_curso_string: 'Todos do curso',
-    todas_turmas_string: 'Todas as turmas',
-    todos_turma_string: 'Todos da turma',
-    todos_disciplina_string: 'Todos da disciplina'
-  }
+  def self.visibilidade_comunicado_strings
+    return {
+      todos_curso_string: 'Todos do curso',
+      todas_turmas_string: 'Todas as turmas',
+      todos_turma_string: 'Todos da turma',
+      todos_disciplina_string: 'Todos da disciplina'
+    }
+  end
 end

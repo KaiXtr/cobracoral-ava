@@ -42,8 +42,7 @@ class ComunicadosController < ApplicationController
 
     @turmas = Turma.all
     @visibilidades = get_visibilidades()
-    
-    VisibilidadeComunicado.all
+      
 		Rails.logger.info "Criando novo comunicado."
   end
 
@@ -196,7 +195,6 @@ class ComunicadosController < ApplicationController
     end
   
     def representanteTurma?
-        cargo = UsuarioCargo.find(usuario.cargo_usuario)
-        cargo.id == 3
+      Usuario.cargo_usuarios[usuario.cargo_usuario] == 3
     end
 end

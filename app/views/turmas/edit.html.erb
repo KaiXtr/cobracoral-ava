@@ -19,11 +19,7 @@
                     <%= form.label :turno_turma, "Turno" %>
                     <div class="select-box">
                         <%= form.select :turno_turma,
-                            options_for_select(Turma.turno_turmas.map{ |t| [
-                                t[1], t[0], {
-                                    'turno-id' => t[0]
-                                }
-                            ]}, @turma.turno_turma)
+                            options_for_select(select_turno(), @turma.turno_turma)
                         %>
                     </div>
                 </div>
@@ -31,11 +27,7 @@
                     <%= form.label :modalidade_turma, "Modalidade" %>
                     <div class="select-box">
                         <%= form.select :modalidade_turma,
-                            options_for_select(Turma.modalidade_turmas.map{ |t| [
-                                t[1], t[0], {
-                                    'modalidade-id' => t[0]
-                                }
-                            ]}, @turma.modalidade_turma)
+                            options_for_select(select_modalidade(), @turma.modalidade_turma)
                         %>
                     </div>
                 </div>

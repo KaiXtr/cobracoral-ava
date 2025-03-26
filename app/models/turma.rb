@@ -16,14 +16,18 @@ class Turma < ApplicationRecord
 		:ead,
 	]
 
-	enum :turno_turma_string, {
-		diurno_string: 'Diurno',
-		vespertino_string: 'Vespertino',
-		noturno_string: 'Noturno',
-    }
+	def self.turno_turma_strings
+		return {
+			diurno_string: 'Diurno',
+			vespertino_string: 'Vespertino',
+			noturno_string: 'Noturno',
+		}
+	end
 
-	enum :modalidade_turma_string, {
-		presencial_string: 'Presencial',
-		ead_string: 'Ensino à distância',
-    }
+	def self.modalidade_turma_strings
+		return {
+			presencial_string: 'Presencial',
+			ead_string: 'Ensino à distância',
+		}
+	end
 end

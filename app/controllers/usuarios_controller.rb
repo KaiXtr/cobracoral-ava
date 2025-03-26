@@ -9,7 +9,6 @@ class UsuariosController < ApplicationController
     def edit
         @usuario = usuario_autenticado
         authorize(@usuario)
-        @pronomes = PronomesUsuario.all
         Rails.logger.info "Editando usuário " + @usuario.nome_completo + "."
     end
   

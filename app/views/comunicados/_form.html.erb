@@ -14,11 +14,7 @@
       <%= form.label :visibilidade_comunicado, "Visibilidade" %>
       <div class="select-box">
           <%= form.select :visibilidade_comunicado,
-              options_for_select(Comunicado.visibilidade_comunicado_strings.map{ |v| [
-                  v[1], v[0], {
-                      'visibilidade-id' => v[0]
-                  }
-              ]}, comunicado.visibilidade_comunicado)
+              options_for_select(select_visibilidade(), comunicado.visibilidade_comunicado)
           %>
       </div>
   </div>
