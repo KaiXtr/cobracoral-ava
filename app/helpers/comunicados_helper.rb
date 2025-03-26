@@ -2,9 +2,13 @@ module ComunicadosHelper
     def usuario_comunicado(usuario_id)
         Usuario.find(usuario_id)
     end
+    
+    def enum_visibilidade(visibilidade)
+        return Comunicado.visibilidade_comunicado_strings[visibilidade + '_string']
+    end
 
     def info_usuario(usuario, comunicado)
-        visibilidade = comunicado.visibilidade_comunicado_id
+        visibilidade = comunicado.visibilidade_comunicado
         disciplina = Disciplina.find_by(usuario_id: usuario.id)
 
         # Professor(a) da disciplina

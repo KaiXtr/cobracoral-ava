@@ -54,10 +54,9 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_16_141346) do
     t.integer "turma_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "visibilidade_comunicado_id", null: false
+    t.integer "visibilidade_comunicado", null: false
     t.index ["turma_id"], name: "index_comunicados_on_turma_id"
     t.index ["usuario_id"], name: "index_comunicados_on_usuario_id"
-    t.index ["visibilidade_comunicado_id"], name: "index_comunicados_on_visibilidade_comunicado_id"
   end
 
   create_table "conteudos", force: :cascade do |t|
@@ -141,8 +140,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_16_141346) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "curso_id", null: false
-    t.string "turno_turma", null: false
-    t.string "modalidade_turma", null: false
+    t.integer "turno_turma", null: false
+    t.integer "modalidade_turma", null: false
     t.index ["curso_id"], name: "index_turmas_on_curso_id"
   end
 
@@ -160,7 +159,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_16_141346) do
     t.index ["disciplina_id"], name: "index_unidade_disciplinas_on_disciplina_id"
   end
 
-  create_table "usuario_cargos", force: :cascade do |t|
+  create_table "cargo_usuarios", force: :cascade do |t|
     t.string "enumCargoFeminino"
     t.string "enumCargoMasculino"
     t.datetime "created_at", null: false
@@ -173,15 +172,13 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_16_141346) do
     t.integer "telefone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "pronomes_usuario_id", null: false
+    t.integer "pronomes_usuario", null: false
     t.string "biografia"
     t.string "lattes_id"
     t.string "orcid_id"
     t.string "password_digest"
-    t.integer "usuario_cargo_id", null: false
+    t.integer "cargo_usuario", null: false
     t.integer "acessos_count"
-    t.index ["pronomes_usuario_id"], name: "index_usuarios_on_pronomes_usuario_id"
-    t.index ["usuario_cargo_id"], name: "index_usuarios_on_usuario_cargo_id"
   end
 
   create_table "visibilidade_comunicados", force: :cascade do |t|
@@ -194,7 +191,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_16_141346) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comunicados", "turmas"
   add_foreign_key "comunicados", "usuarios"
-  add_foreign_key "comunicados", "visibilidade_comunicados"
   add_foreign_key "conteudos", "unidade_disciplinas"
   add_foreign_key "cursos", "usuarios"
   add_foreign_key "disciplinas", "cursos"
@@ -208,6 +204,4 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_16_141346) do
   add_foreign_key "reacao_comunicados", "usuarios"
   add_foreign_key "turmas", "cursos"
   add_foreign_key "unidade_disciplinas", "disciplinas"
-  add_foreign_key "usuarios", "pronomes_usuarios"
-  add_foreign_key "usuarios", "usuario_cargos"
 end

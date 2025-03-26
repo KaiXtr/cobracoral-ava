@@ -127,7 +127,7 @@ class ComunicadosController < ApplicationController
       curso_atual = helpers.current_curso(usuario_autenticado)
       comunicados_da_coordenacao = Comunicado.where(
         usuario_id: curso_atual.usuario_id,
-        visibilidade_comunicado_id: 1
+        visibilidade_comunicado: 1
       )
 
       # Obtendo todos os comunicados de professores (deve haver uma forma mais eficiente)
@@ -146,16 +146,16 @@ class ComunicadosController < ApplicationController
       visibilidades = Array.new()
 
       if (visivelTodosCurso?)
-        visibilidades.push(VisibilidadeComunicado.find(1))
+        visibilidades.push(Comunicado.visibilidade_comunicados[:todos_curso])
       end
       if (visivelTodasTurmas?)
-        visibilidades.push(VisibilidadeComunicado.find(2))
+        visibilidades.push(Comunicado.visibilidade_comunicados[:todas_turmas])
       end
       if (visivelTodosTurma?)
-        visibilidades.push(VisibilidadeComunicado.find(3))
+        visibilidades.push(Comunicado.visibilidade_comunicados[:todos_turma])
       end
       if (visivelTodosDisciplinas?)
-        visibilidades.push(VisibilidadeComunicado.find(4))
+        visibilidades.push(Comunicado.visibilidade_comunicados[:todos_disciplina])
       end
 
       return visibilidades
@@ -196,7 +196,7 @@ class ComunicadosController < ApplicationController
     end
   
     def representanteTurma?
-        cargo = UsuarioCargo.find(usuario.usuario_cargo_id)
+        cargo = UsuarioCargo.find(usuario.cargo_usuario)
         cargo.id == 3
     end
 end

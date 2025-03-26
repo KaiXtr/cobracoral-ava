@@ -18,7 +18,7 @@ class TurmasController < ApplicationController
 		matriculas_estudantes = Matricula.where(turma_id: @turma.id)
 		for matricula in matriculas_estudantes do
 			estudante = Usuario.find(matricula.usuario_id)
-			cargo = UsuarioCargo.find(estudante.usuario_cargo_id)
+			cargo = UsuarioCargo.find(estudante.cargo_usuario)
 
 			if cargo.id > 2 then
 				@estudantes_turma.push(estudante)
@@ -51,7 +51,7 @@ class TurmasController < ApplicationController
 		matriculas_estudantes = Matricula.where(turma_id: @turma.id)
 		for matricula in matriculas_estudantes do
 			usuario = Usuario.find(matricula.usuario_id)
-			cargo = UsuarioCargo.find(usuario.usuario_cargo_id)
+			cargo = UsuarioCargo.find(usuario.cargo_usuario)
 
 			if cargo.id > 2 then
 				@estudantes_turma.push(usuario)
@@ -76,7 +76,7 @@ class TurmasController < ApplicationController
 
 		# Se professor ou representante, apenas cursos onde está matriculado
 		if matricula then
-			usuarioCargo = UsuarioCargo.find(usuario.usuario_cargo_id)
+			usuarioCargo = UsuarioCargo.find(usuario.cargo_usuario)
 			if usuarioCargo.id == 2 || usuarioCargo.id == 3 then
 				turmas_matriculadas = Turma.joins(:matricula).where(
 					matricula: { turma_id: matricula.id }

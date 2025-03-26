@@ -51,8 +51,8 @@ class DisciplinasController < ApplicationController
 		usuario = usuario_autenticado
     
 		# Se professor, apenas cursos onde leciona
-		if usuario.usuario_cargo_id > 1 then
-			if usuario.usuario_cargo_id == 2 then
+		if usuario.cargo_usuario > 1 then
+			if usuario.cargo_usuario == 2 then
 				turmas_matriculadas = Turma.joins(:disciplina).where(
 					disciplina: { usuario_id: usuario.id }
 				)
@@ -166,7 +166,7 @@ class DisciplinasController < ApplicationController
     
     def isUsuarioEstudante(usuario)
         matricula = Matricula.find_by(usuario_id: usuario.id)
-        cargo = UsuarioCargo.find(usuario.usuario_cargo_id)
+        cargo = UsuarioCargo.find(usuario.cargo_usuario)
         cargo.id > 2
     end
 end

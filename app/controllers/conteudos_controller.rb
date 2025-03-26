@@ -167,7 +167,7 @@ class ConteudosController < ApplicationController
     end
 
     def isUsuarioEstudante(usuario)
-        cargo = UsuarioCargo.find(usuario.usuario_cargo_id)
+        cargo = UsuarioCargo.find(usuario.cargo_usuario)
         cargo.id > 2
     end
 end

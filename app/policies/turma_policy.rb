@@ -74,7 +74,7 @@ class TurmaPolicy
   end
 
   def temCargoProfessor?
-    cargo = UsuarioCargo.find(usuario.usuario_cargo_id)
+    cargo = UsuarioCargo.find(usuario.cargo_usuario)
     cargo.id == 2
   end
 
@@ -92,7 +92,7 @@ class TurmaPolicy
   end
 
   def temCargoRepresentante?
-    cargo = UsuarioCargo.find(usuario.usuario_cargo_id)
+    cargo = UsuarioCargo.find(usuario.cargo_usuario)
     cargo.id == 3
   end
 

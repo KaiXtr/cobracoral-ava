@@ -6,32 +6,9 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-PronomesUsuario.create(id: 1, enumPronomes: 'Ela/dela')
-PronomesUsuario.create(id: 2, enumPronomes: 'Ele/dele')
-PronomesUsuario.create(id: 3, enumPronomes: 'Elu/delu')
-
-puts "= pronomes_usuarios populada."
-
-UsuarioCargo.create(id: 0,
-    enumCargoFeminino: 'Administradora', enumCargoMasculino: 'Administrador')
-UsuarioCargo.create(id: 1,
-    enumCargoFeminino: 'Coordenadora', enumCargoMasculino: 'Coordenador')
-UsuarioCargo.create(id: 2,
-    enumCargoFeminino: 'Professora', enumCargoMasculino: 'Professor')
-UsuarioCargo.create(id: 3,
-    enumCargoFeminino: 'Representante', enumCargoMasculino: 'Representante')
-UsuarioCargo.create(id: 4,
-    enumCargoFeminino: 'Estagiária', enumCargoMasculino: 'Estagiário')
-UsuarioCargo.create(id: 5,
-    enumCargoFeminino: 'Monitora', enumCargoMasculino: 'Monitor')
-UsuarioCargo.create(id: 6,
-    enumCargoFeminino: 'Estudante', enumCargoMasculino: 'Estudante')
-
-puts "= usuario_cargos populada."
-
 Usuario.create(
     id: 1,
-    pronomes_usuario_id: 2,
+    pronomes_usuario: :ele_dele,
     nome_completo: "Ewerton Matheus Bezerra Ramos",
     email: "ewerton.ramos@cobracoral.edu.br",
     telefone: "997773322",
@@ -39,12 +16,12 @@ Usuario.create(
     biografia: 'Sou estudante de ciência da computação',
     lattes_id: '2274633017966563',
     orcid_id: '0009-0002-5894-0401',
-    usuario_cargo_id: 6,
+    cargo_usuario: :estudante,
     acessos_count: 0
 )
 Usuario.create(
     id: 2,
-    pronomes_usuario_id: 1,
+    pronomes_usuario: :ela_dela,
     nome_completo: "Professora de autômatos",
     email: "professora.automatos@cobracoral.edu.br",
     telefone: "997773322",
@@ -52,12 +29,12 @@ Usuario.create(
     biografia: nil,
     lattes_id: nil,
     orcid_id: nil,
-    usuario_cargo_id: 2,
+    cargo_usuario: :professor,
     acessos_count: 0
 )
 Usuario.create(
     id: 3,
-    pronomes_usuario_id: 2,
+    pronomes_usuario: :ele_dele,
     nome_completo: "Professor de IHC",
     email: "professor.ihc@cobracoral.edu.br",
     telefone: "997773322",
@@ -65,12 +42,12 @@ Usuario.create(
     biografia: nil,
     lattes_id: nil,
     orcid_id: nil,
-    usuario_cargo_id: 2,
+    cargo_usuario: :professor,
     acessos_count: 0
 )
 Usuario.create(
     id: 4,
-    pronomes_usuario_id: 1,
+    pronomes_usuario: :ela_dela,
     nome_completo: "Professora de Design",
     email: "professora.design@cobracoral.edu.br",
     telefone: "997773322",
@@ -78,12 +55,12 @@ Usuario.create(
     biografia: nil,
     lattes_id: nil,
     orcid_id: nil,
-    usuario_cargo_id: 2,
+    cargo_usuario: :professor,
     acessos_count: 0
 )
 Usuario.create(
     id: 5,
-    pronomes_usuario_id: 1,
+    pronomes_usuario: :ela_dela,
     nome_completo: "Representante da turma CC2 Noturno",
     email: "representante.cc2n@cobracoral.edu.br",
     telefone: "997773322",
@@ -91,12 +68,12 @@ Usuario.create(
     biografia: nil,
     lattes_id: nil,
     orcid_id: nil,
-    usuario_cargo_id: 3,
+    cargo_usuario: :representante,
     acessos_count: 0
 )
 Usuario.create(
     id: 6,
-    pronomes_usuario_id: 2,
+    pronomes_usuario: :ele_dele,
     nome_completo: "Estagiário da turma CC2 Vespertino",
     email: "monitor.cc2v@cobracoral.edu.br",
     telefone: "997773322",
@@ -104,12 +81,12 @@ Usuario.create(
     biografia: nil,
     lattes_id: nil,
     orcid_id: nil,
-    usuario_cargo_id: 4,
+    cargo_usuario: :estagiario,
     acessos_count: 0
 )
 Usuario.create(
     id: 7,
-    pronomes_usuario_id: 2,
+    pronomes_usuario: :ele_dele,
     nome_completo: "Monitor da turma CC2 Vespertino",
     email: "monitor.cc2v@cobracoral.edu.br",
     telefone: "997773322",
@@ -117,12 +94,12 @@ Usuario.create(
     biografia: nil,
     lattes_id: nil,
     orcid_id: nil,
-    usuario_cargo_id: 5,
+    cargo_usuario: :monitor,
     acessos_count: 0
 )
 Usuario.create(
     id: 8,
-    pronomes_usuario_id: 3,
+    pronomes_usuario: :elu_delu,
     nome_completo: "Representante da turma DG1 Diruno",
     email: "representante.dg1d@cobracoral.edu.br",
     telefone: "997773322",
@@ -130,12 +107,12 @@ Usuario.create(
     biografia: nil,
     lattes_id: nil,
     orcid_id: nil,
-    usuario_cargo_id: 3,
+    cargo_usuario: :representante,
     acessos_count: 0
 )
 Usuario.create(
     id: 9,
-    pronomes_usuario_id: 1,
+    pronomes_usuario: :ela_dela,
     nome_completo: "Coordenadora do curso de Ciência da Computação",
     email: "coordenadora.cc@cobracoral.edu.br",
     telefone: "997773322",
@@ -143,12 +120,12 @@ Usuario.create(
     biografia: nil,
     lattes_id: nil,
     orcid_id: nil,
-    usuario_cargo_id: 1,
+    cargo_usuario: :coordenador,
     acessos_count: 0
 )
 Usuario.create(
     id: 10,
-    pronomes_usuario_id: 2,
+    pronomes_usuario: :ele_dele,
     nome_completo: "Coordenador do curso de Design Gráfico",
     email: "coordenador.dg@cobracoral.edu.br",
     telefone: "997773322",
@@ -156,12 +133,12 @@ Usuario.create(
     biografia: nil,
     lattes_id: nil,
     orcid_id: nil,
-    usuario_cargo_id: 1,
+    cargo_usuario: :coordenador,
     acessos_count: 0
 )
 Usuario.create(
     id: 11,
-    pronomes_usuario_id: 2,
+    pronomes_usuario: :ele_dele,
     nome_completo: "Administração do sistema",
     email: "administracao@cobracoral.edu.br",
     telefone: "997773322",
@@ -169,7 +146,7 @@ Usuario.create(
     biografia: nil,
     lattes_id: nil,
     orcid_id: nil,
-    usuario_cargo_id: 0,
+    cargo_usuario: :administrador,
     acessos_count: 0
 )
 
@@ -189,17 +166,6 @@ Curso.create(
 )
 
 puts "= cursos populada."
-
-TurnoTurma.create(id: 1, enumTurno: 'Diurno')
-TurnoTurma.create(id: 2, enumTurno: 'Vespertino')
-TurnoTurma.create(id: 3, enumTurno: 'Noturno')
-
-puts "= turno_turmas populada."
-
-ModalidadeTurma.create(id: 1, enumModalidade: 'Presencial')
-ModalidadeTurma.create(id: 2, enumModalidade: 'À distância')
-
-puts "= modalidade_turmas populada."
 
 Turma.create(id: 1, curso_id: 1, turno_turma: :diurno,
     modalidade_turma: :presencial, nome_turma: 'CC1 Diurno', senha_acesso: '12345678')
@@ -351,66 +317,47 @@ Conteudo.create(
 
 puts "= conteudos populada."
 
-VisibilidadeComunicado.create(
-    id: 1,
-    enumVisibilidade: 'Todos do curso'
-)
-VisibilidadeComunicado.create(
-    id: 2,
-    enumVisibilidade: 'Todos das turmas'
-)
-VisibilidadeComunicado.create(
-    id: 3,
-    enumVisibilidade: 'Todos da turma'
-)
-VisibilidadeComunicado.create(
-    id: 4,
-    enumVisibilidade: 'Todos da disciplina'
-)
-
-puts "= visibilidade_comunicados populada."
-
 Comunicado.create(
     id: 1,
-    usuario_id: 2,                   # Professora de autômatos
-    turma_id: 1,                     # CC1 Diurno
-    visibilidade_comunicado_id: 3    # Todos da turma
+    usuario_id: 2,                           # Professora de autômatos
+    turma_id: 1,                             # CC1 Diurno
+    visibilidade_comunicado: :todos_turma    # Todos da turma
 )
 Comunicado.create(
     id: 2,
-    usuario_id: 2,                   # Professora de autômatos
-    turma_id: 2,                     # CC1 Noturno
-    visibilidade_comunicado_id: 3    # Todos da turma
+    usuario_id: 2,                           # Professora de autômatos
+    turma_id: 2,                             # CC1 Noturno
+    visibilidade_comunicado: :todos_turma    # Todos da turma
 )
 Comunicado.create(
     id: 3,
-    usuario_id: 2,                   # Professora de autômatos
-    turma_id: 1,                     # CC1 Diurno e Noturno
-    visibilidade_comunicado_id: 2    # Todas as turmas
+    usuario_id: 2,                           # Professora de autômatos
+    turma_id: 1,                             # CC1 Diurno e Noturno
+    visibilidade_comunicado: :todas_turmas   # Todas as turmas
 )
 Comunicado.create(
     id: 4,
-    usuario_id: 4,                   # Professora de Design
-    turma_id: 5,                     # DG1 Diurno
-    visibilidade_comunicado_id: 3    # Todos da turma
+    usuario_id: 4,                           # Professora de Design
+    turma_id: 5,                             # DG1 Diurno
+    visibilidade_comunicado: :todos_turma    # Todos da turma
 )
 Comunicado.create(
     id: 5,
-    usuario_id: 4,                   # Professora de Design
-    turma_id: 6,                     # DG1 Noturno
-    visibilidade_comunicado_id: 3    # Todos da turma
+    usuario_id: 4,                           # Professora de Design
+    turma_id: 6,                             # DG1 Noturno
+    visibilidade_comunicado: :todos_turma    # Todos da turma
 )
 Comunicado.create(
     id: 6,
-    usuario_id: 4,                   # Professora de Design
-    turma_id: 1,                     # DG1 Diurno e Noturno
-    visibilidade_comunicado_id: 2    # Todas as turmas
+    usuario_id: 4,                           # Professora de Design
+    turma_id: 1,                             # DG1 Diurno e Noturno
+    visibilidade_comunicado: :todas_turmas   # Todas as turmas
 )
 Comunicado.create(
     id: 7,
-    usuario_id: 9,                   # Coordenadora do curso de ciência da computação
-    turma_id: 1,                     # DG1 Diurno e Noturno
-    visibilidade_comunicado_id: 1    # Todos do curso
+    usuario_id: 9,                           # Coordenadora do curso de ciência da computação
+    turma_id: 1,                             # DG1 Diurno e Noturno
+    visibilidade_comunicado: :todos_curso    # Todos do curso
 )
 
 puts "= comunicados populada."

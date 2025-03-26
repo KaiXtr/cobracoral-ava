@@ -5,18 +5,18 @@ usuario_coordenadora:
   pronomes_usuario: pronomes_ela
   email: coordenadora@exemplo.com
   telefone: 1
-  usuario_cargo: cargo_coordenador
+  cargo_usuario: cargo_coordenador
 
 usuario_professor:
   nome_completo: Professor
   pronomes_usuario: pronomes_ele
   email: professor@exemplo.com
   telefone: 1
-  usuario_cargo: cargo_professor
+  cargo_usuario: cargo_professor
 
 usuario_representante:
   nome_completo: Representante
   pronomes_usuario: pronomes_ela
   email: representante@exemplo.com
   telefone: 1
-  usuario_cargo: cargo_representante
+  cargo_usuario: cargo_representante

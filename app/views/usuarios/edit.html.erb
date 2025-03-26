@@ -19,8 +19,8 @@
             <%= f.text_area :biografia, cols: 130, rows: 5 %>
         </div>
         <div class="form_group">
-            <%= f.label :pronomes_usuario_id, "Pronomes" %>
-            <%= f.select :pronomes_usuario_id,
+            <%= f.label :pronomes_usuario, "Pronomes" %>
+            <%= f.select :pronomes_usuario,
             options_for_select(@pronomes.map{ |p| [
                 p.enumPronomes, p.id, {
                 'pronomes-id' => p.id

@@ -39,7 +39,7 @@ class SessionsController < ApplicationController
 		end
 
 		@pronomes = PronomesUsuario.all
-		@cargo = UsuarioCargo.find(@usuario_autenticado.usuario_cargo_id).enumCargoMasculino
+		@cargo = UsuarioCargo.find(@usuario_autenticado.cargo_usuario).enumCargoMasculino
 		render "primeiro-acesso"
 	end
 

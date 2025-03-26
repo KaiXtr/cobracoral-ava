@@ -28,7 +28,7 @@ class UsuariosExtController < ApplicationController
         novo_usuario.pronomes_usuario_id = json_params['pronomes']
         novo_usuario.email = json_params['email']
         novo_usuario.password = json_params['senha']
-        novo_usuario.usuario_cargo_id = json_params['cargo']
+        novo_usuario.cargo_usuario = json_params['cargo']
         novo_usuario.acessos_count = 0
         
         if novo_usuario.save then

@@ -39,7 +39,7 @@ class ConteudoPolicy
   private
 
   def temCargoCoordenador?
-    cargo = UsuarioCargo.find(usuario.usuario_cargo_id)
+    cargo = UsuarioCargo.find(usuario.cargo_usuario)
     cargo.id == 1
   end
 
@@ -54,7 +54,7 @@ class ConteudoPolicy
   end
 
   def temCargoProfessor?
-    cargo = UsuarioCargo.find(usuario.usuario_cargo_id)
+    cargo = UsuarioCargo.find(usuario.cargo_usuario)
     cargo.id == 2
   end
 
