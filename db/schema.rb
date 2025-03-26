@@ -112,18 +112,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_16_141346) do
     t.index ["usuario_id"], name: "index_matriculas_on_usuario_id"
   end
 
-  create_table "modalidade_turmas", force: :cascade do |t|
-    t.string "enumModalidade"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "pronomes_usuarios", force: :cascade do |t|
-    t.string "enumPronomes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "reacao_comunicados", force: :cascade do |t|
     t.integer "comunicado_id", null: false
     t.integer "usuario_id", null: false
@@ -145,25 +133,12 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_16_141346) do
     t.index ["curso_id"], name: "index_turmas_on_curso_id"
   end
 
-  create_table "turno_turmas", force: :cascade do |t|
-    t.string "enumTurno"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "unidade_disciplinas", force: :cascade do |t|
     t.integer "disciplina_id", null: false
     t.string "nome_unidade"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["disciplina_id"], name: "index_unidade_disciplinas_on_disciplina_id"
-  end
-
-  create_table "cargo_usuarios", force: :cascade do |t|
-    t.string "enumCargoFeminino"
-    t.string "enumCargoMasculino"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "usuarios", force: :cascade do |t|
@@ -179,12 +154,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_16_141346) do
     t.string "password_digest"
     t.integer "cargo_usuario", null: false
     t.integer "acessos_count"
-  end
-
-  create_table "visibilidade_comunicados", force: :cascade do |t|
-    t.string "enumVisibilidade"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

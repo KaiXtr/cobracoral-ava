@@ -61,8 +61,7 @@ class DisciplinaPolicy
   end
 
   def temCargoCoordenador?
-    curso = Curso.find(@disciplina.curso_id)
-    curso.usuario_id == @usuario.id
+    Usuario.cargo_usuarios[usuario.cargo_usuario] == 1
   end
 
   def permissaoProfessor?
@@ -74,8 +73,7 @@ class DisciplinaPolicy
   end
 
   def temCargoProfessor?
-    cargo = UsuarioCargo.find(usuario.cargo_usuario)
-    cargo.id == 2
+    Usuario.cargo_usuarios[usuario.cargo_usuario] == 2
   end
 
   def estaNoSemestre?

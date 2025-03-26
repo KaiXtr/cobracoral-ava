@@ -60,8 +60,7 @@ class TurmaPolicy
   end
 
   def temCargoCoordenador?
-    curso = Curso.find(@turma.curso_id)
-    curso.usuario_id = @usuario.id
+    Usuario.cargo_usuarios[usuario.cargo_usuario] == 1
   end
 
   def permissaoProfessor?
@@ -74,8 +73,7 @@ class TurmaPolicy
   end
 
   def temCargoProfessor?
-    cargo = UsuarioCargo.find(usuario.cargo_usuario)
-    cargo.id == 2
+    Usuario.cargo_usuarios[usuario.cargo_usuario] == 2
   end
 
   def permissaoRepresentante?
@@ -92,8 +90,7 @@ class TurmaPolicy
   end
 
   def temCargoRepresentante?
-    cargo = UsuarioCargo.find(usuario.cargo_usuario)
-    cargo.id == 3
+    Usuario.cargo_usuarios[usuario.cargo_usuario] == 3
   end
 
   class Scope < ApplicationPolicy::Scope

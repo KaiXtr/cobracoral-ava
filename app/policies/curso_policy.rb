@@ -57,8 +57,7 @@ class CursoPolicy
   end
 
   def temCargoProfessor?
-    cargo = UsuarioCargo.find(usuario.cargo_usuario)
-    cargo.id == 2
+    Usuario.cargo_usuarios[usuario.cargo_usuario] == 2
   end
 
   private
@@ -94,8 +93,7 @@ class CursoPolicy
   end
 
   def temCargoRepresentante?
-    cargo = UsuarioCargo.find(usuario.cargo_usuario)
-    cargo.id == 3
+    Usuario.cargo_usuarios[usuario.cargo_usuario] == 3
   end
 
   class Scope < ApplicationPolicy::Scope
