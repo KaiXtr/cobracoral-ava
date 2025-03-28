@@ -29,6 +29,7 @@ class ApplicationController < ActionController::Base
 
 	def logar(usuario)
 		session[:usuario_id] = usuario.id
+		session[:login_time] = Time.now
 		@usuario_autenticado = usuario
 
 		Rails.logger.info "Criada sessão para o(a) usuário(a) com email " + usuario.email + "."

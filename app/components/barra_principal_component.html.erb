@@ -64,7 +64,7 @@
             <button class="act-button abrir-menu">
                 <i class="fa-solid fa-user fa-2xl"></i>
                 <div id="menu-perfil">
-                    <%= render PomodoroToolComponent.new() %>
+                    <%= render PomodoroToolComponent.new(login_time: session[:login_time]) %>
                     <h5 class="menu-perfil-usuario-cargo">
                         <%= helpers.enum_cargo_usuario(@usuario_autenticado) %>
                     </h5>

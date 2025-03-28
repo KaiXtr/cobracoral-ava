@@ -1,10 +1,7 @@
 <% if @pomodoro_ativado %>
-    <div class="medidor-container">
-        <div class="medidor-grafico">
-            <div class="medidor-grafico-max"></div>
-            <div class="medidor-grafico-atual"></div>
-            <span class="medidor-grafico-valor">15m</span>
-        </div>
-        <h3>Pomodoro</h3>
-    </div>
+    <%= render MedidorGraficoComponent.new(
+        medidor_titulo: 'Pomodoro',
+        valor_entrada: @pomodoro_tempo_atual,
+        valor_tipo: 'minuto')
+    %>
 <% end %>
