@@ -1,0 +1,10 @@
+<div class="button-group">
+    <%= render CobraButtonComponent.new(
+        text: 'Cancelar',
+        href: @cancel_url)
+    %>
+    <%= render CobraButtonComponent.new(
+        text: 'Salvar',
+        submit: true)
+    %>
+</div>

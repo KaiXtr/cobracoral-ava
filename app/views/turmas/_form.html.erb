@@ -39,15 +39,7 @@
     <%= form.label :senha_acesso, "Senha de acesso" %>
     <%= form.password_field :senha_acesso %>
   </div>
-  
-  <div class="button-group">
-    <a href="/turmas">
-      <button class="act-button">
-        Cancelar
-      </button>
-    </a>
-    <button type="submit" class="act-button">
-      Salvar
-    </button>
-  </div>
+  <%= render CancelarSalvarButtonsComponent.new(
+    cancel_to_link: '/turmas/' + @turma.id.to_s)
+  %>
 <% end %>

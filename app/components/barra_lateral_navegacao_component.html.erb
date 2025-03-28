@@ -1,0 +1,39 @@
+<% if @matricula_estudante %>
+    <div id="barra-lateral" style="visibility: hidden; opacity: 0%;" onclick="abrirBarraLateral()">
+        <h2>
+            <a href="/turmas/<%= helpers.turma_estudante(@usuario_autenticado, @matricula_estudante).id %>">
+                <%= helpers.turma_estudante(@usuario_autenticado, @matricula_estudante).nome_turma %>
+            </a>
+        </h2>
+        <span>
+            Semestre <%= @matricula_estudante.semestre %>
+        </span>
+        <ul>
+            <% helpers.disciplinas_turma(@usuario_autenticado, @matricula_estudante).each do |disciplina| %>
+                <li>
+                    <a href="/disciplinas/<%= disciplina.id %>">
+                        <h3><%= disciplina.nome_disciplina %></h3>
+                        <ol>
+                            <% helpers.unidades_disciplina(disciplina).each do |unidade| %>
+                                <a href="/disciplinas/<%= disciplina.id %>#<%= unidade.id %>">
+                                    <li>
+                                        <h4><%= unidade.nome_unidade %></h4>
+                                        <ul>
+                                            <% helpers.conteudos_unidade(unidade).each do |conteudo| %>
+                                                <a href="/conteudos/<%= conteudo.id %>">
+                                                    <li>
+                                                        <h5><%= conteudo.nome_conteudo %></h5>
+                                                    </li>
+                                                </a>
+                                            <% end %>
+                                        </ul>
+                                    </li>
+                                </a>
+                            <% end %>
+                        </ol>
+                    </a>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>

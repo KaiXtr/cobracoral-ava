@@ -131,9 +131,10 @@
 			%>
 		</div>
 		<div class="button-group" onclick="triggerLoginSubmit()">
-			<button type="button" class="act-button">
-				Atualizar e entrar
-			</button>
+			<%= render CobraButtonComponent.new(
+				text: 'Atualizar e entrar',
+				onclick: 'triggerLoginSubmit')
+			%>
 		</div>
 		<div class="login-info">
             <%= ENV["COBRACORAL_VERSION"] %> | 

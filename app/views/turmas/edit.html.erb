@@ -32,17 +32,9 @@
                     </div>
                 </div>
             </div>
-
-            <div class="button-group">
-                <a href="/turmas/<%= @turma.id %>">
-                <button class="act-button">
-                    Cancelar
-                </button>
-                </a>
-                <button type="submit" class="act-button">
-                    Salvar
-                </button>
-            </div>
+            <%= render CancelarSalvarButtonsComponent.new(
+                cancel_to_link: '/turmas/' + @turma.id.to_s)
+            %>
 
             <div>
                 <h2>Estudantes da turma</h2>

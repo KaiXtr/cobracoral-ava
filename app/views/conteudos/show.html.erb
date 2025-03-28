@@ -23,22 +23,10 @@
     <div class="conteudo-elementos">
       <%= @conteudo.corpo %>
     </div>
-
-    <div class="button-group">
-      <% if @conteudo.id - 1 > 0 %>
-        <a href="/conteudos/<%= @conteudo.id - 1 %>">
-          <button class="act-button">Conteúdo anterior</button>
-        </a>
-      <% end %>
-      <a href="/conteudos/<%= @conteudo.id %>/salvar">
-        <button class="act-button">
-          <% if @proximoConteudo %>
-            Próximo conteúdo: <%= @proximoConteudo.nome_conteudo %>
-          <% else %>
-            Voltar à disciplina
-          <% end %>
-        </button>
-      </a>
-    </div>
+    
+    <%= render ConteudoNavButtonComponent.new(
+      conteudoAtual: @conteudo,
+      proximoConteudo: @proximoConteudo)
+    %>
   </div>
 </nav>

@@ -1,0 +1,16 @@
+<div class="button-group">
+    <% if @conteudoAtual.id - 1 > 0 %>
+        <a href="/conteudos/<%= @conteudoAtual.id - 1 %>">
+        <button class="act-button">Conteúdo anterior</button>
+        </a>
+    <% end %>
+    <a href="/conteudos/<%= @conteudoAtual.id %>/salvar">
+        <button class="act-button">
+            <% if @proximoConteudo %>
+            Próximo conteúdo: <%= @proximoConteudo.nome_conteudo %>
+            <% else %>
+            Voltar à disciplina
+            <% end %>
+        </button>
+    </a>
+</div>

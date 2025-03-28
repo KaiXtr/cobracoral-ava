@@ -78,3 +78,5 @@ gem "whenever", "~> 1.0"
 gem "redis-namespace", "~> 1.11"
 
 gem "redis-rails", "~> 5.0"
+
+gem "view_component", "~> 3.21"

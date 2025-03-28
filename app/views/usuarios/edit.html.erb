@@ -46,14 +46,14 @@
         </div>
 
         <div class="button-group">
-            <a href="/usuarios/<%= @usuario.id %>">
-            <button class="act-button">
-                Cancelar
-            </button>
-            </a>
-            <button type="submit" class="act-button">
-                Salvar
-            </button>
+            <%= render CobraButtonComponent.new(
+                text: 'Cancelar',
+                href: '/usuarios/' + @usuario.id.to_s)
+            %>
+            <%= render CobraButtonComponent.new(
+                text: 'Salvar',
+                submit: true)
+            %>
         </div>
     </nav>
 <% end %>
