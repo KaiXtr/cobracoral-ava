@@ -24,9 +24,9 @@
             <%= @usuario.biografia %>
         </p>
         <div>
-            Cargo: <%= cargo_usuario(@usuario) %>
+            Cargo: <%= enum_cargo_usuario(@usuario) %>
             <br>
-            Pronomes: <%= pronomes_usuario(@usuario).enumPronomes %>
+            Pronomes: <%= enum_pronomes(@usuario.pronomes_usuario) %>
             <br>
             Turmas: <% for turma in turmas_usuario(@usuario) %>
                 <a href="/turmas/<%= turma.id %>">
@@ -54,7 +54,7 @@
             </a>
             <% end %>
         </div>
-        <% if @usuario.usuario_cargo_id == 2 %>
+        <% if Usuario.cargo_usuarios[@usuario.cargo_usuario] == 2 %>
             <%= render "dados_docente", usuario: @usuario %>
         <% end %>
     </div>

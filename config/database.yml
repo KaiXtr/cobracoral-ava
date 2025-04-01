@@ -9,6 +9,16 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
+oracle_db:
+  adapter: oracle_enhanced
+  host: localhost
+  database: ORCL
+  username: <%= ENV.fetch("ORACLE_USERNAME") %>
+  password: <%= ENV.fetch("ORACLE_PASSWORD") %>
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
 development:
   <<: *default
   database: db/development.sqlite3

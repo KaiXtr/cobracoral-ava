@@ -1,0 +1,7 @@
+<% if @pomodoro_ativado %>
+    <%= render MedidorGraficoComponent.new(
+        medidor_titulo: 'Pomodoro',
+        valor_entrada: @pomodoro_tempo_atual,
+        valor_tipo: 'minuto')
+    %>
+<% end %>

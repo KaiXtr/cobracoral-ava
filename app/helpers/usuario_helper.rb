@@ -1,6 +1,39 @@
 module UsuarioHelper
-    def pronomes_usuario(usuario)
-        return PronomesUsuario.find(usuario.pronomes_usuario_id)
+    def enum_pronomes(pronomes)
+        hash = Usuario.pronomes_usuario_strings.transform_keys(&:to_s)
+        return hash[pronomes + '_string']
+    end
+
+    def enum_cargo_usuario(usuario)
+        hashFeminino = Usuario.cargo_usuario_feminino_strings.transform_keys(&:to_s)
+        hashMasculino = Usuario.cargo_usuario_masculino_strings.transform_keys(&:to_s)
+        cargo = usuario.cargo_usuario
+
+        if usuario.pronomes_usuario == 1 then
+            return hashFeminino[cargo + '_feminino_string']
+        else
+            return hashMasculino[cargo + '_masculino_string']
+        end
+    end
+
+    def select_pronomes
+        Usuario.pronomes_usuarios.map{ |t| [
+            enum_pronomes(t[0]), t[0], {
+                'pronome-id' => t[0]
+            }
+        ]}
+    end
+
+    def select_cargo_usuario(usuario)
+        Usuario.cargo_usuarios.map{ |t| [
+            enum_cargo_usuario(usuario), t[0], {
+                'cargo-id' => t[0]
+            }
+        ]}
+    end
+
+    def isUsuarioDiscente(usuario)
+        Usuario.cargo_usuarios[usuario.cargo_usuario] < 3
     end
     
     def turmas_usuario(usuario)
@@ -12,16 +45,5 @@ module UsuarioHelper
         end
 
         return turmas
-    end
-
-    def cargo_usuario(usuario)
-        cargo = UsuarioCargo.find(usuario.usuario_cargo_id)
-        pronomes = PronomesUsuario.find(usuario.pronomes_usuario_id)
-
-        if pronomes.id == 1 then
-            return cargo.enumCargoFeminino
-        else
-            return cargo.enumCargoMasculino
-        end
     end
 end

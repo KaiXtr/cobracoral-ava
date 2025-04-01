@@ -39,8 +39,7 @@ class ConteudoPolicy
   private
 
   def temCargoCoordenador?
-    cargo = UsuarioCargo.find(usuario.usuario_cargo_id)
-    cargo.id == 1
+    Usuario.cargo_usuarios[usuario.cargo_usuario] == 1
   end
 
   def permissaoProfessor?
@@ -54,8 +53,7 @@ class ConteudoPolicy
   end
 
   def temCargoProfessor?
-    cargo = UsuarioCargo.find(usuario.usuario_cargo_id)
-    cargo.id == 2
+    Usuario.cargo_usuarios[usuario.cargo_usuario] == 2
   end
 
   class Scope < ApplicationPolicy::Scope

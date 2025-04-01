@@ -19,13 +19,7 @@
   <div>
     <%= form.rich_text_area :corpo %>
   </div>
-
-  <div class="button-group">
-    <a href="/conteudos/<%= @conteudo.id %>">
-      <button class="act-button">
-        Cancelar
-      </button>
-    </a>
-    <%= form.submit "Salvar", class: "act-button" %>
-  </div>
+  <%= render CancelarSalvarButtonsComponent.new(
+    cancel_to_link: '/conteudos/' + @conteudo.id.to_s)
+  %>
 <% end %>

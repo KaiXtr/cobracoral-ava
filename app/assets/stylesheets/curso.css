@@ -226,7 +226,7 @@ div.disciplinas-banner img {
 }
 
 .medidor-container .medidor-grafico .medidor-grafico-atual {
-    border: 10px solid red;
+    border: 10px solid var(--red-main);
     border-radius: 100%;
     position: absolute;
     min-width: 5vw;

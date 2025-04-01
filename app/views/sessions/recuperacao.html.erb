@@ -9,14 +9,14 @@
 			<%= f.email_field :email, required: 'true', class: 'input-text' %>
 		</div>
 		<div class="button-group">
-            <a href="/entrar">
-                <button type="button" class="act-button">
-                    Voltar
-                </button>
-            </a>
-			<button type="submit" class="act-button">
-				Enviar
-			</button>
+			<%= render CobraButtonComponent.new(
+				text: 'Voltar',
+                href: '/entrar')
+			%>
+			<%= render CobraButtonComponent.new(
+				text: 'Enviar',
+				submit: true)
+			%>
 		</div>
     <% end %>
 </div>

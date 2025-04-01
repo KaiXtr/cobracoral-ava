@@ -31,15 +31,7 @@
     <%= form.label :semestre %>
     <%= form.text_field :semestre %>
   </div>
-
-  <div class="button-group">
-    <a href="/disciplinas/<%= @disciplina.id %>">
-      <button class="act-button">
-        Cancelar
-      </button>
-    </a>
-    <button type="submit" class="act-button">
-      Salvar
-    </button>
-  </div>
+  <%= render CancelarSalvarButtonsComponent.new(
+    cancel_to_link: '/disciplinas/' + @disciplina.id.to_s)
+  %>
 <% end %>

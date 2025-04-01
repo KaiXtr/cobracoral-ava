@@ -4,13 +4,13 @@ if Rails.env.production?
     end
 
 
-    Redis.current = Redis.new(
+    $redis = Redis.new(
         url:        ENV['SENTINEL_URL'],
         sentinels:  SENTINELS,
         role:       :master
     )
 else
-    Redis.current = Redis.new(
+    $redis = Redis.new(
         url:    ENV['REDIS_URL'],
         port:   ENV['REDIS_PORT'],  
         db:     ENV['REDIS_DB']

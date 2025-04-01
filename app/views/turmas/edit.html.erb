@@ -16,41 +16,25 @@
             </h2>
             <div>
                 <div class="form-group">
-                    <%= form.label :turno_turma_id, "Turno" %>
+                    <%= form.label :turno_turma, "Turno" %>
                     <div class="select-box">
-                        <%= form.select :turno_turma_id,
-                            options_for_select(@turno_turmas.map{ |t| [
-                                t.enumTurno, t.id, {
-                                    'turno-id' => t.id
-                                }
-                            ]}, @turma.turno_turma_id)
+                        <%= form.select :turno_turma,
+                            options_for_select(select_turno(), @turma.turno_turma)
                         %>
                     </div>
                 </div>
                 <div class="form-group">
-                    <%= form.label :modalidade_turma_id, "Modalidade" %>
+                    <%= form.label :modalidade_turma, "Modalidade" %>
                     <div class="select-box">
-                        <%= form.select :modalidade_turma_id,
-                            options_for_select(@modalidade_turmas.map{ |t| [
-                                t.enumModalidade, t.id, {
-                                    'modalidade-id' => t.id
-                                }
-                            ]}, @turma.modalidade_turma_id)
+                        <%= form.select :modalidade_turma,
+                            options_for_select(select_modalidade(), @turma.modalidade_turma)
                         %>
                     </div>
                 </div>
             </div>
-
-            <div class="button-group">
-                <a href="/turmas/<%= @turma.id %>">
-                <button class="act-button">
-                    Cancelar
-                </button>
-                </a>
-                <button type="submit" class="act-button">
-                    Salvar
-                </button>
-            </div>
+            <%= render CancelarSalvarButtonsComponent.new(
+                cancel_to_link: '/turmas/' + @turma.id.to_s)
+            %>
 
             <div>
                 <h2>Estudantes da turma</h2>

@@ -47,4 +47,8 @@ module ApplicationHelper
 	def unidades_disciplina(disciplina)
 		return UnidadeDisciplina.where(disciplina_id: disciplina.id)
 	end
+
+	def conteudos_unidade(unidade)
+		return Conteudo.where(unidade_disciplina_id: unidade.id)
+	end
 end

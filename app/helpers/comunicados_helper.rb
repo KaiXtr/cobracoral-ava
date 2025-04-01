@@ -2,9 +2,22 @@ module ComunicadosHelper
     def usuario_comunicado(usuario_id)
         Usuario.find(usuario_id)
     end
+    
+    def enum_visibilidade(visibilidade)
+        hash = Comunicado.visibilidade_comunicado_strings.transform_keys(&:to_s)
+        return hash[visibilidade + '_string']
+    end
+
+    def select_visibilidade
+        Comunicado.visibilidade_comunicados.map{ |v| [
+            enum_visibilidade(v[0]), v[0], {
+                'visibilidade-id' => v[0]
+            }
+        ]}
+    end
 
     def info_usuario(usuario, comunicado)
-        visibilidade = comunicado.visibilidade_comunicado_id
+        visibilidade = comunicado.visibilidade_comunicado
         disciplina = Disciplina.find_by(usuario_id: usuario.id)
 
         # Professor(a) da disciplina

@@ -1,0 +1,109 @@
+<header id="cobracoral-header">
+    <button class="icon-button" onclick="abrirBarraLateral()">
+    <i class="fa-solid fa-bars fa-2xl"></i>
+    </button>
+    <div class="header-logo">
+    <div class="header-logo-svg">
+        <%= helpers.show_svg('cobracoral-logo.svg') %>
+    </div>
+    <div class="header-logo-info">
+        <a href="/">
+            <% if helpers.isUsuarioDiscente(@usuario_autenticado) %>
+                <h1>SIGAA</h1>
+            <% else %>
+                <h1><%= helpers.current_curso(@usuario_autenticado).nome_curso %></h1>
+            <% end %>
+        </a>
+        <span><%= ENV["COBRACORAL_VERSION"] %></span>
+    </div>
+    </div>
+    <ul>
+        <li>
+        <a href="/painel" title="Painel">
+            <button class="icon-button">
+                <i class="fa-solid fa-square-poll-horizontal fa-2xl"></i>
+            </button>
+        </a>
+        </li>
+        <li>
+            <a href="/comunicados" title="Comunicados">
+            <button class="icon-button">
+                <i class="fa-solid fa-bell fa-2xl"></i>
+            </button>
+            </a>
+        </li>
+        <li>
+            <a href="/cursos" title="Cursos">
+            <button class="act-button">
+                <i class="fa-solid fa-book-open fa-2xl"></i>
+            </button>
+            </a>
+        </li>
+        <!--li>
+            <a href="/ide" title="Ambiente integrado de desenvolvimento">
+            <button class="act-button">
+                <i class="fa-solid fa-code fa-2xl"></i>
+            </button>
+            </a>
+        </li-->
+        <li>
+            <a href="/tarefas" title="Tarefas">
+            <button class="act-button">
+                <i class="fa-solid fa-list-check fa-2xl"></i>
+            </button>
+            </a>
+        </li>
+        <li>
+            <a href="/mensagens" title="Mensagens">
+            <button class="act-button">
+                <i class="fa-solid fa-comment fa-2xl"></i>
+            </button>
+            </a>
+        </li>
+        <li>
+            <button class="act-button abrir-menu">
+                <i class="fa-solid fa-user fa-2xl"></i>
+                <div id="menu-perfil">
+                    <%= render PomodoroToolComponent.new(login_time: session[:login_time]) %>
+                    <h5 class="menu-perfil-usuario-cargo">
+                        <%= helpers.enum_cargo_usuario(@usuario_autenticado) %>
+                    </h5>
+                    <ul>
+                        <li>
+                            <a href="/perfil">
+                                <i class="fa-solid fa-smile fa-xl"></i>
+                                <span>Editar perfil</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/usuarios/:id/caixa" target="_blank">
+                                <i class="fa-solid fa-envelope fa-xl"></i>
+                                <span>Abrir caixa de entrada</span>
+                            </a>
+                        </li>
+                        <% if @usuario_autenticado.lattes_id %>
+                            <li>
+                                <a href="/usuarios/:id/lattes" target="_blank">
+                                    <i class="fa-solid fa-file-lines fa-xl"></i>
+                                    <span>Acessar currículo lattes</span>
+                                </a>
+                            </li>
+                        <% end %>
+                        <li>
+                            <a href="/perfil">
+                                <i class="fa-solid fa-gear fa-xl"></i>
+                                <span>Preferências</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/sair" data-turbo-prefetch="false">
+                                <i class="fa-solid fa-door-open fa-xl"></i>
+                                <span>Sair</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </button>
+        </li>
+    </ul>
+</header>

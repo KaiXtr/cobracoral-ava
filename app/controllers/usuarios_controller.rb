@@ -9,7 +9,6 @@ class UsuariosController < ApplicationController
     def edit
         @usuario = usuario_autenticado
         authorize(@usuario)
-        @pronomes = PronomesUsuario.all
         Rails.logger.info "Editando usuário " + @usuario.nome_completo + "."
     end
   
@@ -51,7 +50,7 @@ class UsuariosController < ApplicationController
         matricula = Matricula.new
         matricula.usuario_id = usuario.id
         matricula.turma_id = turma.id
-        usuario.usuario_cargo_id = 6
+        usuario.cargo_usuario = 6
 
         respond_to do |format|
             if matricula.save

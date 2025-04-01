@@ -19,13 +19,9 @@
             <%= f.text_area :biografia, cols: 130, rows: 5 %>
         </div>
         <div class="form_group">
-            <%= f.label :pronomes_usuario_id, "Pronomes" %>
-            <%= f.select :pronomes_usuario_id,
-            options_for_select(@pronomes.map{ |p| [
-                p.enumPronomes, p.id, {
-                'pronomes-id' => p.id
-                }
-            ]}, @usuario.pronomes_usuarios_id)
+            <%= f.label :pronomes_usuario, "Pronomes" %>
+            <%= f.select :pronomes_usuario,
+                options_for_select(select_pronomes(), @usuario.pronomes_usuario)
             %>
         </div>
         <div class="form_group">
@@ -50,14 +46,14 @@
         </div>
 
         <div class="button-group">
-            <a href="/usuarios/<%= @usuario.id %>">
-            <button class="act-button">
-                Cancelar
-            </button>
-            </a>
-            <button type="submit" class="act-button">
-                Salvar
-            </button>
+            <%= render CobraButtonComponent.new(
+                text: 'Cancelar',
+                href: '/usuarios/' + @usuario.id.to_s)
+            %>
+            <%= render CobraButtonComponent.new(
+                text: 'Salvar',
+                submit: true)
+            %>
         </div>
     </nav>
 <% end %>

@@ -12,17 +12,15 @@ class TurmasController < ApplicationController
 	def show
 		@turma = Turma.find(params[:id])
 		@curso_turma = Curso.find(@turma.curso_id)
-		@turno_turma = TurnoTurma.find(@turma.turno_turma_id)
-		@modalidade_turma = ModalidadeTurma.find(@turma.modalidade_turma_id)
 
 		# Listar apenas usuários estudantes, excluindo professores
 		@estudantes_turma = Array.new
 		matriculas_estudantes = Matricula.where(turma_id: @turma.id)
 		for matricula in matriculas_estudantes do
 			estudante = Usuario.find(matricula.usuario_id)
-			cargo = UsuarioCargo.find(estudante.usuario_cargo_id)
+			cargo = Usuario.cargo_usuarios[estudante.cargo_usuario]
 
-			if cargo.id > 2 then
+			if cargo > 2 then
 				@estudantes_turma.push(estudante)
 			end
 		end
@@ -47,18 +45,16 @@ class TurmasController < ApplicationController
 
 		@cursos = Curso.pluck(:nome_curso)
 		@curso_turma = Curso.find(@turma.curso_id)
-		@turno_turmas = TurnoTurma.all
-		@modalidade_turmas = ModalidadeTurma.all
 
 		# Listar apenas usuários estudantes, excluindo professores
 		@estudantes_turma = Array.new
 		matriculas_estudantes = Matricula.where(turma_id: @turma.id)
 		for matricula in matriculas_estudantes do
-			cargo = UsuarioCargo.find(usuario.usuario_cargo_id)
-			estudante = Usuario.find(matricula.usuario_id)
+			usuario = Usuario.find(matricula.usuario_id)
+			cargo = Usuario.cargo_usuarios[usuario.cargo_usuario]
 
-			if cargo.id > 2 then
-				@estudantes_turma.push(estudante)
+			if cargo > 2 then
+				@estudantes_turma.push(usuario)
 			end
 		end
 
@@ -73,8 +69,6 @@ class TurmasController < ApplicationController
 	def new
 		@turma = Turma.new
 		authorize(@turma)
-		@turno_turmas = TurnoTurma.all
-		@modalidade_turmas = ModalidadeTurma.all
 
 		# Verificando nível de acesso do usuário
 		usuario = usuario_autenticado
@@ -82,8 +76,8 @@ class TurmasController < ApplicationController
 
 		# Se professor ou representante, apenas cursos onde está matriculado
 		if matricula then
-			usuarioCargo = UsuarioCargo.find(usuario.usuario_cargo_id)
-			if usuarioCargo.id == 2 || usuarioCargo.id == 3 then
+			cargo_usuario = Usuario.cargo_usuarios[usuario.cargo_usuario]
+			if cargo_usuario == 2 || cargo_usuario == 3 then
 				turmas_matriculadas = Turma.joins(:matricula).where(
 					matricula: { turma_id: matricula.id }
 				)
@@ -190,6 +184,6 @@ class TurmasController < ApplicationController
 		end
 
 		def turma_params
-			params.require(:turma).permit(:curso_id, :nome_turma, :turno_turma_id, :modalidade_turma_id)
+			params.require(:turma).permit(:curso_id, :nome_turma, :turno_turma, :modalidade_turma)
 		end
 end

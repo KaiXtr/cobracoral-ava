@@ -84,14 +84,10 @@
 				%>
 			</div>
 			<div class="form-column">
-				<%= f.label :pronomes_usuario_id, "Pronomes" %>
+				<%= f.label :pronomes_usuario, "Pronomes" %>
 				<div class="select-box">
-					<%= f.select :pronomes_usuario_id,
-						options_for_select(@pronomes.map{ |p| [
-							p.enumPronomes, p.id, {
-							'pronomes-id' => p.id
-							}
-						]}, @usuario_autenticado.pronomes_usuario_id)
+					<%= f.select :pronomes_usuario,
+                		options_for_select(select_pronomes(), @usuario_autenticado.pronomes_usuario)
 					%>
 				</div>
 			</div>
@@ -135,9 +131,10 @@
 			%>
 		</div>
 		<div class="button-group" onclick="triggerLoginSubmit()">
-			<button type="button" class="act-button">
-				Atualizar e entrar
-			</button>
+			<%= render CobraButtonComponent.new(
+				text: 'Atualizar e entrar',
+				onclick: 'triggerLoginSubmit')
+			%>
 		</div>
 		<div class="login-info">
             <%= ENV["COBRACORAL_VERSION"] %> | 

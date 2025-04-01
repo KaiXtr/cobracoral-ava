@@ -51,21 +51,17 @@
       </div>
 
       <div class="disciplina_medidores">
-        <button class="act-button">Lançar presenças</button>
-        <button class="act-button">Lançar notas</button>
+        <%= render CobraButtonComponent.new(
+            text: 'Lançar presenças')
+        %>
+        <%= render CobraButtonComponent.new(
+            text: 'Lançar notas')
+        %>
       </div>
     </div>
-
-    <div class="button-group">
-      <a href="/disciplinas/<%= @disciplina.id %>">
-        <button class="act-button">
-          Cancelar
-        </button>
-      </a>
-      <button type="submit" class="act-button">
-        Salvar
-      </button>
-    </div>
+    <%= render CancelarSalvarButtonsComponent.new(
+      cancel_to_link: '/disciplinas/' + @disciplina.id.to_s)
+    %>
 
     <div class="disciplina_conteudos_container">
       <ol>

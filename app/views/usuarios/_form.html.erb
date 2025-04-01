@@ -11,15 +11,7 @@
         <%= f.label :telefone, 'Telefone' %>
         <%= f.text_field :telefone %>
     </div>
-
-    <div class="button-group">
-        <a href="/usuarios/<%= @usuario.id %>">
-        <button class="act-button">
-            Cancelar
-        </button>
-        </a>
-        <button type="submit" class="act-button">
-            Salvar
-        </button>
-    </div>
+    <%= render CancelarSalvarButtonsComponent.new(
+        cancelar_to_link: '/usuarios/' + @usuario.id.to_s)
+    %>
 <% end %>

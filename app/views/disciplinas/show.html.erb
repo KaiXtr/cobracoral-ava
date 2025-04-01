@@ -39,32 +39,16 @@
         Semestre: <%= @disciplina.semestre %>
       </div>
       <div class="disciplina_medidores">
-        <div class="medidor-container">
-          <div class="medidor-grafico">
-            <div class="medidor-grafico-max"></div>
-            <div class="medidor-grafico-atual"></div>
-            <span class="medidor-grafico-valor">100%</span>
-          </div>
-          <h5>
-            Presenças
-            <a href="">
-              <i class="fa-solid fa-pie-chart fa-lg icon-button"></i>
-            </a>
-          </h5>
-        </div>
-        <div class="medidor-container">
-          <div class="medidor-grafico">
-            <div class="medidor-grafico-max"></div>
-            <div class="medidor-grafico-atual"></div>
-            <span class="medidor-grafico-valor">10%</span>
-          </div>
-          <h5>
-            Notas
-            <a href="">
-              <i class="fa-solid fa-pie-chart fa-lg icon-button"></i>
-            </a>
-          </h5>
-        </div>
+        <%= render MedidorGraficoComponent.new(
+          medidor_titulo: 'Presenças',
+          valor_entrada: 100,
+          valor_tipo: 'porcento')
+        %>
+        <%= render MedidorGraficoComponent.new(
+          medidor_titulo: 'Notas',
+          valor_entrada: 6.5,
+          valor_tipo: 'nota')
+        %>
       </div>
     </div>
     <div class="disciplina_conteudos_container">

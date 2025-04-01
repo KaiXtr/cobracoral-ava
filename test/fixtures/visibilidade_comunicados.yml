@@ -1,7 +1,0 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-visibilidade_curso:
-  enumVisibilidade: todos do curso
-
-visibilidade_turmas:
-  enumVisibilidade: todas as turmas

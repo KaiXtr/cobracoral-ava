@@ -24,38 +24,22 @@
     %>
   </div>
   <div>
-    <%= form.label :turno_turma_id, "Turno" %>
-    <%= form.select :turno_turma_id,
-      options_for_select(@turno_turmas.map{ |t| [
-        t.enumTurno, t.id, {
-          'turno-id' => t.id
-        }
-      ]}, @turma.turno_turma_id)  
+    <%= form.label :turno_turma, "Turno" %>
+    <%= form.select :turno_turma,
+      options_for_select(select_turno(), @turma.turno_turma)
     %>
   </div>
   <div>
-    <%= form.label :modalidade_turma_id, "Modalidade" %>
-    <%= form.select :modalidade_turma_id,
-      options_for_select(@modalidade_turmas.map{ |m| [
-        m.enumModalidade, m.id, {
-          'modalidade-id' => m.id
-        }
-      ]}, @turma.modalidade_turma_id)
+    <%= form.label :modalidade_turma, "Modalidade" %>
+    <%= form.select :modalidade_turma,
+      options_for_select(select_modalidade(), @turma.modalidade_turma)
     %>
   </div>
   <div>
     <%= form.label :senha_acesso, "Senha de acesso" %>
     <%= form.password_field :senha_acesso %>
   </div>
-  
-  <div class="button-group">
-    <a href="/turmas">
-      <button class="act-button">
-        Cancelar
-      </button>
-    </a>
-    <button type="submit" class="act-button">
-      Salvar
-    </button>
-  </div>
+  <%= render CancelarSalvarButtonsComponent.new(
+    cancel_to_link: '/turmas/' + @turma.id.to_s)
+  %>
 <% end %>

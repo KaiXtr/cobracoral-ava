@@ -11,14 +11,10 @@
   <% end %>
 
   <div class="form-group">
-      <%= form.label :visibilidade_comunicado_id, "Visibilidade" %>
+      <%= form.label :visibilidade_comunicado, "Visibilidade" %>
       <div class="select-box">
-          <%= form.select :visibilidade_comunicado_id,
-              options_for_select(@visibilidades.map{ |v| [
-                  v.enumVisibilidade, v.id, {
-                      'visibilidade-id' => v.id
-                  }
-              ]}, comunicado.visibilidade_comunicado_id)
+          <%= form.select :visibilidade_comunicado,
+              options_for_select(select_visibilidade(), comunicado.visibilidade_comunicado)
           %>
       </div>
   </div>

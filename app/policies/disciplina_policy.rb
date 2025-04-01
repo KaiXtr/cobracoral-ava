@@ -61,8 +61,7 @@ class DisciplinaPolicy
   end
 
   def temCargoCoordenador?
-    curso = Curso.find(@disciplina.curso_id)
-    curso.usuario_id == @usuario.id
+    Usuario.cargo_usuarios[usuario.cargo_usuario] == 1
   end
 
   def permissaoProfessor?
@@ -74,12 +73,11 @@ class DisciplinaPolicy
   end
 
   def temCargoProfessor?
-    cargo = UsuarioCargo.find(usuario.usuario_cargo_id)
-    cargo.id == 2
+    Usuario.cargo_usuarios[usuario.cargo_usuario] == 2
   end
 
   def estaNoSemestre?
-    if usuario.usuario_cargo_id > 2 then
+    if Usuario.cargo_usuarios[usuario.cargo_usuario] > 2 then
       matricula = Matricula.find_by(usuario_id: usuario.id)
       if matricula then
         return @disciplina.semestre == matricula.semestre

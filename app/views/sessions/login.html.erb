@@ -59,10 +59,11 @@
 		<div class="form-group">
 			<a id="problemas-link" href="/recuperacao">Problemas para entrar?</a>
 		</div>
-		<div class="button-group" onclick="triggerLoginSubmit()">
-			<button type="button" class="act-button">
-				Entrar
-			</button>
+		<div class="button-group">
+			<%= render CobraButtonComponent.new(
+				text: 'Entrar',
+				onclick: 'triggerLoginSubmit')
+			%>
 		</div>
 		<div class="login-info">
             <%= ENV["COBRACORAL_VERSION"] %> | 

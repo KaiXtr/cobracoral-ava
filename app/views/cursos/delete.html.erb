@@ -4,11 +4,10 @@
         Não será possível desfazer as alterações.
     </p>
     <div class="button-group">
-        <a href="/cursos/<%= @curso.id %>/editar">
-            <button class="act-button">
-                Cancelar
-            </button>
-        </a>
+        <%= render CobraButtonComponent.new(
+            text: 'Cancelar',
+            href: '/cursos/' + @curso.id.to_s + '/editar')
+        %>
         <%= button_to "Deletar", @curso, class: "act-button", method: :delete %>
     </div>
 </nav>

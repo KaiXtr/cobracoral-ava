@@ -16,10 +16,10 @@
         </h3>
         <div>
             <div>
-                Turno: <%= @turno_turma.enumTurno %>
+                Turno: <%= enum_turno(@turma.turno_turma) %>
             </div>
             <div>
-                Modalidade: <%= @modalidade_turma.enumModalidade %>
+                Modalidade: <%= enum_modalidade(@turma.modalidade_turma) %>
             </div>
             </div>
         <div>
@@ -27,13 +27,12 @@
             <div>
                 <%= render @estudantes_turma %>
             </div>
-            <a href="/turmas/<%= @turma.id %>/matricular">
-                <% if policy(@turma).matricular? %>
-                    <button class="act-button">
-                        Matricular estudantes
-                    </button>
-                <% end %>
-            </a>
+            <% if policy(@turma).matricular? %>
+                <%= render CobraButtonComponent.new(
+                    text: 'Matricular estudantes',
+                    href: '/turmas/' + @turma.id.to_s + 'matricular')
+                %>
+            <% end %>
         </div>
         <div>
             <h2>Minhas disciplinas</h2>

@@ -38,8 +38,7 @@ class SessionsController < ApplicationController
 			redirect_to root_path
 		end
 
-		@pronomes = PronomesUsuario.all
-		@cargo = UsuarioCargo.find(@usuario_autenticado.usuario_cargo_id).enumCargoMasculino
+		@cargo = helpers.enum_cargo_usuario(@usuario_autenticado)
 		render "primeiro-acesso"
 	end
 
