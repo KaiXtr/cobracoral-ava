@@ -73,7 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_16_141346) do
     t.string "nome_curso"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "descricao"
+    t.string "descricao"  
     t.integer "usuario_id", null: false
     t.index ["usuario_id"], name: "index_cursos_on_usuario_id"
   end

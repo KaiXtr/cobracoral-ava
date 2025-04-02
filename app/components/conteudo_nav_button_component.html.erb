@@ -1,11 +1,11 @@
 <div class="button-group">
     <% if @conteudoAtual.id - 1 > 0 %>
         <a href="/conteudos/<%= @conteudoAtual.id - 1 %>">
-        <button class="act-button">Conteúdo anterior</button>
+        <button class="cobra-button">Conteúdo anterior</button>
         </a>
     <% end %>
     <a href="/conteudos/<%= @conteudoAtual.id %>/salvar">
-        <button class="act-button">
+        <button class="cobra-button">
             <% if @proximoConteudo %>
             Próximo conteúdo: <%= @proximoConteudo.nome_conteudo %>
             <% else %>

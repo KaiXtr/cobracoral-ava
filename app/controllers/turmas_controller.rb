@@ -96,7 +96,7 @@ class TurmasController < ApplicationController
 			end
 		# Se coordenador, apenas cursos onde coordena
 		else
-			@cursos = Curso.where(usuario_id: @usuario.id)
+			@cursos = Curso.where(usuario_id: usuario.id)
 			Rails.logger.info "Criando nova turma com nível de usuário Coordenador(a)."
 		end
 	end

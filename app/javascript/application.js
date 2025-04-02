@@ -3,6 +3,8 @@ import "@hotwired/turbo-rails"
 import "trix"
 import "@rails/actiontext"
 
+import "./context-menu"
+
 const header = document.getElementById('cobracoral-header');
 if (header && document.referrer.includes('entrar')) {
     header.style = "padding-top: 80vw";

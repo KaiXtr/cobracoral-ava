@@ -1,0 +1,50 @@
+<div id="context-menu-component" class="select-disable" style="visibility: hidden;">
+    <ul id="context-menu-options" style="opacity: 0%;">
+        <li id="context-menu-option-go-to" style="display: none;">
+            <i class="fa-solid fa-arrow-right fa-sm"></i>
+            <span>Ir</span>
+        </li>
+        <li id="context-menu-option-search" style="display: none;">
+            <i class="fa-solid fa-magnifying-glass fa-sm"></i>
+            <span>Pesquisar</span>
+        </li>
+        <li id="context-menu-option-open-link" style="display: none;">
+            <i class="fa-solid fa-link fa-sm"></i>
+            <span>Abrir link</span>
+        </li>
+        <li id="context-menu-option-open-imagem" style="display: none;">
+            <i class="fa-solid fa-image fa-sm"></i>
+            <span>Abrir imagem</span>
+        </li>
+        <li id="context-menu-option-copy">
+            <i class="fa-solid fa-copy fa-sm"></i>
+            <span>Copiar</span>
+        </li>
+        <li id="context-menu-option-cut" style="display: none;">
+            <i class="fa-solid fa-scissors fa-sm"></i>
+            <span>Recortar</span>
+        </li>
+        <li id="context-menu-option-paste" style="display: none;">
+            <i class="fa-solid fa-clipboard fa-sm"></i>
+            <span>Colar</span>
+        </li>
+        <li id="context-menu-option-select-all">
+            <i class="fa-solid fa-square fa-sm"></i>
+            <span>Selecionar tudo</span>
+        </li>
+    </ul>
+
+    <% if @anotacoes %>
+        <div id="context-menu-marker-colors">
+            <% for cor in ['a','b','c'] %>
+                <span>
+                    <%= cor %>
+                </span>
+            <% end %>
+        </div>
+
+        <div id="context-menu-annoation-area">
+            <textarea></textarea>
+        </div>
+    <% end %>
+</div>

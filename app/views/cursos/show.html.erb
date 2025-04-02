@@ -1,7 +1,7 @@
 <nav>
     <div class="deslizar-transition">
         <% if policy(@curso).index? %>
-            <a href="/cursos">
+            <a href="/cursos" class="goback-button">
                 <i class="fa-solid fa-arrow-left fa-sm"></i>
                 Voltar para <strong>todos os cursos</strong>
             </a>
@@ -9,7 +9,7 @@
         <h1>
             <%= @curso.nome_curso %>
             <% if policy(@curso).edit? %>
-                <a href="/cursos/<%= @curso.id %>/editar">
+                <a href="/cursos/<%= @curso.id %>/editar" tooltip-text="Editar curso">
                     <i class="fa-solid fa-pen fa-sm icon-button"></i>
                 </a>
             <% end %>

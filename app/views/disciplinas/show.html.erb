@@ -7,9 +7,7 @@
 </div>
 <nav>
   <div class="deslizar-transition">
-    <p style="color: green"><%= notice %></p>
-    
-    <a href="/turmas/<%= @turma.id %>">
+    <a href="/turmas/<%= @turma.id %>" class="goback-button">
       <i class="fa-solid fa-arrow-left fa-sm"></i>
       Voltar para <strong><%= @turma.nome_turma %></strong>
     </a>
@@ -19,7 +17,7 @@
         <h1 class="titulo-disciplina">
           <%= @disciplina.nome_disciplina %>
           <% if policy(@disciplina).edit? %>
-            <a href="/disciplinas/<%= @disciplina.id %>/editar">
+            <a href="/disciplinas/<%= @disciplina.id %>/editar" tooltip-text="Editar disciplina">
                 <i class="fa-solid fa-pen fa-sm icon-button"></i>
             </a>
           <% end %>

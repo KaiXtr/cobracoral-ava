@@ -1,14 +1,13 @@
 <nav>
   <div class="deslizar-transition">
-    <p style="color: green"><%= notice %></p>
-    <a href="/disciplinas/<%= @disciplina_conteudo.id %>">
+    <a href="/disciplinas/<%= @disciplina_conteudo.id %>" class="goback-button">
       <i class="fa-solid fa-arrow-left fa-sm"></i>
       Voltar para <strong><%= @disciplina_conteudo.nome_disciplina %></strong>
     </a>
     <h1>
       <%= @conteudo.nome_conteudo %>
       <% if policy(@conteudo).edit? %>
-        <a href="/conteudos/<%= @conteudo.id %>/editar">
+        <a href="/conteudos/<%= @conteudo.id %>/editar" tooltip-text="Editar conteúdo">
             <i class="fa-solid fa-pen fa-sm icon-button"></i>
         </a>
       <% end %>

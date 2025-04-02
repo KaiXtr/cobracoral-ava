@@ -7,10 +7,7 @@
     <%= csp_meta_tag %>
 
     <%= favicon_link_tag asset_path('favicon.png') %>
-    <%= stylesheet_link_tag "themes/theme-default", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "curso", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "pages", "data-turbo-track": "reload" %>
     <script src="https://kit.fontawesome.com/597fea8ed7.js" crossorigin="anonymous"></script>
     <%= javascript_importmap_tags %>
     <script type="text/javascript">
@@ -26,9 +23,11 @@
         }
     </script>
   </head>
-  <body>  
+  <body>
+    <%= render ContextMenuComponent.new() %>
     <%= render BarraPrincipalComponent.new(usuario_autenticado: @usuario_autenticado) %>
     <%= render BarraLateralNavegacaoComponent.new(usuario_autenticado: @usuario_autenticado) %>
+    <%= render NotificacaoComponent.new(mensagem: notice) %>
     <%= yield %>
     <%= render RodapeComponent.new() %>
   </body>

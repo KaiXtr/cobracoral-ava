@@ -1,11 +1,11 @@
 <% if @href %>
     <a href="<%= @href %>">
-        <button type="<%= @type %>" class="act-button" onclick="<%= @onclick %>()">
+        <button type="<%= @type %>" class="cobra-button" onclick="<%= @onclick %>()">
             <%= @text %>
         </button>
     </a>
 <% else %>
-    <button type="<%= @type %>" class="act-button" onclick="<%= @onclick %>()">
+    <button type="<%= @type %>" class="cobra-button" onclick="<%= @onclick %>()">
         <%= @text %>
     </button>
 <% end %>
