@@ -1,32 +1,32 @@
-<div id="context-menu-component" style="visibility: hidden;">
+<div id="context-menu-component" class="select-disable" style="visibility: hidden;">
     <ul id="context-menu-options" style="opacity: 0%;">
-        <li>
+        <li id="context-menu-option-search">
             <i class="fa-solid fa-magnifying-glass fa-sm"></i>
             <span>Pesquisar</span>
         </li>
         <% if @link %>
-            <li>
+            <li id="context-menu-option-open-link">
                 <i class="fa-solid fa-link fa-sm"></i>
                 <span>Abrir link</span>
             </li>
         <% end %>
-        <li>
+        <li id="context-menu-option-open-imagem">
             <i class="fa-solid fa-image fa-sm"></i>
             <span>Abrir imagem</span>
         </li>
-        <li>
+        <li id="context-menu-option-copy">
             <i class="fa-solid fa-copy fa-sm"></i>
             <span>Copiar</span>
         </li>
-        <li>
+        <li id="context-menu-option-cut">
             <i class="fa-solid fa-scissors fa-sm"></i>
             <span>Recortar</span>
         </li>
-        <li>
+        <li id="context-menu-option-paste">
             <i class="fa-solid fa-clipboard fa-sm"></i>
             <span>Colar</span>
         </li>
-        <li>
+        <li id="context-menu-option-select-all">
             <i class="fa-solid fa-square fa-sm"></i>
             <span>Selecionar tudo</span>
         </li>
