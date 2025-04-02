@@ -6,7 +6,12 @@ class ApplicationController < ActionController::Base
 
 	def usuario_autenticado
 		if session[:usuario_id]
-			@usuario_autenticado = Usuario.find(session[:usuario_id])
+			if Usuario.where(id: session[:usuario_id]).length > 0 then
+				@usuario_autenticado = Usuario.find(session[:usuario_id])
+			else
+				Rails.logger.info "Usuário previamente autenticado foi deletado. Encerrando sessão."
+				logout
+			end
 		end
 	end
 
