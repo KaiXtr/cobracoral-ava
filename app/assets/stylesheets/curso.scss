@@ -154,8 +154,13 @@ div.disciplinas-banner {
 }
 
 .page-edit-input {
+    background-color: var(--nav-bg);
     border: none;
     border-bottom: 2px solid black;
+}
+
+textarea {
+    font-family: "Rubik", sans-serif;
 }
 
 .disciplina_info_container {

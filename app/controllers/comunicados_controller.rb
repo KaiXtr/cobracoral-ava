@@ -9,16 +9,20 @@ class ComunicadosController < ApplicationController
     @comunicados = get_comunicados(@usuario)
 
     # Marcar visualização
-    for c in @comunicados do
-      if !ReacaoComunicado.find_by(usuario_id: @usuario.id, comunicado_id: c.id) then
-        reacao = ReacaoComunicado.new(
-            usuario_id: @usuario.id,
-            comunicado_id: c.id
-        )
-        reacao.save
+    if @comunicados then
+      for c in @comunicados do
+        if !ReacaoComunicado.find_by(usuario_id: @usuario.id, comunicado_id: c.id) then
+          reacao = ReacaoComunicado.new(
+              usuario_id: @usuario.id,
+              comunicado_id: c.id
+          )
+          reacao.save
+        end
       end
+      Rails.logger.info "Acessando todos os comunicados."
+    else
+      Rails.logger.info "Não há comunicados a serem exibidos."
     end
-    Rails.logger.info "Acessando todos os comunicados."
   end
 
   def reagir
@@ -125,6 +129,8 @@ class ComunicadosController < ApplicationController
       # Obtendo todos os comunicados da coordenação do curso
       curso_atual = helpers.current_curso(usuario_autenticado)
 
+      comunicados_da_coordenacao = nil
+
       if curso_atual then
         comunicados_da_coordenacao = Comunicado.where(
           usuario_id: curso_atual.usuario_id,
@@ -142,7 +148,11 @@ class ComunicadosController < ApplicationController
         end
       end
 
-      comunicados = comunicados_da_coordenacao + comunicados_de_professores
+      comunicados = comunicados_da_coordenacao
+      
+      if comunicados_da_coordenacao then
+        comunicados += comunicados_de_professores
+      end
 
       return comunicados
     end

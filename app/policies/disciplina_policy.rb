@@ -17,7 +17,7 @@ class DisciplinaPolicy
   end
 
   def new?
-    index?
+    temCargoCoordenador? || permissaoProfessor?
   end
 
   def new_conteudo?
@@ -33,7 +33,7 @@ class DisciplinaPolicy
   end
 
   def create?
-    temCargoCoordenador?
+    new?
   end
   
   def update?

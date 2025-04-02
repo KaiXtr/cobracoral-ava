@@ -72,7 +72,7 @@ class DisciplinasController < ApplicationController
 			end
 		# Se coordenador, apenas cursos onde coordena
 		else
-			@cursos = Curso.where(usuario_id: @usuario.id)
+			@cursos = Curso.where(usuario_id: usuario.id)
       Rails.logger.info "Criando nova disciplina com nível de acesso Coordenador(a)."
 		end
   end
@@ -106,6 +106,7 @@ class DisciplinasController < ApplicationController
   # POST /disciplinas or /disciplinas.json
   def create
     @disciplina = Disciplina.new(disciplina_params)
+    @cursos = Curso.all
     authorize(@disciplina)
 
     respond_to do |format|
@@ -161,7 +162,7 @@ class DisciplinasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def disciplina_params
-      params.require(:disciplina).permit(:nome_disciplina, :banner, :sala_aula, :semestre)
+      params.require(:disciplina).permit(:nome_disciplina, :curso, :turma, :usuario, :banner, :sala_aula, :semestre)
     end
     
     def isUsuarioEstudante(usuario)

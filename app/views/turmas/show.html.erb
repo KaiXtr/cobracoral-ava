@@ -34,11 +34,20 @@
             <% end %>
         </div>
         <div>
-            <h2>Minhas disciplinas</h2>
-            <h3>Semestre</h3>
-            <div class="disciplinas-container">
-                <%= render @disciplinas_turma %>
-            </div>
+            <% if @disciplinas_turma.length > 0 %>
+                <% if policy(@disciplinas_turma).index? %>
+                    <%= link_to "Todas as disciplinas", disciplinas_path(@disciplinas_turma) %>
+                <% end %>
+                <h3>Semestre</h3>
+                <div class="disciplinas-container">
+                    <%= render @disciplinas_turma %>
+                </div>
+            <% else %>
+                <p>Não há nenhuma disciplina cadastrada neste curso.</p>
+                <% if policy(@disciplinas_turma).new? %>
+                    <%= link_to "Adicionar disciplina", new_disciplina_path, remote: true %>
+                <% end %>
+            <% end %>
         </div>
     </div>
 </nav>

@@ -24,22 +24,36 @@
         </p>
         <div>
             <h2>Minhas turmas</h2>
-            <% if policy(@curso).index_turmas? %>
-                <%= link_to "Todas as turmas", turmas_path(@curso) %>
+            <% if @turmas.length > 0 %>
+                <% if policy(@curso).index_turmas? %>
+                    <%= link_to "Todas as turmas", turmas_path(@turmas) %>
+                <% end %>
+                <div>
+                    <%= render @turmas %>
+                </div>
+            <% else %>
+                <p>Não há nenhuma turma cadastrada neste curso.</p>
+                <% if policy(@turmas).new? %>
+                    <%= link_to "Adicionar turma", new_turma_path, remote: true %>
+                <% end %>
             <% end %>
-            <div>
-                <%= render @turmas %>
-            </div>
         </div>
         <div>
             <h2>Minhas disciplinas</h2>
-            <% if policy(@curso).index_disciplinas? %>
-                <%= link_to "Todas as disciplinas", disciplinas_path(@curso) %>
+            <% if @disciplinas.length > 0 %>
+                <% if policy(@curso).index_disciplinas? %>
+                    <%= link_to "Todas as disciplinas", disciplinas_path(@disciplinas) %>
+                <% end %>
+                <h3>Semestre</h3>
+                <div class="disciplinas-container">
+                    <%= render @disciplinas %>
+                </div>
+            <% else %>
+                <p>Não há nenhuma disciplina cadastrada neste curso.</p>
+                <% if policy(@disciplinas).new? %>
+                    <%= link_to "Adicionar disciplina", new_disciplina_path, remote: true %>
+                <% end %>
             <% end %>
-            <h3>Semestre</h3>
-            <div class="disciplinas-container">
-                <%= render @disciplinas %>
-            </div>
         </div>
     </div>
 </nav>

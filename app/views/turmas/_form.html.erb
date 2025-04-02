@@ -9,33 +9,39 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="form-group">
     <%= form.label :nome_turma, "Nome da turma" %>
     <%= form.text_field :nome_turma %>
   </div>
-  <div>
+  <div class="form-group">
     <%= form.label :curso_id, "Curso" %>
-    <%= form.select :curso_id,
-      options_for_select(@cursos.map{ |c| [
-        c.nome_curso, c.id, {
-          'curso-id' => c.id
-        }
-      ]}, @turma.curso_id)  
-    %>
+    <div class="select-box">
+      <%= form.select :curso_id,
+        options_for_select(@cursos.map{ |c| [
+          c.nome_curso, c.id, {
+            'curso-id' => c.id
+          }
+        ]}, @turma.curso_id)  
+      %>
+    </div>
   </div>
-  <div>
+  <div class="form-group">
     <%= form.label :turno_turma, "Turno" %>
-    <%= form.select :turno_turma,
-      options_for_select(select_turno(), @turma.turno_turma)
-    %>
+    <div class="select-box">
+      <%= form.select :turno_turma,
+        options_for_select(select_turno(), @turma.turno_turma)
+      %>
+    </div>
   </div>
-  <div>
+  <div class="form-group">
     <%= form.label :modalidade_turma, "Modalidade" %>
-    <%= form.select :modalidade_turma,
-      options_for_select(select_modalidade(), @turma.modalidade_turma)
-    %>
+    <div class="select-box">
+      <%= form.select :modalidade_turma,
+        options_for_select(select_modalidade(), @turma.modalidade_turma)
+      %>
+    </div>
   </div>
-  <div>
+  <div class="form-group">
     <%= form.label :senha_acesso, "Senha de acesso" %>
     <%= form.password_field :senha_acesso %>
   </div>

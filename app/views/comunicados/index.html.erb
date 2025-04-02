@@ -1,11 +1,17 @@
 <nav>
   <div class="deslizar-transition">
     <h1>Comunicados</h1>
-    <% if policy(@comunicado).new? %>
-      <%= link_to "New comunicado", new_comunicado_path %>
+    <% if @comunicados %>
+      <% if policy(@comunicado).new? %>
+        <%= link_to "New comunicado", new_comunicado_path %>
+      <% end %>
+      <div>
+        <%= render @comunicados %>
+      </div>
+    <% else %>
+      <p>
+        Você está em dia.
+      </p>
     <% end %>
-    <div>
-      <%= render @comunicados %>
-    </div>
   </div>
 </nav>

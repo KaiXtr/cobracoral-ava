@@ -29,7 +29,7 @@ class TurmaPolicy
   end
 
   def create?
-    temCargoCoordenador? || permissaoProfessor? || permissaoRepresentante?
+    coordenadorCriaTurma? || permissaoProfessor? || permissaoRepresentante?
   end
   
   def edit?
