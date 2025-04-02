@@ -1,0 +1,87 @@
+#barra-lateral {
+    color: var(--white-main);
+    background-color: black;
+    transition-duration: .2s;
+    width: 30vw;
+    height: 100%;
+    position: fixed;
+    padding-top: 5vh;
+    padding-left: 2vw;
+    top: 0px;
+    z-index: 10;
+}
+
+#barra-lateral ul {
+    padding-left: 2vw;
+}
+
+#barra-lateral ul li {
+    width: fit-content;
+    margin-bottom: 1vh;
+    list-style: none;
+}
+
+#barra-lateral ol li {
+    width: fit-content;
+    margin-bottom: 1vh;
+    list-style: decimal;
+}
+
+#barra-lateral a {
+    color: var(--white-main);
+    transition-duration: .2s;
+    font-weight: bold;
+}
+
+#barra-lateral a:hover {
+    color: var(--red-dark);
+}
+
+.notificacao-conteiner {
+    color: ghostwhite;
+    font-weight: bold;
+    font-size: 10pt;
+    background-color: var(--red-main);
+    margin-left: 1vw;
+    margin-top: 70vh;
+    border: 2px solid ghostwhite;
+    border-radius: 25px;
+    padding: 1vw;
+    position: fixed;
+    z-index: 10;
+    animation: notification-in forwards 5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes notification-in {
+    0% { opacity: 0%; transform: translateX(-30px); }
+    25% { opacity: 100%; transform: translateX(0px);}
+    95% { opacity: 100%; }
+    100% { opacity: 0%; }
+}
+
+#context-menu-component {
+    position: fixed;
+    z-index: 50;
+}
+
+#context-menu-component ul {
+    color: ghostwhite;
+    background-color: rgb(15, 15, 15);
+    border-radius: 10px;
+    padding: 1vw;
+    transition-duration: .2s;
+    margin: 0px;
+}
+
+#context-menu-component ul li {
+    font-weight: bold;
+    line-height: 20pt;
+    list-style: none;
+    transition-duration: .2s;
+}
+
+#context-menu-component ul li:hover {
+    color: var(--red-main);
+    cursor: pointer;
+}

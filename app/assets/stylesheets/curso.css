@@ -33,6 +33,11 @@
 .usuario-button {
     display: block;
     margin-bottom: 10px;
+    transition-duration: .2s;
+}
+
+.usuario-button:hover {
+    transform: translateX(5px);
 }
 
 .usuario-button .usuario-button-icon {
