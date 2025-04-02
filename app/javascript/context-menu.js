@@ -1,6 +1,11 @@
 let clickedElement;
 
 function loadContextMenuOptions() {
+    let contextMenuOptionGoTo = document.getElementById('context-menu-option-go-to');
+    contextMenuOptionGoTo.addEventListener('click', function() {
+        contextMenuSearch();
+    });
+
     let contextMenuOptionSearch = document.getElementById('context-menu-option-search');
     contextMenuOptionSearch.addEventListener('click', function() {
         contextMenuSearch();
@@ -33,13 +38,14 @@ function getSelectedText() {
     } else if (document.selection && document.selection.type != "Control") {
         text = document.selection.createRange().text;
     }
-
-    console.log(text);
+    
     return text;
 }
 
 function contextMenuSearch() {
-    if (clickedElement.href) {
+    if (clickedElement.baseURI) {
+        window.open(clickedElement.baseURI, '_blank').focus();
+    } else if (clickedElement.href) {
         window.open(clickedElement.href, '_blank').focus();
     } else if (getSelectedText) {
         window.open("https://duckduckgo.com?q=" + getSelectedText(), '_blank').focus();
@@ -68,38 +74,52 @@ function showContextMenu(evt) {
     let contextMenuOptions = document.getElementById('context-menu-options');
     contextMenuOptions.style.opacity = '100%';
 
+    let contextMenuOptionGoTo = document.getElementById('context-menu-option-go-to');
     let contextMenuOptionOpenLink = document.getElementById('context-menu-option-open-link');
     let contextMenuOptionSearch = document.getElementById('context-menu-option-search');
     let contextMenuOptionCopy = document.getElementById('context-menu-option-copy');
     let contextMenuOptionPaste = document.getElementById('context-menu-option-paste');
     let contextMenuOptionCut = document.getElementById('context-menu-option-cut');
 
-    console.log(clickedElement);
-
-    if (clickedElement.parentElement.className == 'trix-content' &&
-        clickedElement.parentElement.parentElement.className == 'conteudo-elementos'
-    ) {
+    if (clickedElement.tagName == 'BUTTON') {
+        contextMenuOptionOpenLink.style.display = 'none';
+        contextMenuOptionSearch.style.display = 'none';
         contextMenuOptionCopy.style.display = 'none';
-    } else {
-        contextMenuOptionCopy.style.display = 'block';
-    }
-
-    if (clickedElement.tagName == 'INPUT' || clickedElement.tagName == 'TEXTAREA') {
-        contextMenuOptionPaste.style.display = 'block';
-        contextMenuOptionCut.style.display = 'block';
-    }
-    else {
         contextMenuOptionPaste.style.display = 'none';
         contextMenuOptionCut.style.display = 'none';
-    }
 
-    if (clickedElement.href) {
-        contextMenuOptionOpenLink.style.display = 'block';
-        contextMenuOptionSearch.style.display = 'none';
+        if (clickedElement.baseURI)
+            contextMenuOptionGoTo.style.display = 'block';
+        else
+            contextMenuOptionGoTo.style.display = 'none';
+
     }
     else {
-        contextMenuOptionOpenLink.style.display = 'none';
-        contextMenuOptionSearch.style.display = 'block';
+        if (clickedElement.parentElement.className == 'trix-content' &&
+            clickedElement.parentElement.parentElement.className == 'conteudo-elementos'
+        ) {
+            contextMenuOptionCopy.style.display = 'none';
+        } else {
+            contextMenuOptionCopy.style.display = 'block';
+        }
+
+        if (clickedElement.tagName == 'INPUT' || clickedElement.tagName == 'TEXTAREA') {
+            contextMenuOptionPaste.style.display = 'block';
+            contextMenuOptionCut.style.display = 'block';
+        }
+        else {
+            contextMenuOptionPaste.style.display = 'none';
+            contextMenuOptionCut.style.display = 'none';
+        }
+
+        if (clickedElement.href) {
+            contextMenuOptionOpenLink.style.display = 'block';
+            contextMenuOptionSearch.style.display = 'none';
+        }
+        else {
+            contextMenuOptionOpenLink.style.display = 'none';
+            contextMenuOptionSearch.style.display = 'block';
+        }
     }
 }
 
