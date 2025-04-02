@@ -15,17 +15,21 @@
  */
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import "./themes/theme-default.scss";
 @import "./actiontext.css";
-@import "./components.css";
+@import "./components.scss";
+@import "./curso.scss";
+@import "./pages.scss";
 
 body {
+  color: var(--text-color);
   background-color: var(--red-main);
   font-family: "Rubik", sans-serif;
   margin: 0px;
 }
 
 a {
-  color: var(--red-dark);
+  color: var(--nav-link);
   text-decoration: none;
 }
 
@@ -103,50 +107,7 @@ svg.cobracoral-icon {
     transition-duration: .2s;
 
     &:hover {
-      filter: brightness(150%);
-    }
-    &:nth-child(2){
-      animation-delay: .1s;
-    }
-    &:nth-child(3){
-      animation-delay: .2s;
-    }
-  }
-}
-
-.button-group {
-  width: 100%;
-  text-align: center;
-  align-content: center;
-  margin: 10px;
-}
-
-.act-button {
-  font-family: "Rubik", sans-serif;
-  font-weight: bold;
-  border: 3px solid var(--red-main);
-  background-color: rgba(0,0,0,0);
-  padding: 1rem;
-  cursor: pointer;
-  transition-duration: .2s;
-  position: relative;
-  
-  &:before {
-    content: '';
-    background-color: var(--red-main);
-    width: 0%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    position: absolute;
-    transition: .2s;
-    z-index: -1;
-  }
-  &:hover {
-    color: var(--white-main);
-
-    &:before{
-      width: 100%;
+      filter: contrast(150%);
     }
   }
 }
@@ -196,11 +157,13 @@ header#cobracoral-header {
     }
 
     div.header-logo-info {
+      color: var(--red-dark);
       max-width: 30vw;
       display: inline-block;
       position: relative;
 
       h1 {
+        color: var(--red-dark);
         transition-duration: .2s;
         margin: 0px;
         
@@ -239,8 +202,8 @@ header#cobracoral-header {
         min-width: 15vw;
         padding: 20px;
         opacity: 0%;
-        top: 8vh;
-        right: -7vw;
+        top: 12vh;
+        right: 4vw;
         z-index: 10;
         cursor: default;
 
@@ -249,6 +212,7 @@ header#cobracoral-header {
           padding: 0px;
           
           li {
+            font-weight: bold;
             text-align: left;
             display: block;
             margin: 0px;
@@ -282,45 +246,6 @@ header#cobracoral-header {
   margin-top: 0px;
 }
 
-.menu-perfil .medidor-container {
-  text-align: center;
-  display: inline-block;
-  margin: 1vw;
-}
-
-.menu-perfil .medidor-container .medidor-grafico {
-  min-width: 5vw;
-  min-height: 5vw;
-  position: relative;
-}
-
-.menu-perfil .medidor-container .medidor-grafico .medidor-grafico-max {
-  border: 10px solid rgb(255, 255, 255);
-  border-radius: 100%;
-  position: absolute;
-  min-width: 5vw;
-  min-height: 5vw;
-  top: 0px;
-}
-
-.menu-perfil .medidor-container .medidor-grafico .medidor-grafico-atual {
-  border: 10px solid rgb(0, 0, 0);
-  border-radius: 100%;
-  position: absolute;
-  min-width: 5vw;
-  min-height: 5vw;
-  top: 0px;
-}
-
-.menu-perfil .medidor-container .medidor-grafico .medidor-grafico-valor {
-  text-align: center;
-  font-weight: bold;
-  min-width: 5vw;
-  top: 2.5vw;
-  left: 0.7vw;
-  position: absolute;
-}
-
 div.inicio-banner {
   background-color: var(--red-main);
   min-height: 30vh;
@@ -342,10 +267,4 @@ nav {
   width: 45%;
   vertical-align: top;
   display: inline-block;
-}
-
-footer {
-  text-align: center;
-  padding: 10vh 10vw 10vh 10vw;
-  background-color: var(--red-main);
 }

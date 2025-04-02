@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import "./themes/theme-default.scss";
+@import "./components.scss";
+
 body {
     color: var(--text-color);
     background-color: var(--login-bg);
@@ -10,16 +14,26 @@ a {
     text-decoration: none;
 }
 
+svg.cobracoral-icon {
+    .g-mask path {
+      transition-duration: .2s;
+  
+      &:hover {
+        filter: contrast(150%);
+      }
+    }
+  }
+
 #login-form-container {
     background-color: var(--login-container-bg);
     border-radius: 20px;
     padding: 5vw;
     padding-bottom: 0px;
     margin: 8vh 30vw 0vh 30vw;
-}
 
-#login-form-container.primeiro-acesso {
-    margin: 8vh 25vw 0vh 25vw;
+    &.primeiro-acesso {
+        margin: 8vh 25vw 0vh 25vw;
+    }
 }
 
 .form-login-submit-in {
@@ -68,12 +82,12 @@ a {
 
 .form-group {
     margin-top: 10px;
-}
 
-.form-group .form-column {
-    width: 45%;
-    margin-right: 10px;
-    display: inline-block;
+    .form-column {
+        width: 45%;
+        margin-right: 10px;
+        display: inline-block;
+    }
 }
 
 .input-text {
@@ -91,20 +105,20 @@ a {
 .select-box {
     display: inline-block;
     position: relative;
-}
 
-.select-box select {
-    background-color: var(--red-main);
-    font-size: 12pt;
-    border: none;
-    border-radius: 10px;
-    transition-duration: .2s;
-    padding: 1vw;
-}
+    select {
+        background-color: var(--red-main);
+        font-size: 12pt;
+        border: none;
+        border-radius: 10px;
+        transition-duration: .2s;
+        padding: 1vw;
 
-.select-box select:hover {
-    background-color: #ff7272;
-    cursor: pointer;
+        &:hover {
+            background-color: #ff7272;
+            cursor: pointer;
+        }
+    }
 }
 
 #campo-caps {
@@ -115,42 +129,6 @@ a {
 
 #problemas-link {
     font-size: 10pt;
-}
-
-.button-group {
-    width: 100%;
-    text-align: center;
-    align-content: center;
-    margin-top: 2vh;
-}
-
-.act-button {
-    font-family: "Rubik", sans-serif;
-    font-weight: bold;
-    border: 3px solid var(--red-main);
-    background-color: rgba(0,0,0,0);
-    padding: 1rem;
-    cursor: pointer;
-    transition-duration: .2s;
-    position: relative;
-
-    &:before {
-        background-color: var(--red-main);
-        width: 0%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        position: absolute;
-        transition: .2s;
-        z-index: -1;
-    }
-    &:hover {
-        color: var(--white-main);
-
-        &:before{
-            width: 100%;
-        }
-    }
 }
 
 .login-info {
