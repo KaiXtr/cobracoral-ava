@@ -19,6 +19,14 @@ oracle_db:
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
+postgresql_db: &postgresql_db
+  adapter: postgresql
+  database: <%= ENV.fetch("POSTGRESQL_DATABASE") %>
+  username: <%= ENV.fetch("POSTGRESQL_USERNAME") %>
+  password: <%= ENV.fetch("POSTGRESQL_PASSWORD") %>
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
 development:
   <<: *default
   database: db/development.sqlite3
@@ -31,5 +39,5 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  <<: *postgresql_db
+  database: <%= ENV.fetch("POSTGRESQL_DATABASE") %>
