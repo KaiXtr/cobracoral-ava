@@ -26,9 +26,10 @@
         }
     </script>
   </head>
-  <body>  
+  <body>
     <%= render BarraPrincipalComponent.new(usuario_autenticado: @usuario_autenticado) %>
     <%= render BarraLateralNavegacaoComponent.new(usuario_autenticado: @usuario_autenticado) %>
+    <%= render NotificacaoComponent.new(mensagem: notice) %>
     <%= yield %>
     <%= render RodapeComponent.new() %>
   </body>

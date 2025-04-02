@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
 				respond_to do |format|
 					logtxt = "Senha incorreta"
 					Rails.logger.error logtxt
-					format.html { redirect_to "/entrar", notice: logtxt }
+					format.html { redirect_to "/entrar", login_error: logtxt }
 					format.json { render json: { error: logtxt }, status: :unauthorized }
 				end
 			end
@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
 			respond_to do |format|
 				logtxt = "Não há usuário cadastrado com o email informado"
 				Rails.logger.error logtxt
-				format.html { redirect_to "/entrar", notice: logtxt }
+				format.html { redirect_to "/entrar", login_error: logtxt }
 				format.json { render json: { error: logtxt }, status: :unauthorized }
 			end
 		end
@@ -65,7 +65,7 @@ class SessionsController < ApplicationController
 						logtxt = usuario.errors
 					end
 					Rails.logger.error logtxt
-					format.html { redirect_to "/primeiro-acesso", notice: logtxt }
+					format.html { redirect_to "/primeiro-acesso", login_error: logtxt }
 					format.json { render json: { error: usuario.errors }, status: :unauthorized }
 				end
 			end
@@ -73,7 +73,7 @@ class SessionsController < ApplicationController
 			respond_to do |format|
 				logtxt = "As senhas não conferem."
 				Rails.logger.error logtxt
-				format.html { redirect_to "/primeiro-acesso", notice: logtxt }
+				format.html { redirect_to "/primeiro-acesso", login_error: logtxt }
 				format.json { render json: { error: usuario.errors }, status: :unauthorized }
 			end
 		end

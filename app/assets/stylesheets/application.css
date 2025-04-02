@@ -328,6 +328,29 @@ header#cobracoral-header {
   color: var(--red-dark);
 }
 
+.notificacao-conteiner {
+  color: ghostwhite;
+  font-weight: bold;
+  font-size: 10pt;
+  background-color: var(--red-main);
+  margin-left: 1vw;
+  margin-top: 70vh;
+  border: 2px solid ghostwhite;
+  border-radius: 25px;
+  padding: 1vw;
+  position: fixed;
+  z-index: 10;
+  animation: notification-in forwards 5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes notification-in {
+  0% { opacity: 0%; transform: translateX(-30px); }
+  25% { opacity: 100%; transform: translateX(0px);}
+  95% { opacity: 100%; }
+  100% { opacity: 0%; }
+}
+
 div.inicio-banner {
   background-color: var(--red-main);
   min-height: 30vh;

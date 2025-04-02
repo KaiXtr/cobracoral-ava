@@ -40,11 +40,11 @@ module CobracoralWebsite
       config.logger = Logger.new("log/production.log")
     end
     config.log_level = :info
-
+    
     # Redis
 
-    #config.cache_store = :redis_store,
-    #    ENV['REDIS_URL'] + ':' + ENV['REDIS_PORT'] + '/' + ENV['REDIS_DB'] + '/cache',
-    #    {}
+    config.cache_store = :redis_store,
+        ENV['REDIS_URL'] + ':' + ENV['REDIS_PORT'] + '/' + ENV['REDIS_DB'] + '/cache',
+        {}
   end
 end
