@@ -29,6 +29,37 @@ a {
   text-decoration: none;
 }
 
+[tooltip-text] {
+  position: relative;
+}
+
+[tooltip-text]:after {
+  content: attr(tooltip-text);
+  color: ghostwhite;
+  font-weight: bold;
+  font-size: 10pt;
+  background-color: rgb(15, 15, 15);
+  border-radius: 10px;
+  padding: 0.5vw;
+  transition-duration: .2s;
+  margin: 0px;
+  left: 10%;
+  bottom: 110%;
+  white-space: nowrap;
+  opacity: 0%;
+  z-index: 60;
+  transform: translateY(-10px);
+  visibility: hidden;
+  position: absolute;
+}
+
+[tooltip-text]:hover:after {
+  opacity: 100%;
+  transition-duration: .2s;
+  visibility: visible;
+  transform: translateY(0px);
+}
+
 @keyframes deslizar {
   0% {
     opacity: 0%;

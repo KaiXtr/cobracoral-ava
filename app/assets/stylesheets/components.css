@@ -85,3 +85,12 @@
     color: var(--red-main);
     cursor: pointer;
 }
+
+.goback-button {
+    transition-duration: .2s;
+    transform: translateX(0px);
+}
+
+.goback-button:hover {
+    transform: translateX(-10px);
+}

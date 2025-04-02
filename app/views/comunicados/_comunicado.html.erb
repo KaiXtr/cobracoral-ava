@@ -27,12 +27,12 @@
   </div>
   <div class="comunicado-actions">
     <% if policy(comunicado).edit? %>
-      <a href="/comunicados/<%= comunicado.id %>/editar">
+      <a href="/comunicados/<%= comunicado.id %>/editar" tooltip-text="Editar comunicado">
           <i class="fa-solid fa-pen fa-lg icon-button"></i>
       </a>
     <% end %>
     <% if policy(comunicado).destroy? %>
-      <a href="/comunicados/<%= comunicado.id %>/deletar" data-turbo-prefetch="false">
+      <a href="/comunicados/<%= comunicado.id %>/deletar" tooltip-text="Deletar comunicado" data-turbo-prefetch="false">
           <i class="fa-solid fa-trash fa-lg icon-button"></i>
       </a>
     <% end %>

@@ -1,12 +1,12 @@
 <%= form_with(model: @usuario) do |f| %>
     <div class="inicio-banner">
         <% if @usuario.avatar.attached? %>
-            <div class="usuario-banner-photo photo-upload">
+            <div class="usuario-banner-photo photo-upload" tooltip-text="Enviar foto">
                 <%= image_tag(@usuario.avatar) %>
                 <%= f.file_field :avatar %>
             </div>
         <% else %>
-            <div class="usuario-banner-icon photo-upload">
+            <div class="usuario-banner-icon photo-upload" tooltip-text="Enviar foto">
                 <i class="fa-solid fa-camera fa-lg"></i>
                 <%= f.file_field :avatar %>
             </div>
