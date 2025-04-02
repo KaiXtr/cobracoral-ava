@@ -6,26 +6,35 @@ function loadContextMenuOptions() {
         contextMenuSearch();
     });
 
+    let contextMenuOptionOpenLink = document.getElementById('context-menu-option-open-link');
+    contextMenuOptionOpenLink.addEventListener('click', function() {
+        contextMenuSearch();
+    });
+
     let contextMenuOptionCopy = document.getElementById('context-menu-option-copy');
     contextMenuOptionCopy.addEventListener('click', function() {
         contextMenuCopyToClipboard();
     });
 
-    let contextMenuOptionPaste = document.getElementById('context-menu-option-paste');
+    /*let contextMenuOptionPaste = document.getElementById('context-menu-option-paste');
     contextMenuOptionPaste.addEventListener('click', async(evt) => {
         contextMenuPasteFromClipboard(evt);
-    });
+    });*/
 }
 
 function getSelectedText() {
     let text;
 
-    if (window.getSelection()) {
+    if (clickedElement.value) {
+        text = clickedElement.value;
+    }
+    else if (window.getSelection()) {
         text = window.getSelection().toString();
     } else if (document.selection && document.selection.type != "Control") {
         text = document.selection.createRange().text;
     }
 
+    console.log(text);
     return text;
 }
 
@@ -47,13 +56,10 @@ async function contextMenuPasteFromClipboard(evt) {
 }
 
 function showContextMenu(evt) {
-    clickedElement = evt.originalTarget;
+    clickedElement = evt.target;
 
     let cursor = event || window.event;
     let contextMenuComponent = document.getElementById('context-menu-component');
-
-    if (contextMenuComponent.style.visibility == 'visible')
-        contextMenuComponent.style['transition-duration'] = '.2s';
 
     contextMenuComponent.style.visibility = 'visible';
     contextMenuComponent.style.top = cursor.clientY + 'px';
@@ -61,6 +67,40 @@ function showContextMenu(evt) {
 
     let contextMenuOptions = document.getElementById('context-menu-options');
     contextMenuOptions.style.opacity = '100%';
+
+    let contextMenuOptionOpenLink = document.getElementById('context-menu-option-open-link');
+    let contextMenuOptionSearch = document.getElementById('context-menu-option-search');
+    let contextMenuOptionCopy = document.getElementById('context-menu-option-copy');
+    let contextMenuOptionPaste = document.getElementById('context-menu-option-paste');
+    let contextMenuOptionCut = document.getElementById('context-menu-option-cut');
+
+    console.log(clickedElement);
+
+    if (clickedElement.parentElement.className == 'trix-content' &&
+        clickedElement.parentElement.parentElement.className == 'conteudo-elementos'
+    ) {
+        contextMenuOptionCopy.style.display = 'none';
+    } else {
+        contextMenuOptionCopy.style.display = 'block';
+    }
+
+    if (clickedElement.tagName == 'INPUT' || clickedElement.tagName == 'TEXTAREA') {
+        contextMenuOptionPaste.style.display = 'block';
+        contextMenuOptionCut.style.display = 'block';
+    }
+    else {
+        contextMenuOptionPaste.style.display = 'none';
+        contextMenuOptionCut.style.display = 'none';
+    }
+
+    if (clickedElement.href) {
+        contextMenuOptionOpenLink.style.display = 'block';
+        contextMenuOptionSearch.style.display = 'none';
+    }
+    else {
+        contextMenuOptionOpenLink.style.display = 'none';
+        contextMenuOptionSearch.style.display = 'block';
+    }
 }
 
 function hideContextMenu() {
