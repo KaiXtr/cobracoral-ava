@@ -11,10 +11,19 @@
             <% if helpers.isUsuarioDiscente(@usuario_autenticado) %>
                 <h1>SIGAA</h1>
             <% else %>
-                <h1><%= helpers.current_curso(@usuario_autenticado).nome_curso %></h1>
+                <h1>
+                    <% if helpers.current_curso(@usuario_autenticado) %>
+                        <%= helpers.current_curso(@usuario_autenticado).nome_curso %>
+                    <% else %>
+                        Cobracoral
+                    <% end %>
+                </h1>
             <% end %>
         </a>
-        <span><%= ENV["COBRACORAL_VERSION"] %></span>
+        <span>
+            <%= ENV["COBRACORAL_VERSION"] %>
+            <%= @cobracoral_env %>
+        </span>
     </div>
     </div>
     <ul>

@@ -19,7 +19,7 @@ module ApplicationHelper
 					turma = Turma.find(isEstudante.turma_id)
 					curso_turma = Curso.find(turma.curso_id)
 				else
-					'Cobracoral'
+					nil
 				end
 			end
 		end

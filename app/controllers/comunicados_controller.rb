@@ -124,16 +124,22 @@ class ComunicadosController < ApplicationController
 
       # Obtendo todos os comunicados da coordenação do curso
       curso_atual = helpers.current_curso(usuario_autenticado)
-      comunicados_da_coordenacao = Comunicado.where(
-        usuario_id: curso_atual.usuario_id,
-        visibilidade_comunicado: 1
-      )
+
+      if curso_atual then
+        comunicados_da_coordenacao = Comunicado.where(
+          usuario_id: curso_atual.usuario_id,
+          visibilidade_comunicado: 1
+        )
+      end
 
       # Obtendo todos os comunicados de professores (deve haver uma forma mais eficiente)
       comunicados_de_professores = Array.new()
-      disciplinas_do_curso = Disciplina.where(curso_id: curso_atual.id)
-      disciplinas_do_curso.each do |d|
-        comunicados_de_professores += Comunicado.where(usuario_id: d.usuario_id)
+
+      if curso_atual then
+        disciplinas_do_curso = Disciplina.where(curso_id: curso_atual.id)
+        disciplinas_do_curso.each do |d|
+          comunicados_de_professores += Comunicado.where(usuario_id: d.usuario_id)
+        end
       end
 
       comunicados = comunicados_da_coordenacao + comunicados_de_professores

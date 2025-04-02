@@ -1,22 +1,39 @@
 class UsuariosExtController < ApplicationController
 	def get_auth_token
+        novo_usuario = Usuario.new
+		session[:usuario_id] = usuario.id
+		respond_to do |format|
+			format.json { render json: { token: session }, status: :ok }
+		end
+    end
+
+    def get_auth_token_by_email
         # OBTER USUÁRIO ATRAVÉS DO PORTAL DO DESENVOLVEDOR COBRACORAL, ONDE FOI GERADA A API_KEY
 		usuario = Usuario.find_by(email: params[:email])
-		auth = usuario.authenticate(params[:senha])
 
-		if auth then
-			logar_EXT(usuario)
-		else
-			respond_to do |format|
-				logtxt = "Senha incorreta"
-				Rails.logger.error "[EXT] Erro ao obter token de autenticação."
-				format.json { render json: { error: usuario.errors }, status: :unauthorized }
-			end
-		end
+        if usuario then
+            auth = usuario.authenticate(params[:senha])
+
+            if auth then
+                logar_EXT(usuario)
+            else
+                respond_to do |format|
+                    logtxt = "Senha incorreta"
+                    Rails.logger.error "[EXT] Erro ao obter token de autenticação."
+                    format.json { render json: { error: logtxt }, status: :unauthorized }
+                end
+            end
+        else
+            respond_to do |format|
+                logtxt = "Não existe usuário com o email informado."
+                Rails.logger.error "[EXT] Erro ao obter token de autenticação."
+                format.json { render json: { error: logtxt }, status: :unauthorized }
+            end
+        end
 	end
 
     def get_usuarios
-		respond_to do |format|
+		respond_to do |format|  
 			format.json { render json: { usuarios: Usuario.all }, status: :ok }
 		end
     end
