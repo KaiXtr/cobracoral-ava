@@ -35,7 +35,7 @@
 }
 
 .trix-button {
-  background-color: var(--red-main) !important;
+  background-color: var(--main-color) !important;
   transition-duration: .2s !important;
   border-radius: 10px !important;
   border: none !important;

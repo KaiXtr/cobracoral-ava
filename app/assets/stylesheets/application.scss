@@ -15,7 +15,7 @@
  */
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-@import "./themes/theme-default.scss";
+@import "./themes/theme-celeste.scss";
 @import "./actiontext.css";
 @import "./components.scss";
 @import "./curso.scss";
@@ -23,7 +23,7 @@
 
 body {
   color: var(--text-color);
-  background-color: var(--red-main);
+  background-color: var(--main-color);
   font-family: "Rubik", sans-serif;
   margin: 0px;
 }
@@ -106,6 +106,18 @@ svg.cobracoral-icon {
     transform: rotate(-80deg);
     transition-duration: .2s;
 
+    &#cobracoral-icon-color-1 {
+      fill: var(--cobracoral-icon-color-1);
+    }
+
+    &#cobracoral-icon-color-2 {
+      fill: var(--cobracoral-icon-color-2);
+    }
+
+    &#cobracoral-icon-color-3 {
+      fill: var(--cobracoral-icon-color-3);
+    }
+
     &:hover {
       filter: contrast(150%);
     }
@@ -123,14 +135,14 @@ svg.cobracoral-icon {
 }
 
 header#cobracoral-header {
-  background-color: var(--red-main);
+  background-color: var(--main-color);
   padding: 0vw 10vw 0vw 3vw;
   max-height: 30vh;
   align-items: center;
   display: flex;
 
   button.icon-button {
-    background-color: var(--red-main);
+    background-color: var(--main-color);
     color: black;
     border: none;
     transition-duration: .2s;
@@ -195,7 +207,7 @@ header#cobracoral-header {
 
       #menu-perfil {
         color: var(--white-main);
-        background-color: var(--red-main);
+        background-color: var(--main-color);
         transition-duration: .2s;
         visibility: hidden;
         position: absolute;
@@ -247,7 +259,7 @@ header#cobracoral-header {
 }
 
 div.inicio-banner {
-  background-color: var(--red-main);
+  background-color: var(--main-color);
   min-height: 30vh;
 }
 

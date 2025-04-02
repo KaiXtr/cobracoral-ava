@@ -15,7 +15,7 @@
         text-align: center;
         align-items: center;
         vertical-align: top;
-        background-color: var(--red-main);
+        background-color: var(--main-color);
         border-radius: 100%;
         width: 2vw;
         height: 2vw;
@@ -59,7 +59,7 @@
     margin: 1vw;
 
     &:hover {
-        background-color: var(--red-main);
+        background-color: var(--main-color);
     }
 }
 
@@ -87,7 +87,7 @@
 }
 
 div.disciplinas-banner {
-    background-color: var(--red-main);
+    background-color: var(--main-color);
     width: 100%;
     max-height: 20vh;
     z-index: -10;
@@ -219,7 +219,7 @@ div.disciplinas-banner {
         }
         
         .conteudo-button-conclusao-atual {
-            border: 5px solid red;
+            border: 5px solid var(--main-color);
             border-radius: 100%;
             position: absolute;
             min-width: 1.5vw;
