@@ -30,11 +30,21 @@ module CobracoralWebsite
 
     # Logger
 
-    config.logger = Logger.new("log/development.log")
+    if Rails.env.test?
+      config.logger = Logger.new("log/test.log")
+    end
+    if Rails.env.development?
+      config.logger = Logger.new("log/development.log")
+    end
+    if Rails.env.production?
+      config.logger = Logger.new("log/production.log")
+    end
     config.log_level = :info
 
     # Redis
 
-    config.cache_store = :redis_store, ENV['REDIS_URL'] + ':' + ENV['REDIS_PORT'] + '/' + ENV['REDIS_DB'] + '/cache', { expires_in: 90.minutes }
+    #config.cache_store = :redis_store,
+    #    ENV['REDIS_URL'] + ':' + ENV['REDIS_PORT'] + '/' + ENV['REDIS_DB'] + '/cache',
+    #    {}
   end
 end
