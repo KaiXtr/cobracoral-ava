@@ -1,0 +1,12 @@
+<h1>Novo comunicado de <%= @autor_comunicado %></h1>
+<p>
+  Um novo comunicado foi lançado no AVA por <%= @autor_comunicado %>:
+</p>
+<div class="mail-comunicado">
+  <%= @comunicado.corpo %>
+</div>
+<p>
+  Veja o comunicado completo em: <a href="<%= @link_comunicado %>" target="_blank">
+    <%= @link_comunicado %>
+  </a>
+</p>

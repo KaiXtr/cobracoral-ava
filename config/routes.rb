@@ -40,7 +40,7 @@ Rails.application.routes.draw do
 
   get '/comunicados/:id/reagir/:emoji', to: 'comunicados#reagir'
   get '/comunicados/:id/editar', to: 'comunicados#edit'
-  get '/comunicados/:id/deletar', to: 'comunicados#delete'
+  get '/comunicados/:id/deletar', to: 'comunicados#destroy'
 
   get '/cursos/:id/editar', to: 'cursos#edit'
   get '/cursos/:id/deletar', to: 'cursos#delete'

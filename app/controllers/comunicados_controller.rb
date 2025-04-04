@@ -67,8 +67,25 @@ class ComunicadosController < ApplicationController
     @comunicado = Comunicado.new(comunicado_params)
     @comunicado.usuario_id = @usuario.id
 
+    if @comunicado.visibilidade_comunicado == "todos_curso" then
+      curso_comunicado = Curso.find_by(usuario_id: @usuario.id)
+      usuarios_list = Usuario.all.select(:id, :email).take
+    elsif @comunicado.visibilidade_comunicado == "todas_turmas" then
+      usuarios_list = Usuario.all.select(:id, :email).take
+    elsif @comunicado.visibilidade_comunicado == "todos_turma" then
+      usuarios_list = Usuario.all.select(:id, :email).take
+    elsif @comunicado.visibilidade_comunicado == "todos_disciplina" then
+      usuarios_list = Usuario.all.select(:id, :email).take
+    else
+      usuarios_list = Usuario.all.select(:id, :email).take
+    end
+
     respond_to do |format|
       if @comunicado.save
+        ComunicadoMailer.with(
+          usuarios_list: usuarios_list,
+          comunicado: @comunicado).novo_comunicado_email.deliver_later
+        
         logtxt = "Comunicado adicionado com sucesso."
         Rails.logger.info logtxt
         format.html { redirect_to comunicados_url(@comunicado), notice: logtxt }
@@ -99,6 +116,9 @@ class ComunicadosController < ApplicationController
 
   # DELETE /comunicados/1 or /comunicados/1.json
   def destroy
+    ReacaoComunicado.where(comunicado_id: @comunicado.id).each do |reacao|
+      reacao.destroy
+    end
     @comunicado.destroy
 
     respond_to do |format|
@@ -117,7 +137,7 @@ class ComunicadosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def comunicado_params
-      params.require(:comunicado).permit(:usuario_id, :turma_id, :visibilidade_comunicado_id, :corpo, imagens: [])
+      params.require(:comunicado).permit(:usuario_id, :turma_id, :visibilidade_comunicado, :corpo, imagens: [])
     end
 
     def get_comunicados(usuario_autenticado)

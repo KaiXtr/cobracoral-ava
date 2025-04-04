@@ -14,7 +14,7 @@ class SessionMailer < ApplicationMailer
 
         @senha_provisoria = params[:senha_provisoria]
         @instituicao_nome = params[:instituicao_nome]
-        @acesso_link = "https://cobracoral-ava.onrender.com/entrar"
+        @acesso_link = "http://localhost:3000/entrar"
 
         mail(to: @usuario.email, subject: "Primeiro acesso no AVA")
     end
