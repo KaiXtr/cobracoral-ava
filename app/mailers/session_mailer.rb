@@ -38,7 +38,7 @@ class SessionMailer < ApplicationMailer
 
         hash_senha = @usuario.password_digest
 
-        @link_recuperacao = "https://cobracoral-ava.onrender.com/recuperacao?h=" + hash_senha
+        @link_recuperacao = "http://localhost:3000/recuperar?h=" + hash_senha
         
         mail(to: @usuario.email, subject: "Recuperação de senha solicitada para " + @usuario.email)
     end

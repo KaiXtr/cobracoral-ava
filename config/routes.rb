@@ -12,10 +12,12 @@ Rails.application.routes.draw do
   
   get '/entrar', to: 'sessions#login'
   post '/entrar', to: 'sessions#create'
-
-  get '/primeiro-acesso', to: 'sessions#primeiroAcesso'
+  get '/primeiro-acesso', to: 'sessions#primeiro_acesso'
   post '/primeiro-acesso', to: 'sessions#edit'
-  get '/recuperacao', to: 'sessions#recuperacao'
+  get '/problemas-acesso', to: 'sessions#problemas-acesso'
+  post '/problemas-acesso', to: 'sessions#recover_password'
+  get '/recuperar', to: 'sessions#recuperar'
+  post '/recuperar', to: 'sessions#validate_recovery'
 
   get '/usuarios/:id/caixa', to: 'usuarios#caixa'
   get '/usuarios/:id/lattes', to: 'usuarios#lattes'
