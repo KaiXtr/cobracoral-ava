@@ -26,8 +26,22 @@ class SessionMailer < ApplicationMailer
         @login_device = params[:login_device]
         @login_so = params[:login_so]
         @login_browser = params[:login_browser]
-        @login_time = params[:login_time]
+        @login_time = params[:login_time].strftime("%d/%m/%Y às %H:%M")
         
         mail(to: @usuario.email, subject: "Novo acesso em " + @login_browser)
+    end
+
+    def recuperacao_senha_email
+        @usuario = params[:usuario]
+        @login_device = params[:login_device]
+        @login_so = params[:login_so]
+        @login_browser = params[:login_browser]
+        @login_time = params[:login_time].strftime("%d/%m/%Y às %H:%M")
+
+        hash_senha = @usuario.password_digest
+
+        @link_recuperacao = "https://cobracoral-ava.onrender.com/recuperacao?h=" + hash_senha
+        
+        mail(to: @usuario.email, subject: "Recuperação de senha solicitada para " + @usuario.email)
     end
 end

@@ -1,0 +1,30 @@
+<h1>Recuperação de senha</h1>
+<p>
+    Uma solicitação de recuperação de senha foi enviada e aprovada pela sua instituição de ensino de acordo com os dados abaixo:
+</p>
+<ul>
+    <li>
+        <strong>Dispositivo</strong>: <%= @login_device %>
+    </li>
+    <li>
+        <strong>Sistema operacional</strong>: <%= @login_so %>
+    </li>
+    <li>
+        <strong>Navegador</strong>: <%= @login_browser %>
+    </li>
+    <li>
+        <strong>Data e hora</strong>: <%= @login_time %>
+    </li>
+</ul>
+<p>
+    Se você não deseja trocar sua senha, ignore esta mensagem. Caso deseje trocar a sua senha, acesse o link abaixo:
+</p>
+<p>
+    <a href="<%= @link_recuperacao %>" target="_blank">
+        <%= @link_recuperacao %>
+    </a>
+</p>
+<p>
+    Se você não reconhecer esta atividade, por favor, comunique sua instituição de ensino.
+    Nunca compartilhe suas credenciais de acesso e sempre se certifique de recordar suas senhas.
+</p>
