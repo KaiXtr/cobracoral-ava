@@ -1,6 +1,4 @@
 class SessionMailer < ApplicationMailer
-  default from: "ewertonmatheus2113@gmail.com"
-
     def primeiro_acesso_email
         @usuario = params[:usuario]
 

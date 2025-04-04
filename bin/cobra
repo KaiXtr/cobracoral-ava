@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+APP_PATH = File.expand_path("../.", __dir__)
+command_input = ARGV
+
+if (ARGV[0] == "-v") then
+    puts "Cobracoral 1.0 \"Corallinus\""
+end
+
+if (ARGV[0] == "init") then
+    puts "=> Cobracoral v1.0 \"Corallinus\""
+    system "bundle install"
+    system "rails db:setup"
+    system "rails server"
+end
+
+if (ARGV[0] == "start") then
+    puts "=> Cobracoral v1.0 \"Corallinus\""
+    system "rails server"
+end
+
+if (ARGV[0] == "create" && ARGV[1] == "user") then
+    puts "== Criando usuário =="
+    system "rails runner -e production 'Usuario.find(1).delete'"
+    command = "Usuario.create(
+                id: 1,
+                pronomes_usuario: :ele_dele,
+                nome_completo: 'Ewerton Matheus Bezerra Ramos',
+                email: 'bramosewerton@proton.me',
+                telefone: '997773322',
+                password: 'C0br@c0r@l',
+                biografia: 'Sou estudante de ciência da computação',
+                lattes_id: '2274633017966563',
+                orcid_id: '0009-0002-5894-0401',
+                cargo_usuario: :estudante,
+                acessos_count: 0
+            )"
+    system "rails runner -e production \"" + command + "\""
+end
+
+if (ARGV[0] == "send" && ARGV[1] == "mail") then
+    puts "== Enviando email =="   
+    command = "SessionMailer.with(usuario: Usuario.find(1), login_device: 'Notebook legal', login_so: 'Linux', login_browser: 'Firefox', login_time: Time.now).acesso_email.deliver_now"
+    system "rails runner \"" + command + "\""
+end

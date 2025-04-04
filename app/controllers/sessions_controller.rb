@@ -37,7 +37,7 @@ class SessionsController < ApplicationController
 						session[:primeiro_acesso] = usuario.id
 						redirect_to "/primeiro-acesso"
 					else
-						logar(usuario)
+						logar(usuario, params[:session])
 					end
 				else
 					respond_to do |format|
@@ -95,7 +95,7 @@ class SessionsController < ApplicationController
 					usuario.acessos_count += 1
 					usuario.save
 
-					logar(usuario)
+					logar(usuario, params[:session])
 				else
 					respond_to do |format|
 						if usuario.errors["password"] then

@@ -19,13 +19,18 @@ module CobracoralWebsite
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    # Abrir variáveis LOCAL_ENV
+    # Abrir variáveis LOCAL_ENV e SECRETS_ENV
 
     config.before_configuration do
       env_file = File.join(Rails.root, 'config', 'local_env.yml')
       YAML.load(File.open(env_file)).each do |key, value|
         ENV[key.to_s] = value.to_s
       end if File.exist?(env_file)
+
+      secrets_env_file = File.join(Rails.root, 'config', 'secrets_env.yml')
+      YAML.load(File.open(secrets_env_file)).each do |key, value|
+        ENV[key.to_s] = value.to_s
+      end if File.exist?(secrets_env_file)
     end
 
     # Logger

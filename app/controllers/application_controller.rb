@@ -32,25 +32,23 @@ class ApplicationController < ActionController::Base
 		@usuario_autenticado = usuario_autenticado
 	end
 
-	def logar(usuario)
-		dispositivo_atual = "Lenovo legal"
-		so_atual = "Fedora Workstation"
-		browser_atual = "Firefox"
-		hora_atual = Time.now
+	def logar(usuario, sessionData)
+		Rails.logger.info sessionData.to_s
 
 		session[:usuario_id] = usuario.id
-		session[:login_device] = dispositivo_atual
-		session[:login_so] = so_atual
-		session[:login_browser] = browser_atual
-		session[:login_time] = hora_atual
+		session[:login_device] = sessionData[:login_device]
+		session[:login_so] = sessionData[:login_so]
+		session[:login_browser] = sessionData[:login_browser]
+		session[:login_time] = Time.now
 		@usuario_autenticado = usuario
 
 		SessionMailer.with(
 			usuario: usuario,
-			login_device: dispositivo_atual,
-			login_so: so_atual,
-			login_browser: browser_atual,
-			login_time: hora_atual).acesso_email.deliver_later
+			login_device: session[:login_device],
+			login_so: session[:login_so],
+			login_browser: session[:login_browser],
+			login_time: Time.now).acesso_email.deliver_later
+		
 		Rails.logger.info "Criada sessão para o(a) usuário(a) com email " + usuario.email + "."
 		
 		redirect_to root_path

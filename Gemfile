@@ -82,3 +82,5 @@ gem "redis-rails", "~> 5.0"
 gem "view_component", "~> 3.21"
 
 gem "postgresql", "~> 1.0"
+
+gem "mailcatcher", "~> 0.2.4"
