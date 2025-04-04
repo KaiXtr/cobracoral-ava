@@ -1,6 +1,18 @@
 <div id="login-form-container" class="form-login-submit-in">
 	<script type="text/javascript">
-		const el = document.getElementById('login-form-container')
+		var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+
+		var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+		
+		var isFirefox = typeof InstallTrigger !== 'undefined';
+
+		var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
+
+		var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+		var isEdge = !isIE && !!window.StyleMedia;
+
+		var el = document.getElementById('login-form-container')
 		
 		function submitForm() {
 			let form = document.getElementById('login-form');
@@ -11,7 +23,23 @@
 			el.classList.remove('form-login-submit-in');
 			el.classList.add('form-login-submit-out');
 
-			setTimeout(submitForm, 500);
+			let deviceInput = document.getElementById('input-device');
+			deviceInput.value = "Notebook"
+			
+			let SOInput = document.getElementById('input-so');
+			SOInput.value = window.navigator.oscpu;
+
+			let browserAtual;
+			if (isChrome == true)	{ browserAtual = 'Chrome'; }
+			if (isOpera == true) 	{ browserAtual = 'Opera'; }
+			if (isFirefox == true)	{ browserAtual = 'Firefox'; }
+			if (isSafari == true)	{ browserAtual = 'Safari'; }
+			if (isEdge == true)		{ browserAtual = 'Edge'; }
+
+			let browserInput = document.getElementById('input-browser');
+			browserInput.value = browserAtual;
+
+			setTimeout(submitForm, 1500);
 		}
 		
 		function checarCaps(event) {
@@ -37,6 +65,10 @@
 		<%= notice %>
 	</div>
 	<%= form_for :session, html: { id: 'login-form' } do |f| %>
+		<%= f.hidden_field :login_device,  id: 'input-device' %>
+		<%= f.hidden_field :login_so,	   id: 'input-so' %>
+		<%= f.hidden_field :login_browser, id: 'input-browser' %>
+
 		<div class="form-group">
 			<%= f.label :email, 'Email institucional: '%>
 			<%= f.text_field :email,
@@ -57,7 +89,9 @@
 			%>
 		</div>
 		<div class="form-group">
-			<a id="problemas-link" href="/recuperacao">Problemas para entrar?</a>
+			<a id="problemas-link" href="/problemas-acesso">
+				Problemas para entrar?
+			</a>
 		</div>
 		<div class="button-group">
 			<%= render CobraButtonComponent.new(

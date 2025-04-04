@@ -59,6 +59,7 @@
         color: var(--select-box-color);
         background-color: var(--select-box-bg-color);
         font-size: 12pt;
+        font-weight: bold;
         border: none;
         border-radius: 10px;
         transition-duration: .2s;
@@ -147,7 +148,7 @@
     
 
         li {
-            font-weight: bold;
+            font-weight: 600;
             line-height: 20pt;
             list-style: none;
             transition-duration: .2s;

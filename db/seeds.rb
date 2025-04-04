@@ -10,7 +10,7 @@ Usuario.create(
     id: 1,
     pronomes_usuario: :ele_dele,
     nome_completo: "Ewerton Matheus Bezerra Ramos",
-    email: "ewerton.ramos@cobracoral.edu.br",
+    email: "ewertonmatheus2113@gmail.com",
     telefone: "997773322",
     password: "C0br@c0r@l",
     biografia: 'Sou estudante de ciência da computação',

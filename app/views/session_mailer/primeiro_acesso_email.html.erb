@@ -1,0 +1,37 @@
+<h1>Primeiro acesso no Cobracoral</h1>
+<p>
+    <%= @saudacao %>,
+</p>
+<p>
+    A administração de sua instituição de ensino superior efetivou o seu cadastro no
+    ambiente virtual de aprendizagem, por onde terá acesso às suas principais necessidades
+    no âmbito educacional:
+</p>
+<ul>
+    <li>Visualizar o material didático de suas disciplinas</li>
+    <li>Realizar atividades e avaliações de suas disciplinas</li>
+    <li>Conferir notas e presenças de suas disciplinas</li>
+    <li>Enviar mensagens aos seus colegas de turma e docentes</li>
+    <li>Enviar solicitações para a gestão acadêmica</li>
+    <li>Muito mais!</li>
+</ul>
+<p>
+    Para dar início ao seu tour dentro do AVA, clique no link abaixo e realize o seu primeiro
+    acesso como <%= @cargo_usuario %> utilizando o email <strong><%= @usuario.email %></strong>
+    e a senha provisória a seguir:
+</p>
+<p>
+    <a href="<%= @acesso_link %>" target="_blank">
+        <%= @acesso_link %>
+    </a>
+</p>
+<div class="mail-access-code">
+    <%= @senha_provisoria %>
+</div>
+<p>
+    Após realizado o primeiro acesso, você deverá cadastrar uma nova senha. Não compartilhe as
+    suas credenciais de acesso e certifique-se de recordá-las para continuar acessando o AVA.
+</p>
+<p>
+    Atenciosamente, <%= @instituicao_nome %>
+</p>

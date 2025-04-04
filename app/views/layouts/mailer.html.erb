@@ -1,13 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
-      /* Email styles need to be inline */
+      body {
+        font-family: sans-serif;
+      }
+
+      .mail-conteiner {
+        background-color: ghostwhite;
+        border-radius: 20px;
+        padding: 5%;
+        margin: 5% 20% 10% 20%;
+      }
+
+      .mail-conteiner .mail-cobracoral-icon {
+        width: 100%;
+      }
+
+      .mail-conteiner .mail-cobracoral-icon svg.cobracoral-icon {
+        max-width: 20%;
+        margin: 0% 40% 0% 40%;
+      }
+
+      .mail-content h1 {
+        text-align: center;
+        width: 100%;
+      }
+
+      .mail-content p {
+        margin-bottom: 20px;
+        margin-bottom: 30px;
+      }
+
+      .mail-content a {
+        color: red;
+        text-decoration: underline;
+      }
+
+      .mail-content .mail-access-code {
+        font-size: 20pt;
+        font-weight: bold;
+        text-align: center;
+        background: gray;
+        width: 50%;
+        padding: 5%;
+        margin: 0% 20% 0% 20%;
+      }
+
+      .mail-content .mail-comunicado {
+        background-color: #d9d9d9;
+        border-radius: 20px;
+        padding: 5%;
+      }
+
+      .mail-footer {
+        color: gray;
+        text-align: center;
+        width: 100%;
+        margin-top: 10%;
+      }
     </style>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="mail-conteiner">
+      <div class="mail-cobracoral-icon">
+        <svg class="cobracoral-icon" width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <mask id="mask0_1_68" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="176" height="200">
+              <path class="logo-svg" d="M175.849 34.8313C162.541 19.3421 144.809 8.29853 125.038 3.18536C105.268 -1.9278 84.4055 -0.865449 65.2565 6.22959C46.1075 13.3246 29.5896 26.1122 17.9236 42.8732C6.25766 59.6342 0.00281203 79.565 9.47444e-07 99.9862C-0.00281013 120.407 6.24655 140.34 17.9079 157.104C29.5693 173.868 46.0836 186.661 65.2307 193.761C84.3778 200.861 105.24 201.929 125.012 196.822C144.784 191.714 162.518 180.675 175.831 165.19L140.923 135.18C133.739 143.537 124.168 149.494 113.498 152.251C102.828 155.007 91.5693 154.431 81.2363 150.599C70.9034 146.767 61.9913 139.864 55.6981 130.817C49.4049 121.77 46.0324 111.013 46.0339 99.9926C46.0354 88.972 49.4109 78.2161 55.7066 69.1709C62.0022 60.1256 70.9163 53.2247 81.2503 49.3957C91.5843 45.5668 102.843 44.9935 113.512 47.7529C124.182 50.5123 133.751 56.472 140.933 64.831L175.849 34.8313Z" fill="#FF3E60"/>
+          </mask>
+          <g class="g-mask" mask="url(#mask0_1_68)">
+              <path id="cobracoral-icon-color-1" d="M100 100L203.057 200.5H-3.05702L100 100Z" fill="#452525"/>
+              <path id="cobracoral-icon-color-2" d="M100 100L-3.05702 -0.5L203.057 -0.5L100 100Z" fill="#FFBCBC"/>
+              <path id="cobracoral-icon-color-3" d="M100 100L-0.5 203.057L-0.5 -3.05702L100 100Z" fill="#FF4343"/>
+         </g>
+        </svg>
+      </div>
+      <div class="mail-content">
+        <%= yield %>
+      </div>
+      <div class="mail-footer">
+        Cobracoral - 2025
+      </div>
+    </div>
   </body>
 </html>
