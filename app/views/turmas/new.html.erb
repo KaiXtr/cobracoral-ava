@@ -1,15 +1,5 @@
-<turbo-frame id="cobra-modal">
-  <div class="cobra-modal-background"></div>
-  <div data-controller="cobra-modal"
-    data-action="
-      turbo:submit-end -> cobra-modal#hide
-      keydown.esc -> cobra-modal#hide
-    "
-    role="dialog"
-    tabindex="-1"
-    class="modal-transition-in">
-    <h1>Adicionar turma</h1>
+<%= render CobraModalComponent.new() do %>
+  <h1>Adicionar turma</h1>
 
-    <%= render "form", turma: @turma %>
-  </div>
-</turbo-frame>
+  <%= render "form", turma: @turma %>
+<% end %>

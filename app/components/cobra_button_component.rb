@@ -23,7 +23,7 @@ class CobraButtonComponent < ViewComponent::Base
     @data_action = nil
 
     if (close_modal) then
-      @data_action = 'cobra-modal#hide'
+      @data_action = 'turbo-modal#hideModal'
     end
   end
 end

@@ -47,9 +47,5 @@
     <%= form.label :senha_acesso, "Senha de acesso" %>
     <%= form.password_field :senha_acesso, class: 'input-text' %>
   </div>
-  <%= button_tag "CANC", type: :button, method: :get, data: { action: "modal#hide" } %>
-  <%= render CancelarSalvarButtonsComponent.new(
-    cancel_to_link: request.env["HTTP_REFERER"],
-    close_modal: true)
-  %>
+  <%= render CancelarSalvarButtonsComponent.new(close_modal: true) %>
 <% end %>

@@ -14,7 +14,9 @@
   </head>
 
   <body>
-    <%= render ContextMenuComponent.new() %>
-    <%= yield %>
+    <main class="cobra-app">
+      <%= render ContextMenuComponent.new() %>
+      <%= yield %>
+    </main>
   </body>
 </html>

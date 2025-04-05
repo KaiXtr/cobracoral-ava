@@ -205,7 +205,7 @@ textarea {
     100% { opacity: 50%; }
 }
 
-#cobra-modal div[role=dialog] {
+#cobra-modal dialog {
     background-color: var(--container-bg);
     border-radius: 20px;
     width: 40vw;

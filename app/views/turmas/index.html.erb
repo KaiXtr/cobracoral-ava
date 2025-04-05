@@ -2,7 +2,7 @@
     <%= link_to "Voltar para todos os cursos", cursos_path %>
 	<h1>Todas as turmas</h1>
 	<% if policy(@turma).new? %>
-		<%= link_to "Adicionar turma", new_turma_path, remote: true, data: { turbo_frame: "cobra-modal" } %>
+		<%= link_to "Adicionar turma", new_turma_path, remote: true, data: { turbo_frame: "cobra-modal" }, onclick: "document.querySelector('dialog').showModal();" %>
 	<% end %>
 	<div>
 		<%= render @turmas %>

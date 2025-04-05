@@ -1,0 +1,12 @@
+<%= turbo_frame_tag "cobra-modal" do %>
+    <div class="cobra-modal-background"></div>
+    <%= tag.dialog data: {
+            controller: "turbo-modal",
+            turbo_modal_target: "cobra-modal",
+            action: "turbo:submit-end->turbo-modal#submitEnd keyup@window->turbo-modal#closeWithKeyboard click@windows->turbo-modal#closeBackground"
+        }, class: "modal-transition-in",
+        role: "dialog" do %>
+        <%= content %>
+        <%= button_tag "Close", data: { action: "turbo-modal#hideModal" }, type: "button", class: "rounded-lg py-3 px-5 bg-red-600 text-white" %>
+    <% end %>
+<% end %>

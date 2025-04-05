@@ -1,27 +1,17 @@
-<turbo-frame id="cobra-modal">
-  <div class="cobra-modal-background"></div>
-  <div data-controller="cobra-modal"
-    data-action="
-      turbo:submit-end -> cobra-modal#hide
-      keydown.esc -> cobra-modal#hide
-    "
-    role="dialog"
-    tabindex="-1"
-    class="modal-transition-in">
-        <h2>Deseja realmente apagar o curso <%= @curso.nome_curso %>?</h2>
-        <p>
-            Não será possível desfazer as alterações.
-        </p>
-        <div class="button-group">
-            <%= render CobraButtonComponent.new(
-                text: 'Cancelar',
-                href: '/cursos/' + @curso.id.to_s + '/editar')
-            %>
-            <%= render CobraButtonComponent.new(
-                text: 'Deletar',
-                href: '/cursos/' + @curso.id.to_s + '/destroy',
-                enable_turbo: false)
-            %>
-        </div>
+<%= render CobraModalComponent.new() do %>
+    <h2>Deseja realmente apagar o curso <%= @curso.nome_curso %>?</h2>
+    <p>
+        Não será possível desfazer as alterações.
+    </p>
+    <div class="button-group">
+        <%= render CobraButtonComponent.new(
+            text: 'Cancelar',
+            href: '/cursos/' + @curso.id.to_s + '/editar')
+        %>
+        <%= render CobraButtonComponent.new(
+            text: 'Deletar',
+            href: '/cursos/' + @curso.id.to_s + '/destroy',
+            enable_turbo: false)
+        %>
     </div>
-</turbo-frame>
+<% end %>
