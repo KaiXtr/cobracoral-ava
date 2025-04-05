@@ -2,7 +2,7 @@
   <h1>Todas as disciplinas</h1>
 
   <% if policy(@disciplina).new? %>
-    <%= link_to "Adicionar disciplina", new_disciplina_path, remote: true %>
+    <%= link_to "Adicionar disciplina", new_disciplina_path, remote: true, data: { turbo_frame: "cobra-modal" } %>
   <% end %>
 
   <div id="disciplinas" class="disciplinas-container">

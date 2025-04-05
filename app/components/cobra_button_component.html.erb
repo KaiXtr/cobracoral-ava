@@ -1,11 +1,17 @@
 <% if @href %>
     <a href="<%= @href %>">
-        <button type="<%= @type %>" class="cobra-button" onclick="<%= @onclick %>()">
+        <button type="<%= @type %>" class="cobra-button"
+            onclick="<%= @onclick %>"
+            data-action="<%= @data_action %>"
+            data-turbo-prefetch="<%= @enable_turbo %>">
             <%= @text %>
         </button>
     </a>
 <% else %>
-    <button type="<%= @type %>" class="cobra-button" onclick="<%= @onclick %>()">
+    <button type="<%= @type %>" class="cobra-button"
+        onclick="<%= @onclick %>"
+        data-action="<%= @data_action %>"
+        data-turbo-prefetch="<%= @enable_turbo %>">
         <%= @text %>
     </button>
 <% end %>

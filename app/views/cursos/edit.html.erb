@@ -1,6 +1,10 @@
 <nav>
     <% if policy(@curso).destroy? %>
-        <a href="/cursos/<%= @curso.id %>/deletar" class="delete-button">
+        <a
+            href="/cursos/<%= @curso.id %>/deletar"
+            class="delete-button"
+            data-turbo-frame="cobra-modal"
+            data-remote="true">
             <i class="fa-solid fa-trash fa-lg icon-button"></i>
         </a>
     <% end %>

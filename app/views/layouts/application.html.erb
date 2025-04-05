@@ -25,6 +25,7 @@
     </script>
   </head>
   <body>
+    <%= turbo_frame_tag "cobra-modal" %>
     <%= render ContextMenuComponent.new() %>
     <%= render BarraPrincipalComponent.new(usuario_autenticado: @usuario_autenticado) %>
     <%= render BarraLateralNavegacaoComponent.new(usuario_autenticado: @usuario_autenticado) %>

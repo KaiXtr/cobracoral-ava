@@ -6,7 +6,11 @@
     </div>
     <h5>
         <%= @medidor_titulo %>
-        <a href="" tooltip-text="Abrir gráfico">
+        <a
+            href="/turmas/new"
+            tooltip-text="Abrir gráfico"
+            data-turbo-frame="cobra-modal"
+            data-remote="true">
             <i class="fa-solid fa-pie-chart fa-lg icon-button"></i>
         </a>
     </h5>

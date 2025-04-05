@@ -93,6 +93,13 @@ class ConteudosController < ApplicationController
     end
   end
 
+	def delete
+		@usuario = usuario_autenticado
+		@conteudo = Conteudo.find(params[:id])
+
+		Rails.logger.info "Confirmando deleção do conteudo " + @conteudo.nome_conteudo + "."
+	end
+
   # GET /conteudos/new
   def new
     @conteudo = Conteudo.new

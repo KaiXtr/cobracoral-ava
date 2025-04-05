@@ -51,7 +51,12 @@ class TurmaPolicy
   private
 
   def coordenadorCriaTurma?
-    true
+    curso = Curso.find_by(usuario_id: @usuario.id)
+    if curso then
+      curso.usuario_id == @usuario.id
+    else
+      false
+    end
   end
 
   def eCoordenadorDoCurso?

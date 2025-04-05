@@ -3,7 +3,7 @@
     <h1>Comunicados</h1>
     <% if @comunicados %>
       <% if policy(@comunicado).new? %>
-        <%= link_to "New comunicado", new_comunicado_path %>
+        <%= link_to "New comunicado", new_comunicado_path, remote: true, data: { turbo_frame: "cobra-modal" } %>
       <% end %>
       <div>
         <%= render @comunicados %>

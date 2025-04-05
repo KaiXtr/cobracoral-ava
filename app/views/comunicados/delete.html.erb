@@ -8,18 +8,18 @@
     role="dialog"
     tabindex="-1"
     class="modal-transition-in">
-        <h2>Deseja realmente apagar a turma <%= @turma.nome_turma %>?</h2>
+        <h2>Deseja realmente apagar este comunicado?</h2>
         <p>
             Não será possível desfazer as alterações.
         </p>
         <div class="button-group">
             <%= render CobraButtonComponent.new(
                 text: 'Cancelar',
-                href: '/turmas/' + @turma.id.to_s + '/editar')
+                href: '/comunicados')
             %>
             <%= render CobraButtonComponent.new(
                 text: 'Deletar',
-                href: '/turmas/' + @turma.id.to_s + '/destroy',
+                href: '/comunicados/' + @comunicado.id.to_s + '/destroy',
                 enable_turbo: false)
             %>
         </div>

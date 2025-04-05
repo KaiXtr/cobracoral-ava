@@ -1,6 +1,17 @@
-<div class="modal-adicionar">
-  <%= link_to "Back to disciplinas", disciplinas_path %>
-  <h3>Adicionar disciplina</h3>
+<turbo-frame id="cobra-modal">
+  <div class="cobra-modal-background"></div>
+  <div data-controller="cobra-modal"
+    data-action="
+      turbo:submit-end -> cobra-modal#hide
+      keydown.esc -> cobra-modal#hide
+    "
+    role="dialog"
+    tabindex="-1"
+    class="modal-transition-in">
+      <%= link_to "Back to disciplinas", disciplinas_path %>
+      <h3>Adicionar disciplina</h3>
 
-  <%= render "form", disciplina: @disciplina %>
-</div>
+      <%= render "form", disciplina: @disciplina %>
+    </div>
+  </div>
+</turbo-frame>
