@@ -181,7 +181,9 @@ class TurmasController < ApplicationController
 	private
 
 		def set_turma
-			@turma = Turma.find(params[:id])
+			if Turma.find_by(id: params[:id]) then
+				@turma = Turma.find(params[:id])
+			end
 		end
 
 		def turma_params

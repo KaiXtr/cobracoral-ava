@@ -25,14 +25,22 @@
     </script>
   </head>
   <body>
-    <main class="cobra-app">
-      <%= turbo_frame_tag "cobra-modal", id: "cobra-modal" %>
-      <%= render ContextMenuComponent.new() %>
-      <%= render BarraPrincipalComponent.new(usuario_autenticado: @usuario_autenticado) %>
-      <%= render BarraLateralNavegacaoComponent.new(usuario_autenticado: @usuario_autenticado) %>
-      <%= render NotificacaoComponent.new(mensagem: notice) %>
-      <%= yield %>
-      <%= render RodapeComponent.new() %>
-    </main>
+    <% if @cobra_app_resting then %>
+      <main class="cobra-app-resting">
+        <%= render ContextMenuComponent.new() %>
+		    <%= show_svg('cobracoral-logo.svg') %>
+        <h1>Hora de uma pausa.</h1>
+      </main>
+    <% else %>
+      <main class="cobra-app">
+        <%= turbo_frame_tag "cobra-modal", id: "cobra-modal" %>
+        <%= render ContextMenuComponent.new() %>
+        <%= render BarraPrincipalComponent.new(usuario_autenticado: @usuario_autenticado) %>
+        <%= render BarraLateralNavegacaoComponent.new(usuario_autenticado: @usuario_autenticado) %>
+        <%= render NotificacaoComponent.new(mensagem: notice) %>
+        <%= yield %>
+        <%= render RodapeComponent.new() %>
+      </main>
+    <% end %>
   </body>
 </html>
