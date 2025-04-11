@@ -122,6 +122,8 @@ class ConteudosController < ApplicationController
     professor = usuario_autenticado
     @conteudo = Conteudo.new(conteudo_params)
     @conteudo.unidade_disciplina_id = 1
+    @conteudo.data_liberacao = DateTime.now
+    @conteudo.data_vencimento = DateTime.now
     @disciplina_conteudo = Disciplina.find_by(usuario_id: professor.id)
 
     respond_to do |format|
