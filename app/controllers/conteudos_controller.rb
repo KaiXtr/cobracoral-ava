@@ -105,6 +105,7 @@ class ConteudosController < ApplicationController
     @conteudo = Conteudo.new
     @conteudo.nome_conteudo = "Nome do conteúdo "
     professor = usuario_autenticado
+    authorize(@conteudo)
     
     @disciplina_conteudo = Disciplina.find_by(usuario_id: professor.id)
     Rails.logger.info "Criando novo conteúdo."
@@ -118,17 +119,20 @@ class ConteudosController < ApplicationController
 
   # POST /conteudos or /conteudos.json
   def create
+    professor = usuario_autenticado
     @conteudo = Conteudo.new(conteudo_params)
+    @conteudo.unidade_disciplina_id = 1
+    @disciplina_conteudo = Disciplina.find_by(usuario_id: professor.id)
 
     respond_to do |format|
       if @conteudo.save
-        logtxt = "Conteúdo " + @conteudo.nome_conteudo + " atualizado com sucesso."
+        logtxt = "Conteúdo " + @conteudo.nome_conteudo + " criado com sucesso."
         Rails.logger.info logtxt
         format.html { redirect_to conteudo_url(@conteudo), notice: logtxt }
         format.json { render :show, status: :created, location: @conteudo }
       else
 			  Rails.logger.error "Houve um erro ao criar o conteúdo " + @conteudo.nome_conteudo + "."
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity, notice: @conteudo.errors }
         format.json { render json: @conteudo.errors, status: :unprocessable_entity }
       end
     end

@@ -58,3 +58,8 @@ trix-editor.trix-content {
   border-radius: 20px;
   padding: 2vw;
 }
+
+.trix-content iframe {
+  max-width: 100%;
+  border: none;
+}
