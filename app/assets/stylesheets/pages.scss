@@ -75,6 +75,11 @@
         display: inline-block;
     }
 
+    .comunicado-form-body trix-editor.trix-content {
+        max-height: 60vh !important;
+        overflow-y: scroll;
+    }
+
     p {
         margin: 0px;
     }

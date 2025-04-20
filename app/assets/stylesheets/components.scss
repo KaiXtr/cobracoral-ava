@@ -51,6 +51,35 @@
     position: absolute;
 }
 
+.form-group {
+    margin-top: 10px;
+
+    .form-column {
+        width: 45%;
+        margin-right: 10px;
+        display: inline-block;
+    }
+}
+
+.input-text {
+    color: var(--text-color);
+    background-color: var(--container-bg);
+    font-size: 12pt;
+    border: none;
+    border-bottom: 2px solid black;
+    padding: 0.5vw 0px 0.5vw 0px;
+    width: 100%;
+    margin-top: 10px;
+    display: block;
+}
+
+textarea {
+    background-color: var(--textarea-background-color);
+    font-family: "Rubik", sans-serif;
+    border: none;
+    border-radius: 20px;
+}
+
 .select-box {
     display: inline-block;
     position: relative;
@@ -82,7 +111,7 @@
     padding-top: 5vh;
     padding-left: 2vw;
     top: 0px;
-    z-index: 10;
+    z-index: 20;
 
     ul {
         padding-left: 2vw;
@@ -122,7 +151,7 @@
     border-radius: 25px;
     padding: 1vw;
     position: fixed;
-    z-index: 10;
+    z-index: 50;
     animation: notification-in forwards 5s;
     animation-fill-mode: forwards;
 }
@@ -136,7 +165,7 @@
 
 #context-menu-component {
     position: fixed;
-    z-index: 50;
+    z-index: 90;
 
     ul {
         color: ghostwhite;
@@ -159,6 +188,59 @@
             }
         }
     }
+}
+
+#cobra-modal div.cobra-modal-background {
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    animation: cobra-modal-background-transition .2s ease-out;
+    animation-fill-mode: forwards;
+    position: fixed;
+    z-index: 70;
+}
+
+@keyframes cobra-modal-background-transition {
+    0%   { opacity: 0%; }
+    100% { opacity: 50%; }
+}
+
+#cobra-modal dialog {
+    background-color: var(--container-bg);
+    border-radius: 20px;
+    width: 40vw;
+    max-height: 70vh;
+    overflow-y: scroll;
+    padding: 5vw;
+    margin: 8vh 25vw 0vh 25vw;
+    position: fixed;
+    z-index: 80;
+
+    h1, h2 {
+        margin-top: 0px;
+    }
+}
+
+#cobra-modal .modal-transition-in {
+    animation: modal-transition-in-animation .8s ease-out;
+    animation-fill-mode: forwards;
+}
+
+#cobra-modal .modal-transition-out {
+    animation: modal-transition-out-animation .8s ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes modal-transition-in-animation {
+    0% { margin-top: 50vh; opacity: 0%; }
+    50% { opacity: 100%; }
+    100% { margin-top: 8vh }
+}
+
+@keyframes modal-transition-out-animation {
+    0% { margin-top: 8vh; }
+    50% { opacity: 100%; }
+    100% { margin-top: -50vh; opacity: 0%; }
 }
 
 .goback-button {

@@ -1,6 +1,6 @@
-<div class="modal-adicionar">
+<%= render CobraModalComponent.new() do %>
   <%= link_to "Back to disciplinas", disciplinas_path %>
   <h3>Adicionar disciplina</h3>
 
   <%= render "form", disciplina: @disciplina %>
-</div>
+<% end %>

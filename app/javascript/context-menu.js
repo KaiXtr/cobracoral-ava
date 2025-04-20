@@ -11,6 +11,11 @@ function loadContextMenuOptions() {
         contextMenuSearch();
     });
 
+    let contextMenuOptionOpenImage = document.getElementById('context-menu-option-open-image');
+    contextMenuOptionOpenImage.addEventListener('click', function() {
+        contextMenuOpenImage();
+    });
+
     let contextMenuOptionOpenLink = document.getElementById('context-menu-option-open-link');
     contextMenuOptionOpenLink.addEventListener('click', function() {
         contextMenuSearch();
@@ -52,6 +57,10 @@ function contextMenuSearch() {
     }
 }
 
+function contextMenuOpenImage() {
+    window.open(clickedElement.src, '_blank').focus();
+}
+
 function contextMenuCopyToClipboard() {
     navigator.clipboard.writeText(getSelectedText());
 }
@@ -75,6 +84,7 @@ function showContextMenu(evt) {
     contextMenuOptions.style.opacity = '100%';
 
     let contextMenuOptionGoTo = document.getElementById('context-menu-option-go-to');
+    let contextMenuOptionOpenImage = document.getElementById('context-menu-option-open-image');
     let contextMenuOptionOpenLink = document.getElementById('context-menu-option-open-link');
     let contextMenuOptionSearch = document.getElementById('context-menu-option-search');
     let contextMenuOptionCopy = document.getElementById('context-menu-option-copy');
@@ -82,6 +92,7 @@ function showContextMenu(evt) {
     let contextMenuOptionCut = document.getElementById('context-menu-option-cut');
 
     if (clickedElement.tagName == 'BUTTON') {
+        contextMenuOptionOpenImage.style.display = 'none';
         contextMenuOptionOpenLink.style.display = 'none';
         contextMenuOptionSearch.style.display = 'none';
         contextMenuOptionCopy.style.display = 'none';
@@ -92,9 +103,18 @@ function showContextMenu(evt) {
             contextMenuOptionGoTo.style.display = 'block';
         else
             contextMenuOptionGoTo.style.display = 'none';
-
+    }
+    else if (clickedElement.tagName == 'IMG') {
+        contextMenuOptionOpenImage.style.display = 'block';
+        contextMenuOptionOpenLink.style.display = 'none';
+        contextMenuOptionSearch.style.display = 'none';
+        contextMenuOptionCopy.style.display = 'block';
+        contextMenuOptionPaste.style.display = 'none';
+        contextMenuOptionCut.style.display = 'none';
     }
     else {
+        contextMenuOptionOpenImage.style.display = 'none';
+
         if (clickedElement.parentElement.className == 'trix-content' &&
             clickedElement.parentElement.parentElement.className == 'conteudo-elementos'
         ) {

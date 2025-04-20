@@ -40,21 +40,26 @@ Rails.application.routes.draw do
 
   get '/comunicados/:id/reagir/:emoji', to: 'comunicados#reagir'
   get '/comunicados/:id/editar', to: 'comunicados#edit'
-  get '/comunicados/:id/deletar', to: 'comunicados#destroy'
+  get '/comunicados/:id/deletar', to: 'comunicados#delete'
+  get '/comunicados/:id/destroy', to: 'comunicados#destroy'
 
   get '/cursos/:id/editar', to: 'cursos#edit'
   get '/cursos/:id/deletar', to: 'cursos#delete'
+  get '/cursos/:id/destroy', to: 'cursos#destroy'
 
   get '/turmas/:id/matricular', to: 'turmas#matricular'
   get '/turmas/:id/editar', to: 'turmas#edit'
   get '/turmas/:id/deletar', to: 'turmas#delete'
+  get '/turmas/:id/destroy', to: 'turmas#destroy'
 
   get '/disciplinas/:id/editar', to: 'disciplinas#edit'
   get '/disciplinas/:id/deletar', to: 'disciplinas#delete'
+  get '/disciplinas/:id/destroy', to: 'disciplinas#destroy'
 
   get '/conteudos/:id/editar', to: 'conteudos#edit'
   get '/conteudos/:id/salvar', to: 'conteudos#salvar'
   get '/conteudos/:id/deletar', to: 'conteudos#delete'
+  get '/conteudos/:id/destroy', to: 'conteudos#destroy'
 
   get '/sobre', to: 'sobre#index'
   get '/instalar', to: 'sobre#instalar'

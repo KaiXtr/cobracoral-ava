@@ -1,4 +1,12 @@
 <nav>
-  <%= button_to "Destroy this conteudo", @conteudo, method: :delete %>
+  <% if policy(@conteudo).destroy? %>
+      <a
+          href="/conteudos/<%= @conteudo.id %>/deletar"
+          class="delete-button"
+          data-turbo-frame="cobra-modal"
+          data-remote="true">
+          <i class="fa-solid fa-trash fa-lg icon-button"></i>
+      </a>
+  <% end %>
   <%= render "form", conteudo: @conteudo %>
 </nav>

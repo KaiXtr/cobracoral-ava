@@ -46,6 +46,18 @@ a {
   text-decoration: none;
 }
 
+main.cobra-app-resting svg.cobracoral-icon {
+  width: 100%;
+  margin-top: 35vh;
+  transform: scale(200%);
+}
+
+main.cobra-app-resting h1 {
+  text-align: center;
+  width: 100%;
+  margin-top: 10vh;
+}
+
 [tooltip-text] {
   position: relative;
 }
@@ -64,7 +76,7 @@ a {
   bottom: 110%;
   white-space: nowrap;
   opacity: 0%;
-  z-index: 60;
+  z-index: 100;
   transform: translateY(-10px);
   visibility: hidden;
   position: absolute;
@@ -190,6 +202,7 @@ header#cobracoral-header {
       h1 {
         color: var(--red-dark);
         transition-duration: .2s;
+        font-size: 26pt;
         margin: 0px;
         
         &:hover {
@@ -279,6 +292,10 @@ div.inicio-banner {
 nav {
   background-color: var(--nav-bg);
   padding: 5vh 10vw 5vh 10vw;
+
+  h1 {
+    font-size: 26pt;
+  }
 
   section {
     line-height: 25pt;

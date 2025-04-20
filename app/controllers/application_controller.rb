@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
 	include Pundit::Authorization
 	helper ActionText::Engine.helpers
 
+	before_action :set_cobra_app_resting
+
 	def usuario_autenticado
 		if session[:usuario_id]
 			if Usuario.where(id: session[:usuario_id]).length > 0 then
@@ -76,4 +78,31 @@ class ApplicationController < ActionController::Base
 		session.delete(:usuario_id)
 		@usuario_autenticado = nil
 	end
+
+	private
+
+		def set_cobra_app_resting
+			@cobra_app_resting = false
+
+			login_time = session[:login_time]
+
+			if (login_time) then
+				@pomodoro_hora_atual = Time.now
+				@pomodoro_hora_inicial = login_time.to_time
+				@pomodoro_hora_descanso = login_time.to_time + (25 * 60)
+				@pomodoro_hora_retorno = login_time.to_time + (30 * 60)
+				@pomodoro_tempo_atual = (
+					(@pomodoro_hora_atual.to_time - @pomodoro_hora_inicial.to_time).to_i/60
+				)
+
+				if (@pomodoro_hora_atual >= @pomodoro_hora_descanso) &&
+				(@pomodoro_hora_atual < @pomodoro_hora_retorno) then
+					@cobra_app_resting = true
+				end
+
+				if (@pomodoro_hora_atual >= @pomodoro_hora_retorno) then
+					session[:login_time] = Time.now
+				end
+			end
+		end
 end

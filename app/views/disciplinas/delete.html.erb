@@ -1,5 +1,5 @@
-<nav>
-	<h1>Deseja realmente apagar a disciplina <%= @disciplina.nome_disciplina %>?</h1>
+<%= render CobraModalComponent.new() do %>
+    <h2>Deseja realmente apagar a disciplina <%= @disciplina.nome_disciplina %>?</h2>
     <p>
         Não será possível desfazer as alterações.
     </p>
@@ -8,6 +8,10 @@
             text: 'Cancelar',
             href: '/disciplinas/' + @disciplina.id.to_s + '/editar')
         %>
-        <%= button_to "Deletar", @turma, class: "cobra-button", method: :delete %>
+        <%= render CobraButtonComponent.new(
+            text: 'Deletar',
+            href: '/disciplinas/' + @disciplina.id.to_s + '/destroy',
+            enable_turbo: false)
+        %>
     </div>
-</nav>
+<% end %>

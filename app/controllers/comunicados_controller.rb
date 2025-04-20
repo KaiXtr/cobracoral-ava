@@ -38,6 +38,13 @@ class ComunicadosController < ApplicationController
     Rails.logger.info "Acessando comunicado " + @comunicado.id.to_s + "."
   end
 
+	def delete
+		@usuario = usuario_autenticado
+		@comunicado = Comunicado.find(params[:id])
+
+		Rails.logger.info "Confirmando deleção do comunicado " + @comunicado.id.to_s + "."
+	end
+
   # GET /comunicados/new
   def new
     @usuario = usuario_autenticado
