@@ -111,6 +111,46 @@
     }
 }
 
+#barra-lateral-preferencias {
+    color: var(--white-main);
+    background-color: #2E2E2E;
+    transition-duration: .2s;
+    width: 30vw;
+    height: 100%;
+    position: fixed;
+    padding-top: 5vh;
+    padding-left: 2vw;
+    top: 0px;
+    right: 0px;
+    z-index: 10;
+
+    ul {
+        padding-left: 2vw;
+        
+        li {
+            width: fit-content;
+            margin-bottom: 1vh;
+            list-style: none;
+        }
+    }
+
+    ol li {
+        width: fit-content;
+        margin-bottom: 1vh;
+        list-style: decimal;
+    }
+
+    a {
+        color: var(--white-main);
+        transition-duration: .2s;
+        font-weight: bold;
+
+        &:hover {
+            color: var(--red-dark);
+        }
+    }
+}
+
 .notificacao-conteiner {
     color: ghostwhite;
     font-weight: bold;
