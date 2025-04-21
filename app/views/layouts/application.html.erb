@@ -22,6 +22,17 @@
                 barra.style.opacity = '100%';
             }
         }
+
+        function abrirBarraPreferencias() {
+          let barra = document.getElementById('barra-lateral-preferencias');
+          if (barra.style.visibility == 'visible') {
+              barra.style.visibility = 'hidden';
+              barra.style.opacity = '0%';
+          } else {
+              barra.style.visibility = 'visible';
+              barra.style.opacity = '100%';
+          }
+      }
     </script>
   </head>
   <body>
