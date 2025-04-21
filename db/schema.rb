@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_03_16_141346) do
+ActiveRecord::Schema[7.2].define(version: 2025_04_21_203759) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -73,7 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_16_141346) do
     t.string "nome_curso"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "descricao"  
+    t.string "descricao"
     t.integer "usuario_id", null: false
     t.index ["usuario_id"], name: "index_cursos_on_usuario_id"
   end
@@ -110,6 +110,31 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_16_141346) do
     t.string "semestre"
     t.index ["turma_id"], name: "index_matriculas_on_turma_id"
     t.index ["usuario_id"], name: "index_matriculas_on_usuario_id"
+  end
+
+  create_table "preferencia_usuarios", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "idioma"
+    t.string "tema"
+    t.boolean "avaliacao_exibir_tempo"
+    t.boolean "avaliacao_exibir_progresso"
+    t.boolean "pomodoro_ativar"
+    t.integer "pomodoro_pomodoris_tempo"
+    t.integer "pomodoro_descanso"
+    t.boolean "pomodoro_hibernar"
+    t.boolean "pomodoro_logoff"
+    t.boolean "notificacao_novo_acesso"
+    t.boolean "notificacao_comunicados_coordenacao"
+    t.boolean "notificacao_comunicados_turma"
+    t.boolean "notificacao_agendamentos"
+    t.boolean "notificacao_avaliacao_liberada"
+    t.boolean "notificacao_conteudo_liberado"
+    t.boolean "notificacao_nota_lancada"
+    t.boolean "notificacao_nova_mensagem"
+    t.boolean "notificacao_situacao_solicitacao"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_preferencia_usuarios_on_user_id"
   end
 
   create_table "reacao_comunicados", force: :cascade do |t|
@@ -169,6 +194,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_16_141346) do
   add_foreign_key "leitura_conteudos", "usuarios"
   add_foreign_key "matriculas", "turmas"
   add_foreign_key "matriculas", "usuarios"
+  add_foreign_key "preferencia_usuarios", "users"
   add_foreign_key "reacao_comunicados", "comunicados"
   add_foreign_key "reacao_comunicados", "usuarios"
   add_foreign_key "turmas", "cursos"
