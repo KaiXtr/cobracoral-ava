@@ -1,12 +1,24 @@
-<div id="barra-lateral-preferencias" style="visibility: hidden; opacity: 0%;" onclick="abrirBarraPreferencias()">
-    <h2>
-        Preferências
-    </h2>
-    <span>
-        Semestre
-    </span>
-    <ul>
-    <li>
-    </li>
-    </ul>
+<div id="barra-lateral-preferencias" style="visibility: hidden; opacity: 0%;">
+    <div style="display: flex; align-items: center; justify-content: space-between">
+        <h2>
+            Preferências
+        </h2>
+        <section onclick="abrirBarraPreferencias()" style="cursor: pointer;">
+            X
+        </section>
+    </div>
+
+    <div>
+        <h3>Aparência</h3>
+        <%= form_with(model: @preferencia_usuario) do |f| %>
+            <div class="form-group" style="display: flex; align-items:center; justify-content: space-between;">
+                <%= f.label :tema, "Tema:" %>
+                <div class="select-box-preferencias">
+                    <%= f.select :turno_turma,
+                        options_for_select(['Manhã', 'Tarde', 'Noite'], 'Tarde')
+                    %>
+                </div>
+            </div>
+        <% end %>
+    </div>
 </div>
