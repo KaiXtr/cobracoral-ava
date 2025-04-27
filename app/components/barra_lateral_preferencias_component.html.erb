@@ -9,16 +9,16 @@
     </div>
 
     <div>
-        <h3>Aparência</h3>
         <%= form_with(model: @preferencia_usuario) do |f| %>
-            <div class="form-group" style="display: flex; align-items:center; justify-content: space-between;">
-                <%= f.label :tema, "Tema:" %>
-                <div class="select-box-preferencias">
-                    <%= f.select :turno_turma,
-                        options_for_select(['Manhã', 'Tarde', 'Noite'], 'Tarde')
-                    %>
-                </div>
+        <h3>Aparência</h3>
+        <div class="form-group" style="display: flex; align-items:center; justify-content: space-between;">
+            <%= f.label :tema, "Tema:" %>
+            <div class="select-box-preferencias">
+                <%= f.select :turno_turma,
+                    options_for_select([['Sim', true], 'Tarde', 'Noite'], 'Tarde')
+                %>
             </div>
-        <% end %>
+        </div>
     </div>
+    <% end %>
 </div>
