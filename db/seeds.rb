@@ -361,3 +361,27 @@ Comunicado.create(
 )
 
 puts "= comunicados populada."
+
+PreferenciaUsuario.create(
+    id: 1,
+    usuario_id: 2,
+    idioma: "pt-BR",
+    tema: "default",
+    avaliacao_exibir_tempo: true,
+    avaliacao_exibir_progresso: true,
+    pomodoro_ativar: true,
+    pomodoro_pomodoris_tempo: 25,
+    pomodoro_descanso: 5,
+    pomodoro_pomodoris_quant: 4,
+    pomodoro_hibernar: true,
+    pomodoro_logoff: false,
+    notificacao_novo_acesso: true,
+    notificacao_comunicados_coordenacao: true,
+    notificacao_comunicados_turma: true,
+    notificacao_agendamentos: true,
+    notificacao_avaliacao_liberada: true,
+    notificacao_conteudo_liberado: true,
+    notificacao_nota_lancada: true,
+    notificacao_nova_mensagem: true,
+    notificacao_situacao_solicitacao: true
+)
