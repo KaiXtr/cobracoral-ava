@@ -1,5 +1,7 @@
 class PreferenciasUsuario < ApplicationRecord
-  belongs_to :user
+  belongs_to :usuario
+
+  self.table_name = "preferencias_usuario"
 
   enum tema: { default: 'default', escuro: 'escuro', claro: 'claro' } # ajuste conforme necessário
 
