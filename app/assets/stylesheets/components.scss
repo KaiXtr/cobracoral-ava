@@ -149,9 +149,8 @@
     right: 0px;
     z-index: 10;
     overflow: scroll;
-    label{
-        font-weight: bold;
-    }
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE e Edge antigos */
 }
 
 .notificacao-conteiner {
