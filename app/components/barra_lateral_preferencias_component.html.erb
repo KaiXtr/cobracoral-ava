@@ -1,24 +1,55 @@
 <div id="barra-lateral-preferencias" style="visibility: hidden; opacity: 0%;">
-    <div style="display: flex; align-items: center; justify-content: space-between">
-        <h2>
-            Preferências
-        </h2>
-        <section onclick="abrirBarraPreferencias()" style="cursor: pointer;">
-            X
-        </section>
-    </div>
+  <div style="display: flex; align-items: center; justify-content: space-between">
+    <h2>Preferências</h2>
+    <section onclick="abrirBarraPreferencias()" style="cursor: pointer;">X</section>
+  </div>
 
-    <div>
-        <%= form_with(model: @preferencia_usuario) do |f| %>
-        <h3>Aparência</h3>
-        <div class="form-group" style="display: flex; align-items:center; justify-content: space-between;">
-            <%= f.label :tema, "Tema:" %>
-            <div class="select-box-preferencias">
-                <%= f.select :turno_turma,
-                    options_for_select([['Sim', true], 'Tarde', 'Noite'], 'Tarde')
-                %>
-            </div>
+  <div>
+    <%= form_with(model: @preferencias_usuario) do |f| %>
+      <% configuracoes = {
+        "Aparência" => [
+          { campo: :tema, label: "Tema:", opcoes: ['Padrão', 'Claro', 'Escuro'], padrao: 'Padrão' }
+        ],
+        "Avaliações" => [
+          { campo: :avaliacao_exibir_tempo, label: "Exibir tempo restante:", opcoes: ['Sim', 'Não'], padrao: 'Sim' },
+          { campo: :avaliacao_exibir_progresso, label: "Exibir barra de progresso:", opcoes: ['Sim', 'Não'], padrao: 'Sim' }
+        ],
+        "Pomodoro" => [
+          { campo: :pomodoro_ativar, label: "Ativar pomodoro:", opcoes: ['Sim', 'Não'], padrao: 'Sim' },
+          { campo: :pomodoro_pomodoris_tempo, label: "Tempo do pomodoris:", opcoes: ['25m'], padrao: '25m' },
+          { campo: :pomodoro_descanso, label: "Tempo de descanso:", opcoes: ['5m'], padrao: '5m' },
+          { campo: :pomodoro_pomodoris_quant, label: "Quantidade de pomodoris:", opcoes: ['4'], padrao: '4' },
+          { campo: :pomodoro_hibernar, label: "Descansar ao terminar:", opcoes: ['Sim', 'Não'], padrao: 'Sim' },
+          { campo: :pomodoro_logoff, label: "Desconectar ao terminar:", opcoes: ['Sim', 'Não'], padrao: 'Não' }
+        ],
+        "Notificações" => [
+          { campo: :notificacao_novo_acesso, label: "Novo acesso:", opcoes: ['Sim', 'Não'], padrao: 'Sim' },
+          { campo: :notificacao_comunicados_coordenacao, label: "Comunicados da coordenação:", opcoes: ['Sim', 'Não'], padrao: 'Sim' },
+          { campo: :notificacao_comunicados_turma, label: "Comunicados da turma:", opcoes: ['Sim', 'Não'], padrao: 'Sim' },
+          { campo: :notificacao_agendamentos, label: "Reuniões assíncronas:", opcoes: ['Sim', 'Não'], padrao: 'Sim' },
+          { campo: :notificacao_avaliacao_liberada, label: "Avaliação liberada:", opcoes: ['Sim', 'Não'], padrao: 'Sim' },
+          { campo: :notificacao_conteudo_liberado, label: "Conteúdo liberado:", opcoes: ['Sim', 'Não'], padrao: 'Sim' },
+          { campo: :notificacao_nota_lancada, label: "Nota lançada:", opcoes: ['Sim', 'Não'], padrao: 'Sim' },
+          { campo: :notificacao_nova_mensagem, label: "Novas mensagens:", opcoes: ['Sim', 'Não'], padrao: 'Sim' },
+          { campo: :notificacao_situacao_solicitacao, label: "Solicitações:", opcoes: ['Sim', 'Não'], padrao: 'Sim' },
+        ]
+      } %>
+
+      <% configuracoes.each do |titulo, campos| %>
+        <div style="margin-bottom: 50px;">
+            <h3><%= titulo %></h3>
+            <% campos.each do |campo| %>
+              <div class="form-group" style="display: flex; align-items:center; justify-content: space-between;">
+                <%= f.label campo[:campo], campo[:label] %>
+                <div class="select-box-preferencias">
+                  <%= f.select campo[:campo],
+                      options_for_select(campo[:opcoes], campo[:padrao])
+                  %>
+                </div>
+              </div>
+            <% end %>
         </div>
-    </div>
+      <% end %>
     <% end %>
+  </div>
 </div>
