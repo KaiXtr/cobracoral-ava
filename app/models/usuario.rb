@@ -7,8 +7,8 @@ class Usuario < ApplicationRecord
 	has_many :reacao_comunicado
 
 	has_one_attached :avatar
-	has_one :preferencia_usuario, dependent: :destroy
-	accepts_nested_attributes_for :preferencia_usuario, update_only:
+	has_one :preferencias_usuario, dependent: :destroy
+	accepts_nested_attributes_for :preferencias_usuario, update_only:
 	
 	has_secure_password
 

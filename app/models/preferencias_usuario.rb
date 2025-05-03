@@ -1,4 +1,4 @@
-class PreferenciaUsuario < ApplicationRecord
+class PreferenciasUsuario < ApplicationRecord
   belongs_to :user
 
   enum tema: { default: 'default', escuro: 'escuro', claro: 'claro' } # ajuste conforme necessário

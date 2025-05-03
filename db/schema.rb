@@ -112,7 +112,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_21_203759) do
     t.index ["usuario_id"], name: "index_matriculas_on_usuario_id"
   end
 
-  create_table "preferencia_usuario", force: :cascade do |t|
+  create_table "preferencias_usuario", force: :cascade do |t|
     t.integer "usuario_id", null: false
     t.string "idioma"
     t.string "tema"
@@ -135,7 +135,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_21_203759) do
     t.boolean "notificacao_situacao_solicitacao"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["usuario_id"], name: "index_preferencia_usuario_on_user_id"
+    t.index ["usuario_id"], name: "index_preferencias_usuario_on_user_id"
   end
 
   create_table "reacao_comunicados", force: :cascade do |t|
@@ -195,7 +195,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_21_203759) do
   add_foreign_key "leitura_conteudos", "usuarios"
   add_foreign_key "matriculas", "turmas"
   add_foreign_key "matriculas", "usuarios"
-  add_foreign_key "preferencia_usuario", "usuarios"
+  add_foreign_key "preferencias_usuario", "usuarios"
   add_foreign_key "reacao_comunicados", "comunicados"
   add_foreign_key "reacao_comunicados", "usuarios"
   add_foreign_key "turmas", "cursos"

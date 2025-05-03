@@ -1,6 +1,6 @@
 require "test_helper"
 
-class PreferenciaUsuarioTest < ActiveSupport::TestCase
+class PreferenciasUsuarioTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
