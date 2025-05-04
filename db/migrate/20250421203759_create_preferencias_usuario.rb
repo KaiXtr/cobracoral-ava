@@ -1,7 +1,7 @@
   class CreatePreferenciasUsuario < ActiveRecord::Migration[7.2]
   def change
     create_table :preferencias_usuario do |t|
-      t.references :user, null: false, foreign_key: true
+      t.references :usuario, null: false, foreign_key: true
       t.string :idioma, default: "pt-BR"
       t.string :tema, default: "default"
       t.boolean :avaliacao_exibir_tempo, default: true
