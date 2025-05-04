@@ -27,12 +27,10 @@ class ApplicationController < ActionController::Base
 
 	def index
 		@usuario_autenticado = usuario_autenticado
-		@preferencias_usuario = PreferenciasUsuario.find_by(usuario_id: @usuario_autenticado.id)
 	end
 
 	def show
 		@usuario_autenticado = usuario_autenticado
-		@preferencias_usuario = PreferenciasUsuario.find_by(usuario_id: @usuario_autenticado.id)
 	end
 
 	def logar(usuario, sessionData)
