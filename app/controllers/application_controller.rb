@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
 		if session[:usuario_id]
 			if Usuario.where(id: session[:usuario_id]).length > 0 then
 				@usuario_autenticado = Usuario.find(session[:usuario_id])
+				@preferencias_usuario = PreferenciasUsuario.find_by(usuario_id: @usuario_autenticado.id)
 			else
 				Rails.logger.info "Usuário previamente autenticado foi deletado. Encerrando sessão."
 				logout
@@ -26,12 +27,12 @@ class ApplicationController < ActionController::Base
 
 	def index
 		@usuario_autenticado = usuario_autenticado
-		@preferencias_usuario = PreferenciasUsuario.find_by(usuario_id: @usuario_autenticado.id).first
+		@preferencias_usuario = PreferenciasUsuario.find_by(usuario_id: @usuario_autenticado.id)
 	end
 
 	def show
 		@usuario_autenticado = usuario_autenticado
-		@preferencias_usuario = PreferenciasUsuario.find_by(usuario_id: @usuario_autenticado.id).first
+		@preferencias_usuario = PreferenciasUsuario.find_by(usuario_id: @usuario_autenticado.id)
 	end
 
 	def logar(usuario, sessionData)
