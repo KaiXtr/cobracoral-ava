@@ -39,7 +39,10 @@
     <%= render ContextMenuComponent.new() %>
     <%= render BarraPrincipalComponent.new(usuario_autenticado: @usuario_autenticado) %>
     <%= render BarraLateralNavegacaoComponent.new(usuario_autenticado: @usuario_autenticado) %>
-    <%= render BarraLateralPreferenciasComponent.new(preferencias_usuario: @preferencias_usuario) %>
+    <%= render BarraLateralPreferenciasComponent.new(
+      preferencias_usuario: @preferencias_usuario,
+      usuario_autenticado: @usuario_autenticado
+    ) %>
 
     <%= render NotificacaoComponent.new(mensagem: notice) %>
     <%= yield %>

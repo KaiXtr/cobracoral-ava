@@ -4,6 +4,12 @@
     <section onclick="abrirBarraPreferencias()" style="cursor: pointer;">X</section>
   </div>
 
+  <% if @usuario_autenticado %>
+  <p style="font-size: 0.9rem; margin-bottom: 10px;">
+    Usuário: <%= @usuario_autenticado.nome_completo %> (<%= @usuario_autenticado.email %>)
+  </p>
+<% end %>
+
   <div>
     <%= form_with(model: @preferencias_usuario) do |f| %>
       <% configuracoes = {
