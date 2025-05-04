@@ -4,41 +4,42 @@
     <section onclick="abrirBarraPreferencias()" style="cursor: pointer;">X</section>
   </div>
 
-  <% if @usuario_autenticado %>
-    <p style="font-size: 0.9rem; margin-bottom: 10px;">
-      Usuário: <%= @usuario_autenticado.nome_completo %> (<%= @usuario_autenticado.email %>)
-    </p>
-    <p><strong>Valor do Tema:</strong> <%= @preferencias_usuario&.idioma %></p>
-  <% end %>
+  <% 
+    opcoes_boolean = [['Sim', true], ['Não', false]] 
+    opcoes_tema = [['Padrão', 'default'], ['Claro', 'claro'], ['Escuro', 'escuro']]
+    opcoes_tempo_pomodoro = [['25m', 25], ['50m', 50], ['75m', 75], ['100m', 100]]
+    opcoes_tempo_descanso = [['5m', 5], ['10m', 10], ['15m', 15], ['20m', 20]]
+    opcoes_quantidade_pomodoro = [['1', 1], ['2', 2], ['3', 3], ['4', 4]]
+  %>
 
   <div>
     <%= form_with(model: @preferencias_usuario) do |f| %>
       <% configuracoes = {
         "Aparência" => [
-          { campo: :tema, label: "Tema:", opcoes: [['Padrão', 'padrao'], ['Claro', 'claro'], ['Escuro', 'escuro']] }
+          { campo: :tema, label: "Tema:", opcoes: opcoes_tema }
         ],
         "Avaliações" => [
-          { campo: :avaliacao_exibir_tempo, label: "Exibir tempo restante:", opcoes: [['Sim', true], ['Não', false]] },
-          { campo: :avaliacao_exibir_progresso, label: "Exibir barra de progresso:", opcoes: [['Sim', true], ['Não', false]] }
+          { campo: :avaliacao_exibir_tempo, label: "Exibir tempo restante:" },
+          { campo: :avaliacao_exibir_progresso, label: "Exibir barra de progresso:" }
         ],
         "Pomodoro" => [
-          { campo: :pomodoro_ativar, label: "Ativar pomodoro:", opcoes: [['Sim', true], ['Não', false]] },
-          { campo: :pomodoro_pomodoris_tempo, label: "Tempo do pomodoris:", opcoes: ['25m'] },
-          { campo: :pomodoro_descanso, label: "Tempo de descanso:", opcoes: ['5m'] },
-          { campo: :pomodoro_pomodoris_quant, label: "Quantidade de pomodoris:", opcoes: ['4'] },
-          { campo: :pomodoro_hibernar, label: "Descansar ao terminar:", opcoes: [['Sim', true], ['Não', false]] },
-          { campo: :pomodoro_logoff, label: "Desconectar ao terminar:", opcoes: [['Sim', true], ['Não', false]] }
+          { campo: :pomodoro_ativar, label: "Ativar pomodoro:" },
+          { campo: :pomodoro_pomodoris_tempo, label: "Tempo do pomodoris:", opcoes: opcoes_tempo_pomodoro },
+          { campo: :pomodoro_descanso, label: "Tempo de descanso:", opcoes: opcoes_tempo_descanso },
+          { campo: :pomodoro_pomodoris_quant, label: "Quantidade de pomodoris:", opcoes: opcoes_quantidade_pomodoro },
+          { campo: :pomodoro_hibernar, label: "Descansar ao terminar:" },
+          { campo: :pomodoro_logoff, label: "Desconectar ao terminar:" }
         ],
         "Notificações" => [
-          { campo: :notificacao_novo_acesso, label: "Novo acesso:", opcoes: [['Sim', true], ['Não', false]] },
-          { campo: :notificacao_comunicados_coordenacao, label: "Comunicados da coordenação:", opcoes: [['Sim', true], ['Não', false]] },
-          { campo: :notificacao_comunicados_turma, label: "Comunicados da turma:", opcoes: [['Sim', true], ['Não', false]] },
-          { campo: :notificacao_agendamentos, label: "Reuniões assíncronas:", opcoes: [['Sim', true], ['Não', false]] },
-          { campo: :notificacao_avaliacao_liberada, label: "Avaliação liberada:", opcoes: [['Sim', true], ['Não', false]] },
-          { campo: :notificacao_conteudo_liberado, label: "Conteúdo liberado:", opcoes: [['Sim', true], ['Não', false]] },
-          { campo: :notificacao_nota_lancada, label: "Nota lançada:", opcoes: [['Sim', true], ['Não', false]] },
-          { campo: :notificacao_nova_mensagem, label: "Novas mensagens:", opcoes: [['Sim', true], ['Não', false]] },
-          { campo: :notificacao_situacao_solicitacao, label: "Solicitações:", opcoes: [['Sim', true], ['Não', false]] },
+          { campo: :notificacao_novo_acesso, label: "Novo acesso:" },
+          { campo: :notificacao_comunicados_coordenacao, label: "Comunicados da coordenação:" },
+          { campo: :notificacao_comunicados_turma, label: "Comunicados da turma:" },
+          { campo: :notificacao_agendamentos, label: "Reuniões assíncronas:" },
+          { campo: :notificacao_avaliacao_liberada, label: "Avaliação liberada:" },
+          { campo: :notificacao_conteudo_liberado, label: "Conteúdo liberado:" },
+          { campo: :notificacao_nota_lancada, label: "Nota lançada:" },
+          { campo: :notificacao_nova_mensagem, label: "Novas mensagens:" },
+          { campo: :notificacao_situacao_solicitacao, label: "Solicitações:" },
         ]
       } %>
 
@@ -50,7 +51,7 @@
                 <%= f.label campo[:campo], campo[:label] %>
                 <div class="select-box-preferencias">
                   <%= f.select campo[:campo],
-                      options_for_select(campo[:opcoes], @preferencias_usuario&.send(campo[:campo]))
+                      options_for_select(campo[:opcoes] == nil ? opcoes_boolean : campo[:opcoes], @preferencias_usuario&.send(campo[:campo]))
                   %>
                 </div>
               </div>
