@@ -1,7 +1,5 @@
-<nav>
-  <div class="comunicado-container">
-    <h2>Criar comunicado</h2>
+<%= render CobraModalComponent.new() do %>
+  <h2>Criar comunicado</h2>
 
-    <%= render "form", comunicado: @comunicado %>
-  </div>
-</nav>
+  <%= render "form", comunicado: @comunicado %>
+<% end %>

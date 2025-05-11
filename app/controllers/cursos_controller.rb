@@ -65,7 +65,7 @@ class CursosController < ApplicationController
 		@usuario = usuario_autenticado
 		@curso = Curso.find(params[:id])
 
-		Rails.logger.info "Deletando curso " + @curso.nome_curso + "."
+		Rails.logger.info "Confirmando deleção do curso " + @curso.nome_curso + "."
 	end
 
 	def create

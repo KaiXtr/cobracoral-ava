@@ -25,7 +25,7 @@ svg.cobracoral-icon {
   }
 
 #login-form-container {
-    background-color: var(--login-container-bg);
+    background-color: var(--container-bg);
     border-radius: 20px;
     padding: 5vw;
     padding-bottom: 0px;
@@ -78,47 +78,6 @@ svg.cobracoral-icon {
 .login-errors {
     color: var(--main-color);
     margin-top: 20px;
-}
-
-.form-group {
-    margin-top: 10px;
-
-    .form-column {
-        width: 45%;
-        margin-right: 10px;
-        display: inline-block;
-    }
-}
-
-.input-text {
-    color: var(--text-color);
-    background-color: var(--login-container-bg);
-    font-size: 12pt;
-    border: none;
-    border-bottom: 2px solid black;
-    padding: 0.5vw 0px 0.5vw 0px;
-    width: 100%;
-    margin-top: 10px;
-    display: block;
-}
-
-.select-box {
-    display: inline-block;
-    position: relative;
-
-    select {
-        background-color: var(--main-color);
-        font-size: 12pt;
-        border: none;
-        border-radius: 10px;
-        transition-duration: .2s;
-        padding: 1vw;
-
-        &:hover {
-            background-color: #ff7272;
-            cursor: pointer;
-        }
-    }
 }
 
 #campo-caps {

@@ -77,15 +77,6 @@
     }
 }
 
-.modal-adicionar {
-    background-color: ghostwhite;
-    border-radius: 20px;
-    padding: 5vw;
-    margin: 5vw 30vw 5vw 30vw;
-    position: absolute;
-    z-index: 10;
-}
-
 div.disciplinas-banner {
     background-color: var(--main-color);
     width: 100%;
@@ -157,10 +148,6 @@ div.disciplinas-banner {
     background-color: var(--nav-bg);
     border: none;
     border-bottom: 2px solid black;
-}
-
-textarea {
-    font-family: "Rubik", sans-serif;
 }
 
 .disciplina_info_container {

@@ -50,3 +50,16 @@
 .trix-button.trix-active {
   background-color: var(--red-dark) !important;
 }
+
+trix-editor.trix-content {
+  background-color: var(--textarea-background-color);
+  font-family: "Rubik", sans-serif;
+  border: none;
+  border-radius: 20px;
+  padding: 2vw;
+}
+
+.trix-content iframe {
+  max-width: 100%;
+  border: none;
+}

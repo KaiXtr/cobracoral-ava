@@ -100,7 +100,7 @@ class DisciplinasController < ApplicationController
 		@usuario = usuario_autenticado
 		@disciplina = Disciplina.find(params[:id])
 
-		Rails.logger.info "Deletando disciplina " + @disciplina.nome_disciplina + "."
+		Rails.logger.info "Confirmando deleção da disciplina " + @disciplina.nome_disciplina + "."
 	end
 
   # POST /disciplinas or /disciplinas.json

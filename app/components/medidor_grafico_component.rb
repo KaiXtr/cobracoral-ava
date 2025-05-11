@@ -26,7 +26,7 @@ class MedidorGraficoComponent < ViewComponent::Base
       minutos = @valor_entrada
 
       if horas > 0 then
-        @valor_entrada = horas.to_s + ':' + minutos.to_s + 'm'
+        @valor_entrada = horas.to_s + 'h' + minutos.to_s + 'm'
       else
         @valor_entrada = valor_entrada.to_s + 'm'
       end

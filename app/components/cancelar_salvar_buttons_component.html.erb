@@ -1,10 +1,12 @@
 <div class="button-group">
     <%= render CobraButtonComponent.new(
         text: 'Cancelar',
-        href: @cancel_url)
+        href: @cancel_url,
+        close_modal: @close_modal)
     %>
     <%= render CobraButtonComponent.new(
         text: 'Salvar',
-        submit: true)
+        submit: true,
+        close_modal: @close_modal)
     %>
 </div>

@@ -1,16 +1,16 @@
 <%= render CobraModalComponent.new() do %>
-    <h2>Deseja realmente apagar o curso <%= @curso.nome_curso %>?</h2>
+    <h2>Deseja realmente apagar o conteúdo <%= @conteudo.nome_conteudo %>?</h2>
     <p>
         Não será possível desfazer as alterações.
     </p>
     <div class="button-group">
         <%= render CobraButtonComponent.new(
             text: 'Cancelar',
-            href: '/cursos/' + @curso.id.to_s + '/editar')
+            href: '/conteudos/' + @conteudo.id.to_s + '/editar')
         %>
         <%= render CobraButtonComponent.new(
             text: 'Deletar',
-            href: '/cursos/' + @curso.id.to_s + '/destroy',
+            href: '/conteudos/' + @conteudo.id.to_s + '/destroy',
             enable_turbo: false)
         %>
     </div>

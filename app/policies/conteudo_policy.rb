@@ -13,7 +13,7 @@ class ConteudoPolicy
   end
 
   def new?
-    temCargoCoordenador? || permissaoProfessor?
+    temCargoCoordenador? || temCargoProfessor?
   end
 
   def create?

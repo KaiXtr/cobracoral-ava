@@ -104,6 +104,7 @@ class TurmasController < ApplicationController
 	def matricular
 		@usuario = usuario_autenticado
 		@turma = Turma.find(params[:id])
+		authorize(@turma)
 		
 		if policy(@turma).matricular? then
 			@estudantes_matriculados = Usuario.joins(:matricula).where(
@@ -127,7 +128,7 @@ class TurmasController < ApplicationController
 		@usuario = usuario_autenticado
 		@turma = Turma.find(params[:id])
 
-		Rails.logger.info "Deletando turma " + @turma.nome_turma + "."
+		Rails.logger.info "Confirmando deleção da turma " + @turma.nome_turma + "."
 	end
 
 	def create
@@ -180,7 +181,9 @@ class TurmasController < ApplicationController
 	private
 
 		def set_turma
-			@turma = Turma.find(params[:id])
+			if Turma.find_by(id: params[:id]) then
+				@turma = Turma.find(params[:id])
+			end
 		end
 
 		def turma_params
