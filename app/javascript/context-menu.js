@@ -73,8 +73,6 @@ async function contextMenuPasteFromClipboard(evt) {
             clickedElement.value += textoCopiado;
         if (clickedElement.tagName == 'TEXTAREA' || clickedElement.tagName == 'TRIX-EDITOR')
             clickedElement.innerHTML += textoCopiado;
-
-        console.log('clickedElement',clickedElement)
     });
 }
 

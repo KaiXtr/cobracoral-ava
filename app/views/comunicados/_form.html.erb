@@ -36,9 +36,15 @@
     <%= form.rich_text_area :corpo %>
   </div>
 
-  <%= render CancelarSalvarButtonsComponent.new(
-    submit_text: 'Publicar',
-    cancel_to_link: '/comunicados',
-    close_modal: true)
-  %>
+  <% if params[:action] == 'new' %>
+    <%= render CancelarSalvarButtonsComponent.new(
+      submit_text: 'Publicar',
+      close_modal: true)
+    %>
+  <% else %>
+    <%= render CancelarSalvarButtonsComponent.new(
+      submit_text: 'Salvar',
+      close_modal: true)
+    %>
+  <% end %>
 <% end %>

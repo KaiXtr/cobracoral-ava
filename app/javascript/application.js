@@ -1,8 +1,9 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
-import "trix"
 import "@rails/actiontext"
+import "trix"
 
+import "controllers"
 import "./context-menu"
 
 const header = document.getElementById('cobracoral-header');

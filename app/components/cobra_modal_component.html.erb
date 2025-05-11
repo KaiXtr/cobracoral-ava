@@ -1,12 +1,10 @@
 <%= turbo_frame_tag "cobra-modal" do %>
-    <div class="cobra-modal-background"></div>
+    <div id="cobra-modal-background"></div>
     <%= tag.div data: {
-            controller: "cobra-modal",
-            turbo_modal_target: "cobra-modal",
-            action: "
-                turbo:submit-end->cobra-modal#submitEnd
-                keyup@window->cobra-modal#closeWithKeyboard
-                click@windows->cobra-modal#closeBackground"
+            controller: @modal_controller,
+            turbo_modal_target: @modal_target,
+            action: @modal_actions,
+            allow_close_background: @allow_close_background
         }, class: "modal-transition-in",
         role: "dialog" do %>
         <%= content %>

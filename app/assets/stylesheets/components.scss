@@ -253,7 +253,7 @@ textarea {
     }
 }
 
-#cobra-modal div.cobra-modal-background {
+#cobra-modal div#cobra-modal-background {
     background-color: black;
     width: 100%;
     height: 100%;
@@ -268,7 +268,7 @@ textarea {
     100% { opacity: 50%; }
 }
 
-#cobra-modal dialog {
+#cobra-modal div[role="dialog"] {
     background-color: var(--container-bg);
     border-radius: 20px;
     width: 40vw;

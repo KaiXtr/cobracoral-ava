@@ -1,6 +1,6 @@
 class ComunicadosController < ApplicationController
 	before_action :redirecionar_nao_logado
-  before_action :set_comunicado, only: %i[ show edit update destroy ]
+  before_action :set_comunicado, only: %i[ show edit update ]
 
   # GET /comunicados or /comunicados.json
   def index
@@ -97,6 +97,13 @@ class ComunicadosController < ApplicationController
         Rails.logger.info logtxt
         format.html { redirect_to comunicados_url(@comunicado), notice: logtxt }
         format.json { render :show, status: :created, location: @comunicado }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(
+            "comunicados",
+            partial: "comunicados/comunicado",
+            locals: { comunicado: @comunicado }
+            )
+        }
       else
         Rails.logger.error "Houve um erro ao criar o comunicado."
         format.html { render :new, status: :unprocessable_entity }
@@ -123,6 +130,7 @@ class ComunicadosController < ApplicationController
 
   # DELETE /comunicados/1 or /comunicados/1.json
   def destroy
+    @comunicado = Comunicado.find(params[:id])
     ReacaoComunicado.where(comunicado_id: @comunicado.id).each do |reacao|
       reacao.destroy
     end

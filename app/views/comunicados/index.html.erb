@@ -8,6 +8,7 @@
           tooltip: 'Criar comunicado')
         %>
       <% end %>
+      <%= turbo_stream_from "comunicados" %>
       <div>
         <%= render @comunicados %>
       </div>
