@@ -7,7 +7,7 @@ class UsuariosController < ApplicationController
     end
 
     def edit
-        @usuario = usuario_autenticado
+        @usuario = get_usuario_autenticado
         authorize(@usuario)
         Rails.logger.info "Editando usuário " + @usuario.nome_completo + "."
     end
@@ -25,19 +25,19 @@ class UsuariosController < ApplicationController
     end
 
     def perfil
-        @usuario = usuario_autenticado
+        @usuario = get_usuario_autenticado
         Rails.logger.info "Exibindo perfil do(a) usuário(a) " + @usuario.nome_completo + "."
         redirect_to usuario_path(@usuario)
     end
 
     def caixa
-        usuario = usuario_autenticado
+        usuario = get_usuario_autenticado
         Rails.logger.info "Redirecionando para caixa de entrada de " + usuario.email + "."
         redirect_to "https://" + usuario.email, allow_other_host: true
     end
 
     def lattes
-		usuario = usuario_autenticado
+		usuario = get_usuario_autenticado
         Rails.logger.info "Redirecionando para currículo lattes " + usuario.lattes_id + "."
         link_lattes = "https://lattes.cnpq.br/" + usuario.lattes_id.to_s
         redirect_to link_lattes, allow_other_host: true

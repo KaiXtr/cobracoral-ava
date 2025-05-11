@@ -4,7 +4,7 @@ class ComunicadosController < ApplicationController
 
   # GET /comunicados or /comunicados.json
   def index
-    @usuario = usuario_autenticado
+    @usuario = get_usuario_autenticado
     @comunicado = Comunicado.new
     @comunicados = get_comunicados(@usuario)
 
@@ -39,7 +39,7 @@ class ComunicadosController < ApplicationController
   end
 
 	def delete
-		@usuario = usuario_autenticado
+		@usuario = get_usuario_autenticado
 		@comunicado = Comunicado.find(params[:id])
 
 		Rails.logger.info "Confirmando deleção do comunicado " + @comunicado.id.to_s + "."
@@ -47,7 +47,7 @@ class ComunicadosController < ApplicationController
 
   # GET /comunicados/new
   def new
-    @usuario = usuario_autenticado
+    @usuario = get_usuario_autenticado
     @comunicado = Comunicado.new
     authorize(@comunicado)
 
@@ -59,7 +59,7 @@ class ComunicadosController < ApplicationController
 
   # GET /comunicados/1/edit
   def edit
-    @usuario = usuario_autenticado
+    @usuario = get_usuario_autenticado
     @comunicado = Comunicado.find(params[:id])
     authorize(@comunicado)
 
@@ -70,7 +70,7 @@ class ComunicadosController < ApplicationController
 
   # POST /comunicados or /comunicados.json
   def create
-    @usuario = usuario_autenticado
+    @usuario = get_usuario_autenticado
     @comunicado = Comunicado.new(comunicado_params)
     @comunicado.usuario_id = @usuario.id
 

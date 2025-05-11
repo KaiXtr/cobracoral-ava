@@ -4,7 +4,7 @@ class DisciplinasController < ApplicationController
 
   # GET /disciplinas or /disciplinas.json
   def index
-		@usuario = usuario_autenticado
+		@usuario = get_usuario_autenticado
     @disciplina = Disciplina.new
 		matricula = Matricula.find_by(usuario_id: usuario_autenticado.id)
     if matricula then
@@ -25,7 +25,7 @@ class DisciplinasController < ApplicationController
   # GET /disciplinas/1 or /disciplinas/1.json
   def show
     @estaEditando = false
-    @usuario = usuario_autenticado
+    @usuario = get_usuario_autenticado
     @disciplina = Disciplina.find(params[:id])
     authorize @disciplina
 
@@ -48,7 +48,7 @@ class DisciplinasController < ApplicationController
     authorize(@disciplina)
 
 		# Verificando nível de acesso do usuário
-		usuario = usuario_autenticado
+		usuario = get_usuario_autenticado
     
 		# Se professor, apenas cursos onde leciona
 		if Usuario.cargo_usuarios[usuario.cargo_usuario] > 1 then
@@ -80,7 +80,7 @@ class DisciplinasController < ApplicationController
   # GET /disciplinas/1/edit
   def edit
     @estaEditando = true
-    @usuario = usuario_autenticado
+    @usuario = get_usuario_autenticado
     @disciplina = Disciplina.find(params[:id])
 
     authorize(@disciplina)
@@ -97,7 +97,7 @@ class DisciplinasController < ApplicationController
   end
 
 	def delete
-		@usuario = usuario_autenticado
+		@usuario = get_usuario_autenticado
 		@disciplina = Disciplina.find(params[:id])
 
 		Rails.logger.info "Confirmando deleção da disciplina " + @disciplina.nome_disciplina + "."

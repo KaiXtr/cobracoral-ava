@@ -4,7 +4,7 @@ class ConteudosController < ApplicationController
 
   # GET /conteudos or /conteudos.json
   def index
-    usuario = usuario_autenticado
+    usuario = get_usuario_autenticado
     @conteudos = Conteudo.all
     Rails.logger.info "Acessando todos os conteúdos."
   end
@@ -12,7 +12,7 @@ class ConteudosController < ApplicationController
   # GET /conteudos/1 or /conteudos/1.json
   def show
     authorize @conteudo
-    usuario = usuario_autenticado
+    usuario = get_usuario_autenticado
     conteudo = Conteudo.find(params[:id])
     unidade_do_conteudo = UnidadeDisciplina.find_by(id: conteudo.unidade_disciplina_id)
     @disciplina_conteudo = Disciplina.find_by(id: unidade_do_conteudo.disciplina_id)
@@ -50,7 +50,7 @@ class ConteudosController < ApplicationController
 
   # Atualizar leitura do conteúdo
   def salvar
-    usuario = usuario_autenticado
+    usuario = get_usuario_autenticado
     conteudo = Conteudo.find(params[:id])
     unidade_do_conteudo = UnidadeDisciplina.find_by(id: conteudo.unidade_disciplina_id)
 
@@ -94,7 +94,7 @@ class ConteudosController < ApplicationController
   end
 
 	def delete
-		@usuario = usuario_autenticado
+		@usuario = get_usuario_autenticado
 		@conteudo = Conteudo.find(params[:id])
 
 		Rails.logger.info "Confirmando deleção do conteudo " + @conteudo.nome_conteudo + "."
@@ -104,7 +104,7 @@ class ConteudosController < ApplicationController
   def new
     @conteudo = Conteudo.new
     @conteudo.nome_conteudo = "Nome do conteúdo "
-    professor = usuario_autenticado
+    professor = get_usuario_autenticado
     authorize(@conteudo)
     
     @disciplina_conteudo = Disciplina.find_by(usuario_id: professor.id)
@@ -119,7 +119,7 @@ class ConteudosController < ApplicationController
 
   # POST /conteudos or /conteudos.json
   def create
-    professor = usuario_autenticado
+    professor = get_usuario_autenticado
     @conteudo = Conteudo.new(conteudo_params)
     @conteudo.unidade_disciplina_id = 1
     @conteudo.data_liberacao = DateTime.now

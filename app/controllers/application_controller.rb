@@ -6,33 +6,40 @@ class ApplicationController < ActionController::Base
 
 	before_action :set_cobra_app_resting
 
-	def usuario_autenticado
+	def get_usuario_autenticado
 		if session[:usuario_id]
 			if Usuario.where(id: session[:usuario_id]).length > 0 then
 				@usuario_autenticado = Usuario.find(session[:usuario_id])
 				@preferencias_usuario = PreferenciasUsuario.find_by(usuario_id: @usuario_autenticado.id)
+				if (!@preferencias_usuario) then
+					@preferencias_usuario = PreferenciasUsuario.new(usuario_id: session[:usuario_id])
+				end
+				return @usuario_autenticado
 			else
-				Rails.logger.info "Usuário previamente autenticado foi deletado. Encerrando sessão."
+				Rails.logger.info "Usuário previamente autenticado foi deletado."
 				logout
 			end
 		end
 	end
 
     def redirecionar_nao_logado
-        @usuario_autenticado = usuario_autenticado
-        redirect_to '/entrar' unless @usuario_autenticado
+        @usuario_autenticado = get_usuario_autenticado
+		if !@usuario_autenticado then
+			Rails.logger.info "Usuário não autenticado. Redirecionando."
+        	redirect_to '/entrar'
+		end
     end
 
 	def current_user
-		usuario_autenticado
+		get_usuario_autenticado
 	end
 
 	def index
-		@usuario_autenticado = usuario_autenticado
+		@usuario_autenticado = get_usuario_autenticado
 	end
 
 	def show
-		@usuario_autenticado = usuario_autenticado
+		@usuario_autenticado = get_usuario_autenticado
 	end
 
 	def logar(usuario, sessionData)
@@ -72,12 +79,13 @@ class ApplicationController < ActionController::Base
 	end
 
 	def logado?
-		!usuario_autenticado.nil?
+		!get_usuario_autenticado.nil?
 	end
 
 	def logout
 		session.delete(:usuario_id)
 		@usuario_autenticado = nil
+		Rails.logger.info "Encerrando sessão."
 	end
 
 	private

@@ -4,7 +4,7 @@ class CursosController < ApplicationController
 
 	def index
 		@curso = Curso.new
-		@usuario = usuario_autenticado
+		@usuario = get_usuario_autenticado
 		
 		# Listar cursos de acordo com Coordenador(a)/Professor(a)
 		if policy(@curso).index? then
@@ -28,7 +28,7 @@ class CursosController < ApplicationController
 	end
 
 	def show
-		@usuario = usuario_autenticado
+		@usuario = get_usuario_autenticado
 		@curso = Curso.find(params[:id])
 		authorize(@curso)
 		@coordenacao = Usuario.find(@curso.usuario_id)
@@ -41,8 +41,8 @@ class CursosController < ApplicationController
 	def new
 		@curso = Curso.new
 		authorize(@curso)
-		@usuario = usuario_autenticado
-		@coordenacao = usuario_autenticado
+		@usuario = get_usuario_autenticado
+		@coordenacao = get_usuario_autenticado
 
 		Rails.logger.info "Criando novo curso."
 	end
@@ -51,7 +51,7 @@ class CursosController < ApplicationController
 		@curso = Curso.find(params[:id])
 		authorize(@curso)
 		@coordenacao = Usuario.find(@curso.usuario_id)
-		@usuario = usuario_autenticado
+		@usuario = get_usuario_autenticado
 		@turmas = Turma.where(curso_id: @curso.id)
 		@disciplinas = Disciplina.where(curso_id: @curso.id)
 
@@ -62,7 +62,7 @@ class CursosController < ApplicationController
 	end
 
 	def delete
-		@usuario = usuario_autenticado
+		@usuario = get_usuario_autenticado
 		@curso = Curso.find(params[:id])
 
 		Rails.logger.info "Confirmando deleção do curso " + @curso.nome_curso + "."
