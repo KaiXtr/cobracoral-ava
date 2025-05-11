@@ -5,11 +5,11 @@ class MedidorGraficoComponent < ViewComponent::Base
       medidor_titulo:,
       valor_entrada:,
       valor_tipo:,
-      graph_modal: nil)
+      modal_href: nil)
     @medidor_titulo = medidor_titulo
     @valor_entrada = valor_entrada
     @valor_tipo = valor_tipo
-    @graph_modal = graph_modal
+    @modal_href = modal_href
 
     if @valor_tipo == 'porcento' then
       @valor_entrada = valor_entrada.to_s + '%'

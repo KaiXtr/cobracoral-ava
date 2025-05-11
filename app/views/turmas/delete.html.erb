@@ -3,15 +3,9 @@
     <p>
         Não será possível desfazer as alterações.
     </p>
-    <div class="button-group">
-        <%= render CobraButtonComponent.new(
-            text: 'Cancelar',
-            href: '/turmas/' + @turma.id.to_s + '/editar')
-        %>
-        <%= render CobraButtonComponent.new(
-            text: 'Deletar',
-            href: '/turmas/' + @turma.id.to_s + '/destroy',
-            enable_turbo: false)
-        %>
-    </div>
+    <%= render CancelarSalvarButtonsComponent.new(
+        submit_text: 'Deletar',
+        submit_to_link: '/turmas/' + @turma.id.to_s + '/destroy',
+        close_modal: true)
+    %>
 <% end %>

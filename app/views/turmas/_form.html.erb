@@ -47,5 +47,8 @@
     <%= form.label :senha_acesso, "Senha de acesso" %>
     <%= form.password_field :senha_acesso, class: 'input-text' %>
   </div>
-  <%= render CancelarSalvarButtonsComponent.new(close_modal: true) %>
+  <%= render CancelarSalvarButtonsComponent.new(
+    submit_text: 'Adicionar',
+    close_modal: true)
+  %>
 <% end %>

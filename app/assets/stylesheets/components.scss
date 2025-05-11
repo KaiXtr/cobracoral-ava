@@ -43,7 +43,6 @@
     border: 3px dashed gray;
     border-radius: 50px;
     padding: 1rem;
-    width: 100%;
 
     i {
         transition-duration: .2s;
@@ -55,6 +54,23 @@
         i {
             transform: scale(1.2);
         }
+    }
+
+    &.open-modal-comunicado {
+        margin: 1vh 10vw 1vh 10vw;
+        width: 70%;
+    }
+
+    &.open-modal-curso {
+        width: 100%;
+    }
+
+    &.open-modal-turma {
+        width: fit-content;
+    }
+
+    &.open-modal-disciplina {
+        width: 30vw;
     }
 }
 

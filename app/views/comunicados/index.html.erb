@@ -5,6 +5,7 @@
       <% if policy(@comunicado).new? %>
         <%= render OpenModalButtonComponent.new(
           href: new_comunicado_path,
+          button_class: 'open-modal-comunicado',
           tooltip: 'Criar comunicado')
         %>
       <% end %>

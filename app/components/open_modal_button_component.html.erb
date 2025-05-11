@@ -1,8 +1,12 @@
 <a href="<%= @href %>"
     tooltip-text="<%= @tooltip %>"
-    data-turbo-frame="cobra-modal"
-    data-remote="true">
-    <div class="open-modal-button">
+
+    <% if @open_modal %>
+        data-turbo-frame="cobra-modal"
+        data-remote="true"
+    <% end %>
+    >
+    <div class="open-modal-button <%= @button_class %>">
         <i class="fa-solid fa-square-plus fa-xl"></i>
     </div>
 </a>

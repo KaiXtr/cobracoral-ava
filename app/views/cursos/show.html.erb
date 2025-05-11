@@ -24,34 +24,56 @@
         </p>
         <div>
             <h2>Minhas turmas</h2>
-            <% if @turmas.length > 0 %>
+            <% if @turmas.length > 0 || policy(@curso).adicionar_turma? %>
                 <% if policy(@curso).index_turmas? %>
                     <%= link_to "Todas as turmas", "/turmas" %>
                 <% end %>
                 <div>
                     <%= render @turmas %>
+                    <% if policy(@curso).adicionar_turma? %>
+                        <%= render OpenModalButtonComponent.new(
+                            href: new_turma_path(@turma_nova),
+                            button_class: 'open-modal-turma',
+                            tooltip: 'Adicionar turma')
+                        %>
+                    <% end %>
                 </div>
             <% else %>
                 <p>Não há nenhuma turma cadastrada neste curso.</p>
-                <% if policy(@turmas).new? %>
-                    <%= link_to "Adicionar turma", new_turma_path, remote: true %>
+                <% if policy(@curso).adicionar_turma? %>
+                    <%= render OpenModalButtonComponent.new(
+                        href: new_turma_path(@turma_nova),
+                        button_class: 'open-modal-turma',
+                        tooltip: 'Adicionar turma')
+                    %>
                 <% end %>
             <% end %>
         </div>
         <div>
             <h2>Minhas disciplinas</h2>
-            <% if @disciplinas.length > 0 %>
+            <% if @disciplinas.length > 0 || policy(@curso).adicionar_disciplina? %>
                 <% if policy(@curso).index_disciplinas? %>
                     <%= link_to "Todas as disciplinas", disciplinas_path(@disciplinas) %>
                 <% end %>
                 <h3>Semestre</h3>
                 <div class="disciplinas-container">
                     <%= render @disciplinas %>
+                    <% if policy(@curso).adicionar_disciplina? %>
+                        <%= render OpenModalButtonComponent.new(
+                            href: new_disciplina_path(@disciplina_nova),
+                            button_class: 'open-modal-disciplina',
+                            tooltip: 'Adicionar disciplina')
+                        %>
+                    <% end %>
                 </div>
             <% else %>
                 <p>Não há nenhuma disciplina cadastrada neste curso.</p>
-                <% if policy(@disciplinas).new? %>
-                    <%= link_to "Adicionar disciplina", new_disciplina_path, remote: true %>
+                <% if policy(@curso).adicionar_disciplina? %>
+                    <%= render OpenModalButtonComponent.new(
+                        href: new_disciplina_path(@disciplina_nova),
+                        button_class: 'open-modal-disciplina',
+                        tooltip: 'Adicionar disciplina')
+                    %>
                 <% end %>
             <% end %>
         </div>
