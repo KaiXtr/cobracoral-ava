@@ -26,10 +26,10 @@ function loadContextMenuOptions() {
         contextMenuCopyToClipboard();
     });
 
-    /*let contextMenuOptionPaste = document.getElementById('context-menu-option-paste');
+    let contextMenuOptionPaste = document.getElementById('context-menu-option-paste');
     contextMenuOptionPaste.addEventListener('click', async(evt) => {
         contextMenuPasteFromClipboard(evt);
-    });*/
+    });
 }
 
 function getSelectedText() {
@@ -66,8 +66,16 @@ function contextMenuCopyToClipboard() {
 }
 
 async function contextMenuPasteFromClipboard(evt) {
-    let text = await navigator.clipboard.readText();
-    clickedElement.value += text;
+    navigator.clipboard.readText().then((textoCopiado) => {
+        console.log(textoCopiado)
+
+        if (clickedElement.tagName == 'INPUT')
+            clickedElement.value += textoCopiado;
+        if (clickedElement.tagName == 'TEXTAREA' || clickedElement.tagName == 'TRIX-EDITOR')
+            clickedElement.innerHTML += textoCopiado;
+
+        console.log('clickedElement',clickedElement)
+    });
 }
 
 function showContextMenu(evt) {
@@ -115,6 +123,7 @@ function showContextMenu(evt) {
     else {
         contextMenuOptionOpenImage.style.display = 'none';
 
+        // DESABILITA OPÇÃO DE "COPIAR" EM LEITURAS DE CONTEÚDO (ANTI-TRAPAÇA)
         if (clickedElement.parentElement.className == 'trix-content' &&
             clickedElement.parentElement.parentElement.className == 'conteudo-elementos'
         ) {
@@ -123,7 +132,10 @@ function showContextMenu(evt) {
             contextMenuOptionCopy.style.display = 'block';
         }
 
-        if (clickedElement.tagName == 'INPUT' || clickedElement.tagName == 'TEXTAREA') {
+        // HABILITA OPÇÃO DE CORTAR E COLAR
+        if (clickedElement.tagName == 'INPUT' ||
+            clickedElement.tagName == 'TEXTAREA' ||
+            clickedElement.tagName == 'TRIX-EDITOR') {
             contextMenuOptionPaste.style.display = 'block';
             contextMenuOptionCut.style.display = 'block';
         }
@@ -132,6 +144,7 @@ function showContextMenu(evt) {
             contextMenuOptionCut.style.display = 'none';
         }
 
+        // HABILITA OPÇÃO DE LINK E BUSCA
         if (clickedElement.href) {
             contextMenuOptionOpenLink.style.display = 'block';
             contextMenuOptionSearch.style.display = 'none';
