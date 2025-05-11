@@ -1,0 +1,43 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  idioma: MyString
+  tema: MyString
+  avaliacao_exibir_tempo: false
+  avaliacao_exibir_progresso: false
+  pomodoro_ativar: false
+  pomodoro_pomodoris_tempo: 1
+  pomodoro_descanso: 1
+  pomodoro_hibernar: false
+  pomodoro_logoff: false
+  notificacao_novo_acesso: false
+  notificacao_comunicados_coordenacao: false
+  notificacao_comunicados_turma: false
+  notificacao_agendamentos: false
+  notificacao_avaliacao_liberada: false
+  notificacao_conteudo_liberado: false
+  notificacao_nota_lancada: false
+  notificacao_nova_mensagem: false
+  notificacao_situacao_solicitacao: false
+
+two:
+  user: two
+  idioma: MyString
+  tema: MyString
+  avaliacao_exibir_tempo: false
+  avaliacao_exibir_progresso: false
+  pomodoro_ativar: false
+  pomodoro_pomodoris_tempo: 1
+  pomodoro_descanso: 1
+  pomodoro_hibernar: false
+  pomodoro_logoff: false
+  notificacao_novo_acesso: false
+  notificacao_comunicados_coordenacao: false
+  notificacao_comunicados_turma: false
+  notificacao_agendamentos: false
+  notificacao_avaliacao_liberada: false
+  notificacao_conteudo_liberado: false
+  notificacao_nota_lancada: false
+  notificacao_nova_mensagem: false
+  notificacao_situacao_solicitacao: false

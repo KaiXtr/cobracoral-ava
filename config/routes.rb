@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :unidade_disciplinas
   resources :conteudos
   resources :leitura_conteudos
+  resources :preferencias_usuario
   
   root 'comunicados#index'
   
