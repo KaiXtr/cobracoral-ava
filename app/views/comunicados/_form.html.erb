@@ -36,14 +36,9 @@
     <%= form.rich_text_area :corpo %>
   </div>
 
-  <div class="button-group">
-    <a href="/comunicados">
-      <button class="cobra-button">
-        Cancelar
-      </button>
-    </a>
-    <button type="submit" class="cobra-button">
-      Publicar
-    </button>
-  </div>
+  <%= render CancelarSalvarButtonsComponent.new(
+    submit_text: 'Publicar',
+    cancel_to_link: '/comunicados',
+    close_modal: true)
+  %>
 <% end %>

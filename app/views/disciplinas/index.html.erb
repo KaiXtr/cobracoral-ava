@@ -2,7 +2,10 @@
   <h1>Todas as disciplinas</h1>
 
   <% if policy(@disciplina).new? %>
-    <%= link_to "Adicionar disciplina", new_disciplina_path, remote: true, data: { turbo_frame: "cobra-modal" } %>
+    <%= render OpenModalButtonComponent.new(
+      href: new_disciplina_path,
+      tooltip: 'Adicionar disciplina')
+    %>
   <% end %>
 
   <div id="disciplinas" class="disciplinas-container">

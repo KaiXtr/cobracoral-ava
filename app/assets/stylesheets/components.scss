@@ -37,6 +37,27 @@
     }
 }
 
+.open-modal-button {
+    text-align: center;
+    color: gray;
+    border: 3px dashed gray;
+    border-radius: 50px;
+    padding: 1rem;
+    width: 100%;
+
+    i {
+        transition-duration: .2s;
+    }
+
+    &:hover {
+        cursor: pointer;
+
+        i {
+            transform: scale(1.2);
+        }
+    }
+}
+
 .icon-button {
     color: var(--nav-link);
     transition-duration: .2s;

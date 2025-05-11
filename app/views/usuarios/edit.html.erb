@@ -47,15 +47,8 @@
             <%= f.text_field :orcid_id, class: 'input-text' %>
         </div>
 
-        <div class="button-group">
-            <%= render CobraButtonComponent.new(
-                text: 'Cancelar',
-                href: '/usuarios/' + @usuario.id.to_s)
-            %>
-            <%= render CobraButtonComponent.new(
-                text: 'Salvar',
-                submit: true)
-            %>
-        </div>
+        <%= render CancelarSalvarButtonsComponent.new(
+            cancel_to_link: '/usuarios/' + @usuario.id.to_s)
+        %>
     </nav>
 <% end %>
