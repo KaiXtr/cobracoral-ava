@@ -17,12 +17,12 @@ class Usuario < ApplicationRecord
 
 	validates_presence_of :password_digest
 
-	validates :password, format: /\A
+	'''validates :password, format: /\A
 		(?=.{8,})
 		(?=.*\d)
 		(?=.*[a-z])
 		(?=.*[A-Z])
-	/x
+	/x'''
 
 	enum :pronomes_usuario, [
 		:ela_dela,

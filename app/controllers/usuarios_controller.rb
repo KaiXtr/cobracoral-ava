@@ -99,7 +99,7 @@ class UsuariosController < ApplicationController
 
         respond_to do |format|
             if @usuario.update(usuario_params)
-                if @usuario.pronomes_usuario_id == 1 then
+                if @usuario.pronomes_usuario == :ela_dela then
                     logtxt = "Usuária " + @usuario.nome_completo + " atualizada com sucesso."
                 else
                     logtxt = "Usuário " + @usuario.nome_completo + " atualizado com sucesso."
@@ -109,6 +109,7 @@ class UsuariosController < ApplicationController
                 format.json { render :show, status: :ok, location: @usuario }
             else
                 Rails.logger.error "Houve um erro ao atualizar o usuário " + @usuario.nome_completo + "."
+                Rails.logger.error @usuario.errors
                 format.html { render :edit, status: :unprocessable_entity }
                 format.json { render json: @usuario.errors, status: :unprocessable_entity }
             end
@@ -120,7 +121,7 @@ class UsuariosController < ApplicationController
         def usuario_params
             params.require(:usuario).permit(
                 :avatar, :nome_completo, :biografia,
-                :email, :pronomes_usuario_id,
+                :email, :password, :pronomes_usuario_id,
                 :telefone, :lattes_id, :orcid_id
             )
         end
