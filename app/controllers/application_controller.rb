@@ -92,25 +92,38 @@ class ApplicationController < ActionController::Base
 
 		def set_cobra_app_resting
 			@cobra_app_resting = false
+			@usuario_autenticado = get_usuario_autenticado
 
-			login_time = session[:login_time]
+			if (@usuario_autenticado) then
+				@preferencias_usuario = PreferenciasUsuario.find_by(usuario_id: @usuario_autenticado.id)
 
-			if (login_time) then
-				@pomodoro_hora_atual = Time.now
-				@pomodoro_hora_inicial = login_time.to_time
-				@pomodoro_hora_descanso = login_time.to_time + (25 * 60)
-				@pomodoro_hora_retorno = login_time.to_time + (30 * 60)
-				@pomodoro_tempo_atual = (
-					(@pomodoro_hora_atual.to_time - @pomodoro_hora_inicial.to_time).to_i/60
-				)
+				login_time = session[:login_time]
 
-				if (@pomodoro_hora_atual >= @pomodoro_hora_descanso) &&
-				(@pomodoro_hora_atual < @pomodoro_hora_retorno) then
-					@cobra_app_resting = true
-				end
+				if (@preferencias_usuario.pomodoro_ativar && login_time) then
+					t_p = @preferencias_usuario.pomodoro_pomodoris_tempo
+					t_d = t_p + @preferencias_usuario.pomodoro_descanso
 
-				if (@pomodoro_hora_atual >= @pomodoro_hora_retorno) then
-					session[:login_time] = Time.now
+					@pomodoro_hora_atual = Time.now
+					@pomodoro_hora_inicial = login_time.to_time
+					@pomodoro_hora_descanso = login_time.to_time + (t_p * 60)
+					@pomodoro_hora_retorno = login_time.to_time + (t_d * 60)
+					@pomodoro_tempo_atual = (
+						(@pomodoro_hora_atual.to_time - @pomodoro_hora_inicial.to_time).to_i/60
+					)
+
+					if (@pomodoro_hora_atual >= @pomodoro_hora_descanso) &&
+					(@pomodoro_hora_atual < @pomodoro_hora_retorno) then
+						if (@preferencias_usuario.pomodoro_hibernar) then
+							@cobra_app_resting = true
+						end
+						if (@preferencias_usuario.pomodoro_logoff) then
+							logoff
+						end
+					end
+
+					if (@pomodoro_hora_atual >= @pomodoro_hora_retorno) then
+						session[:login_time] = Time.now
+					end
 				end
 			end
 		end
