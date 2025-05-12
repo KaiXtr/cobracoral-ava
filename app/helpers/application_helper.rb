@@ -8,7 +8,7 @@ module ApplicationHelper
 	def current_curso(usuario_autenticado)
 		isCoordenador = Curso.find_by(usuario_id: usuario_autenticado)
 		if isCoordenador then
-			isCoordenador
+			return isCoordenador
 		else
 			isProfessor = Disciplina.find_by(usuario_id: usuario_autenticado)
 			if isProfessor then

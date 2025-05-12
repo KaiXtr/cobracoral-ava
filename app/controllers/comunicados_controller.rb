@@ -51,8 +51,19 @@ class ComunicadosController < ApplicationController
     @comunicado = Comunicado.new
     authorize(@comunicado)
 
-    @turmas = Turma.all
+    @turmas = Array.new()
+    disciplinas = Disciplina.where(usuario_id: @usuario.id)
+    if (disciplinas) then
+      for d in disciplinas do
+        t = Turma.find(d.turma_id)
+        if (t) then
+          @turmas.push(t)
+        end
+      end
+    end
+
     @visibilidades = get_visibilidades()
+    @visibilidades = Comunicado.visibilidade_comunicados
       
 		Rails.logger.info "Criando novo comunicado."
   end
@@ -156,21 +167,14 @@ class ComunicadosController < ApplicationController
     end
 
     def get_comunicados(usuario_autenticado)
-      # TODO possivelmente uma boa implementação de cache Redis
-
       usuarios = Array.new()
       comunicados = Array.new()
 
       # Obtendo todos os comunicados da coordenação do curso
       curso_atual = helpers.current_curso(usuario_autenticado)
 
-      comunicados_da_coordenacao = nil
-
       if curso_atual then
-        comunicados_da_coordenacao = Comunicado.where(
-          usuario_id: curso_atual.usuario_id,
-          visibilidade_comunicado: 1
-        )
+        comunicados += Comunicado.where(usuario_id: curso_atual.usuario_id)
       end
 
       # Obtendo todos os comunicados de professores (deve haver uma forma mais eficiente)
@@ -182,12 +186,8 @@ class ComunicadosController < ApplicationController
           comunicados_de_professores += Comunicado.where(usuario_id: d.usuario_id)
         end
       end
-
-      comunicados = comunicados_da_coordenacao
       
-      if comunicados_da_coordenacao then
-        comunicados += comunicados_de_professores
-      end
+      comunicados += comunicados_de_professores
 
       return comunicados
     end
@@ -216,15 +216,15 @@ class ComunicadosController < ApplicationController
     end
 
     def visivelTodasTurmas?
-      coordenadorCurso? || professorTurma?
+      !coordenadorCurso? && professorTurma?
     end
 
     def visivelTodosTurma?
-      coordenadorCurso? || professorTurma? || representanteTurma?
+      !coordenadorCurso? && (professorTurma? || representanteTurma?)
     end
 
     def visivelTodosDisciplinas?
-      coordenadorCurso? || professorTurma?
+      !coordenadorCurso? && (professorTurma?)
     end
   
     def coordenadorCurso?

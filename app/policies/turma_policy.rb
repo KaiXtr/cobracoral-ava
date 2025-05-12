@@ -28,6 +28,10 @@ class TurmaPolicy
     temCargoCoordenador?
   end
 
+  def adicionar_disciplina?
+    eCoordenadorDoCurso?
+  end
+
   def create?
     coordenadorCriaTurma? || permissaoProfessor? || permissaoRepresentante?
   end
@@ -69,12 +73,28 @@ class TurmaPolicy
   end
 
   def permissaoProfessor?
-    criouConteudo? && temCargoProfessor?
+   temCargoProfessor? &&  lecionaNaTurma?
   end
 
   def criouConteudo?
     #turma.usuario_id == usuario.id
     true
+  end
+
+  def lecionaNaTurma?
+    disciplinas = Disciplina.where(usuario_id: usuario.id)
+    if (disciplinas) then
+      leciona = false
+      for d in disciplinas do
+        t = Turma.find(d.turma_id)
+        if (t && t.id == turma.id) then
+          leciona = true
+        end
+      end
+      return leciona
+    else
+      return false
+    end
   end
 
   def temCargoProfessor?

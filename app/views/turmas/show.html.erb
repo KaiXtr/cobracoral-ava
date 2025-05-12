@@ -44,7 +44,7 @@
                 </div>
             <% else %>
                 <p>Não há nenhuma disciplina cadastrada neste curso.</p>
-                <% if policy(@disciplinas_turma).new? %>
+                <% if policy(@turma).adicionar_disciplina? %>
                     <%= link_to "Adicionar disciplina", new_disciplina_path, remote: true %>
                 <% end %>
             <% end %>
