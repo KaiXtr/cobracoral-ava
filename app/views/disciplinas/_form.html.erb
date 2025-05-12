@@ -11,7 +11,7 @@
 
   <div class="form-group">
     <%= form.label :nome_disciplina, "Nome da disciplina" %>
-    <%= form.text_field :nome_disciplina %>
+    <%= form.text_field :nome_disciplina, class: 'input-text' %>
   </div>
   <div class="form-group">
     <%= form.file_field :banner %>
@@ -30,9 +30,10 @@
   </div>
   <div class="form-group">
     <%= form.label :semestre %>
-    <%= form.text_field :semestre %>
+    <%= form.text_field :semestre, class: 'input-text' %>
   </div>
   <%= render CancelarSalvarButtonsComponent.new(
-    cancel_to_link: '/disciplinas/' + @disciplina.id.to_s)
+    submit_text: 'Adicionar',
+    close_modal: true)
   %>
 <% end %>

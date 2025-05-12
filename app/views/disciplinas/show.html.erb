@@ -40,12 +40,14 @@
         <%= render MedidorGraficoComponent.new(
           medidor_titulo: 'Presenças',
           valor_entrada: 100,
-          valor_tipo: 'porcento')
+          valor_tipo: 'porcento',
+          modal_href: '/disciplinas/new')
         %>
         <%= render MedidorGraficoComponent.new(
           medidor_titulo: 'Notas',
           valor_entrada: 6.5,
-          valor_tipo: 'nota')
+          valor_tipo: 'nota',
+          modal_href: '/disciplinas/new')
         %>
       </div>
     </div>

@@ -9,6 +9,8 @@ class Comunicado < ApplicationRecord
   validates_presence_of :usuario
   validates_presence_of :turma
 
+  after_create_commit { :broadcast_comunicado_create }
+
   enum :visibilidade_comunicado, [
     :todos_curso,
     :todas_turmas,
@@ -23,5 +25,14 @@ class Comunicado < ApplicationRecord
       todos_turma_string: 'Todos da turma',
       todos_disciplina_string: 'Todos da disciplina'
     }
+  end
+
+  def broadcast_comunicado_create
+    broadcast_append_to(
+      "comunicados",
+      partial: 'comunicados/comunicado',
+      locals: { comunicado: self },
+      target: "comunicados"
+    )
   end
 end

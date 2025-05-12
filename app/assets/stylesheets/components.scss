@@ -37,6 +37,43 @@
     }
 }
 
+.open-modal-button {
+    text-align: center;
+    color: gray;
+    border: 3px dashed gray;
+    border-radius: 50px;
+    padding: 1rem;
+
+    i {
+        transition-duration: .2s;
+    }
+
+    &:hover {
+        cursor: pointer;
+
+        i {
+            transform: scale(1.2);
+        }
+    }
+
+    &.open-modal-comunicado {
+        margin: 1vh 10vw 1vh 10vw;
+        width: 70%;
+    }
+
+    &.open-modal-curso {
+        width: 100%;
+    }
+
+    &.open-modal-turma {
+        width: fit-content;
+    }
+
+    &.open-modal-disciplina {
+        width: 30vw;
+    }
+}
+
 .icon-button {
     color: var(--nav-link);
     transition-duration: .2s;
@@ -174,12 +211,17 @@ textarea {
     padding-top: 5vh;
     padding-left: 2vw;
     padding-right: 2vw;
+    padding-bottom: 2vw;
     top: 0px;
     right: 0px;
     z-index: 10;
     overflow: scroll;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE e Edge antigos */
+
+    .button-group {
+        margin-bottom: 50px;
+    }
 }
 
 .notificacao-conteiner {
@@ -232,7 +274,7 @@ textarea {
     }
 }
 
-#cobra-modal div.cobra-modal-background {
+#cobra-modal div#cobra-modal-background {
     background-color: black;
     width: 100%;
     height: 100%;
@@ -247,7 +289,7 @@ textarea {
     100% { opacity: 50%; }
 }
 
-#cobra-modal dialog {
+#cobra-modal div[role="dialog"] {
     background-color: var(--container-bg);
     border-radius: 20px;
     width: 40vw;

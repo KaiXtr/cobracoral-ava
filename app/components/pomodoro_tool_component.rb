@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class PomodoroToolComponent < ViewComponent::Base
-    def initialize(login_time:)
-        @pomodoro_ativado = true
+    def initialize(preferencias_usuario:, login_time:)
+        t_p = preferencias_usuario.pomodoro_pomodoris_tempo
+        t_d = t_p + preferencias_usuario.pomodoro_descanso
+        
         @pomodoro_hora_atual = Time.now
         @pomodoro_hora_inicial = login_time.to_time
-        @pomodoro_hora_limite = login_time.to_time + (25 * 60)
+        @pomodoro_hora_limite = login_time.to_time + (t_p * 60)
         @pomodoro_tempo_atual = (
             (@pomodoro_hora_atual.to_time - @pomodoro_hora_inicial.to_time).to_i/60
         )

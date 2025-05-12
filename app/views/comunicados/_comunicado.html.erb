@@ -27,7 +27,11 @@
   </div>
   <div class="comunicado-actions">
     <% if policy(comunicado).edit? %>
-      <a href="/comunicados/<%= comunicado.id %>/editar" tooltip-text="Editar comunicado">
+      <a
+        href="/comunicados/<%= comunicado.id %>/editar"
+        tooltip-text="Editar comunicado"
+        data-turbo-frame="cobra-modal"
+        data-remote="true">
           <i class="fa-solid fa-pen fa-lg icon-button"></i>
       </a>
     <% end %>

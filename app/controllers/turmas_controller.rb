@@ -26,7 +26,7 @@ class TurmasController < ApplicationController
 		end
 
 		# Listas disciplinas de turma, turno e modalidades específicas
-		matricula = Matricula.find_by(usuario_id: usuario_autenticado.id)
+		matricula = Matricula.find_by(usuario_id: @usuario_autenticado.id)
 		if matricula then
 			@disciplinas_turma = Disciplina.where(
 				turma_id: @turma.id,
@@ -71,7 +71,7 @@ class TurmasController < ApplicationController
 		authorize(@turma)
 
 		# Verificando nível de acesso do usuário
-		usuario = usuario_autenticado
+		usuario = get_usuario_autenticado
 		matricula = Matricula.find_by(usuario_id: usuario.id)
 
 		# Se professor ou representante, apenas cursos onde está matriculado
@@ -102,7 +102,7 @@ class TurmasController < ApplicationController
 	end
 
 	def matricular
-		@usuario = usuario_autenticado
+		@usuario = get_usuario_autenticado
 		@turma = Turma.find(params[:id])
 		authorize(@turma)
 		
@@ -125,7 +125,7 @@ class TurmasController < ApplicationController
 	end
 
 	def delete
-		@usuario = usuario_autenticado
+		@usuario = get_usuario_autenticado
 		@turma = Turma.find(params[:id])
 
 		Rails.logger.info "Confirmando deleção da turma " + @turma.nome_turma + "."

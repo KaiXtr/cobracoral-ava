@@ -5,7 +5,7 @@ class LeituraConteudosController < ApplicationController
   # GET /leitura_conteudos or /leitura_conteudos.json
   def index
     @estaNoKanban = true
-    @usuario = usuario_autenticado
+    @usuario = get_usuario_autenticado
 
     @tarefasFazendo = Conteudo.joins(:leitura_conteudo).where(
       leitura_conteudo: { usuario_id: @usuario.id, conclusao: 0 })

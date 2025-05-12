@@ -1,4 +1,25 @@
 <%= javascript_include_tag 'trix' %>
+<script type="text/javascript">
+  function showComunicadoInput(evt) {
+    let turmaComunicadoInput = document.getElementById('turma-comunicado-input');
+    let disciplinaComunicadoInput = document.getElementById('disciplina-comunicado-input');
+
+    if (evt.target.value == 'todos_turma')
+      turmaComunicadoInput.style.display = 'block';
+    else
+      turmaComunicadoInput.style.display = 'none';
+
+    if (evt.target.value == 'todos_disciplina')
+      disciplinaComunicadoInput.style.display = 'block';
+    else
+      disciplinaComunicadoInput.style.display = 'none';
+  }
+
+  let visibilidadeComunicadoInput = document.getElementById('comunicado_visibilidade_comunicado');
+  visibilidadeComunicadoInput.addEventListener('click', function(e) {
+    showComunicadoInput(e)
+    }, false);
+</script>
 <%= form_with(model: comunicado) do |form| %>
   <% if comunicado.errors.any? %>
     <div style="color: red">
@@ -9,41 +30,50 @@
       </ul>
     </div>
   <% end %>
-
   <div class="form-group">
       <%= form.label :visibilidade_comunicado, "Visibilidade" %>
       <div class="select-box">
           <%= form.select :visibilidade_comunicado,
-              options_for_select(select_visibilidade(), comunicado.visibilidade_comunicado)
+              options_for_select(select_visibilidade(@visibilidades), comunicado.visibilidade_comunicado)
           %>
       </div>
   </div>
-
-  <div class="form-group">
-      <%= form.label :turma_id, "Turma" %>
-      <div class="select-box">
-          <%= form.select :turma_id,
-              options_for_select(@turmas.map{ |t| [
-                  t.nome_turma, t.id, {
-                      'turma-id' => t.id
-                  }
-              ]}, comunicado.turma_id)
-          %>
-      </div>
+  <div id="turma-comunicado-input" class="form-group" style="display: none">
+        <%= form.label :turma_id, "Turma" %>
+        <div class="select-box">
+            <%= form.select :turma_id,
+                options_for_select(@turmas.map{ |t| [
+                    t.nome_turma, t.id, {
+                        'turma-id' => t.id
+                    }
+                ]}, comunicado.turma_id)
+            %>
+        </div>
   </div>
-
+  <div id="disciplina-comunicado-input" class="form-group" style="display: none">
+        <%= form.label :turma_id, "Disciplina" %>
+        <div class="select-box">
+            <%= form.select :turma_id,
+                options_for_select(@turmas.map{ |t| [
+                    t.nome_turma, t.id, {
+                        'turma-id' => t.id
+                    }
+                ]}, comunicado.turma_id)
+            %>
+        </div>
+  </div>
   <div class="form-group comunicado-form-body">
     <%= form.rich_text_area :corpo %>
   </div>
-
-  <div class="button-group">
-    <a href="/comunicados">
-      <button class="cobra-button">
-        Cancelar
-      </button>
-    </a>
-    <button type="submit" class="cobra-button">
-      Publicar
-    </button>
-  </div>
+  <% if params[:action] == 'new' %>
+    <%= render CancelarSalvarButtonsComponent.new(
+      submit_text: 'Publicar',
+      close_modal: true)
+    %>
+  <% else %>
+    <%= render CancelarSalvarButtonsComponent.new(
+      submit_text: 'Salvar',
+      close_modal: true)
+    %>
+  <% end %>
 <% end %>

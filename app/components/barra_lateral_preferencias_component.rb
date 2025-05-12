@@ -4,5 +4,43 @@ class BarraLateralPreferenciasComponent < ViewComponent::Base
     def initialize(preferencias_usuario:, usuario_autenticado:)
         @preferencias_usuario = preferencias_usuario
         @usuario_autenticado = usuario_autenticado
+
+        @opcoes_boolean = [['Sim', true], ['Não', false]] 
+        opcoes_tema = [
+            ['Padrão', 'default'], ['Black', 'black'], ['Celeste', 'celeste'],
+            ['Nature', 'nature'], ['Tangerine','tangerine']
+        ]
+        opcoes_tempo_pomodoro = [['25m', 25], ['50m', 50], ['75m', 75], ['100m', 100]]
+        opcoes_tempo_descanso = [['5m', 5], ['10m', 10], ['15m', 15], ['20m', 20]]
+        opcoes_quantidade_pomodoro = [['1', 1], ['2', 2], ['3', 3], ['4', 4]]
+
+        @configuracoes = {
+            "Aparência" => [
+                { campo: :tema, label: "Tema:", opcoes: opcoes_tema }
+            ],
+            "Avaliações" => [
+                { campo: :avaliacao_exibir_tempo, label: "Exibir tempo restante:" },
+                { campo: :avaliacao_exibir_progresso, label: "Exibir barra de progresso:" }
+            ],
+            "Pomodoro" => [
+                { campo: :pomodoro_ativar, label: "Ativar pomodoro:" },
+                { campo: :pomodoro_pomodoris_tempo, label: "Tempo do pomodoris:", opcoes: opcoes_tempo_pomodoro },
+                { campo: :pomodoro_descanso, label: "Tempo de descanso:", opcoes: opcoes_tempo_descanso },
+                { campo: :pomodoro_pomodoris_quant, label: "Quantidade de pomodoris:", opcoes: opcoes_quantidade_pomodoro },
+                { campo: :pomodoro_hibernar, label: "Descansar ao terminar:" },
+                { campo: :pomodoro_logoff, label: "Desconectar ao terminar:" }
+            ],
+            "Notificações" => [
+                { campo: :notificacao_novo_acesso, label: "Novo acesso:" },
+                { campo: :notificacao_comunicados_coordenacao, label: "Comunicados da coordenação:" },
+                { campo: :notificacao_comunicados_turma, label: "Comunicados da turma:" },
+                { campo: :notificacao_agendamentos, label: "Reuniões assíncronas:" },
+                { campo: :notificacao_avaliacao_liberada, label: "Avaliação liberada:" },
+                { campo: :notificacao_conteudo_liberado, label: "Conteúdo liberado:" },
+                { campo: :notificacao_nota_lancada, label: "Nota lançada:" },
+                { campo: :notificacao_nova_mensagem, label: "Novas mensagens:" },
+                { campo: :notificacao_situacao_solicitacao, label: "Solicitações:" },
+            ]
+        }
     end
 end

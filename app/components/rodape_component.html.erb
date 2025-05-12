@@ -1,21 +1,23 @@
 <footer class="cobra-footer">
-    <div>
-        <a href="/sobre">
-            <button class="cobra-button">Sobre</button>
-        </a>
-        <a href="/sobre#experimentar">
-            <button class="cobra-button">Experimentar</button>
-        </a>
-        <a href="/instalar">
-            <button class="cobra-button">Instalar</button>
-        </a>
-        <a href="/aprender">
-            <button class="cobra-button">Aprender</button>
-        </a>
-        <a href="/sobre#publicar">
-            <button class="cobra-button">Publicar</button>
-        </a>
-    </div>
+    <% if @habilitar_links %>
+        <div>
+            <a href="/sobre">
+                <button class="cobra-button">Sobre</button>
+            </a>
+            <a href="/sobre#experimentar">
+                <button class="cobra-button">Experimentar</button>
+            </a>
+            <a href="/instalar">
+                <button class="cobra-button">Instalar</button>
+            </a>
+            <a href="/aprender">
+                <button class="cobra-button">Aprender</button>
+            </a>
+            <a href="/sobre#publicar">
+                <button class="cobra-button">Publicar</button>
+            </a>
+        </div>
+    <% end %>
     <span>
         <%= ENV["COBRACORAL_AUTHOR"] %> - <%= ENV["COBRACORAL_YEAR"] %>
     </span>

@@ -1,10 +1,10 @@
 class ComunicadosController < ApplicationController
 	before_action :redirecionar_nao_logado
-  before_action :set_comunicado, only: %i[ show edit update destroy ]
+  before_action :set_comunicado, only: %i[ show edit update ]
 
   # GET /comunicados or /comunicados.json
   def index
-    @usuario = usuario_autenticado
+    @usuario = get_usuario_autenticado
     @comunicado = Comunicado.new
     @comunicados = get_comunicados(@usuario)
 
@@ -39,7 +39,7 @@ class ComunicadosController < ApplicationController
   end
 
 	def delete
-		@usuario = usuario_autenticado
+		@usuario = get_usuario_autenticado
 		@comunicado = Comunicado.find(params[:id])
 
 		Rails.logger.info "Confirmando deleção do comunicado " + @comunicado.id.to_s + "."
@@ -47,19 +47,30 @@ class ComunicadosController < ApplicationController
 
   # GET /comunicados/new
   def new
-    @usuario = usuario_autenticado
+    @usuario = get_usuario_autenticado
     @comunicado = Comunicado.new
     authorize(@comunicado)
 
-    @turmas = Turma.all
+    @turmas = Array.new()
+    disciplinas = Disciplina.where(usuario_id: @usuario.id)
+    if (disciplinas) then
+      for d in disciplinas do
+        t = Turma.find(d.turma_id)
+        if (t) then
+          @turmas.push(t)
+        end
+      end
+    end
+
     @visibilidades = get_visibilidades()
+    @visibilidades = Comunicado.visibilidade_comunicados
       
 		Rails.logger.info "Criando novo comunicado."
   end
 
   # GET /comunicados/1/edit
   def edit
-    @usuario = usuario_autenticado
+    @usuario = get_usuario_autenticado
     @comunicado = Comunicado.find(params[:id])
     authorize(@comunicado)
 
@@ -70,7 +81,7 @@ class ComunicadosController < ApplicationController
 
   # POST /comunicados or /comunicados.json
   def create
-    @usuario = usuario_autenticado
+    @usuario = get_usuario_autenticado
     @comunicado = Comunicado.new(comunicado_params)
     @comunicado.usuario_id = @usuario.id
 
@@ -97,6 +108,13 @@ class ComunicadosController < ApplicationController
         Rails.logger.info logtxt
         format.html { redirect_to comunicados_url(@comunicado), notice: logtxt }
         format.json { render :show, status: :created, location: @comunicado }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(
+            "comunicados",
+            partial: "comunicados/comunicado",
+            locals: { comunicado: @comunicado }
+            )
+        }
       else
         Rails.logger.error "Houve um erro ao criar o comunicado."
         format.html { render :new, status: :unprocessable_entity }
@@ -123,6 +141,7 @@ class ComunicadosController < ApplicationController
 
   # DELETE /comunicados/1 or /comunicados/1.json
   def destroy
+    @comunicado = Comunicado.find(params[:id])
     ReacaoComunicado.where(comunicado_id: @comunicado.id).each do |reacao|
       reacao.destroy
     end
@@ -148,21 +167,14 @@ class ComunicadosController < ApplicationController
     end
 
     def get_comunicados(usuario_autenticado)
-      # TODO possivelmente uma boa implementação de cache Redis
-
       usuarios = Array.new()
       comunicados = Array.new()
 
       # Obtendo todos os comunicados da coordenação do curso
       curso_atual = helpers.current_curso(usuario_autenticado)
 
-      comunicados_da_coordenacao = nil
-
       if curso_atual then
-        comunicados_da_coordenacao = Comunicado.where(
-          usuario_id: curso_atual.usuario_id,
-          visibilidade_comunicado: 1
-        )
+        comunicados += Comunicado.where(usuario_id: curso_atual.usuario_id)
       end
 
       # Obtendo todos os comunicados de professores (deve haver uma forma mais eficiente)
@@ -174,12 +186,8 @@ class ComunicadosController < ApplicationController
           comunicados_de_professores += Comunicado.where(usuario_id: d.usuario_id)
         end
       end
-
-      comunicados = comunicados_da_coordenacao
       
-      if comunicados_da_coordenacao then
-        comunicados += comunicados_de_professores
-      end
+      comunicados += comunicados_de_professores
 
       return comunicados
     end
@@ -208,15 +216,15 @@ class ComunicadosController < ApplicationController
     end
 
     def visivelTodasTurmas?
-      coordenadorCurso? || professorTurma?
+      !coordenadorCurso? && professorTurma?
     end
 
     def visivelTodosTurma?
-      coordenadorCurso? || professorTurma? || representanteTurma?
+      !coordenadorCurso? && (professorTurma? || representanteTurma?)
     end
 
     def visivelTodosDisciplinas?
-      coordenadorCurso? || professorTurma?
+      !coordenadorCurso? && (professorTurma?)
     end
   
     def coordenadorCurso?

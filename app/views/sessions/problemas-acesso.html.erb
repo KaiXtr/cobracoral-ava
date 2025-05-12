@@ -37,6 +37,14 @@
     <p>
         Se possuir um email institucional cadastrado no ambiente virtual de aprendizagem Cobracoral, preencha o campo abaixo com seu endereço de email institucional para obter uma senha temporária para recuperação de cadastro dentro de 24 horas. Caso não haja cadastro com o email institucional informado, preencha o campo abaixo com seu email pessoal para enviar um pedido de cadastro/recuperação de conta aos administradores de sua instituição. Considere verificar, contudo, possíveis erros de digitação.
     </p>
+	<div class="auth-help-container">
+		<% for i in 1..3 do %>
+			<%=
+				image_tag("auth-help-" + i.to_s + ".png",
+				class: "auth-help-image",
+				style: "animation-delay: ." + (i * 3).to_s + "s;") %>
+		<% end %>
+	</div>
 	<div class="login-errors">
 		<%= notice %>
 	</div>

@@ -8,8 +8,8 @@ module ComunicadosHelper
         return hash[visibilidade + '_string']
     end
 
-    def select_visibilidade
-        Comunicado.visibilidade_comunicados.map{ |v| [
+    def select_visibilidade(visibilidades)
+        visibilidades.map{ |v| [
             enum_visibilidade(v[0]), v[0], {
                 'visibilidade-id' => v[0]
             }

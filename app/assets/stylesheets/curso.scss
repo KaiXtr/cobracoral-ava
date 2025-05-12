@@ -50,6 +50,11 @@
     }
 }
 
+.disabled-content {
+    pointer-events: none;
+    opacity: 50%;
+}
+
 .curso-button {
     color: var(--cobra-button-color);
     background-color: var(--container-bg);

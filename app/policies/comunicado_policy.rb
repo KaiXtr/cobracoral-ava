@@ -73,7 +73,9 @@ class ComunicadoPolicy
     end
 
     def criouComunicado?
-        @comunicado.usuario_id == @usuario.id
+        if @usuario then
+            @comunicado.usuario_id == @usuario.id
+        end
     end
   
     class Scope < ApplicationPolicy::Scope

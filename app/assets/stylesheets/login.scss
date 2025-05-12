@@ -59,10 +59,35 @@ svg.cobracoral-icon {
 }
 
 .recuperacao-form-container {
-    background-color: var(--white-main);
+    background-color: var(--container-bg);
     border-radius: 20px;
     padding: 5vw;
-    margin: 15vh 20vw 0vh 20vw;
+    margin: 8vh 20vw 0vh 20vw;
+    animation: recuperacao-form-in .8s ease-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes recuperacao-form-in {
+    0% { margin-top: 20vh; opacity: 0%; }
+    50% { opacity: 100%; }
+    100% { margin-top: 8vh }
+}
+
+div.auth-help-container {
+    text-align: center;
+}
+
+img.auth-help-image {
+    width: 30%;
+    animation: auth-help-image-in 2s ease-out;
+    animation-fill-mode: forwards;
+    opacity: 0%;
+}
+
+@keyframes auth-help-image-in {
+    0% { top: 50px; opacity: 0%; }
+    50% { opacity: 100%; }
+    100% { opacity: 100%; top: 0px; }
 }
 
 #cobracoral-icon-container {

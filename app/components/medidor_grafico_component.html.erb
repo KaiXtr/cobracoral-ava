@@ -6,12 +6,14 @@
     </div>
     <h5>
         <%= @medidor_titulo %>
-        <a
-            href="/turmas/new"
-            tooltip-text="Abrir gráfico"
-            data-turbo-frame="cobra-modal"
-            data-remote="true">
-            <i class="fa-solid fa-pie-chart fa-lg icon-button"></i>
-        </a>
+        <% if @modal_href %>
+            <a
+                href="<%= @modal_href %>"
+                tooltip-text="Abrir gráfico"
+                data-turbo-frame="cobra-modal"
+                data-remote="true">
+                <i class="fa-solid fa-pie-chart fa-lg icon-button"></i>
+            </a>
+        <% end %>
     </h5>
 </div>

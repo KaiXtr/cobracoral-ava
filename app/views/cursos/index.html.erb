@@ -2,7 +2,12 @@
     <div>
         <h1>Todos os Cursos</h1>
         <% if policy(@curso).create? %>
-            <%= link_to "Adicionar curso", new_curso_path, remote: true %>
+            <%= render OpenModalButtonComponent.new(
+                href: new_curso_path,
+                button_class: 'open-modal-curso',
+                tooltip: 'Adicionar curso',
+                open_modal: false)
+            %>
         <% end %>
         <%= render @cursos %>
     </div>

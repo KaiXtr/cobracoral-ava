@@ -65,7 +65,7 @@ class DisciplinaPolicy
   end
 
   def permissaoProfessor?
-    criouConteudo? && temCargoProfessor?
+    temCargoProfessor? && criouConteudo?
   end
 
   def criouConteudo?
