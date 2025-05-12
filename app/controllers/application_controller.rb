@@ -44,8 +44,10 @@ class ApplicationController < ActionController::Base
 
 	def logar(usuario, sessionData)
 		@usuario_autenticado = usuario
+		@preferencias_usuario = PreferenciasUsuario.find_by(usuario_id: @usuario_autenticado.id)
 		session[:usuario_id] = usuario.id
 		session[:login_time] = Time.now
+		session[:pomodoris_quant] = @preferencias_usuario.pomodoro_pomodoris_quant
 
 		if sessionData != nil then
 			session[:login_device] = sessionData[:login_device]
@@ -111,18 +113,30 @@ class ApplicationController < ActionController::Base
 						(@pomodoro_hora_atual.to_time - @pomodoro_hora_inicial.to_time).to_i/60
 					)
 
+					@pomodoro_tempo_descanso = (
+						(@pomodoro_hora_retorno.to_time - @pomodoro_hora_atual.to_time).to_i/60
+					)
+
 					if (@pomodoro_hora_atual >= @pomodoro_hora_descanso) &&
 					(@pomodoro_hora_atual < @pomodoro_hora_retorno) then
 						if (@preferencias_usuario.pomodoro_hibernar) then
 							@cobra_app_resting = true
 						end
-						if (@preferencias_usuario.pomodoro_logoff) then
-							logoff
-						end
 					end
 
 					if (@pomodoro_hora_atual >= @pomodoro_hora_retorno) then
 						session[:login_time] = Time.now
+						if (session[:pomodoris_quant]) then
+							session[:pomodoris_quant] = session[:pomodoris_quant] - 1
+							
+							if (session[:pomodoris_quant] <= 0) then
+								if (@preferencias_usuario.pomodoro_logoff) then
+									logoff
+								else
+									session[:pomodoris_quant] = @preferencias_usuario.pomodoro_pomodoris_quant
+								end
+							end
+						end
 					end
 				end
 			end

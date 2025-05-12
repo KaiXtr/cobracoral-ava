@@ -6,7 +6,10 @@ class BarraLateralPreferenciasComponent < ViewComponent::Base
         @usuario_autenticado = usuario_autenticado
 
         @opcoes_boolean = [['Sim', true], ['Não', false]] 
-        opcoes_tema = [['Padrão', 'default'], ['Claro', 'claro'], ['Escuro', 'escuro']]
+        opcoes_tema = [
+            ['Padrão', 'default'], ['Black', 'black'], ['Celeste', 'celeste'],
+            ['Nature', 'nature'], ['Tangerine','tangerine']
+        ]
         opcoes_tempo_pomodoro = [['25m', 25], ['50m', 50], ['75m', 75], ['100m', 100]]
         opcoes_tempo_descanso = [['5m', 5], ['10m', 10], ['15m', 15], ['20m', 20]]
         opcoes_quantidade_pomodoro = [['1', 1], ['2', 2], ['3', 3], ['4', 4]]

@@ -211,12 +211,17 @@ textarea {
     padding-top: 5vh;
     padding-left: 2vw;
     padding-right: 2vw;
+    padding-bottom: 2vw;
     top: 0px;
     right: 0px;
     z-index: 10;
     overflow: scroll;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE e Edge antigos */
+
+    .button-group {
+        margin-bottom: 50px;
+    }
 }
 
 .notificacao-conteiner {
