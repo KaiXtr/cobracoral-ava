@@ -1,3 +1,5 @@
+require 'net/http'
+
 class SessionsController < ApplicationController
 	layout 'login'
 
@@ -144,6 +146,19 @@ class SessionsController < ApplicationController
 		usuario = Usuario.find_by(email: params[:session][:email])
 		
 		if usuario then
+			#url = URI.parse('http://localhost:8080/solicitacaos/nova')
+			#req = Net::HTTP::Post.new(url.to_s)
+			#req.body = {
+			#	requerente_id: 1,
+			#	assunto_solicitacao: 1,
+			#	situacao: 'encaminhada',
+			#	observacoes: nil
+			#}.to_json
+
+			#res = Net::HTTP.start(url.host, url.port) {|http|
+			#	http.request(req)
+			#}
+
 			session[:login_device] = params[:session][:login_device]
 			session[:login_so] = params[:session][:login_so]
 			session[:login_browser] = params[:session][:login_browser]
