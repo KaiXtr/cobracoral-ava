@@ -240,10 +240,10 @@ textarea {
     width: 30vw;
     height: 100%;
     position: fixed;
-    padding-top: 5vh;
+    padding-top: 10vh;
     padding-left: 2vw;
     padding-right: 2vw;
-    padding-bottom: 2vw;
+    padding-bottom: 5vw;
     top: 0px;
     right: 0px;
     z-index: 10;
@@ -434,8 +434,23 @@ textarea {
 }
 
 footer.cobra-footer {
+    font-size: 8pt;
+    color: var(--gray-color);
     text-align: center;
-    padding: 10vh 10vw 10vh 10vw;
-    background-color: var(--main-color);
+    padding: 1vh 10vw 1vh 10vw;
+    border-top: 1px solid var(--nav-bg-secondary);
+    background-color: var(--nav-bg);
+
+    a {
+        color: var(--gray-color);
+
+        &:hover, &:active, &:focus, &:visited {
+            color: var(--gray-color);
+        }
+
+        &:after {
+            content: '∙'
+        }
+    }
 }
 

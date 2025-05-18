@@ -157,6 +157,7 @@ class ComunicadosController < ApplicationController
 
   # PATCH/PUT /comunicados/1 or /comunicados/1.json
   def update
+    @usuario = get_usuario_autenticado
     @visibilidades = get_visibilidades()
     @turmas = Turma.all
     @disciplinas = Disciplina.all

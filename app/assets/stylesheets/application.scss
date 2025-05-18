@@ -15,7 +15,7 @@
  */
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-@import "./themes/theme-default.scss";
+@import "./theme-default.scss";
 @import "./actiontext.css";
 @import "./components.scss";
 @import "./curso.scss";
@@ -36,7 +36,7 @@
 
 body {
   color: var(--text-color);
-  background-color: var(--main-color);
+  background-color: var(--nav-bg);
   font-family: "Rubik", sans-serif;
   margin: 0px;
 }
@@ -175,7 +175,7 @@ header#cobracoral-header {
   z-index: 60;
 
   button.icon-button {
-    background-color: var(--main-color);
+    background: none;
     color: black;
     border: none;
     transition-duration: .2s;
@@ -392,7 +392,7 @@ header#cobracoral-header {
       div.header-logo-info {
         max-width: 30vw !important;
         vertical-align: top;
-        margin-top: 2vh;
+        margin-top: 1vh;
 
         h1 {
           font-size: 16pt !important;

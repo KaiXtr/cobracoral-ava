@@ -181,6 +181,10 @@ div.disciplinas-banner {
         transform: translateX(10px);
     }
 
+    .usuario-button:hover {
+        transform: none;
+    }
+
     .conteudo-button-info {
         width: 95%;
         display: inline-block;

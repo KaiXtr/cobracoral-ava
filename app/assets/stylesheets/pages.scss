@@ -77,6 +77,10 @@
         text-align: right;
         vertical-align: top;
         display: inline-block;
+
+        a {
+            margin-left: 10px;
+        }
     }
 
     .comunicado-form-body trix-editor.trix-content {
@@ -93,17 +97,56 @@
     }
 
     .comunicado-reacoes {
-    
-        button.comunicado-reacao-button {
-            font-size: 12pt;
-            background-color: var(--container-bg);
-            transition-duration: .2s;
+        .comunicado-reacoes-publicas {
+            border-bottom: 1px solid var(--container-secondary);
+            margin-bottom: 2px;
+
+            .comunicado-reacao-icon {
+                font-size: 9pt;
+
+                strong {
+                    font-size: 10pt;
+                }
+            }
+        }
+
+        .comunicado-reacoes-reagir {
+            border-radius: 10px;
             border: none;
+            width: fit-content;
+
+            .comunicado-reacoes-buttons {
+                background-color: var(--container-bg);
+                border-radius: 25px;
+                box-shadow: 2px 2px 5px black;
+                transition-duration: .2s;
+                padding: 10px;
+                width: fit-content;
+                position: relative;
+                visibility: hidden;
+                opacity: 0%;
+                top: -30px;
         
+                button.comunicado-reacao-button {
+                    font-size: 16pt;
+                    background: none;
+                    transition-duration: .1s;
+                    border: none;
+                    
+                    &:hover {
+                        transform: scale(1.25);
+                        cursor: pointer;
+                    }
+                }
+            }
 
             &:hover {
-                color: var(--main-color);
                 cursor: pointer;
+
+                .comunicado-reacoes-buttons {
+                    visibility: visible;
+                    opacity: 100%;
+                }
             }
         }
     }
@@ -122,7 +165,7 @@
 
         .tarefa-coluna-linha {
             padding: 0px 10px 0px 10px;
-            border-right: 2px solid var(--container-bg);
+            border-right: 2px solid var(--nav-bg-secondary);
         }
     }
 }
