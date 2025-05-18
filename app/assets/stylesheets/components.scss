@@ -164,7 +164,16 @@ textarea {
 
 #annotation-area{
     position: absolute;
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease;
+}
+
+#annotation-area.visible{
+    position: absolute;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease;
 }
 
 #text-area-anotacao {

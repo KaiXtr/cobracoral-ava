@@ -59,7 +59,7 @@
     console.log('Texto selecionado:', selectedText);
     
     if(selection && !selection.isCollapsed && content.contains(selection.anchorNode)){
-      anottationArea.style.display = 'block'
+      anottationArea.classList.add('visible');
     }
   })
 
