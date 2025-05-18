@@ -1,11 +1,20 @@
-<div id="c<%= comunicado.id %>" class="comunicado-container">
-  <script type="text/javascript">
-    //this.classList.add('novo')
-  </script>
+<%
+  @emojis_options = ['👍','❤️','✔️','❌',]
+  @novo_comunicado = ''
+  comunicado_visto = ReacaoComunicado.find_by(
+    comunicado_id: comunicado.id,
+    usuario_id: @usuario_autenticado.id,
+    emoji: 'x')
+  
+  if !comunicado_visto then
+    @novo_comunicado = 'comunicado-novo'
+  end
+%>
+<div id="c<%= comunicado.id %>" class="comunicado-container <%= @novo_comunicado %>">
   <div class="comunicado-info">
     <% usuario = usuario_comunicado(comunicado.usuario_id) %>
-    <a href="/usuarios/<%= usuario.id %>">
-      <div class="usuario-button">
+    <div class="usuario-button">
+      <a href="/usuarios/<%= usuario.id %>">
         <div class="usuario-button-icon icon-larger">
           <% if usuario.avatar.attached? %>
             <%= image_tag(usuario.avatar) %>
@@ -13,17 +22,19 @@
             <i class="fa-solid fa-user fa-lg"></i>
           <% end %>
         </div>
-        <div class="usuario-button-name">
+      </a>
+      <div class="usuario-button-name">
+        <a href="/usuarios/<%= usuario.id %>">
           <%= usuario.nome_completo %>
-          <span class="comunicado-usuario-info">
-            <%= info_usuario(usuario, comunicado) %>
-          </span>
-          <span class="comunicado-data">
-            <%= formatar_data_publicacao(comunicado.created_at) %>
-          </span>
-        </div>
+        </a>
+        <span class="comunicado-usuario-info">
+          <%= info_usuario(usuario, comunicado) %>
+        </span>
+        <span class="comunicado-data">
+          <%= formatar_data_publicacao(comunicado.created_at) %>
+        </span>
       </div>
-    </a>
+    </div>
   </div>
   <div class="comunicado-actions">
     <% if policy(comunicado).edit? %>
@@ -54,12 +65,24 @@
     <% end %>
   </div>
   <div class="comunicado-reacoes">
-    <% for emoji in ['👍','❤️','✔️','❌',] %>
-      <a href="/comunicados/<%= comunicado.id %>/reagir/<%= emoji %>" data-turbo-prefetch="false">
-        <button class="comunicado-reacao-button">
-          <%= emoji %> <strong><%= reacoes_quantidade(comunicado, emoji) %></strong>
-        </button>
-      </a>
-    <% end %>
+    <div class="comunicado-reacoes-publicas">
+      <% for emoji in @emojis_options %>
+        <span class="comunicado-reacao-icon">
+          <%= emoji %><strong><%= reacoes_quantidade(comunicado, emoji) %></strong>
+        </span>
+      <% end %>
+    </div>
+    <div class="comunicado-reacoes-reagir">
+      Gostei
+      <div class="comunicado-reacoes-buttons">
+        <% for emoji in @emojis_options %>
+          <a href="/comunicados/<%= comunicado.id %>/reagir/<%= emoji %>" data-turbo-prefetch="false">
+            <button class="comunicado-reacao-button">
+              <%= emoji %>
+            </button>
+          </a>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

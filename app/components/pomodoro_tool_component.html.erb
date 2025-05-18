@@ -1,7 +1,8 @@
 <div id="pomodoro-tool-component">
     <%= render MedidorGraficoComponent.new(
-        medidor_titulo: 'Pomodoro',
+        medidor_titulo: nil,
         valor_entrada: @pomodoro_tempo_atual,
-        valor_tipo: 'minuto')
+        valor_tipo: 'minuto',
+        theme: 1)
     %>
 </div>

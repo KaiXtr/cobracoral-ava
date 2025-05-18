@@ -1,6 +1,6 @@
-<header id="cobracoral-header">
-    <button class="icon-button" onclick="abrirBarraLateral()">
-    <i class="fa-solid fa-bars fa-2xl"></i>
+<header id="cobracoral-header" class="header-compacto">
+    <button id="header-open-nav-component" class="icon-button" onclick="abrirBarraLateral()">
+        <i class="fa-solid fa-bars fa-2xl"></i>
     </button>
     <div class="header-logo">
     <div class="header-logo-svg">
@@ -8,25 +8,20 @@
     </div>
     <div class="header-logo-info">
         <a href="/">
-            <% if helpers.isUsuarioDiscente(@usuario_autenticado) %>
-                <h1>SIGAA</h1>
-            <% else %>
-                <h1>
-                    <% if helpers.current_curso(@usuario_autenticado) %>
-                        <%= helpers.current_curso(@usuario_autenticado).nome_curso %>
-                    <% else %>
-                        Cobracoral
-                    <% end %>
-                </h1>
-            <% end %>
+            <h1>
+                <% if helpers.current_curso(@usuario_autenticado) %>
+                    <%= helpers.current_curso(@usuario_autenticado).nome_curso %>
+                <% else %>
+                    Cobracoral
+                <% end %>
+            </h1>
         </a>
         <span>
-            <%= ENV["COBRACORAL_VERSION"] %>
-            <%= @cobracoral_env %>
+            Instituto Cobracoral
         </span>
     </div>
     </div>
-    <ul>
+    <ul id="header-buttons">
         <li>
             <a href="/painel" tooltip-text="Painel">
                 <button class="icon-button">
@@ -38,6 +33,11 @@
             <a href="/comunicados" tooltip-text="Comunicados">
                 <button class="icon-button">
                     <i class="fa-solid fa-bell fa-2xl"></i>
+                    <% if @novos_comunicados > 0 %>
+                        <span class="icon-button-counter">
+                            <%= @novos_comunicados %>
+                        </span>
+                    <% end %>
                 </button>
             </a>
         </li>
@@ -66,6 +66,11 @@
             <a href="/mensagens" tooltip-text="Mensagens">
                 <button class="icon-button">
                     <i class="fa-solid fa-comment fa-2xl"></i>
+                    <% if @novas_mensagens > 0 %>
+                        <span class="icon-button-counter">
+                            <%= @novas_mensagens %>
+                        </span>
+                    <% end %>
                 </button>
             </a>
         </li>
@@ -77,3 +82,5 @@
         </li>
     </ul>
 </header>
+<div id="cobracoral-header-spacing">
+</div>

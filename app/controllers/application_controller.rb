@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 	include Pundit::Authorization
 	helper ActionText::Engine.helpers
 
-	before_action :set_cobra_app_resting
+	before_action :set_cobra_app_theme, :set_cobra_app_resting
 
 	def get_usuario_autenticado
 		if session[:usuario_id]
@@ -61,6 +61,7 @@ class ApplicationController < ActionController::Base
 				login_browser: session[:login_browser],
 				login_time: Time.now).acesso_email.deliver_later
 		end
+		session[:current_curso] = nil
 		
 		Rails.logger.info "Criada sessão para o(a) usuário(a) com email " + usuario.email + "."
 		
@@ -91,6 +92,18 @@ class ApplicationController < ActionController::Base
 	end
 
 	private
+		def set_cobra_app_theme
+			@cobra_app_theme = "theme-default"
+			@usuario_autenticado = get_usuario_autenticado
+
+			if (@usuario_autenticado) then
+				@preferencias_usuario = PreferenciasUsuario.find_by(usuario_id: @usuario_autenticado.id)
+
+				if (@preferencias_usuario) then
+					@cobra_app_theme = "theme-" + @preferencias_usuario.tema
+				end
+			end
+		end
 
 		def set_cobra_app_resting
 			@cobra_app_resting = false

@@ -1,15 +1,22 @@
 <div id="menu-perfil">
-    <% if @preferencias_usuario.pomodoro_ativar %>
-        <%= render PomodoroToolComponent.new(
-            preferencias_usuario: @preferencias_usuario,
-            login_time: session[:login_time]
-            ) %>
-    <% end %>
-    <h4 class="menu-perfil-usuario-cargo">
-        <%= @usuario_autenticado.nome_completo %>
-        <br>
-        <%= helpers.enum_cargo_usuario(@usuario_autenticado) %>
-    </h4>
+    <div id="menu-perfil-usuario-container">
+        <div class="menu-perfil-usuario-column">
+            <div id="menu-perfil-usuario-icon">
+                <%= render @usuario_autenticado %>
+            </div>
+            <h4 id="menu-perfil-usuario-cargo">
+                <%= helpers.enum_cargo_usuario(@usuario_autenticado) %>
+            </h4>
+        </div>
+        <div class="menu-perfil-usuario-column">
+            <% if @preferencias_usuario.pomodoro_ativar %>
+                <%= render PomodoroToolComponent.new(
+                    preferencias_usuario: @preferencias_usuario,
+                    login_time: session[:login_time]
+                    ) %>
+            <% end %>
+        </div>
+    </div>
     <ul>
         <li>
             <a href="/perfil">
@@ -38,8 +45,13 @@
             </a>
         </li>
         <li>
-            <a href="/sair" data-turbo-prefetch="false">
-                <i class="fa-solid fa-door-open fa-xl"></i>
+            <a id="menu-perfil-sair-link" href="/sair" data-turbo-prefetch="false">
+                <i id="menu-perfil-sair-open"
+                    class="fa-solid fa-door-open fa-xl"
+                    style="display: none"></i>
+                <i id="menu-perfil-sair-close"
+                    class="fa-solid fa-door-closed fa-xl"
+                    style="display: inline-block"></i>
                 <span>Sair</span>
             </a>
         </li>

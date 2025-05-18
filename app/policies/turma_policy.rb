@@ -37,15 +37,15 @@ class TurmaPolicy
   end
   
   def edit?
-    eCoordenadorDoCurso? || permissaoProfessor? || permissaoRepresentante?
+    eCoordenadorDoCurso? || permissaoProfessor?
   end
 
   def matricular?
-    eCoordenadorDoCurso? || permissaoProfessor? || permissaoRepresentante?
+    eCoordenadorDoCurso? || permissaoProfessor?
   end
   
   def update?
-    eCoordenadorDoCurso? || permissaoProfessor? || permissaoRepresentante?
+    eCoordenadorDoCurso? || permissaoProfessor?
   end
   
   def destroy?

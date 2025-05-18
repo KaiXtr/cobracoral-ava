@@ -89,7 +89,11 @@ class CursoPolicy
 
   def matriculadoTurma?
     matricula = Matricula.find_by(usuario_id: usuario.id)
-    matricula.turma_id == turma.id
+    if matricula then
+      return matricula.turma_id == turma.id
+    else
+      return false
+    end
   end
 
   def temCargoRepresentante?

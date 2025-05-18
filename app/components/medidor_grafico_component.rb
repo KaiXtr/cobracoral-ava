@@ -5,31 +5,44 @@ class MedidorGraficoComponent < ViewComponent::Base
       medidor_titulo:,
       valor_entrada:,
       valor_tipo:,
-      modal_href: nil)
+      modal_href: nil,
+      theme: 0)
     @medidor_titulo = medidor_titulo
     @valor_entrada = valor_entrada
+    @label_entrada = valor_entrada
     @valor_tipo = valor_tipo
     @modal_href = modal_href
 
-    if @valor_tipo == 'porcento' then
-      @valor_entrada = valor_entrada.to_s + '%'
-    end
-    if @valor_tipo == 'minuto' then
+    if @valor_tipo == 'nota' then
+      @valor_entrada = @valor_entrada * 10
+    elsif @valor_tipo == 'porcento' then
+      @label_entrada = @valor_entrada.to_s + '%'
+    elsif @valor_tipo == 'minuto' then
       horas = 0
       minutos = 0
 
-      while @valor_entrada > 60 do
+      while @label_entrada > 60 do
         horas += 1
-        @valor_entrada -= 60
+        @label_entrada -= 60
       end
 
-      minutos = @valor_entrada
+      minutos = @label_entrada
 
       if horas > 0 then
-        @valor_entrada = horas.to_s + 'h' + minutos.to_s + 'm'
+        @label_entrada = horas.to_s + 'h' + minutos.to_s + 'm'
       else
-        @valor_entrada = valor_entrada.to_s + 'm'
+        @label_entrada = @label_entrada.to_s + 'm'
       end
+
+      if @valor_entrada > 0 then
+        @valor_entrada = 25/(100/@valor_entrada)
+      end
+    end
+
+    if theme == 0 then
+      @medidor_style = "background: conic-gradient(var(--main-color) " + @valor_entrada.to_s + "%, white 0) !important"
+    elsif theme == 1 then
+      @medidor_style = "background: conic-gradient(var(--red-dark) " + @valor_entrada.to_s + "%, var(--white-main) 0) !important"
     end
   end
 end

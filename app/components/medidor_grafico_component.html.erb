@@ -1,8 +1,19 @@
 <div class="medidor-container">
     <div class="medidor-grafico">
+        <div class="medidor-grafico-atual"
+            style="<%= @medidor_style %>">
+            <progress
+                value="<%= @valor_entrada %>"
+                min="0"
+                max="100"
+                style="visibility:hidden;height:0;width:0;">
+                <%= @label_entrada %>
+            </progress>
+        </div>
         <div class="medidor-grafico-max"></div>
-        <div class="medidor-grafico-atual"></div>
-        <span class="medidor-grafico-valor"><%= @valor_entrada %></span>
+        <span class="medidor-grafico-valor">
+            <%= @label_entrada %>
+        </span>
     </div>
     <h5>
         <%= @medidor_titulo %>

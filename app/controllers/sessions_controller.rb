@@ -1,3 +1,5 @@
+require 'net/http'
+
 class SessionsController < ApplicationController
 	layout 'login'
 
@@ -106,6 +108,7 @@ class SessionsController < ApplicationController
 				usuario = Usuario.find(session[:primeiro_acesso])
 				senha_nova = BCrypt::Password.create(usuario_autenticado[:new_password])
 				usuario.nome_completo = usuario_autenticado[:nome_completo]
+				usuario.pronomes_usuario = usuario_autenticado[:pronomes_usuario]
 				usuario.lattes_id = usuario_autenticado[:lattes_id]
 				usuario.orcid_id = usuario_autenticado[:orcid_id]
 				usuario.password = usuario_autenticado[:new_password]
@@ -121,10 +124,9 @@ class SessionsController < ApplicationController
 					respond_to do |format|
 						if usuario.errors["password"] then
 							logtxt = "Senha não cumpre os requisitos"
-						else
-							logtxt = usuario.errors
 						end
 						Rails.logger.error logtxt
+						Rails.logger.error usuario.errors
 						format.html { redirect_to "/primeiro-acesso", notice: logtxt }
 						format.json { render json: { error: usuario.errors }, status: :unauthorized }
 					end
@@ -144,6 +146,19 @@ class SessionsController < ApplicationController
 		usuario = Usuario.find_by(email: params[:session][:email])
 		
 		if usuario then
+			#url = URI.parse('http://localhost:8080/solicitacaos/nova')
+			#req = Net::HTTP::Post.new(url.to_s)
+			#req.body = {
+			#	requerente_id: 1,
+			#	assunto_solicitacao: 1,
+			#	situacao: 'encaminhada',
+			#	observacoes: nil
+			#}.to_json
+
+			#res = Net::HTTP.start(url.host, url.port) {|http|
+			#	http.request(req)
+			#}
+
 			session[:login_device] = params[:session][:login_device]
 			session[:login_so] = params[:session][:login_so]
 			session[:login_browser] = params[:session][:login_browser]

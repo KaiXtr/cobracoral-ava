@@ -34,6 +34,7 @@ class CursosController < ApplicationController
 		@coordenacao = Usuario.find(@curso.usuario_id)
 		@turmas = Turma.where(curso_id: @curso.id)
 		@disciplinas = Disciplina.where(curso_id: @curso.id)
+		session[:current_curso] = params[:id]
 
 		Rails.logger.info "Acessando curso " + @curso.nome_curso + "."
 	end
