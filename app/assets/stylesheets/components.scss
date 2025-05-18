@@ -162,6 +162,11 @@ textarea {
     }
 }
 
+#annotation-area{
+    position: absolute;
+    display: none;
+}
+
 #text-area-anotacao {
     background-color: #343434;
     color: white;
@@ -175,7 +180,29 @@ textarea {
     padding: 25px;
     overflow: auto;
     scrollbar-width: none;
-    display: none;
+}
+
+#anotacoes-paleta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #343434;
+    width: 409px;
+    height: 53px;
+    border-radius: 50px;
+    padding-right: 15px;
+
+    img {
+        width: 25px;
+        height: 25px;
+        padding: 20px;
+    }
+
+    .paleta-circle {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+    }
 }
 
 #barra-lateral {

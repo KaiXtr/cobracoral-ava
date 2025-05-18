@@ -24,7 +24,21 @@
     </div>
 
 
-    <textarea placeholder="Insira texto..." id="text-area-anotacao" ></textarea>
+    <div id="annotation-area">
+      <textarea placeholder="Insira texto..." id="text-area-anotacao" ></textarea>
+      <div id="anotacoes-paleta">
+        <img src="/assets/pencil.png" />
+          <div class="paleta-circle" style="background-color: red;"></div>
+          <div class="paleta-circle" style="background-color: orange;"></div>
+          <div class="paleta-circle" style="background-color: yellow;"></div>
+          <div class="paleta-circle" style="background-color: green;"></div>
+          <div class="paleta-circle" style="background-color: cyan;"></div>
+          <div class="paleta-circle" style="background-color: darkblue;"></div>
+          <div class="paleta-circle" style="background-color: purple;"></div>
+          <div class="paleta-circle" style="background-color: pink;"></div>
+          <div class="paleta-circle" style="background-color: white;"></div>
+      </div>
+    </div>
     
     <%= render ConteudoNavButtonComponent.new(
       conteudoAtual: @conteudo,
@@ -35,7 +49,7 @@
 
 <script>
   const content = document.getElementById('content')
-  const anottationArea = document.getElementById('text-area-anotacao')
+  const anottationArea = document.getElementById('annotation-area')
   const range = null;
 
   content.addEventListener('mouseup', (event) => {
