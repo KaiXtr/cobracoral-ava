@@ -159,12 +159,20 @@ svg.cobracoral-icon {
   animation-fill-mode: forwards;
 }
 
+div#cobracoral-header-spacing {
+  height: 10vh;
+  display: block;
+}
+
 header#cobracoral-header {
   background-color: var(--main-color);
   padding: 0vw 10vw 0vw 3vw;
+  width: calc(100% - 13vw);
   max-height: 30vh;
   align-items: center;
+  position: fixed;
   display: flex;
+  z-index: 60;
 
   button.icon-button {
     background-color: var(--main-color);
@@ -293,6 +301,56 @@ header#cobracoral-header {
       #menu-perfil:hover {
         visibility: visible;
         opacity: 100%;
+      }
+    }
+  }
+
+  &.header-compacto {
+    padding: 0vw 10vw 0vw 3vw;
+    width: calc(100% - 13vw);
+    max-height: 10vh;
+
+    button#header-open-nav-component {
+      font-size: 8pt;
+      width: 3vw;
+      height: 3vw;
+    }
+
+    [tooltip-text]:after {
+      bottom: -200%;
+    }
+    
+    ul#header-buttons button.icon-button {
+      font-size: 8pt;
+      width: 3vw;
+      height: 3vw;
+      margin: 0px;
+
+      #menu-perfil {
+        font-size: 10pt;
+        top: 10vh;
+      }
+    }
+
+    div.header-logo {
+      width: 40vw !important;
+
+      div.header-logo-svg svg.cobracoral-icon {
+        width: 5vh !important;
+      }
+
+      div.header-logo-info {
+        max-width: 30vw !important;
+        vertical-align: top;
+        margin-top: 2vh;
+
+        h1 {
+          font-size: 16pt !important;
+        }
+
+        span {
+          font-size: 6pt !important;
+        }
       }
     }
   }

@@ -12,8 +12,8 @@
 <div id="c<%= comunicado.id %>" class="comunicado-container <%= @novo_comunicado %>">
   <div class="comunicado-info">
     <% usuario = usuario_comunicado(comunicado.usuario_id) %>
-    <a href="/usuarios/<%= usuario.id %>">
-      <div class="usuario-button">
+    <div class="usuario-button">
+      <a href="/usuarios/<%= usuario.id %>">
         <div class="usuario-button-icon icon-larger">
           <% if usuario.avatar.attached? %>
             <%= image_tag(usuario.avatar) %>
@@ -21,17 +21,19 @@
             <i class="fa-solid fa-user fa-lg"></i>
           <% end %>
         </div>
-        <div class="usuario-button-name">
+      </a>
+      <div class="usuario-button-name">
+        <a href="/usuarios/<%= usuario.id %>">
           <%= usuario.nome_completo %>
-          <span class="comunicado-usuario-info">
-            <%= info_usuario(usuario, comunicado) %>
-          </span>
-          <span class="comunicado-data">
-            <%= formatar_data_publicacao(comunicado.created_at) %>
-          </span>
-        </div>
+        </a>
+        <span class="comunicado-usuario-info">
+          <%= info_usuario(usuario, comunicado) %>
+        </span>
+        <span class="comunicado-data">
+          <%= formatar_data_publicacao(comunicado.created_at) %>
+        </span>
       </div>
-    </a>
+    </div>
   </div>
   <div class="comunicado-actions">
     <% if policy(comunicado).edit? %>

@@ -54,6 +54,10 @@
     .comunicado-info {
         width: 90%;
         display: inline-block;
+
+        .usuario-button:hover {
+            transform: none;
+        }
     }
 
     .comunicado-usuario-info {

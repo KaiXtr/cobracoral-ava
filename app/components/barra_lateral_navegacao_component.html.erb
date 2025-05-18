@@ -36,4 +36,12 @@
             <% end %>
         </ul>
     </div>
+<% else %>
+    <div id="barra-lateral" style="visibility: hidden; opacity: 0%;" onclick="abrirBarraLateral()">
+        <h2>
+            <a href="/cursos/<%= helpers.current_curso(@usuario_autenticado).id %>">
+                <%= helpers.current_curso(@usuario_autenticado).nome_curso %>
+            </a>
+        </h2>
+    </div>
 <% end %>
