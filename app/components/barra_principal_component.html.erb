@@ -8,17 +8,13 @@
     </div>
     <div class="header-logo-info">
         <a href="/">
-            <% if helpers.isUsuarioDiscente(@usuario_autenticado) %>
-                <h1>SIGAA</h1>
-            <% else %>
-                <h1>
-                    <% if helpers.current_curso(@usuario_autenticado) %>
-                        <%= helpers.current_curso(@usuario_autenticado).nome_curso %>
-                    <% else %>
-                        Cobracoral
-                    <% end %>
-                </h1>
-            <% end %>
+            <h1>
+                <% if helpers.current_curso(@usuario_autenticado) %>
+                    <%= helpers.current_curso(@usuario_autenticado).nome_curso %>
+                <% else %>
+                    Cobracoral
+                <% end %>
+            </h1>
         </a>
         <span>
             <%= ENV["COBRACORAL_VERSION"] %>

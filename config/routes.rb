@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :leitura_conteudos
   resources :preferencias_usuario
   
-  root 'comunicados#index'
+  root 'painel#index'
   
   get '/entrar', to: 'sessions#login'
   post '/entrar', to: 'sessions#create'

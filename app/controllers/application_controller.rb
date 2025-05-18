@@ -61,6 +61,7 @@ class ApplicationController < ActionController::Base
 				login_browser: session[:login_browser],
 				login_time: Time.now).acesso_email.deliver_later
 		end
+		session[:current_curso] = nil
 		
 		Rails.logger.info "Criada sessão para o(a) usuário(a) com email " + usuario.email + "."
 		

@@ -7,6 +7,19 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 Usuario.create([
+	{
+        id: 0,
+        pronomes_usuario: :elu_delu,
+        nome_completo: "Admin",
+        email: "admin@cobracoral.edu.br",
+        telefone: nil,
+        password: "C0br@c0r@l",
+        biografia: nil,
+        lattes_id: nil,
+        orcid_id: nil,
+        cargo_usuario: :administrador,
+        acessos_count: 0
+    },
     {
         id: 1,
         pronomes_usuario: :ele_dele,
@@ -76,7 +89,7 @@ Usuario.create([
         id: 6,
         pronomes_usuario: :ele_dele,
         nome_completo: "Estagiário da turma CC2 Vespertino",
-        email: "monitor.cc2v@cobracoral.edu.br",
+        email: "estagiario.cc2v@cobracoral.edu.br",
         telefone: "997773322",
         password: "C0br@c0r@l",
         biografia: nil,

@@ -210,11 +210,31 @@ class ComunicadosController < ApplicationController
               )
           end
 
+          # Discentes podem ver comunicados de turmas onde estão matriculados
+          matricula_estudante = Matricula.find_by(
+            usuario_id: usuario_autenticado.id,
+            turma_id: t.id
+            )
+          if matricula_estudante then
+            comunicados += Comunicado.where(
+              turma_id: t.id,
+              visibilidade_comunicado: :todos_turma
+              )
+          end
+
           # Obtendo todos os comunicados de disciplinas
           disciplinas_turma = Disciplina.where(turma_id: t.id)
           disciplinas_turma.each do |d|
             # Coordenadores podem ver comunicados de todas as disciplinas de seu curso
             if usuario_autenticado.cargo_usuario == 'coordenador' then
+              comunicados += Comunicado.where(
+                disciplina_id: d.id,
+                visibilidade_comunicado: :todos_disciplina
+                )
+            end
+
+            # Discentes podem ver comunicados de turmas onde estão matriculados
+            if matricula_estudante then
               comunicados += Comunicado.where(
                 disciplina_id: d.id,
                 visibilidade_comunicado: :todos_disciplina
