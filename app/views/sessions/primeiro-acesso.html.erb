@@ -121,16 +121,16 @@
 		<div class="form-group">
 			<%= f.label :new_password, 'Nova senha: '%>
 			<span id="campo-caps">Caps Lock ativada</span>
-			<%= f.password_field :new_password,
-				placeholder: 'Senha',
+			<%= render PasswordFieldComponent.new(
 				id: 'campo-senha',
-				class: 'input-text',
-				required: 'true'
+				form: f,
+				val: :new_password,
+				placeholder: 'Senha'
+				)
 			%>
 		</div>
 		<div class="form-group">
 			<%= f.label :repeat_password, 'Repita a senha: '%>
-			<span id="campo-caps">Caps Lock ativada</span>
 			<%= render PasswordFieldComponent.new(
 				id: 'campo-senha-repetir',
 				form: f,

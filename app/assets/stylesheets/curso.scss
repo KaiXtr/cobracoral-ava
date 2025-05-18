@@ -207,7 +207,7 @@ div.disciplinas-banner {
         position: relative;
 
         .conteudo-button-conclusao-max {
-            border: 5px solid gray;
+            border: 5px solid var(--gray-color);
             border-radius: 100%;
             position: absolute;
             min-width: 1.5vw;
@@ -242,7 +242,7 @@ a.conteudo-disabled {
 
 .conteudo-data {
     font-size: 10pt;
-    color: gray;
+    color: var(--gray-color);
     display: block;
     margin-bottom: 10px;
 }

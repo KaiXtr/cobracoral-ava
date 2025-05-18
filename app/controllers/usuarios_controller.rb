@@ -21,16 +21,18 @@ class UsuariosController < ApplicationController
     def create
         @usuario = Usuario.new(usuario_params)
         @usuario.cargo_usuario = params[:usuario][:cargo_usuario]
-        senha_nova = BCrypt::Password.create("C0br@c0r@l")
-        @usuario.password = "C0br@c0r@l"
-        @usuario.password_digest = senha_nova
+
+        senha_primeiro_acesso = ('0'..'z').to_a.shuffle.first(12).join
+        @usuario.password = senha_primeiro_acesso
+        @usuario.password_digest = BCrypt::Password.create(senha_primeiro_acesso)
         @usuario.acessos_count = 0
 
         respond_to do |format|
             if @usuario.save
-                #ComunicadoMailer.with(
-                #    usuarios_list: usuarios_list,
-                #    comunicado: @comunicado).novo_comunicado_email.deliver_later
+                SessionMailer.with(
+                    usuario: @usuario,
+                    senha_provisoria: senha_primeiro_acesso,
+                    instituicao_nome: 'Instituto Cobracoral').primeiro_acesso_email.deliver_later
 
                 PreferenciasUsuario.create(
                     id: @usuario.id,
