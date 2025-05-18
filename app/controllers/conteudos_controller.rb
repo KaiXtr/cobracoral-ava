@@ -103,7 +103,7 @@ class ConteudosController < ApplicationController
   # GET /conteudos/new
   def new
     @conteudo = Conteudo.new
-    @conteudo.nome_conteudo = "Nome do conteúdo "
+    @conteudo.nome_conteudo = "Nome do conteúdo"
     professor = get_usuario_autenticado
     authorize(@conteudo)
     
@@ -113,7 +113,8 @@ class ConteudosController < ApplicationController
 
   # GET /conteudos/1/edit
   def edit
-    authorize @conteudo
+    authorize(@conteudo)
+    @disciplina_conteudo = Disciplina.find_by(usuario_id: professor.id)
     Rails.logger.info "Editando conteúdo " + @conteudo.nome_conteudo + "."
   end
 

@@ -53,9 +53,12 @@
     </div>
     <div class="disciplina_conteudos_container">
       <% if policy(@disciplina).new_conteudo? %>
-        <a href="/conteudos/new">
-            Adicionar conteúdo
-        </a>
+        <%= render OpenModalButtonComponent.new(
+          href: new_conteudo_path,
+          button_class: 'open-modal-comunicado',
+          tooltip: 'Adicionar conteúdo',
+          open_modal: false)
+        %>
       <% end %>
       <ol>
         <%= render @unidades_disciplina %>

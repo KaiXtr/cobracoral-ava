@@ -251,10 +251,6 @@ puts "= turmas populada."
 
 Matricula.create([
     { usuario_id: 1, turma_id: 1, semestre: '2025/1'},
-    { usuario_id: 2, turma_id: 1, semestre: '2025/1'},
-    { usuario_id: 3, turma_id: 1, semestre: '2025/1'},
-    { usuario_id: 4, turma_id: 6, semestre: '2025/1'},
-    { usuario_id: 4, turma_id: 5, semestre: '2025/1'},
     { usuario_id: 5, turma_id: 4, semestre: '2025/1'},
     { usuario_id: 6, turma_id: 3, semestre: '2025/1'},
     { usuario_id: 7, turma_id: 3, semestre: '2025/1'},

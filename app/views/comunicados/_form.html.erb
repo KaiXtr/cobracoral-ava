@@ -58,7 +58,7 @@
     <div id="disciplina-comunicado-input" class="form-group" style="display: none">
           <%= form.label :disciplina_id, "Disciplina" %>
           <div class="select-box">
-              <%= form.select :turma_id,
+              <%= form.select :disciplina_id,
                   options_for_select(@disciplinas.map{ |d| [
                       nome_disciplina_com_turma(d), d.id, {
                           'disciplina-id' => d.id

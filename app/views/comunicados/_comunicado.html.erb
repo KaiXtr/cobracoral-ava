@@ -1,7 +1,15 @@
-<div id="c<%= comunicado.id %>" class="comunicado-container">
-  <script type="text/javascript">
-    //this.classList.add('novo')
-  </script>
+<%
+  @novo_comunicado = ''
+  comunicado_visto = ReacaoComunicado.find_by(
+    comunicado_id: comunicado.id,
+    usuario_id: @usuario_autenticado.id,
+    emoji: 'x')
+  
+  if !comunicado_visto then
+    @novo_comunicado = 'comunicado-novo'
+  end
+%>
+<div id="c<%= comunicado.id %>" class="comunicado-container <%= @novo_comunicado %>">
   <div class="comunicado-info">
     <% usuario = usuario_comunicado(comunicado.usuario_id) %>
     <a href="/usuarios/<%= usuario.id %>">

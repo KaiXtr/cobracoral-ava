@@ -18,24 +18,30 @@ module ComunicadosHelper
 
     def info_usuario(usuario, comunicado)
         visibilidade = comunicado.visibilidade_comunicado
-        
-        # Visível para todos de um curso
-        if visibilidade == 'todos_curso'
-            curso_comunicado = Curso.find_by(usuario_id: usuario.id)
-            return "Coordenação de " + curso_comunicado.nome_curso
-        # Visível para todas as turmas em que leciona
-        elsif visibilidade == 'todas_turmas'
-            return "Várias turmas"
-        # Visível para todos de uma turma X
-        elsif visibilidade == 'todos_turma'
-            turma_disciplina = Turma.find_by(id: comunicado.turma_id)
-            return turma_disciplina.nome_turma
-        # Visível para todos de uma disciplina X
-        elsif visibilidade == 'todos_disciplina'
-            disciplina_comunicado = Disciplina.find_by(id: comunicado.disciplina_id)
-            nome_disciplina = disciplina_comunicado.nome_disciplina
-            turma_disciplina = Turma.find_by(id: disciplina_comunicado.turma_id)
-            return nome_disciplina + " | " + turma_disciplina.nome_turma
+
+        if comunicado then
+            # Visível para todos de um curso
+            if visibilidade == 'todos_curso'
+                curso_comunicado = Curso.find_by(usuario_id: usuario.id)
+                return "Coordenação de " + curso_comunicado.nome_curso
+            # Visível para todas as turmas em que leciona
+            elsif visibilidade == 'todas_turmas'
+                return "Várias turmas"
+            # Visível para todos de uma turma X
+            elsif visibilidade == 'todos_turma'
+                turma_disciplina = Turma.find_by(id: comunicado.turma_id)
+                return turma_disciplina.nome_turma
+            # Visível para todos de uma disciplina X
+            elsif visibilidade == 'todos_disciplina'
+                disciplina_comunicado = Disciplina.find_by(id: comunicado.disciplina_id)
+                if disciplina_comunicado then
+                    nome_disciplina = disciplina_comunicado.nome_disciplina
+                    turma_disciplina = Turma.find_by(id: disciplina_comunicado.turma_id)
+                    return nome_disciplina + " | " + turma_disciplina.nome_turma
+                else
+                    return ''
+                end
+            end
         end
     end
 

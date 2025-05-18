@@ -175,8 +175,26 @@ header#cobracoral-header {
     height: 5vw;
     cursor: pointer;
 
+    .icon-button-counter {
+      font-size: 10pt;
+      color: var(--cobra-button-color-hover);
+      background-color: var(--cobra-button-color);
+      border: 3px solid var(--main-color);
+      border-radius: 100%;
+      padding: 0px 6px 0px 6px;
+      position: relative;
+      transition-duration: .2s;
+      left: -10px;
+      top: 5px;
+    }
+
     &:hover {
       color: var(--white-main);
+
+      .icon-button-counter {
+        color: black;
+        background-color: var(--white-main);
+      }
     }
   }
 

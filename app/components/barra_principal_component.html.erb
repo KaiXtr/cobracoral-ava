@@ -34,6 +34,11 @@
             <a href="/comunicados" tooltip-text="Comunicados">
                 <button class="icon-button">
                     <i class="fa-solid fa-bell fa-2xl"></i>
+                    <% if @novos_comunicados > 0 %>
+                        <span class="icon-button-counter">
+                            <%= @novos_comunicados %>
+                        </span>
+                    <% end %>
                 </button>
             </a>
         </li>
@@ -62,6 +67,11 @@
             <a href="/mensagens" tooltip-text="Mensagens">
                 <button class="icon-button">
                     <i class="fa-solid fa-comment fa-2xl"></i>
+                    <% if @novas_mensagens > 0 %>
+                        <span class="icon-button-counter">
+                            <%= @novas_mensagens %>
+                        </span>
+                    <% end %>
                 </button>
             </a>
         </li>
