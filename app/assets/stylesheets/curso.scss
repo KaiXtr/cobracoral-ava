@@ -159,19 +159,14 @@ div.disciplinas-banner {
     display: block;
 
     .disciplina_info {
-        width: 70%;
+        width: 60%;
         display: inline-block;
     }
 
     .disciplina_medidores {
-        width: 20%;
+        width: 30%;
         display: inline-block;
         vertical-align: top;
-
-        h5 {
-            min-width: 5vw;
-            margin: none;
-        }
     }
 }
 

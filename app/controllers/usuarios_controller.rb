@@ -80,8 +80,8 @@ class UsuariosController < ApplicationController
 
     def perfil
         @usuario = get_usuario_autenticado
-        Rails.logger.info "Exibindo perfil do(a) usuário(a) " + @usuario.nome_completo + "."
-        redirect_to usuario_path(@usuario)
+        Rails.logger.info "Editando perfil do(a) usuário(a) " + @usuario.nome_completo + "."
+        redirect_to edit_usuario_path(@usuario)
     end
 
     def caixa

@@ -375,34 +375,37 @@ textarea {
 }
 
 .medidor-grafico {
-    min-width: 5vw;
-    min-height: 5vw;
+    min-width: 6vw;
+    min-height: 6vw;
     position: relative;
 
     .medidor-grafico-max {
-        border: 10px solid var(--gray-color);
+        background-color: var(--nav-bg);
+        border: none;
         border-radius: 100%;
         position: absolute;
         min-width: 5vw;
         min-height: 5vw;
-        top: 0px;
+        vertical-align: middle;
+        align-self: center;
+        top: 0.5vw;
+        left: 0.5vw;
     }
 
     .medidor-grafico-atual {
-        border: 10px solid var(--main-color);
-        border-radius: 100%;
+        border: none;
+        border-radius: 50%;
         position: absolute;
-        min-width: 5vw;
-        min-height: 5vw;
-        top: 0px;
+        min-width: 6vw;
+        min-height: 6vw;
     }
 
     .medidor-grafico-valor {
         text-align: center;
         font-weight: bold;
         min-width: 5vw;
-        top: 2.5vw;
-        left: 0.7vw;
+        top: 2.3vw;
+        left: 0.5vw;
         position: absolute;
     }
 }
@@ -414,35 +417,18 @@ textarea {
     margin: 1vw;
 
     .medidor-grafico {
-        min-width: 5vw;
-        min-height: 5vw;
         position: relative;
 
         .medidor-grafico-max {
-            border: 10px solid rgb(255, 255, 255);
-            border-radius: 100%;
-            position: absolute;
-            min-width: 5vw;
-            min-height: 5vw;
-            top: 0px;
+            background-color: var(--main-color);
         }
 
         .medidor-grafico-atual {
-            border: 10px solid var(--white-main);
-            border-radius: 100%;
-            position: absolute;
-            min-width: 5vw;
-            min-height: 5vw;
             top: 0px;
         }
 
         .medidor-grafico-valor {
-            text-align: center;
-            font-weight: bold;
-            min-width: 5vw;
-            top: 2.5vw;
-            left: 0.7vw;
-            position: absolute;
+            color: var(--white-main);
         }
     }
 }

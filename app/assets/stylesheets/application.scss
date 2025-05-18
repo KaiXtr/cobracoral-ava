@@ -264,12 +264,54 @@ header#cobracoral-header {
         visibility: hidden;
         position: absolute;
         min-width: 15vw;
+        max-width: 18vw;
         padding: 20px;
         opacity: 0%;
         top: 12vh;
         right: 4vw;
         z-index: 10;
         cursor: default;
+        
+        div#menu-perfil-usuario-container {
+          text-align: left;
+
+          div.menu-perfil-usuario-column {
+            width: 40%;
+            display: inline-block;
+            vertical-align: top;
+
+            div#menu-perfil-usuario-icon {
+              .usuario-button {
+                .usuario-button-icon {
+                  width: 5vw;
+                  height: 5vw;
+
+                  img {
+                    width: 5vw;
+                    height: 5vw;
+                  }
+                }
+                .usuario-button-name {
+                  color: var(--white-main);
+                  font-weight: bold;
+                  transition-duration: .2s;
+                }
+                &:hover {
+                  transform: none;
+
+                  .usuario-button-name {
+                    color: var(--red-dark);
+                  }
+                }
+              }
+              
+            }
+    
+            h4#menu-perfil-usuario-cargo {
+              text-align: left;
+            }
+          }
+        }
 
         ul {
           width: 100%;
@@ -296,11 +338,11 @@ header#cobracoral-header {
             }
           }
         }
-      }
 
-      #menu-perfil:hover {
-        visibility: visible;
-        opacity: 100%;
+        &:hover {
+          visibility: visible;
+          opacity: 100%;
+        }
       }
     }
   }
@@ -316,13 +358,21 @@ header#cobracoral-header {
       height: 3vw;
     }
 
+    .icon-button-counter {
+      font-size: 8pt !important;
+      border: 1px solid var(--main-color) !important;
+      padding: 0px 4px 0px 4px !important;
+      left: -10px !important;
+      top: 5px !important;
+    }
+
     [tooltip-text]:after {
       bottom: -200%;
     }
     
     ul#header-buttons button.icon-button {
       font-size: 8pt;
-      width: 3vw;
+      width: 4vw;
       height: 3vw;
       margin: 0px;
 
