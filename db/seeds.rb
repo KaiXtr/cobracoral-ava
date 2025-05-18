@@ -167,7 +167,7 @@ Usuario.create([
 
 puts "= usuarios populada."
 
-for i in 1..11 do
+for i in 0..11 do
     PreferenciasUsuario.create(
         id: i,
         usuario_id: i,

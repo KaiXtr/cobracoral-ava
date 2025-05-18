@@ -72,8 +72,6 @@ class ComunicadosController < ApplicationController
     end
 
     @visibilidades = get_visibilidades()
-    puts "VISIBILIDADES DISPONÍVEIS PARA CRIAR COMUNICADO: "
-    puts @visibilidades
       
 		Rails.logger.info "Criando novo comunicado."
   end

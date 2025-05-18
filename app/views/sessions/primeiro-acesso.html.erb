@@ -55,10 +55,18 @@
 		<%= show_svg('cobracoral-logo.svg') %>
 	</div>
 	<h2>Primeiro acesso do <%= @cargo %></h2>
-	<p>
-		Verifique seus dados e crie uma nova senha de no mínimo 8 caracteres contendo
-		letras maiúsculas, letras minúsculas e números.
-	</p>
+	<% if @usuario_autenticado.cargo_usuario == 'administrador' %>
+		<p>
+			Bem vindo ao AVA Cobracoral. Para iniciar a configuração do sistema,
+			crie uma nova senha de no mínimo 8 caracteres contendo letras maiúsculas,
+			letras minúsculas e números.
+		</p>
+	<% else %>
+		<p>
+			Verifique seus dados e crie uma nova senha de no mínimo 8 caracteres contendo
+			letras maiúsculas, letras minúsculas e números.
+		</p>
+	<% end %>
 	<div class="login-errors">
 		<%= notice %>
 	</div>
@@ -123,11 +131,12 @@
 		<div class="form-group">
 			<%= f.label :repeat_password, 'Repita a senha: '%>
 			<span id="campo-caps">Caps Lock ativada</span>
-			<%= f.password_field :repeat_password,
-				placeholder: 'Senha',
+			<%= render PasswordFieldComponent.new(
 				id: 'campo-senha-repetir',
-				class: 'input-text',
-				required: 'true'
+				form: f,
+				val: :repeat_password,
+				placeholder: 'Senha'
+				)
 			%>
 		</div>
 		<div class="button-group" onclick="triggerLoginSubmit()">

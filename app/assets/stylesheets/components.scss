@@ -162,6 +162,12 @@ textarea {
     }
 }
 
+.password-field-button {
+    background-color: var(--main-color);
+    color: var(--nav-link);
+    border: none;
+}
+
 #barra-lateral {
     color: var(--white-main);
     background-color: black;
