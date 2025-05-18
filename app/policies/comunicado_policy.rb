@@ -61,15 +61,7 @@ class ComunicadoPolicy
     end
   
     def representanteTurma?
-        matricula = Matricula.find_by(
-            usuario_id: @usuario.id,
-            turma_id: @comunicado.turma_id
-        )
-        if matricula then
-            Usuario.cargo_usuarios[usuario.cargo_usuario] == 3
-        else
-            false
-        end
+        Usuario.cargo_usuarios[@usuario.cargo_usuario] == 3
     end
 
     def criouComunicado?
