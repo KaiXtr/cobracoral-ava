@@ -24,8 +24,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_21_203759) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -44,17 +44,19 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_21_203759) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "comunicados", force: :cascade do |t|
     t.integer "usuario_id", null: false
-    t.integer "turma_id", null: false
+    t.integer "turma_id"
+    t.integer "disciplina_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "visibilidade_comunicado", null: false
+    t.index ["disciplina_id"], name: "index_comunicados_on_disciplina_id"
     t.index ["turma_id"], name: "index_comunicados_on_turma_id"
     t.index ["usuario_id"], name: "index_comunicados_on_usuario_id"
   end
@@ -114,28 +116,28 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_21_203759) do
 
   create_table "preferencias_usuario", force: :cascade do |t|
     t.integer "usuario_id", null: false
-    t.string "idioma"
-    t.string "tema"
-    t.boolean "avaliacao_exibir_tempo"
-    t.boolean "avaliacao_exibir_progresso"
-    t.boolean "pomodoro_ativar"
-    t.integer "pomodoro_pomodoris_tempo"
-    t.integer "pomodoro_descanso"
-    t.integer "pomodoro_pomodoris_quant"
-    t.boolean "pomodoro_hibernar"
-    t.boolean "pomodoro_logoff"
-    t.boolean "notificacao_novo_acesso"
-    t.boolean "notificacao_comunicados_coordenacao"
-    t.boolean "notificacao_comunicados_turma"
-    t.boolean "notificacao_agendamentos"
-    t.boolean "notificacao_avaliacao_liberada"
-    t.boolean "notificacao_conteudo_liberado"
-    t.boolean "notificacao_nota_lancada"
-    t.boolean "notificacao_nova_mensagem"
-    t.boolean "notificacao_situacao_solicitacao"
+    t.string "idioma", default: "pt-BR"
+    t.string "tema", default: "default"
+    t.boolean "avaliacao_exibir_tempo", default: true
+    t.boolean "avaliacao_exibir_progresso", default: true
+    t.boolean "pomodoro_ativar", default: true
+    t.integer "pomodoro_pomodoris_tempo", default: 25
+    t.integer "pomodoro_descanso", default: 5
+    t.integer "pomodoro_pomodoris_quant", default: 4
+    t.boolean "pomodoro_hibernar", default: true
+    t.boolean "pomodoro_logoff", default: false
+    t.boolean "notificacao_novo_acesso", default: true
+    t.boolean "notificacao_comunicados_coordenacao", default: true
+    t.boolean "notificacao_comunicados_turma", default: true
+    t.boolean "notificacao_agendamentos", default: true
+    t.boolean "notificacao_avaliacao_liberada", default: true
+    t.boolean "notificacao_conteudo_liberado", default: true
+    t.boolean "notificacao_nota_lancada", default: true
+    t.boolean "notificacao_nova_mensagem", default: true
+    t.boolean "notificacao_situacao_solicitacao", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["usuario_id"], name: "index_preferencias_usuario_on_user_id"
+    t.index ["usuario_id"], name: "index_preferencias_usuario_on_usuario_id"
   end
 
   create_table "reacao_comunicados", force: :cascade do |t|
@@ -173,7 +175,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_21_203759) do
     t.integer "telefone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "pronomes_usuario", null: false
+    t.string "pronomes_usuario", null: false
     t.string "biografia"
     t.string "lattes_id"
     t.string "orcid_id"
@@ -184,6 +186,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_21_203759) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comunicados", "disciplinas"
   add_foreign_key "comunicados", "turmas"
   add_foreign_key "comunicados", "usuarios"
   add_foreign_key "conteudos", "unidade_disciplinas"

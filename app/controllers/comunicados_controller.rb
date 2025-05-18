@@ -52,18 +52,25 @@ class ComunicadosController < ApplicationController
     authorize(@comunicado)
 
     @turmas = Array.new()
-    disciplinas = Disciplina.where(usuario_id: @usuario.id)
-    if (disciplinas) then
-      for d in disciplinas do
-        t = Turma.find(d.turma_id)
-        if (t) then
-          @turmas.push(t)
+    @disciplinas = Disciplina.all
+    
+    if (professorTurma?) then
+      disciplinas = Disciplina.where(usuario_id: @usuario.id)
+      if (disciplinas) then
+        for d in disciplinas do
+          t = Turma.find(d.turma_id)
+          if (t) then
+            @turmas.push(t)
+          end
         end
       end
+    elsif (representanteTurma?) then
+      matriculaRepresentante = Matricula.find_by(usuario_id: @usuario.id)
+      turmaRepresentante = Turma.find(matriculaRepresentante.turma_id)
+      @turmas.push(turmaRepresentante)
     end
 
     @visibilidades = get_visibilidades()
-    @visibilidades = Comunicado.visibilidade_comunicados
       
 		Rails.logger.info "Criando novo comunicado."
   end
@@ -74,8 +81,10 @@ class ComunicadosController < ApplicationController
     @comunicado = Comunicado.find(params[:id])
     authorize(@comunicado)
 
-    @turmas = Turma.all
     @visibilidades = get_visibilidades()
+    @turmas = Turma.all
+    @disciplinas = Disciplina.all
+
 		Rails.logger.info "Editando comunicado " + @comunicado.id.to_s + "."
   end
 
@@ -84,6 +93,9 @@ class ComunicadosController < ApplicationController
     @usuario = get_usuario_autenticado
     @comunicado = Comunicado.new(comunicado_params)
     @comunicado.usuario_id = @usuario.id
+    @visibilidades = get_visibilidades()
+    @turmas = Turma.all
+    @disciplinas = Disciplina.all
 
     if @comunicado.visibilidade_comunicado == "todos_curso" then
       curso_comunicado = Curso.find_by(usuario_id: @usuario.id)
@@ -117,6 +129,7 @@ class ComunicadosController < ApplicationController
         }
       else
         Rails.logger.error "Houve um erro ao criar o comunicado."
+        Rails.logger.error @comunicado.errors
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @comunicado.errors, status: :unprocessable_entity }
       end
@@ -125,6 +138,10 @@ class ComunicadosController < ApplicationController
 
   # PATCH/PUT /comunicados/1 or /comunicados/1.json
   def update
+    @visibilidades = get_visibilidades()
+    @turmas = Turma.all
+    @disciplinas = Disciplina.all
+    
     respond_to do |format|
       if @comunicado.update(comunicado_params)
         logtxt = "Comunicado atualizado com sucesso."
@@ -174,10 +191,10 @@ class ComunicadosController < ApplicationController
       curso_atual = helpers.current_curso(usuario_autenticado)
 
       if curso_atual then
-        comunicados += Comunicado.where(usuario_id: curso_atual.usuario_id)
+        comunicados += Comunicado.where(usuario_id: curso_atual.usuario_id, visibilidade_comunicado: :todos_curso)
       end
 
-      # Obtendo todos os comunicados de professores (deve haver uma forma mais eficiente)
+      # Obtendo todos os comunicados de turmas
       comunicados_de_professores = Array.new()
 
       if curso_atual then
@@ -193,19 +210,19 @@ class ComunicadosController < ApplicationController
     end
 
     def get_visibilidades
-      visibilidades = Array.new()
+      visibilidades = {}
 
       if (visivelTodosCurso?)
-        visibilidades.push(Comunicado.visibilidade_comunicados[:todos_curso])
+        visibilidades['todos_curso'] =  Comunicado.visibilidade_comunicados[:todos_curso]
       end
       if (visivelTodasTurmas?)
-        visibilidades.push(Comunicado.visibilidade_comunicados[:todas_turmas])
+        visibilidades['todas_turmas'] =  Comunicado.visibilidade_comunicados[:todas_turmas]
       end
       if (visivelTodosTurma?)
-        visibilidades.push(Comunicado.visibilidade_comunicados[:todos_turma])
+        visibilidades['todos_turma'] =  Comunicado.visibilidade_comunicados[:todos_turma]
       end
       if (visivelTodosDisciplinas?)
-        visibilidades.push(Comunicado.visibilidade_comunicados[:todos_disciplina])
+        visibilidades['todos_disciplina'] =  Comunicado.visibilidade_comunicados[:todos_disciplina]
       end
 
       return visibilidades
@@ -228,24 +245,14 @@ class ComunicadosController < ApplicationController
     end
   
     def coordenadorCurso?
-      curso = Curso.find_by(usuario_id: @usuario.id)
-      if curso
-        true
-      else
-        false
-      end
+      Usuario.cargo_usuarios[@usuario.cargo_usuario] == 1
     end
   
     def professorTurma?
-      disciplina = Disciplina.find_by(usuario_id: @usuario.id)
-      if (disciplina)
-        true
-      else
-        false
-      end
+      Usuario.cargo_usuarios[@usuario.cargo_usuario] == 2
     end
   
     def representanteTurma?
-      Usuario.cargo_usuarios[usuario.cargo_usuario] == 3
+      Usuario.cargo_usuarios[@usuario.cargo_usuario] == 3
     end
 end

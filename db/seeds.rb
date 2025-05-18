@@ -100,7 +100,7 @@ Usuario.create(
 Usuario.create(
     id: 8,
     pronomes_usuario: :elu_delu,
-    nome_completo: "Representante da turma DG1 Diruno",
+    nome_completo: "Representante da turma DG1 Diurno",
     email: "representante.dg1d@cobracoral.edu.br",
     telefone: "997773322",
     password: "C0br@c0r@l",
@@ -246,12 +246,57 @@ Disciplina.create(
 )
 Disciplina.create(
     id: 3,
+    curso_id: 1,
+    turma_id: 1,
+    usuario_id: 9,
+    nome_disciplina: 'Programação Orientada a Objetos',
+    sala_aula: 'Bloco A Sala 204',
+    semestre: '2025/2',
+)
+Disciplina.create(
+    id: 4,
+    curso_id: 1,
+    turma_id: 3,
+    usuario_id: 9,
+    nome_disciplina: 'Programação Orientada a Objetos',
+    sala_aula: 'Bloco A Sala 204',
+    semestre: '2025/2',
+)
+Disciplina.create(
+    id: 5,
     curso_id: 2,
     turma_id: 6,
     usuario_id: 4,
     nome_disciplina: 'Design UI/UX',
     sala_aula: 'Bloco AC Sala 201',
     semestre: '2025/1',
+)
+Disciplina.create(
+    id: 6,
+    curso_id: 2,
+    turma_id: 7,
+    usuario_id: 4,
+    nome_disciplina: 'Design UI/UX',
+    sala_aula: 'Bloco AC Sala 201',
+    semestre: '2025/1',
+)
+Disciplina.create(
+    id: 7,
+    curso_id: 1,
+    turma_id: 2,
+    usuario_id: 2,
+    nome_disciplina: 'Teoria dos Autômatos',
+    sala_aula: 'Bloco A Sala 202',
+    semestre: '2025/1',
+)
+Disciplina.create(
+    id: 8,
+    curso_id: 2,
+    turma_id: 5,
+    usuario_id: 3,
+    nome_disciplina: 'Interface Humano Computador',
+    sala_aula: 'Bloco B Sala 204',
+    semestre: '2025/2',
 )
 
 puts "= disciplinas populada."
@@ -345,47 +390,154 @@ Conteudo.create(
 
 puts "= conteudos populada."
 
-Comunicado.create(
+c = Comunicado.create(
     id: 1,
-    usuario_id: 2,                           # Professora de autômatos
-    turma_id: 1,                             # CC1 Diurno
-    visibilidade_comunicado: :todos_turma    # Todos da turma
+    usuario_id: 9,                             # Coordenadora do curso de ciência da computação
+    turma_id: nil,                             # Nenhum
+    disciplina_id: nil,                        # Nenhum
+    visibilidade_comunicado: :todos_curso,     # Todos do curso
 )
-Comunicado.create(
+c.corpo.body = "Comunicado visível para <b>todos do curso.</b>"
+c.save
+
+c = Comunicado.create(
     id: 2,
-    usuario_id: 2,                           # Professora de autômatos
-    turma_id: 2,                             # CC1 Noturno
-    visibilidade_comunicado: :todos_turma    # Todos da turma
+    usuario_id: 9,                             # Coordenadora do curso de ciência da computação
+    turma_id: nil,                             # CC1 Diurno e CC2 Vespertino
+    disciplina_id: nil,                        # Nenhum
+    visibilidade_comunicado: :todas_turmas     # Todas as turmas em que leciona
 )
-Comunicado.create(
+c.corpo.body = "Comunicado visível para as turmas <b>CC1 Diurno e CC2 Vespertino.</b>"
+c.save
+
+c = Comunicado.create(
     id: 3,
-    usuario_id: 2,                           # Professora de autômatos
-    turma_id: 1,                             # CC1 Diurno e Noturno
-    visibilidade_comunicado: :todas_turmas   # Todas as turmas
+    usuario_id: 9,                             # Coordenadora do curso de ciência da computação
+    turma_id: 1,                               # CC1 Diurno
+    disciplina_id: nil,                        # Nenhum
+    visibilidade_comunicado: :todos_turma      # Todos de uma turma X
 )
-Comunicado.create(
+c.corpo.body = "Comunicado visível para a turma <b>CC1 Diurno.</b>"
+c.save
+
+c = Comunicado.create(
     id: 4,
-    usuario_id: 4,                           # Professora de Design
-    turma_id: 5,                             # DG1 Diurno
-    visibilidade_comunicado: :todos_turma    # Todos da turma
+    usuario_id: 9,                             # Coordenadora do curso de ciência da computação
+    turma_id: 3,                               # CC2 Vespertino
+    disciplina_id: nil,                        # Nenhum
+    visibilidade_comunicado: :todos_turma      # Todos de uma turma X
 )
-Comunicado.create(
+c.corpo.body = "Comunicado visível para a turma <b>CC2 Vespertino.</b>"
+c.save
+
+c = Comunicado.create(
     id: 5,
-    usuario_id: 4,                           # Professora de Design
-    turma_id: 6,                             # DG1 Noturno
-    visibilidade_comunicado: :todos_turma    # Todos da turma
+    usuario_id: 9,                             # Coordenadora do curso de ciência da computação
+    turma_id: 1,                               # CC1 Diurno
+    disciplina_id: 3,                          # Programação Orientada a Objetos (CC1 Diurno)
+    visibilidade_comunicado: :todos_disciplina # Todos de uma disciplina X
 )
-Comunicado.create(
+c.corpo.body = "Comunicado visível para a disciplina <b>Programação Orientada a Objetos</b> da turma <b>CC1 Diurno</b>"
+c.save
+
+c = Comunicado.create(
     id: 6,
-    usuario_id: 4,                           # Professora de Design
-    turma_id: 1,                             # DG1 Diurno e Noturno
-    visibilidade_comunicado: :todas_turmas   # Todas as turmas
+    usuario_id: 2,                             # Professora de Autômatos
+    turma_id: nil,                             # CC1 Diurno e CC1 Noturno
+    disciplina_id: nil,                        # Nenhum
+    visibilidade_comunicado: :todas_turmas     # Todas as turmas em que leciona
 )
-Comunicado.create(
+c.corpo.body = "Comunicado visível para as turmas <b>CC1 Diurno e CC1 Noturno.</b>"
+c.save
+
+c = Comunicado.create(
     id: 7,
-    usuario_id: 9,                           # Coordenadora do curso de ciência da computação
-    turma_id: 1,                             # DG1 Diurno e Noturno
-    visibilidade_comunicado: :todos_curso    # Todos do curso
+    usuario_id: 2,                             # Professora de Autômatos
+    turma_id: 1,                               # CC1 Diurno
+    disciplina_id: nil,                        # Nenhum
+    visibilidade_comunicado: :todos_turma      # Todos de uma turma X
 )
+c.corpo.body = "Comunicado visível para a turma <b>CC1 Diurno.</b>"
+c.save
+
+c = Comunicado.create(
+    id: 8,
+    usuario_id: 2,                             # Professora de Autômatos
+    turma_id: 2,                               # CC1 Noturno
+    disciplina_id: nil,                        # Nenhum
+    visibilidade_comunicado: :todos_turma      # Todos de uma turma X
+)
+c.corpo.body = "Comunicado visível para a turma <b>CC1 Noturno.</b>"
+c.save
+
+c = Comunicado.create(
+    id: 9,
+    usuario_id: 2,                             # Professora de Autômatos
+    turma_id: 1,                               # CC1 Diurno
+    disciplina_id: 1,                          # Teoria dos Autômatos (CC1 Diurno)
+    visibilidade_comunicado: :todos_disciplina # Todos de uma disciplina X
+)
+c.corpo.body = "Comunicado visível para a disciplina <b>Teoria dos Autômatos</b> da turma <b>CC1 Diurno</b>"
+c.save
+
+c = Comunicado.create(
+    id: 10,
+    usuario_id: 3,                             # Professor de IHC
+    turma_id: nil,                             # DG1 Diurno e DG1 Noturno
+    disciplina_id: nil,                        # Nenhum
+    visibilidade_comunicado: :todas_turmas     # Todas as turmas em que leciona
+)
+c.corpo.body = "Comunicado visível para as turmas <b>DG1 Diurno e DG1 Noturno.</b>"
+c.save
+
+c = Comunicado.create(
+    id: 11,
+    usuario_id: 3,                             # Professor de IHC
+    turma_id: 5,                               # DG1 Diurno
+    disciplina_id: nil,                        # Nenhum
+    visibilidade_comunicado: :todos_turma      # Todos de uma turma X
+)
+c.corpo.body = "Comunicado visível para a turma <b>DG1 Diurno.</b>"
+c.save
+
+c = Comunicado.create(
+    id: 12,
+    usuario_id: 3,                             # Professor de IHC
+    turma_id: 6,                               # DG1 Noturno
+    disciplina_id: nil,                        # Nenhum
+    visibilidade_comunicado: :todos_turma      # Todos de uma turma X
+)
+c.corpo.body = "Comunicado visível para a turma <b>DG1 Noturno.</b>"
+c.save
+
+c = Comunicado.create(
+    id: 13,
+    usuario_id: 3,                             # Professor de IHC
+    turma_id: 5,                               # DG1 Diurno
+    disciplina_id: 8,                          # Interface Humano Computador (DG1 Diurno)
+    visibilidade_comunicado: :todos_disciplina # Todos de uma disciplina X
+)
+c.corpo.body = "Comunicado visível para a disciplina <b>Interface Humano Computador</b> da turma <b>DG1 Diurno</b>"
+c.save
+
+c = Comunicado.create(
+    id: 14,
+    usuario_id: 5,                             # Representante da turma CC2 Noturno
+    turma_id: 4,                               # CC2 Noturno
+    disciplina_id: nil,                        # Nenhum
+    visibilidade_comunicado: :todos_turma      # Todos de uma turma X
+)
+c.corpo.body = "Comunicado visível para a turma <b>CC2 Noturno.</b>"
+c.save
+
+c = Comunicado.create(
+    id: 15,
+    usuario_id: 8,                             # Representante da turma DG1 Diurno
+    turma_id: 5,                               # DG1 Diurno
+    disciplina_id: nil,                        # Nenhum
+    visibilidade_comunicado: :todos_disciplina # Todos de uma turma X
+)
+c.corpo.body = "Comunicado visível para a turma <b>DG1 Diurno.</b>"
+c.save
 
 puts "= comunicados populada."

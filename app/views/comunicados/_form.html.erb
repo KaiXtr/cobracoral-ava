@@ -30,38 +30,44 @@
       </ul>
     </div>
   <% end %>
-  <div class="form-group">
-      <%= form.label :visibilidade_comunicado, "Visibilidade" %>
-      <div class="select-box">
-          <%= form.select :visibilidade_comunicado,
-              options_for_select(select_visibilidade(@visibilidades), comunicado.visibilidade_comunicado)
-          %>
-      </div>
-  </div>
-  <div id="turma-comunicado-input" class="form-group" style="display: none">
-        <%= form.label :turma_id, "Turma" %>
+  <% if @visibilidades.length > 1 %>
+    <div class="form-group">
+        <%= form.label :visibilidade_comunicado, "Visibilidade" %>
         <div class="select-box">
-            <%= form.select :turma_id,
-                options_for_select(@turmas.map{ |t| [
-                    t.nome_turma, t.id, {
-                        'turma-id' => t.id
-                    }
-                ]}, comunicado.turma_id)
+            <%= form.select :visibilidade_comunicado,
+                options_for_select(select_visibilidade(@visibilidades), comunicado.visibilidade_comunicado)
             %>
         </div>
-  </div>
-  <div id="disciplina-comunicado-input" class="form-group" style="display: none">
-        <%= form.label :turma_id, "Disciplina" %>
-        <div class="select-box">
-            <%= form.select :turma_id,
-                options_for_select(@turmas.map{ |t| [
-                    t.nome_turma, t.id, {
-                        'turma-id' => t.id
-                    }
-                ]}, comunicado.turma_id)
-            %>
-        </div>
-  </div>
+    </div>
+  <% end %>
+  <% if @turmas != nil %>
+    <div id="turma-comunicado-input" class="form-group" style="display: none">
+          <%= form.label :turma_id, "Turma" %>
+          <div class="select-box">
+              <%= form.select :turma_id,
+                  options_for_select(@turmas.map{ |t| [
+                      t.nome_turma, t.id, {
+                          'turma-id' => t.id
+                      }
+                  ]}, comunicado.turma_id)
+              %>
+          </div>
+    </div>
+  <% end %>
+  <% if @disciplinas != nil %>
+    <div id="disciplina-comunicado-input" class="form-group" style="display: none">
+          <%= form.label :disciplina_id, "Turma" %>
+          <div class="select-box">
+              <%= form.select :turma_id,
+                  options_for_select(@disciplinas.map{ |d| [
+                      d.nome_disciplina, d.id, {
+                          'disciplina-id' => d.id
+                      }
+                  ]}, comunicado.disciplina_id)
+              %>
+          </div>
+    </div>
+  <% end %>
   <div class="form-group comunicado-form-body">
     <%= form.rich_text_area :corpo %>
   </div>
