@@ -49,6 +49,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_21_203759) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "cargo_usuarios", force: :cascade do |t|
+    t.string "enumCargoFeminino"
+    t.string "enumCargoMasculino"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "comunicados", force: :cascade do |t|
     t.integer "usuario_id", null: false
     t.integer "turma_id"
@@ -175,7 +182,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_21_203759) do
     t.integer "telefone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "pronomes_usuario", null: false
+    t.integer "pronomes_usuario", null: false
     t.string "biografia"
     t.string "lattes_id"
     t.string "orcid_id"

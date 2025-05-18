@@ -121,7 +121,7 @@ class UsuariosController < ApplicationController
         def usuario_params
             params.require(:usuario).permit(
                 :avatar, :nome_completo, :biografia,
-                :email, :password, :pronomes_usuario_id,
+                :email, :password, :pronomes_usuario,
                 :telefone, :lattes_id, :orcid_id
             )
         end

@@ -202,26 +202,51 @@ class ComunicadosController < ApplicationController
         # Obtendo todos os comunicados de turmas
         turmas_curso = Turma.where(curso_id: curso_atual.id)
         turmas_curso.each do |t|
-          comunicados += Comunicado.where(
-            turma_id: t.id,
-            visibilidade_comunicado: :todos_turma
-            )
+          # Coordenadores podem ver comunicados de todas as turmas de seu curso
+          if usuario_autenticado.cargo_usuario == 'coordenador' then
+            comunicados += Comunicado.where(
+              turma_id: t.id,
+              visibilidade_comunicado: :todos_turma
+              )
+          end
 
           # Obtendo todos os comunicados de disciplinas
           disciplinas_turma = Disciplina.where(turma_id: t.id)
           disciplinas_turma.each do |d|
-            comunicados += Comunicado.where(
-              disciplina_id: d.id,
-              visibilidade_comunicado: :todos_disciplina
-              )
+            # Coordenadores podem ver comunicados de todas as disciplinas de seu curso
+            if usuario_autenticado.cargo_usuario == 'coordenador' then
+              comunicados += Comunicado.where(
+                disciplina_id: d.id,
+                visibilidade_comunicado: :todos_disciplina
+                )
+            end
 
             # Obtendo todos os comunicados de várias turmas onde um docente leciona
             docente_disciplina = Usuario.find_by(id: d.usuario_id)
-            comunicados_docente = Comunicado.where(
+            comunicados += Comunicado.where(
               usuario_id: docente_disciplina.id,
               visibilidade_comunicado: :todas_turmas
               )
-            comunicados += comunicados_docente
+
+            # Comunicados visíveis para professores
+            if (usuario_autenticado.cargo_usuario == 'professor') then
+              # Professores podem ver comunicados de turmas ondes lecionam
+              if (usuario_autenticado.id == docente_disciplina.id) then
+                comunicados += Comunicado.where(
+                  usuario_id: docente_disciplina.id,
+                  turma_id: t.id,
+                  visibilidade_comunicado: :todos_turma,
+                  )
+              end
+
+              # Professores podem ver comunicados de disciplinas onde lecionam
+              if (usuario_autenticado.id == docente_disciplina.id) then
+                comunicados += Comunicado.where(
+                  disciplina_id: d.id,
+                  visibilidade_comunicado: :todos_disciplina
+                  )
+              end
+            end
           end
         end
       end

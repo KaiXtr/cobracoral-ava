@@ -15,6 +15,8 @@ class Usuario < ApplicationRecord
 	validates_presence_of :email
 	validates_uniqueness_of :email
 
+	validates_presence_of :pronomes_usuario
+	validates_presence_of :cargo_usuario
 	validates_presence_of :password_digest
 
 	'''validates :password, format: /\A

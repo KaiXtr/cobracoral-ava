@@ -108,6 +108,7 @@ class SessionsController < ApplicationController
 				usuario = Usuario.find(session[:primeiro_acesso])
 				senha_nova = BCrypt::Password.create(usuario_autenticado[:new_password])
 				usuario.nome_completo = usuario_autenticado[:nome_completo]
+				usuario.pronomes_usuario = usuario_autenticado[:pronomes_usuario]
 				usuario.lattes_id = usuario_autenticado[:lattes_id]
 				usuario.orcid_id = usuario_autenticado[:orcid_id]
 				usuario.password = usuario_autenticado[:new_password]
@@ -123,10 +124,9 @@ class SessionsController < ApplicationController
 					respond_to do |format|
 						if usuario.errors["password"] then
 							logtxt = "Senha não cumpre os requisitos"
-						else
-							logtxt = usuario.errors
 						end
 						Rails.logger.error logtxt
+						Rails.logger.error usuario.errors
 						format.html { redirect_to "/primeiro-acesso", notice: logtxt }
 						format.json { render json: { error: usuario.errors }, status: :unauthorized }
 					end
