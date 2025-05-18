@@ -19,9 +19,12 @@
       <%= formatar_data_vencimento(@conteudo.data_vencimento) %>
     </span>
 
-    <div class="conteudo-elementos">
+    <div class="conteudo-elementos" id="content">
       <%= @conteudo.corpo %>
     </div>
+
+
+    <textarea placeholder="Insira texto..." id="text-area-anotacao" ></textarea>
     
     <%= render ConteudoNavButtonComponent.new(
       conteudoAtual: @conteudo,
@@ -29,3 +32,25 @@
     %>
   </div>
 </nav>
+
+<script>
+  const content = document.getElementById('content')
+  const anottationArea = document.getElementById('text-area-anotacao')
+  const range = null;
+
+  content.addEventListener('mouseup', (event) => {
+    const selection = window.getSelection();
+
+    const selectedText = selection?.toString();
+    console.log('Texto selecionado:', selectedText);
+    
+    if(selection && !selection.isCollapsed && content.contains(selection.anchorNode)){
+      anottationArea.style.display = 'block'
+    }
+  })
+
+  document.addEventListener('mouseup', (event) => {
+    const clickedElement = event.target;
+  })
+
+</script>
