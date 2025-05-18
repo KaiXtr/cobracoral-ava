@@ -33,6 +33,11 @@ module ApplicationHelper
 		end
 	end
 
+	def nome_disciplina_com_turma(disciplina)
+		t = Turma.find_by(id: disciplina.turma_id)
+		return disciplina.nome_disciplina + " | " + t.nome_turma
+	end
+
 	def disciplinas_turma(usuario_autenticado, matricula)
 		if matricula then
 			return Disciplina.where(

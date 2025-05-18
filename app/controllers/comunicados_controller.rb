@@ -52,12 +52,13 @@ class ComunicadosController < ApplicationController
     authorize(@comunicado)
 
     @turmas = Array.new()
-    @disciplinas = Disciplina.all
+    @disciplinas = Array.new()
     
     if (professorTurma?) then
-      disciplinas = Disciplina.where(usuario_id: @usuario.id)
-      if (disciplinas) then
-        for d in disciplinas do
+      disciplinas_docente = Disciplina.where(usuario_id: @usuario.id)
+      if (disciplinas_docente) then
+        for d in disciplinas_docente do
+          @disciplinas.push(d)
           t = Turma.find(d.turma_id)
           if (t) then
             @turmas.push(t)
@@ -71,6 +72,8 @@ class ComunicadosController < ApplicationController
     end
 
     @visibilidades = get_visibilidades()
+    puts "VISIBILIDADES DISPONÍVEIS PARA CRIAR COMUNICADO: "
+    puts @visibilidades
       
 		Rails.logger.info "Criando novo comunicado."
   end
@@ -191,22 +194,41 @@ class ComunicadosController < ApplicationController
       curso_atual = helpers.current_curso(usuario_autenticado)
 
       if curso_atual then
-        comunicados += Comunicado.where(usuario_id: curso_atual.usuario_id, visibilidade_comunicado: :todos_curso)
-      end
+        comunicados += Comunicado.where(
+          usuario_id: curso_atual.usuario_id,
+          visibilidade_comunicado: :todos_curso
+          )
 
-      # Obtendo todos os comunicados de turmas
-      comunicados_de_professores = Array.new()
+        # Obtendo todos os comunicados de turmas
+        turmas_curso = Turma.where(curso_id: curso_atual.id)
+        turmas_curso.each do |t|
+          comunicados += Comunicado.where(
+            turma_id: t.id,
+            visibilidade_comunicado: :todos_turma
+            )
 
-      if curso_atual then
-        disciplinas_do_curso = Disciplina.where(curso_id: curso_atual.id)
-        disciplinas_do_curso.each do |d|
-          comunicados_de_professores += Comunicado.where(usuario_id: d.usuario_id)
+          # Obtendo todos os comunicados de disciplinas
+          disciplinas_turma = Disciplina.where(turma_id: t.id)
+          disciplinas_turma.each do |d|
+            comunicados += Comunicado.where(
+              disciplina_id: d.id,
+              visibilidade_comunicado: :todos_disciplina
+              )
+
+            # Obtendo todos os comunicados de várias turmas onde um docente leciona
+            docente_disciplina = Usuario.find_by(id: d.usuario_id)
+            comunicados_docente = Comunicado.where(
+              usuario_id: docente_disciplina.id,
+              visibilidade_comunicado: :todas_turmas
+              )
+            comunicados += comunicados_docente
+          end
         end
       end
-      
-      comunicados += comunicados_de_professores
 
-      return comunicados
+      comunicados = comunicados.sort_by{|c| c[:updated_at]}
+      comunicados = comunicados.sort_by{|c| c[:id]}
+      return comunicados.uniq
     end
 
     def get_visibilidades
@@ -233,15 +255,15 @@ class ComunicadosController < ApplicationController
     end
 
     def visivelTodasTurmas?
-      !coordenadorCurso? && professorTurma?
+      professorTurma?
     end
 
     def visivelTodosTurma?
-      !coordenadorCurso? && (professorTurma? || representanteTurma?)
+      professorTurma? || representanteTurma?
     end
 
     def visivelTodosDisciplinas?
-      !coordenadorCurso? && (professorTurma?)
+      professorTurma?
     end
   
     def coordenadorCurso?
@@ -249,7 +271,18 @@ class ComunicadosController < ApplicationController
     end
   
     def professorTurma?
-      Usuario.cargo_usuarios[@usuario.cargo_usuario] == 2
+      # Professor de uma turma
+      if Usuario.cargo_usuarios[@usuario.cargo_usuario] == 2 then
+        return true
+      # Coordenador que leciona
+      elsif Usuario.cargo_usuarios[@usuario.cargo_usuario] == 1 then
+        d = Disciplina.where(usuario_id: @usuario.id)
+        if d.length > 0 then
+          return true
+        else
+          return false
+        end
+      end
     end
   
     def representanteTurma?

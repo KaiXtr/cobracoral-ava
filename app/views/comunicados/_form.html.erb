@@ -4,7 +4,7 @@
     let turmaComunicadoInput = document.getElementById('turma-comunicado-input');
     let disciplinaComunicadoInput = document.getElementById('disciplina-comunicado-input');
 
-    if (evt.target.value == 'todos_turma')
+    if ((evt.target.value == 'todos_turma') || (evt.target.value == 'todos_disciplina'))
       turmaComunicadoInput.style.display = 'block';
     else
       turmaComunicadoInput.style.display = 'none';
@@ -56,11 +56,11 @@
   <% end %>
   <% if @disciplinas != nil %>
     <div id="disciplina-comunicado-input" class="form-group" style="display: none">
-          <%= form.label :disciplina_id, "Turma" %>
+          <%= form.label :disciplina_id, "Disciplina" %>
           <div class="select-box">
               <%= form.select :turma_id,
                   options_for_select(@disciplinas.map{ |d| [
-                      d.nome_disciplina, d.id, {
+                      nome_disciplina_com_turma(d), d.id, {
                           'disciplina-id' => d.id
                       }
                   ]}, comunicado.disciplina_id)

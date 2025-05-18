@@ -18,7 +18,6 @@ module ComunicadosHelper
 
     def info_usuario(usuario, comunicado)
         visibilidade = comunicado.visibilidade_comunicado
-        puts "Visibilidade é " + visibilidade
         
         # Visível para todos de um curso
         if visibilidade == 'todos_curso'
