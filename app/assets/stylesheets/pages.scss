@@ -221,3 +221,45 @@ div.cards-container {
         }
     }
 }
+
+.mensagens-users {
+    background-color: var(--container-bg);
+    padding: 3vw;
+    width: 30%;
+    height: 100vh;
+    display: inline-block;
+    overflow-x: scroll;
+}
+
+.mensagens-list {
+    display: inline-block;
+    width: 30%;
+
+    .mensagem-container {
+        background-color: var(--container-bg);
+        border-radius: 50px;
+        padding: 0.5vw;
+        margin-bottom: 5px;
+        width: fit-content;
+
+        &.mensagem-nova {
+            box-shadow: 0px 0px 10px var(--main-color);
+        }
+
+        .mensagem-info {
+            font-size: 10pt;
+            color: var(--gray-color);
+            margin-bottom: 10px;
+            width: 90%;
+            display: block;
+
+            .usuario-button:hover {
+                transform: none;
+            }
+        }
+    }
+
+    .mensagem-input-form {
+        width: 30vw;
+    }
+}

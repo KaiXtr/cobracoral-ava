@@ -1,0 +1,31 @@
+<nav>
+  <div class="mensagens-users">
+    <% for u in Usuario.all %>
+      <%= render u %>
+    <% end %>
+  </div>
+  <div class="mensagens-list">
+    <% @mensagens.each do |mensagem| %>
+      <%= render mensagem %>
+    <% end %>
+    <div class="mensagem-input-form">
+      <%= form_for Mensagem.new,
+        url: '/mensagens/',
+        html: { method: :post } do |form| %>
+        <div>
+          <%= form.label :remetente_id, style: "display: block" %>
+          <%= form.text_field :remetente_id %>
+        </div>
+        <div>
+          <%= form.label :destinatario_id, style: "display: block" %>
+          <%= form.text_field :destinatario_id %>
+        </div>
+        <%= form.rich_text_area :corpo %>
+
+        <div>
+          <%= form.submit %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</nav>

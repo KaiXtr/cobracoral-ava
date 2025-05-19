@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :mensagens
   resources :comunicados
   resources :usuarios
   resources :cursos
@@ -29,7 +30,6 @@ Rails.application.routes.draw do
   get '/cursos', to: 'cursos#index'
   get '/ide', to: 'ide#index'
   get '/tarefas', to: 'leitura_conteudos#index'
-  get '/mensagens', to: 'cursos#index'
 
   get '/usuarios/:usuario_id/editar', to: 'usuarios#edit'
   get '/usuarios/:usuario_id/:turma_id/matricular', to: 'usuarios#matricular'

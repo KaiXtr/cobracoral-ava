@@ -1,0 +1,29 @@
+<%= form_for mensagem,
+  url: '/mensagens/',
+  html: { method: :post } do |form| %>
+  <% if mensagem.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(mensagem.errors.count, "error") %> prohibited this mensagem from being saved:</h2>
+
+      <ul>
+        <% mensagem.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :remetente_id, style: "display: block" %>
+    <%= form.text_field :remetente_id %>
+  </div>
+
+  <div>
+    <%= form.label :destinatario_id, style: "display: block" %>
+    <%= form.text_field :destinatario_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

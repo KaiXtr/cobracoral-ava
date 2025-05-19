@@ -580,3 +580,15 @@ c.corpo.body = "Comunicado visível para a turma <b>DG1 Diurno.</b>"
 c.save
 
 puts "= comunicados populada."
+
+for i in 1..5 do
+    m = Mensagem.create(
+        id: i,
+        remetente_id: i,
+        destinatario_id: i + 1
+    )
+    m.corpo.body = "Hello World!"
+    m.save
+end
+
+puts "= mensagens populada."

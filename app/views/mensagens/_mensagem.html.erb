@@ -1,0 +1,9 @@
+<div id="<%= dom_id mensagem %>" class="mensagem-container">
+  <div class="mensagem-info">
+    <%= render Usuario.find(mensagem.remetente_id) %>
+    <%= formatar_data_mensagem(mensagem.updated_at) %>
+  </div>
+  <div class="mensagem-content">
+    <%= mensagem.corpo %>
+  </div>
+</div>

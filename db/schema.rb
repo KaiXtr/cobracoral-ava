@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_21_203759) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_19_002200) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -121,6 +121,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_21_203759) do
     t.index ["usuario_id"], name: "index_matriculas_on_usuario_id"
   end
 
+  create_table "mensagens", force: :cascade do |t|
+    t.integer "remetente_id", null: false
+    t.integer "destinatario_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["destinatario_id"], name: "index_mensagens_on_destinatario_id"
+    t.index ["remetente_id"], name: "index_mensagens_on_remetente_id"
+  end
+
   create_table "preferencias_usuario", force: :cascade do |t|
     t.integer "usuario_id", null: false
     t.string "idioma", default: "pt-BR"
@@ -205,6 +214,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_21_203759) do
   add_foreign_key "leitura_conteudos", "usuarios"
   add_foreign_key "matriculas", "turmas"
   add_foreign_key "matriculas", "usuarios"
+  add_foreign_key "mensagens", "usuarios", column: "destinatario_id"
+  add_foreign_key "mensagens", "usuarios", column: "remetente_id"
   add_foreign_key "preferencias_usuario", "usuarios"
   add_foreign_key "reacao_comunicados", "comunicados"
   add_foreign_key "reacao_comunicados", "usuarios"
