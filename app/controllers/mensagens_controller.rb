@@ -21,7 +21,50 @@ class MensagensController < ApplicationController
           )
       @mensagens = @mensagens.uniq
       @mensagens = @mensagens.sort_by{|m| m[:created_at]}
+    
+      # Marcar visualização
+      if @mensagens then
+        for m in @mensagens do
+          if !ReacaoMensagem.find_by(
+            usuario_id: @usuario_autenticado.id,
+            mensagem_id: m.id,
+            emoji: 'x') then
+
+            if !ReacaoMensagem.find_by(
+            usuario_id: @usuario_autenticado.id,
+            mensagem_id: m.id,
+            emoji: nil) then
+              reacao = ReacaoMensagem.new(
+                  usuario_id: @usuario_autenticado.id,
+                  mensagem_id: m.id,
+                  emoji: nil
+              )
+              reacao.save
+            else
+              reacao = ReacaoMensagem.find_by(
+                usuario_id: @usuario_autenticado.id,
+                mensagem_id: m.id,
+                emoji: nil
+              )
+              reacao.emoji = 'x'
+              reacao.save
+            end
+          end
+        end
+        Rails.logger.info "Acessando todas as mensagens."
+      else
+        Rails.logger.info "Não há mensagens a serem exibidas."
+      end
+    else
+      Rails.logger.info "Não há mensagens a serem exibidas."
     end
+  end
+
+  def reagir
+    mensagem = Mensagem.find(params[:id])
+    emoji = params[:emoji]
+    helpers.reagir_emoji_mensagem(mensagem, emoji)
+    redirect_to "/mensagens/" + mensagem.destinatario_id.to_s
   end
 
   # POST /mensagens or /mensagens.json
@@ -31,13 +74,15 @@ class MensagensController < ApplicationController
     params[:mensagem][:destinatario_id] = params[:id]
 
     @mensagem = Mensagem.new(mensagem_params)
+    @mensagens_usuarios = Usuario.where.not(id: @usuario_autenticado.id)
+    @mensagens = Mensagem.all
 
     respond_to do |format|
       if @mensagem.save
         format.html { redirect_to '/mensagens/' + params[:id].to_s }
-        format.json { render :show, status: :created, location: @mensagem }
+        format.json { render :index, status: :created, location: @mensagem }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :index, status: :unprocessable_entity }
         format.json { render json: @mensagem.errors, status: :unprocessable_entity }
       end
     end

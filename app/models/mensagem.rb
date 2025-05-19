@@ -1,6 +1,7 @@
 class Mensagem < ApplicationRecord
   #belongs_to :usuario, foreign_key: "remetente"
   #belongs_to :usuario, foreign_key: "destinatario"
+  has_many :reacao_mensagens
   has_rich_text :corpo
 
   self.table_name = "mensagens"

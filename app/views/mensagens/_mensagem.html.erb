@@ -3,8 +3,21 @@
   if @usuario_autenticado.id == mensagem.remetente_id then
     @minha_mensagem = 'mensagem-minha'
   end
+
+  @emojis_options = ['👍','❤️','✔️','❌',]
+
+  @nova_mensagem = ''
+  mensagem_vista = ReacaoMensagem.find_by(
+    mensagem_id: mensagem.id,
+    usuario_id: @usuario_autenticado.id,
+    emoji: 'x')
+  
+  if !mensagem_vista then
+    @nova_mensagem = 'mensagem-nova'
+  end
 %>
-<div id="<%= dom_id mensagem %>" class="mensagem-container <%= @minha_mensagem %>">
+<div id="<%= dom_id mensagem %>"
+  class="mensagem-container <%= @minha_mensagem %> <%= @nova_mensagem %>">
   <div class="mensagem-info">
     <span class="mensagem-info-user">
       <a href="/usuarios/<%= Usuario.find(mensagem.remetente_id).id %>">
@@ -17,5 +30,31 @@
   </div>
   <div class="mensagem-content">
     <%= mensagem.corpo %>
+  </div>
+  <div class="mensagem-reacoes">
+    <div class="mensagem-reacoes-publicas">
+      <% for emoji in @emojis_options %>
+        <% emojiQuant = reacoes_mensagem_quantidade(mensagem, emoji) %>
+        <% if emojiQuant > 0 %>
+          <span class="mensagem-reacao-icon">
+            <%= emoji %>
+            <% if emojiQuant > 1 %>
+              <strong>
+                <%= emojiQuant %>
+              </strong>
+            <% end %>
+          </span>
+        <% end %>
+      <% end %>
+      <div class="mensagem-reacoes-buttons">
+        <% for emoji in @emojis_options %>
+          <a href="/mensagens/<%= mensagem.id %>/reagir/<%= emoji %>" data-turbo-prefetch="false">
+            <button class="mensagem-reacao-button">
+              <%= emoji %>
+            </button>
+          </a>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_19_002200) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_19_025729) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -166,6 +166,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_19_002200) do
     t.index ["usuario_id"], name: "index_reacao_comunicados_on_usuario_id"
   end
 
+  create_table "reacao_mensagens", force: :cascade do |t|
+    t.integer "mensagem_id", null: false
+    t.integer "usuario_id", null: false
+    t.string "emoji"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mensagem_id"], name: "index_reacao_mensagens_on_mensagem_id"
+    t.index ["usuario_id"], name: "index_reacao_mensagens_on_usuario_id"
+  end
+
   create_table "turmas", force: :cascade do |t|
     t.string "nome_turma"
     t.string "senha_acesso"
@@ -219,6 +229,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_19_002200) do
   add_foreign_key "preferencias_usuario", "usuarios"
   add_foreign_key "reacao_comunicados", "comunicados"
   add_foreign_key "reacao_comunicados", "usuarios"
+  add_foreign_key "reacao_mensagens", "mensagens", column: "mensagem_id"
+  add_foreign_key "reacao_mensagens", "usuarios"
   add_foreign_key "turmas", "cursos"
   add_foreign_key "unidade_disciplinas", "disciplinas"
 end

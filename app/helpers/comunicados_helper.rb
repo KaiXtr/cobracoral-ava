@@ -49,11 +49,11 @@ module ComunicadosHelper
         data_hora.strftime("Publicado em %d/%m/%Y às %H:%M")
     end
 
-    def reacoes_quantidade(comunicado, emoji)
+    def reacoes_comunicado_quantidade(comunicado, emoji)
         ReacaoComunicado.where(comunicado_id: comunicado.id, emoji: emoji).count()
     end
 
-    def reagir_emoji(comunicado, emoji)
+    def reagir_emoji_comunicado(comunicado, emoji)
 		if session[:usuario_id]
 			usuario = Usuario.find(session[:usuario_id])
         end

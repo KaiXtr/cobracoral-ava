@@ -64,6 +64,7 @@ Rails.application.routes.draw do
   get '/mensagens', to: 'mensagens#index'
   get '/mensagens/:id', to: 'mensagens#index'
   post '/mensagens/:id', to: 'mensagens#create'
+  get '/mensagens/:id/reagir/:emoji', to: 'mensagens#reagir'
 
   get '/sobre', to: 'sobre#index'
   get '/instalar', to: 'sobre#instalar'

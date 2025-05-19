@@ -46,7 +46,7 @@ class ComunicadosController < ApplicationController
   def reagir
     comunicado = Comunicado.find(params[:id])
     emoji = params[:emoji]
-    helpers.reagir_emoji(comunicado, emoji)
+    helpers.reagir_emoji_comunicado(comunicado, emoji)
     redirect_to "/comunicados"
   end
 

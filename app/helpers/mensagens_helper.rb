@@ -9,4 +9,20 @@ module MensagensHelper
             return data_hora.strftime("%H:%M")
         end
     end
+
+    def reacoes_mensagem_quantidade(mensagem, emoji)
+        ReacaoMensagem.where(mensagem_id: mensagem.id, emoji: emoji).count()
+    end
+
+    def reagir_emoji_mensagem(mensagem, emoji)
+		if session[:usuario_id]
+			usuario = Usuario.find(session[:usuario_id])
+        end
+        reacao = ReacaoMensagem.new(
+            usuario_id: usuario.id,
+            mensagem_id: mensagem.id,
+            emoji: emoji
+        )
+        reacao.save
+    end
 end
