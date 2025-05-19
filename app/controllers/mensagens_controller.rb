@@ -4,16 +4,37 @@ class MensagensController < ApplicationController
   # GET /mensagens or /mensagens.json
   def index
     @usuario_autenticado = get_usuario_autenticado
-    @mensagens = Mensagem.all
+    @usuario_destinatario = nil
+    @mensagens = nil
+
+    @mensagens_usuarios = Usuario.where.not(id: @usuario_autenticado.id)
+
+    if (params) then
+      @usuario_destinatario = params[:id]
+      @mensagens = Mensagem.where(
+          remetente_id: @usuario_autenticado.id,
+          destinatario_id: @usuario_destinatario
+          ) + 
+        Mensagem.where(
+          remetente_id: @usuario_destinatario,
+          destinatario_id: @usuario_autenticado.id
+          )
+      @mensagens = @mensagens.uniq
+      @mensagens = @mensagens.sort_by{|m| m[:created_at]}
+    end
   end
 
   # POST /mensagens or /mensagens.json
   def create
+    @usuario_autenticado = get_usuario_autenticado
+    params[:mensagem][:remetente_id] = @usuario_autenticado.id
+    params[:mensagem][:destinatario_id] = params[:id]
+
     @mensagem = Mensagem.new(mensagem_params)
 
     respond_to do |format|
       if @mensagem.save
-        format.html { redirect_to mensagens_url }
+        format.html { redirect_to '/mensagens/' + params[:id].to_s }
         format.json { render :show, status: :created, location: @mensagem }
       else
         format.html { render :new, status: :unprocessable_entity }

@@ -222,44 +222,89 @@ div.cards-container {
     }
 }
 
+nav.mensagens-nav {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
 .mensagens-users {
     background-color: var(--container-bg);
     padding: 3vw;
     width: 30%;
-    height: 100vh;
+    max-height: 90vh;
     display: inline-block;
     overflow-x: scroll;
+    vertical-align: top;
+
+    .mensagens-users-button {
+        margin-bottom: 5px;
+    }
 }
 
-.mensagens-list {
+.mensagens-user {
     display: inline-block;
-    width: 30%;
+    padding-left: 5vw;
+    width: 50%;
+    max-height: 90vh;
 
-    .mensagem-container {
-        background-color: var(--container-bg);
-        border-radius: 50px;
-        padding: 0.5vw;
-        margin-bottom: 5px;
-        width: fit-content;
+    .mensagens-list {
+        max-height: 50vh;
+        overflow-x: scroll;
 
-        &.mensagem-nova {
-            box-shadow: 0px 0px 10px var(--main-color);
-        }
+        .mensagem-container {
+            background-color: var(--container-bg);
+            border-radius: 50px;
+            padding: 0.5vw 2vw 0.5vw 2vw;
+            margin-bottom: 5px;
+            min-width: 3vw;
+            max-width: 25vw;
+    
+            &.mensagem-nova {
+                box-shadow: 0px 0px 10px var(--main-color);
+            }
 
-        .mensagem-info {
-            font-size: 10pt;
-            color: var(--gray-color);
-            margin-bottom: 10px;
-            width: 90%;
-            display: block;
+            &.mensagem-minha {
+                margin-left: 18vw;
+            }
+    
+            .mensagem-info {
+                margin-bottom: 10px;
+                width: 90%;
+                display: block;
 
-            .usuario-button:hover {
-                transform: none;
+                .mensagem-info-user {
+                    display: inline-block;
+
+                    a {
+                        font-size: 10pt;
+                        margin-bottom: 1px;
+                        display: block;
+                    }
+                }
+                .mensagem-info-data {
+                    text-align: right;
+                    font-size: 8pt;
+                    color: var(--gray-color);
+                    margin-left: 50%;
+                    display: inline-block;
+                }
+            }
+
+            .mensagem-content {
+                font-size: 10pt;
+
+                trix-toolbar {
+                    display: none;
+                }
+                trix-editor {
+                    max-height: 2vh;
+                }
             }
         }
     }
 
     .mensagem-input-form {
         width: 30vw;
+        max-height: 20vh;
     }
 }

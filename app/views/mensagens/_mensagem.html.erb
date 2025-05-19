@@ -1,7 +1,19 @@
-<div id="<%= dom_id mensagem %>" class="mensagem-container">
+<%
+  @minha_mensagem = ''
+  if @usuario_autenticado.id == mensagem.remetente_id then
+    @minha_mensagem = 'mensagem-minha'
+  end
+%>
+<div id="<%= dom_id mensagem %>" class="mensagem-container <%= @minha_mensagem %>">
   <div class="mensagem-info">
-    <%= render Usuario.find(mensagem.remetente_id) %>
-    <%= formatar_data_mensagem(mensagem.updated_at) %>
+    <span class="mensagem-info-user">
+      <a href="/usuarios/<%= Usuario.find(mensagem.remetente_id).id %>">
+        <%= Usuario.find(mensagem.remetente_id).nome_completo %>
+      </a>
+    </span>
+    <span class="mensagem-info-data">
+      <%= formatar_data_mensagem(mensagem.updated_at) %>
+    </span>
   </div>
   <div class="mensagem-content">
     <%= mensagem.corpo %>

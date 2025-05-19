@@ -1,31 +1,30 @@
-<nav>
+<nav class="mensagens-nav">
   <div class="mensagens-users">
-    <% for u in Usuario.all %>
-      <%= render u %>
+    <% for u in @mensagens_usuarios %>
+      <div class="mensagens-users-button">
+        <a href="/mensagens/<%= u.id %>">
+          <%= u.nome_completo %>
+        </a>
+      </div>
     <% end %>
   </div>
-  <div class="mensagens-list">
-    <% @mensagens.each do |mensagem| %>
-      <%= render mensagem %>
-    <% end %>
-    <div class="mensagem-input-form">
-      <%= form_for Mensagem.new,
-        url: '/mensagens/',
-        html: { method: :post } do |form| %>
-        <div>
-          <%= form.label :remetente_id, style: "display: block" %>
-          <%= form.text_field :remetente_id %>
-        </div>
-        <div>
-          <%= form.label :destinatario_id, style: "display: block" %>
-          <%= form.text_field :destinatario_id %>
-        </div>
-        <%= form.rich_text_area :corpo %>
-
-        <div>
-          <%= form.submit %>
-        </div>
+  <div class="mensagens-user">
+    <div class="mensagens-list">
+      <% @mensagens.each do |mensagem| %>
+        <%= render mensagem %>
       <% end %>
     </div>
+    <% if @usuario_destinatario %>
+      <div class="mensagem-input-form">
+        <%= form_for Mensagem.new,
+          url: '/mensagens/' + @usuario_destinatario,
+          html: { method: :post } do |form| %>
+          <%= form.rich_text_area :corpo %>
+          <button type="submit">
+            <i class="fa-solid fa-paper-plane fa-xl icon-button"></i>
+          </button>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </nav>

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :mensagens
   resources :comunicados
   resources :usuarios
   resources :cursos
@@ -61,6 +60,10 @@ Rails.application.routes.draw do
   get '/conteudos/:id/salvar', to: 'conteudos#salvar'
   get '/conteudos/:id/deletar', to: 'conteudos#delete'
   get '/conteudos/:id/destroy', to: 'conteudos#destroy'
+
+  get '/mensagens', to: 'mensagens#index'
+  get '/mensagens/:id', to: 'mensagens#index'
+  post '/mensagens/:id', to: 'mensagens#create'
 
   get '/sobre', to: 'sobre#index'
   get '/instalar', to: 'sobre#instalar'
