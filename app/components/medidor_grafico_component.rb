@@ -5,12 +5,14 @@ class MedidorGraficoComponent < ViewComponent::Base
       medidor_titulo:,
       valor_entrada:,
       valor_tipo:,
+      valor_max: 100,
       modal_href: nil,
       theme: 0)
     @medidor_titulo = medidor_titulo
     @valor_entrada = valor_entrada
     @label_entrada = valor_entrada
     @valor_tipo = valor_tipo
+    @valor_max = valor_max
     @modal_href = modal_href
 
     if @valor_tipo == 'nota' then
@@ -35,7 +37,7 @@ class MedidorGraficoComponent < ViewComponent::Base
       end
 
       if @valor_entrada > 0 then
-        @valor_entrada = 25/(100/@valor_entrada)
+        @valor_entrada = 100/(@valor_max/@valor_entrada)
       end
     end
 

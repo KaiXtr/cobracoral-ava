@@ -98,7 +98,6 @@
 
     .comunicado-reacoes {
         .comunicado-reacoes-publicas {
-            border-bottom: 1px solid var(--container-secondary);
             margin-bottom: 2px;
 
             .comunicado-reacao-icon {
@@ -108,12 +107,6 @@
                     font-size: 10pt;
                 }
             }
-        }
-
-        .comunicado-reacoes-reagir {
-            border-radius: 10px;
-            border: none;
-            width: fit-content;
 
             .comunicado-reacoes-buttons {
                 background-color: var(--container-bg);
@@ -126,6 +119,7 @@
                 visibility: hidden;
                 opacity: 0%;
                 top: -30px;
+                margin-bottom: -60px;
         
                 button.comunicado-reacao-button {
                     font-size: 16pt;
@@ -231,13 +225,36 @@ nav.mensagens-nav {
     background-color: var(--container-bg);
     padding: 3vw;
     width: 30%;
-    max-height: 90vh;
+    max-height: 70vh;
     display: inline-block;
-    overflow-x: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
     vertical-align: top;
 
     .mensagens-users-button {
-        margin-bottom: 5px;
+        border-bottom: 1px solid var(--container-secondary);
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        width: 100%;
+        display: block;
+
+        &.mensagens-novas {
+            font-weight: bold;
+        }
+
+        .mensagem-recente {
+            font-size: 10pt;
+            font-weight: lighter;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;
+            overflow: hidden;
+            display: block;
+
+            action-text-attachment, br {
+                display: none;
+            }
+        }
     }
 }
 
@@ -247,18 +264,27 @@ nav.mensagens-nav {
     width: 50%;
     max-height: 90vh;
 
-    .mensagens-list {
-        height: 50vh;
-        max-height: 50vh;
+    #mensagens-list {
+        padding-left: 10px;
+        padding-right: 10px;
+        max-height: 60vh;
+        height: 60vh;
         overflow-x: scroll;
+
+        #mensagens-vazio {
+            text-align: center;
+            color: var(--gray-color);
+            width: 100%;
+            margin-top: 40%;
+            display: block;
+        }
 
         .mensagem-container {
             background-color: var(--container-bg);
-            border-radius: 50px;
-            padding: 0.5vw 2vw 0.5vw 2vw;
-            margin-left: 5px;
+            border-radius: 25px;
+            padding: 0.5vw 1vw 0.5vw 1vw;
             margin-bottom: 5px;
-            min-width: 3vw;
+            min-width: 4vw;
             max-width: 20vw;
     
             &.mensagem-nova {
@@ -359,7 +385,32 @@ nav.mensagens-nav {
     }
 
     .mensagem-input-form {
-        width: 30vw;
+        width: 100%;
         max-height: 20vh;
+
+        trix-toolbar {
+            display: none;
+        }
+
+        trix-editor {
+            width: 80%;
+            display: inline-block;
+        }
+
+        button#mensagem-input-form-submit {
+            color: var(--red-secondary);
+            background-color: var(--main-color);
+            border: none;
+            border-radius: 25px;
+            padding: 1vw;
+            display: inline-block;
+            transition-duration: .2s;
+
+            &:hover {
+                color: var(--main-color);
+                background-color: var(--red-dark);
+                cursor: pointer;
+            }
+        }
     }
 }

@@ -1,27 +1,56 @@
 <nav class="mensagens-nav">
   <div class="mensagens-users">
+   <div class="mensagens-users-button <%= mensagens_novas_usuario(@usuario_autenticado, Usuario.find(0)) %>">
+      <a href="/suporte">
+        Suporte técnico
+      </a>
+      <span class="mensagem-recente">
+        <%= mensagem_recente_usuario(@usuario_autenticado, Usuario.find(0)) %>
+      </span>
+    </div>
+
     <% for u in @mensagens_usuarios %>
-      <div class="mensagens-users-button">
+      <div class="mensagens-users-button <%= mensagens_novas_usuario(@usuario_autenticado, u) %>">
         <a href="/mensagens/<%= u.id %>">
           <%= u.nome_completo %>
         </a>
+        <span class="mensagem-recente">
+          <%= mensagem_recente_usuario(@usuario_autenticado, u) %>
+        </span>
+      </div>
+    <% end %>
+
+    <% for t in @mensagens_turmas %>
+      <div class="mensagens-users-button <%= mensagens_novas_usuario(@usuario_autenticado, u) %>">
+        <a href="/mensagens/turma/<%= t.id %>">
+          <%= t.nome_turma %>
+        </a>
+        <span class="mensagem-recente">
+          <%= mensagem_recente_usuario(@usuario_autenticado, u) %>
+        </span>
       </div>
     <% end %>
   </div>
   <div class="mensagens-user">
-    <div class="mensagens-list">
-      <% @mensagens.each do |mensagem| %>
-        <%= render mensagem %>
+    <div id="mensagens-list">
+      <% if @mensagens.length > 0 %>
+        <% @mensagens.each do |mensagem| %>
+          <%= render mensagem %>
+        <% end %>
+      <% else %>
+        <span id="mensagens-vazio">
+          Dê um oi 
+        </span>
       <% end %>
     </div>
     <% if @usuario_destinatario %>
       <div class="mensagem-input-form">
         <%= form_for Mensagem.new,
-          url: '/mensagens/' + @usuario_destinatario,
+          url: '/mensagens/' + @usuario_destinatario.to_s,
           html: { method: :post } do |form| %>
           <%= form.rich_text_area :corpo %>
-          <button type="submit">
-            <i class="fa-solid fa-paper-plane fa-xl icon-button"></i>
+          <button id="mensagem-input-form-submit" type="submit">
+            <i class="fa-solid fa-paper-plane fa-xl"></i>
           </button>
         <% end %>
       </div>

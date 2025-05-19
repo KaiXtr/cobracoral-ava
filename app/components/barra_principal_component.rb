@@ -9,6 +9,9 @@ class BarraPrincipalComponent < ViewComponent::Base
       emoji: nil
     ).length
 
-    @novas_mensagens = 0
+    @novas_mensagens = ReacaoMensagem.where(
+      usuario_id: @usuario_autenticado.id,
+      emoji: nil
+    ).length
   end
 end

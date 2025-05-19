@@ -10,6 +10,54 @@ module MensagensHelper
         end
     end
 
+    def mensagens_novas_usuario(usuario_autenticado, usuario_mensagem)
+        mensagens = Mensagem.where(
+            remetente_id: usuario_mensagem.id,
+            destinatario_id: usuario_autenticado.id
+            )
+        quant = 0
+
+        mensagens.each do |m|
+            quant += ReacaoMensagem.where(
+                mensagem_id: m.id, emoji: nil
+                ).count()
+        end
+
+        if quant > 0 then
+            return 'mensagens-novas'
+        else
+            return ''
+        end
+    end
+
+    def mensagem_recente_usuario(usuario_autenticado, usuario_mensagem)
+        mensagens = Mensagem.where(
+            remetente_id: usuario_mensagem.id,
+            destinatario_id: usuario_autenticado.id
+            ) + 
+            Mensagem.where(
+                remetente_id: usuario_autenticado.id,
+                destinatario_id: usuario_mensagem.id
+            )
+        
+        if mensagens then
+            mensagens = mensagens.uniq
+            mensagens = mensagens.sort_by{|c| c[:created_at]}
+            recente = mensagens.last
+            if recente then
+                if recente.remetente_id == @usuario_autenticado.id then
+                    return recente.corpo.body
+                else
+                    return recente.corpo.body
+                end
+            else
+                return ''
+            end
+        else
+            return ''
+        end
+    end
+
     def reacoes_mensagem_quantidade(mensagem, emoji)
         ReacaoMensagem.where(mensagem_id: mensagem.id, emoji: emoji).count()
     end

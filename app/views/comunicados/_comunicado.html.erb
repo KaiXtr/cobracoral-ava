@@ -67,16 +67,18 @@
   <div class="comunicado-reacoes">
     <div class="comunicado-reacoes-publicas">
       <% for emoji in @emojis_options %>
-        <span class="comunicado-reacao-icon">
-          <%= emoji %>
-          <strong>
-            <%= reacoes_comunicado_quantidade(comunicado, emoji) %>
-          </strong>
-        </span>
+        <% emojiQuant = reacoes_comunicado_quantidade(comunicado, emoji) %>
+        <% if emojiQuant > 0 %>
+          <span class="comunicado-reacao-icon">
+            <%= emoji %>
+            <% if emojiQuant > 1 %>
+              <strong>
+                <%= emojiQuant %>
+              </strong>
+            <% end %>
+          </span>
+        <% end %>
       <% end %>
-    </div>
-    <div class="comunicado-reacoes-reagir">
-      Gostei
       <div class="comunicado-reacoes-buttons">
         <% for emoji in @emojis_options %>
           <a href="/comunicados/<%= comunicado.id %>/reagir/<%= emoji %>" data-turbo-prefetch="false">

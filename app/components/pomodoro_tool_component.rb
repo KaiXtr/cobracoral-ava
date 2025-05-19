@@ -2,7 +2,9 @@
 
 class PomodoroToolComponent < ViewComponent::Base
     def initialize(preferencias_usuario:, login_time:)
-        t_p = preferencias_usuario.pomodoro_pomodoris_tempo
+        @pomodoro_pomodoris_tempo = preferencias_usuario.pomodoro_pomodoris_tempo
+
+        t_p = @pomodoro_pomodoris_tempo
         t_d = t_p + preferencias_usuario.pomodoro_descanso
         
         @pomodoro_hora_atual = Time.now
