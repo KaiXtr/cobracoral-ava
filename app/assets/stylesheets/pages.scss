@@ -232,17 +232,28 @@ nav.mensagens-nav {
     vertical-align: top;
 
     .mensagens-users-button {
-        border-bottom: 1px solid var(--container-secondary);
-        padding-bottom: 10px;
+        border: none;
+        border-radius: 15px;
+        padding: 10px;
         margin-bottom: 10px;
         width: 100%;
         display: block;
+
+        &:hover {
+            background-color: var(--nav-bg-secondary);
+            cursor: pointer;
+        }
 
         &.mensagens-novas {
             font-weight: bold;
         }
 
+        &.mensagem-selecionada {
+            background-color: var(--textarea-background-color);
+        }
+
         .mensagem-recente {
+            color: var(--gray-color);
             font-size: 10pt;
             font-weight: lighter;
             text-overflow: ellipsis;

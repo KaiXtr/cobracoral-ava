@@ -7,18 +7,26 @@ class MensagensController < ApplicationController
     @usuario_destinatario = nil
     @mensagens = nil
 
-    @mensagens_usuarios = Usuario.where.not(id: @usuario_autenticado.id)
     @mensagens_turmas = Turma.all
+    @mensagens_usuarios = Usuario.where.not(id: @usuario_autenticado.id)
+    @mensagens_usuarios = @mensagens_usuarios.sort_by{|u| u[:updated_at]}
+    @mensagens_usuarios = @mensagens_usuarios.reverse
+
+    @form_submit_link = '/mensagens/'
 
     if (params) then
       @usuario_destinatario = params[:id]
+      @form_submit_link = '/mensagens/' + @usuario_destinatario.to_s
+
       @mensagens = Mensagem.where(
           remetente_id: @usuario_autenticado.id,
-          destinatario_id: @usuario_destinatario
+          destinatario_id: @usuario_destinatario,
+          is_privada: true
           ) + 
         Mensagem.where(
           remetente_id: @usuario_destinatario,
-          destinatario_id: @usuario_autenticado.id
+          destinatario_id: @usuario_autenticado.id,
+          is_privada: true
           )
       @mensagens = @mensagens.uniq
       @mensagens = @mensagens.sort_by{|m| m[:created_at]}
@@ -33,27 +41,34 @@ class MensagensController < ApplicationController
   def turma
     @usuario_autenticado = get_usuario_autenticado
     @usuario_destinatario = nil
+    @turma_atual = nil
     @mensagens = nil
 
-    @mensagens_usuarios = Usuario.where.not(id: @usuario_autenticado.id)
     @mensagens_turmas = Turma.all
+    @mensagens_usuarios = Usuario.where.not(id: @usuario_autenticado.id)
+    @form_submit_link = '/mensagens/turma/'
 
     if (params) then
+      @turma_atual = params[:id]
+      @form_submit_link = '/mensagens/turma/' + @turma_atual.to_s
+
       @usuario_destinatario = @usuario_autenticado.id
       @usuarios_turma = Usuario.joins(:matricula).where(
         matricula: {
-          turma_id: params[:id]
+          turma_id: @turma_atual
         }
       )
       @mensagens = Array.new()
       @usuarios_turma.each do |u|
         @mensagens += Mensagem.where(
             remetente_id: @usuario_autenticado.id,
-            destinatario_id: u.id
+            destinatario_id: u.id,
+            is_privada: false
             ) + 
           Mensagem.where(
             remetente_id: u.id,
-            destinatario_id: @usuario_autenticado.id
+            destinatario_id: @usuario_autenticado.id,
+            is_privada: false
             )
       end
       @mensagens = @mensagens.uniq
@@ -86,6 +101,7 @@ class MensagensController < ApplicationController
     @usuario_autenticado = get_usuario_autenticado
     params[:mensagem][:remetente_id] = @usuario_autenticado.id
     params[:mensagem][:destinatario_id] = params[:id]
+    params[:mensagem][:is_privada] = true
 
     @mensagem = Mensagem.new(mensagem_params)
     @mensagens_usuarios = Usuario.where.not(id: @usuario_autenticado.id)
@@ -94,12 +110,12 @@ class MensagensController < ApplicationController
     respond_to do |format|
       if @mensagem.save
         dest = Usuario.find(@mensagem.destinatario_id)
+        dest.updated_at = Time.now
+        dest.save
         
         @preferencias_usuario = PreferenciasUsuario.find_by(usuario_id: dest.id)
         if @preferencias_usuario.notificacao_nova_mensagem then
-          MensagemMailer.with(
-            usuarios_list: [dest],
-            mensagem: @mensagem).nova_mensagem_email.deliver_later
+          MensagemMailer.with(mensagem: @mensagem).nova_mensagem_email.deliver_later
         end
         
         Rails.logger.info "Mensagem para " + dest.id.to_s + ': "' + @mensagem.corpo.body.to_s + '"'
@@ -121,17 +137,30 @@ class MensagensController < ApplicationController
 
     @matriculas_turma = Matricula.where(turma_id: params[:id])
     @matriculas_turma.each do |m|
+      if m.usuario_id != @usuario_autenticado.id then
+        params[:mensagem][:remetente_id] = @usuario_autenticado.id
+        params[:mensagem][:destinatario_id] = m.usuario_id
+        params[:mensagem][:is_privada] = false
+        mensagem = Mensagem.new(mensagem_params)
+      
+        respond_to do |format|
+          if mensagem.save
+            m.updated_at = Time.now
+            m.save
 
-      params[:mensagem][:remetente_id] = @usuario_autenticado.id
-      params[:mensagem][:destinatario_id] = m.usuario_id
-      mensagem = Mensagem.new(mensagem_params)
-  
-      respond_to do |format|
-        if mensagem.save
-          format.json { render :index, status: :created, location: mensagem }
-        else
-          format.html { render :index, status: :unprocessable_entity }
-          format.json { render json: mensagem.errors, status: :unprocessable_entity }
+            @preferencias_usuario = PreferenciasUsuario.find_by(usuario_id: m.usuario_id)
+            if @preferencias_usuario.notificacao_nova_mensagem then
+              MensagemMailer.with(mensagem: @mensagem).nova_mensagem_email.deliver_later
+            end
+
+            Rails.logger.info "Mensagem para a turma " + params[:id].to_s + ': "' + mensagem.corpo.body.to_s + '"'
+            format.json { render :index, status: :created, location: mensagem }
+          else
+            Rails.logger.error "Houve um erro ao enviar a mensagem da turma."
+            Rails.logger.error mensagem.errors
+            format.html { render :index, status: :unprocessable_entity }
+            format.json { render json: mensagem.errors, status: :unprocessable_entity }
+          end
         end
       end
     end
@@ -168,7 +197,7 @@ class MensagensController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def mensagem_params
-      params.require(:mensagem).permit(:remetente_id, :destinatario_id, :corpo)
+      params.require(:mensagem).permit(:remetente_id, :destinatario_id, :corpo, :is_privada)
     end
 
     def marcar_visualizacao_mensagens(usuario_autenticado, mensagens)

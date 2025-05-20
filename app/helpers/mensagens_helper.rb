@@ -33,11 +33,13 @@ module MensagensHelper
     def mensagem_recente_usuario(usuario_autenticado, usuario_mensagem)
         mensagens = Mensagem.where(
             remetente_id: usuario_mensagem.id,
-            destinatario_id: usuario_autenticado.id
+            destinatario_id: usuario_autenticado.id,
+            is_privada: true
             ) + 
             Mensagem.where(
                 remetente_id: usuario_autenticado.id,
-                destinatario_id: usuario_mensagem.id
+                destinatario_id: usuario_mensagem.id,
+                is_privada: true
             )
         
         if mensagens then

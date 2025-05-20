@@ -10,26 +10,36 @@
       </span>
     </div>
 
-    <% for u in @mensagens_usuarios %>
-      <div class="mensagens-users-button <%= mensagens_novas_usuario(@usuario_autenticado, u) %>">
-        <a href="/mensagens/<%= u.id %>">
+    <% for u in @mensagens_usuarios
+      @msg_select = ''
+      if @usuario_destinatario.to_i == u.id then
+        @msg_select = 'mensagem-selecionada'
+      end
+    %>
+      <a href="/mensagens/<%= u.id %>">
+        <div class="mensagens-users-button <%= mensagens_novas_usuario(@usuario_autenticado, u) %> <%= @msg_select %>">
           <%= u.nome_completo %>
-        </a>
-        <span class="mensagem-recente">
-          <%= mensagem_recente_usuario(@usuario_autenticado, u) %>
-        </span>
-      </div>
+          <span class="mensagem-recente">
+            <%= mensagem_recente_usuario(@usuario_autenticado, u) %>
+          </span>
+        </div>
+      </a>
     <% end %>
 
-    <% for t in @mensagens_turmas %>
-      <div class="mensagens-users-button <%= mensagens_novas_usuario(@usuario_autenticado, u) %>">
-        <a href="/mensagens/turma/<%= t.id %>">
+    <% for t in @mensagens_turmas
+      @msg_select = ''
+      if @turma_atual.to_i == t.id then
+        @msg_select = 'mensagem-selecionada'
+      end
+    %>
+      <a href="/mensagens/turma/<%= t.id %>">
+        <div class="mensagens-users-button <%= mensagens_novas_usuario(@usuario_autenticado, u) %> <%= @msg_select %>">
           <%= t.nome_turma %>
-        </a>
-        <span class="mensagem-recente">
-          <%= mensagem_recente_usuario(@usuario_autenticado, u) %>
-        </span>
-      </div>
+          <span class="mensagem-recente">
+            <%= mensagem_recente_usuario(@usuario_autenticado, u) %>
+          </span>
+        </div>
+      </a>
     <% end %>
   </div>
   <div class="mensagens-user">
@@ -49,7 +59,7 @@
     <% if @usuario_destinatario %>
       <div class="mensagem-input-form">
         <%= form_for Mensagem.new,
-          url: '/mensagens/' + @usuario_destinatario.to_s,
+          url: @form_submit_link,
           html: { method: :post } do |form| %>
           <%= form.rich_text_area :corpo %>
           <button id="mensagem-input-form-submit" type="submit">

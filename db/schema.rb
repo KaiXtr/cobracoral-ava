@@ -124,6 +124,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_19_025729) do
   create_table "mensagens", force: :cascade do |t|
     t.integer "remetente_id", null: false
     t.integer "destinatario_id", null: false
+    t.boolean "is_privada", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["destinatario_id"], name: "index_mensagens_on_destinatario_id"

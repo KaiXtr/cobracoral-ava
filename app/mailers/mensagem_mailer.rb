@@ -12,7 +12,7 @@ class MensagemMailer < ApplicationMailer
     usuarios_list = params[:usuarios_list]
 
     mail(
-        to: usuarios_list.collect(&:email).join(","),
+        to: Usuario.find(@mensagem.destinatario_id).email,
         subject: "Nova mensagem de " + @autor_mensagem
         )
   end
