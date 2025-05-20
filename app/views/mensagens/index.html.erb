@@ -1,3 +1,4 @@
+<%= turbo_stream_from 'mensagens' %>
 <nav class="mensagens-nav">
   <div class="mensagens-users">
    <div class="mensagens-users-button <%= mensagens_novas_usuario(@usuario_autenticado, Usuario.find(0)) %>">
@@ -33,9 +34,11 @@
   </div>
   <div class="mensagens-user">
     <div id="mensagens-list">
+      <% last_mensagem = nil %>
       <% if @mensagens.length > 0 %>
         <% @mensagens.each do |mensagem| %>
-          <%= render mensagem %>
+          <%= render mensagem, last_mensagem: last_mensagem %>
+          <% last_mensagem = mensagem %>
         <% end %>
       <% else %>
         <span id="mensagens-vazio">

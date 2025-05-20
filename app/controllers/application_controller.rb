@@ -44,7 +44,11 @@ class ApplicationController < ActionController::Base
 
 	def logar(usuario, sessionData)
 		@usuario_autenticado = usuario
-		@preferencias_usuario = PreferenciasUsuario.find_by(usuario_id: @usuario_autenticado.id)
+		@preferencias_usuario = PreferenciasUsuario.find_by(
+			usuario_id: @usuario_autenticado.id
+			)
+
+		session[:current_curso] = nil
 		session[:usuario_id] = usuario.id
 		session[:login_time] = Time.now
 		session[:pomodoris_quant] = @preferencias_usuario.pomodoro_pomodoris_quant
@@ -54,14 +58,16 @@ class ApplicationController < ActionController::Base
 			session[:login_so] = sessionData[:login_so]
 			session[:login_browser] = sessionData[:login_browser]
 
-			SessionMailer.with(
-				usuario: usuario,
-				login_device: session[:login_device],
-				login_so: session[:login_so],
-				login_browser: session[:login_browser],
-				login_time: Time.now).acesso_email.deliver_later
+			if @preferencias_usuario.notificacao_novo_acesso then
+				SessionMailer.with(
+					usuario: usuario,
+					login_device: session[:login_device],
+					login_so: session[:login_so],
+					login_browser: session[:login_browser],
+					login_time: Time.now
+					).acesso_email.deliver_later
+			end
 		end
-		session[:current_curso] = nil
 		
 		Rails.logger.info "Criada sessão para o(a) usuário(a) com email " + usuario.email + "."
 		

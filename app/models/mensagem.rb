@@ -13,4 +13,11 @@ class Mensagem < ApplicationRecord
   def to_show_path 
     'mensagens/show' 
   end
+
+  after_create_commit -> {
+    broadcast_prepend_to "mensagens",
+      partial: "mensagens/mensagem",
+      locals: { mensagem: self },
+      target: "mensagens"
+  }
 end

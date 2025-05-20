@@ -58,6 +58,26 @@ module MensagensHelper
         end
     end
 
+    def get_mensagem_lida(usuario_autenticado, mensagem)
+        if usuario_autenticado == nil then
+            return ''
+        elsif mensagem.destinatario_id == usuario_autenticado.id
+            return ''
+        else
+            lido = ReacaoMensagem.find_by(
+                usuario_id: mensagem.destinatario_id,
+                mensagem_id: mensagem.id,
+                emoji: 'x'
+                )
+            
+            if lido then
+                return ' - Lido'
+            else
+                return ' - Enviado'
+            end
+        end
+    end
+
     def reacoes_mensagem_quantidade(mensagem, emoji)
         ReacaoMensagem.where(mensagem_id: mensagem.id, emoji: emoji).count()
     end

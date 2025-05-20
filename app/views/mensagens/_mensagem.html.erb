@@ -1,33 +1,44 @@
 <%
-  @minha_mensagem = ''
-  if @usuario_autenticado.id == mensagem.remetente_id then
-    @minha_mensagem = 'mensagem-minha'
-  end
-
   @emojis_options = ['👍','❤️','✔️','❌',]
 
+  @minha_mensagem = ''
   @nova_mensagem = ''
-  mensagem_vista = ReacaoMensagem.find_by(
-    mensagem_id: mensagem.id,
-    usuario_id: @usuario_autenticado.id,
-    emoji: 'x')
-  
-  if !mensagem_vista then
-    @nova_mensagem = 'mensagem-nova'
+  last_mensagem = nil
+
+  if @usuario_autenticado then
+    if @usuario_autenticado.id == mensagem.remetente_id then
+      @minha_mensagem = 'mensagem-minha'
+    end
+
+
+    mensagem_vista = ReacaoMensagem.find_by(
+      mensagem_id: mensagem.id,
+      usuario_id: @usuario_autenticado.id,
+      emoji: 'x')
+    
+    if !mensagem_vista then
+      @nova_mensagem = 'mensagem-nova'
+    end
   end
 %>
-<div id="<%= dom_id mensagem %>"
-  class="mensagem-container <%= @minha_mensagem %> <%= @nova_mensagem %>">
-  <div class="mensagem-info">
-    <span class="mensagem-info-user">
-      <a href="/usuarios/<%= Usuario.find(mensagem.remetente_id).id %>">
-        <%= Usuario.find(mensagem.remetente_id).nome_completo %>
-      </a>
-    </span>
-    <span class="mensagem-info-data">
-      <%= formatar_data_mensagem(mensagem.updated_at) %>
-    </span>
-  </div>
+<div class="mensagem-container <%= @minha_mensagem %> <%= @nova_mensagem %>">
+  <%
+    if last_mensagem == nil || \
+    formatar_data_mensagem(mensagem.updated_at) != \
+    formatar_data_mensagem(last_mensagem.updated_at)
+  %>
+    <div class="mensagem-info">
+      <span class="mensagem-info-user">
+        <a href="/usuarios/<%= Usuario.find(mensagem.remetente_id).id %>">
+          <%= Usuario.find(mensagem.remetente_id).nome_completo %>
+        </a>
+      </span>
+      <span class="mensagem-info-data">
+        <%= formatar_data_mensagem(mensagem.updated_at) %>
+        <%= get_mensagem_lida(@usuario_autenticado, mensagem) %>
+      </span>
+    </div>
+  <% end %>
   <div class="mensagem-content">
     <%= mensagem.corpo %>
   </div>

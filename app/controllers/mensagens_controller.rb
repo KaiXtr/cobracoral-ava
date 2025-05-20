@@ -93,9 +93,21 @@ class MensagensController < ApplicationController
 
     respond_to do |format|
       if @mensagem.save
+        dest = Usuario.find(@mensagem.destinatario_id)
+        
+        @preferencias_usuario = PreferenciasUsuario.find_by(usuario_id: dest.id)
+        if @preferencias_usuario.notificacao_nova_mensagem then
+          MensagemMailer.with(
+            usuarios_list: [dest],
+            mensagem: @mensagem).nova_mensagem_email.deliver_later
+        end
+        
+        Rails.logger.info "Mensagem para " + dest.id.to_s + ': "' + @mensagem.corpo.body.to_s + '"'
         format.html { redirect_to '/mensagens/' + params[:id].to_s }
         format.json { render :index, status: :created, location: @mensagem }
       else
+        Rails.logger.error "Houve um erro ao enviar a mensagem."
+        Rails.logger.error @mensagem.errors
         format.html { render :index, status: :unprocessable_entity }
         format.json { render json: @mensagem.errors, status: :unprocessable_entity }
       end
