@@ -73,7 +73,6 @@ end
 
 gem "pundit", "~> 2.4"
 
-gem "whenever", "~> 1.0"
 
 gem "redis-namespace", "~> 1.11"
 

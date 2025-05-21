@@ -41,6 +41,14 @@
     }
 }
 
+.cobra-container {
+    background-color: var(--container-bg);
+    border-radius: 50px;
+    padding: 2vw;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
 .comunicado-container {
     background-color: var(--container-bg);
     border-radius: 50px;
@@ -98,7 +106,6 @@
 
     .comunicado-reacoes {
         .comunicado-reacoes-publicas {
-            border-bottom: 1px solid var(--container-secondary);
             margin-bottom: 2px;
 
             .comunicado-reacao-icon {
@@ -108,12 +115,6 @@
                     font-size: 10pt;
                 }
             }
-        }
-
-        .comunicado-reacoes-reagir {
-            border-radius: 10px;
-            border: none;
-            width: fit-content;
 
             .comunicado-reacoes-buttons {
                 background-color: var(--container-bg);
@@ -126,6 +127,7 @@
                 visibility: hidden;
                 opacity: 0%;
                 top: -30px;
+                margin-bottom: -60px;
         
                 button.comunicado-reacao-button {
                     font-size: 16pt;
@@ -149,6 +151,11 @@
                 }
             }
         }
+    }
+    
+    .conteudo-button {
+        border: 1px solid var(--nav-bg-secondary);
+        margin-top: 10px;
     }
 }
 
@@ -217,6 +224,216 @@ div.cards-container {
             div.card-verso {
                 display: block;
                 opacity: 100%;
+            }
+        }
+    }
+}
+
+nav.mensagens-nav {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.mensagens-users {
+    background-color: var(--container-bg);
+    padding: 3vw;
+    width: 30%;
+    max-height: 70vh;
+    display: inline-block;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    vertical-align: top;
+
+    .mensagens-users-button {
+        border: none;
+        border-radius: 15px;
+        padding: 10px;
+        margin-bottom: 10px;
+        width: 100%;
+        display: block;
+
+        &:hover {
+            background-color: var(--nav-bg-secondary);
+            cursor: pointer;
+        }
+
+        &.mensagens-novas {
+            font-weight: bold;
+        }
+
+        &.mensagem-selecionada {
+            background-color: var(--textarea-background-color);
+        }
+
+        .mensagem-recente {
+            color: var(--gray-color);
+            font-size: 10pt;
+            font-weight: lighter;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;
+            overflow: hidden;
+            display: block;
+
+            action-text-attachment, br {
+                display: none;
+            }
+        }
+    }
+}
+
+.mensagens-user {
+    display: inline-block;
+    padding-left: 5vw;
+    width: 50%;
+    max-height: 90vh;
+
+    #mensagens-list {
+        padding-left: 10px;
+        padding-right: 10px;
+        max-height: 60vh;
+        height: 60vh;
+        overflow-x: scroll;
+
+        #mensagens-vazio {
+            text-align: center;
+            color: var(--gray-color);
+            width: 100%;
+            margin-top: 40%;
+            display: block;
+        }
+
+        .mensagem-container {
+            background-color: var(--container-bg);
+            border-radius: 25px;
+            padding: 0.5vw 1vw 0.5vw 1vw;
+            margin-bottom: 5px;
+            min-width: 4vw;
+            max-width: 20vw;
+    
+            &.mensagem-nova {
+                box-shadow: 0px 0px 10px var(--main-color);
+            }
+
+            &.mensagem-minha {
+                margin-left: 18vw;
+
+                &.mensagem-nova {
+                    box-shadow: none;
+                }
+            }
+    
+            .mensagem-info {
+                width: 90%;
+                display: block;
+
+                .mensagem-info-user {
+                    display: inline-block;
+                    width: fit-content;
+
+                    a {
+                        font-size: 10pt;
+                        margin-bottom: 1px;
+                        display: block;
+                    }
+                }
+                .mensagem-info-data {
+                    text-align: right;
+                    font-size: 8pt;
+                    color: var(--gray-color);
+                    width: fit-content;
+                    display: inline-block;
+                }
+            }
+
+            .mensagem-content {
+                font-size: 10pt;
+
+                trix-toolbar {
+                    display: none;
+                }
+                trix-editor {
+                    max-height: 2vh;
+                }
+            }
+
+            .mensagem-reacoes {
+                .mensagem-reacoes-publicas {
+                    .mensagem-reacao-icon {
+                        font-size: 9pt;
+                        background-color: var(--container-secondary);
+                        border-radius: 10px;
+        
+                        strong {
+                            font-size: 10pt;
+                        }
+                    }
+        
+                    .mensagem-reacoes-buttons {
+                        background-color: var(--container-bg);
+                        border-radius: 25px;
+                        box-shadow: 2px 2px 5px black;
+                        transition-duration: .2s;
+                        padding: 10px;
+                        width: fit-content;
+                        position: relative;
+                        visibility: hidden;
+                        opacity: 0%;
+                        top: -30px;
+                        margin-bottom: -30pt;
+                
+                        button.mensagem-reacao-button {
+                            font-size: 16pt;
+                            background: none;
+                            transition-duration: .1s;
+                            border: none;
+                            
+                            &:hover {
+                                transform: scale(1.25);
+                                cursor: pointer;
+                            }
+                        }
+                    }
+        
+                    &:hover {
+                        cursor: pointer;
+        
+                        .mensagem-reacoes-buttons {
+                            visibility: visible;
+                            opacity: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .mensagem-input-form {
+        width: 100%;
+        max-height: 20vh;
+
+        trix-toolbar {
+            display: none;
+        }
+
+        trix-editor {
+            width: 80%;
+            display: inline-block;
+        }
+
+        button#mensagem-input-form-submit {
+            color: var(--red-secondary);
+            background-color: var(--main-color);
+            border: none;
+            border-radius: 25px;
+            padding: 1vw;
+            display: inline-block;
+            transition-duration: .2s;
+
+            &:hover {
+                color: var(--main-color);
+                background-color: var(--red-dark);
+                cursor: pointer;
             }
         }
     }

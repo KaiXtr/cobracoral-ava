@@ -10,11 +10,14 @@
     @novo_comunicado = 'comunicado-novo'
   end
 %>
-<div id="c<%= comunicado.id %>" class="comunicado-container <%= @novo_comunicado %>">
+<div id="c<%= comunicado.id %>"
+  class="comunicado-container <%= @novo_comunicado %>"
+  aria-label="<%= @novo_comunicado != '' ? 'novo' : '' %> comunicado"
+  tabindex="0">
   <div class="comunicado-info">
     <% usuario = usuario_comunicado(comunicado.usuario_id) %>
     <div class="usuario-button">
-      <a href="/usuarios/<%= usuario.id %>">
+      <a href="/usuarios/<%= usuario.id %>" tabindex="-1">
         <div class="usuario-button-icon icon-larger">
           <% if usuario.avatar.attached? %>
             <%= image_tag(usuario.avatar) %>
@@ -24,7 +27,8 @@
         </div>
       </a>
       <div class="usuario-button-name">
-        <a href="/usuarios/<%= usuario.id %>">
+        <a href="/usuarios/<%= usuario.id %>"
+          aria-label="Publicado por <%= usuario.nome_completo %>">
           <%= usuario.nome_completo %>
         </a>
         <span class="comunicado-usuario-info">
@@ -41,6 +45,7 @@
       <a
         href="/comunicados/<%= comunicado.id %>/editar"
         tooltip-text="Editar comunicado"
+        aria-label="Editar comunicado"
         data-turbo-frame="cobra-modal"
         data-remote="true">
           <i class="fa-solid fa-pen fa-lg icon-button"></i>
@@ -50,6 +55,7 @@
       <a
         href="/comunicados/<%= comunicado.id %>/deletar"
         tooltip-text="Deletar comunicado"
+        aria-label="Deletar comunicado"
         data-turbo-frame="cobra-modal"
         data-remote="true">
           <i class="fa-solid fa-trash fa-lg icon-button"></i>
@@ -67,13 +73,18 @@
   <div class="comunicado-reacoes">
     <div class="comunicado-reacoes-publicas">
       <% for emoji in @emojis_options %>
-        <span class="comunicado-reacao-icon">
-          <%= emoji %><strong><%= reacoes_quantidade(comunicado, emoji) %></strong>
-        </span>
+        <% emojiQuant = reacoes_comunicado_quantidade(comunicado, emoji) %>
+        <% if emojiQuant > 0 %>
+          <span class="comunicado-reacao-icon">
+            <%= emoji %>
+            <% if emojiQuant > 1 %>
+              <strong>
+                <%= emojiQuant %>
+              </strong>
+            <% end %>
+          </span>
+        <% end %>
       <% end %>
-    </div>
-    <div class="comunicado-reacoes-reagir">
-      Gostei
       <div class="comunicado-reacoes-buttons">
         <% for emoji in @emojis_options %>
           <a href="/comunicados/<%= comunicado.id %>/reagir/<%= emoji %>" data-turbo-prefetch="false">

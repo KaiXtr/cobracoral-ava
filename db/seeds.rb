@@ -162,12 +162,25 @@ Usuario.create([
         orcid_id: nil,
         cargo_usuario: :administrador,
         acessos_count: 0
+    },
+	{
+        id: 12,
+        pronomes_usuario: :ela_dela,
+        nome_completo: "Estudante da turma CC2 Vespertino",
+        email: "estudante.cc2v@cobracoral.edu.br",
+        telefone: "997773322",
+        password: "C0br@c0r@l",
+        biografia: nil,
+        lattes_id: nil,
+        orcid_id: nil,
+        cargo_usuario: :estudante,
+        acessos_count: 0
     }
 ])
 
 puts "= usuarios populada."
 
-for i in 0..11 do
+for i in 0..12 do
     PreferenciasUsuario.create(
         id: i,
         usuario_id: i,
@@ -254,7 +267,8 @@ Matricula.create([
     { usuario_id: 5, turma_id: 4, semestre: '2025/1'},
     { usuario_id: 6, turma_id: 3, semestre: '2025/1'},
     { usuario_id: 7, turma_id: 3, semestre: '2025/1'},
-    { usuario_id: 8, turma_id: 5, semestre: '2025/1'}
+    { usuario_id: 8, turma_id: 5, semestre: '2025/1'},
+    { usuario_id: 12, turma_id: 3, semestre: '2025/1'}
 ])
 
 puts "= matriculas populada."
@@ -580,3 +594,16 @@ c.corpo.body = "Comunicado visível para a turma <b>DG1 Diurno.</b>"
 c.save
 
 puts "= comunicados populada."
+
+for i in 1..5 do
+    m = Mensagem.create(
+        id: i,
+        remetente_id: i,
+        destinatario_id: i + 1,
+        is_privada: true
+    )
+    m.corpo.body = "Hello World!"
+    m.save
+end
+
+puts "= mensagens populada."

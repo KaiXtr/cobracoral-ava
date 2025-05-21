@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-@import "./themes/theme-default.scss";
+@import "./theme-default.scss";
 @import "./components.scss";
 
 body {
@@ -120,4 +120,21 @@ img.auth-help-image {
     font-size: 8pt;
     margin-top: 3vh;
     padding-bottom: 2vh;
+}
+
+div.cobra-javascript-disabled-warning {
+    color: white;
+    background-color: var(--main-color);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 100;
+    align-content: center;
+
+    p {
+        font-weight: bold;
+        text-align: center;
+        padding: 0% 20% 0% 20%;
+        width: 60%;
+    }
 }

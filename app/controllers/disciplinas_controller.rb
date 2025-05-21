@@ -38,7 +38,7 @@ class DisciplinasController < ApplicationController
           disciplina_id: @disciplina.id
         }
       )
-
+    
     Rails.logger.info "Acessando disciplina " + @disciplina.nome_disciplina + "."
   end
 

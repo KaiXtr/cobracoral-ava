@@ -49,11 +49,11 @@ module ComunicadosHelper
         data_hora.strftime("Publicado em %d/%m/%Y às %H:%M")
     end
 
-    def reacoes_quantidade(comunicado, emoji)
+    def reacoes_comunicado_quantidade(comunicado, emoji)
         ReacaoComunicado.where(comunicado_id: comunicado.id, emoji: emoji).count()
     end
 
-    def reagir_emoji(comunicado, emoji)
+    def reagir_emoji_comunicado(comunicado, emoji)
 		if session[:usuario_id]
 			usuario = Usuario.find(session[:usuario_id])
         end
@@ -63,5 +63,32 @@ module ComunicadosHelper
             emoji: emoji
         )
         reacao.save
+    end
+
+    def get_lista_usuarios_notificados(usuario_autenticado, comunicado)
+        usuarios_list = Array.new()
+
+        if comunicado.visibilidade_comunicado == "todos_curso" then
+            curso_comunicado = Curso.find_by(usuario_id: usuario_autenticado.id)
+            turmas_curso = Turma.where(curso_id: curso_comunicado.id)
+            turmas_curso.each do |t|
+                usuarios_list += Usuario.joins(:matricula).where(matricula: {turma_id: t.id})
+        end
+        elsif comunicado.visibilidade_comunicado == "todas_turmas" then
+            usuarios_list = Usuario.all
+        elsif comunicado.visibilidade_comunicado == "todos_turma" then
+            usuarios_list += Usuario.joins(:matricula).where(
+                matricula: { turma_id: comunicado.turma_id }
+                )
+        elsif comunicado.visibilidade_comunicado == "todos_disciplina" then
+            disciplina = Disciplina.find(comunicado.disciplina_id)
+            usuarios_list += Usuario.joins(:matricula).where(
+                matricula: { turma_id: disciplina.turma_id }
+                )
+        else
+            usuarios_list = Usuario.all.select(:id, :email).take
+        end
+
+        return usuarios_list
     end
 end

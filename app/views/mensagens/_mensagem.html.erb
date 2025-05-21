@@ -1,0 +1,71 @@
+<%
+  @emojis_options = ['👍','❤️','✔️','❌',]
+
+  @minha_mensagem = ''
+  @nova_mensagem = ''
+  last_mensagem = nil
+
+  if @usuario_autenticado then
+    if @usuario_autenticado.id == mensagem.remetente_id then
+      @minha_mensagem = 'mensagem-minha'
+    end
+
+
+    mensagem_vista = ReacaoMensagem.find_by(
+      mensagem_id: mensagem.id,
+      usuario_id: @usuario_autenticado.id,
+      emoji: 'x')
+    
+    if !mensagem_vista then
+      @nova_mensagem = 'mensagem-nova'
+    end
+  end
+%>
+<div class="mensagem-container <%= @minha_mensagem %> <%= @nova_mensagem %>">
+  <%
+    if last_mensagem == nil || \
+    formatar_data_mensagem(mensagem.updated_at) != \
+    formatar_data_mensagem(last_mensagem.updated_at)
+  %>
+    <div class="mensagem-info">
+      <span class="mensagem-info-user">
+        <a href="/usuarios/<%= Usuario.find(mensagem.remetente_id).id %>">
+          <%= Usuario.find(mensagem.remetente_id).nome_completo %>
+        </a>
+      </span>
+      <span class="mensagem-info-data">
+        <%= formatar_data_mensagem(mensagem.updated_at) %>
+        <%= get_mensagem_lida(@usuario_autenticado, mensagem) %>
+      </span>
+    </div>
+  <% end %>
+  <div class="mensagem-content">
+    <%= mensagem.corpo %>
+  </div>
+  <div class="mensagem-reacoes">
+    <div class="mensagem-reacoes-publicas">
+      <% for emoji in @emojis_options %>
+        <% emojiQuant = reacoes_mensagem_quantidade(mensagem, emoji) %>
+        <% if emojiQuant > 0 %>
+          <span class="mensagem-reacao-icon">
+            <%= emoji %>
+            <% if emojiQuant > 1 %>
+              <strong>
+                <%= emojiQuant %>
+              </strong>
+            <% end %>
+          </span>
+        <% end %>
+      <% end %>
+      <div class="mensagem-reacoes-buttons">
+        <% for emoji in @emojis_options %>
+          <a href="/mensagens/<%= mensagem.id %>/reagir/<%= emoji %>" data-turbo-prefetch="false">
+            <button class="mensagem-reacao-button">
+              <%= emoji %>
+            </button>
+          </a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

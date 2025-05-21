@@ -156,15 +156,21 @@ div.disciplinas-banner {
 }
 
 .disciplina_info_container {
+    background-color: var(--container-bg);
+    border-radius: 50px;
+    padding: 2vw;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
     display: block;
 
     .disciplina_info {
-        width: 60%;
+        width: 70%;
         display: inline-block;
     }
 
     .disciplina_medidores {
-        width: 30%;
+        margin-top: 5vh;
+        width: fit-content;
         display: inline-block;
         vertical-align: top;
     }

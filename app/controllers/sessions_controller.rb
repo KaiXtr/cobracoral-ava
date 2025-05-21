@@ -3,14 +3,65 @@ require 'net/http'
 class SessionsController < ApplicationController
 	layout 'login'
 
+	def send_auth_code
+		session[:login_email] = params[:session][:email]
+		session[:login_senha] = params[:session][:senha]
+
+		if Rails.env.test?
+			usuario = Usuario.find_by(email: params[:session][:email])
+			session[:auth_code] = (('0'..'9').to_a + ('A'..'Z').to_a).shuffle.first(6).join
+
+			if (usuario && usuario.acessos_count == 0) then
+				create()
+			else
+				SessionMailer.with(
+					usuario: usuario,
+					codigo: session[:auth_code]
+					).codigo_autenticacao_email.deliver_later
+				
+				redirect_to '/authcode'
+			end
+		else
+			create()
+		end
+	end
+
+	def auth_code
+		if session[:auth_code] == nil then
+			redirect_to '/entrar'
+		else
+			render "auth-code"
+		end
+	end
+
+	def validate_auth_code
+		code_field = ''
+		for i in 1..6 do
+			code_field += params["auth_code_digit_#{i}"]
+		end
+
+		if session[:auth_code] == code_field then
+			Rails.logger.info "Código de autenticação válido."
+			session[:auth_code] = nil
+			create()
+		else
+			respond_to do |format|
+				logtxt = "Código de autenticação incorreto."
+				Rails.logger.error logtxt
+				format.html { redirect_to "/authcode", notice: logtxt }
+				format.json { render json: { error: logtxt }, status: :unauthorized }
+			end
+		end
+	end
+
 	def create
 		# Cadastro do usuário inicial administador por API KEY
 		if Usuario.all.length == 0 then
-			if params[:session][:senha] == ENV["COBRACORAL_API_KEY"] then
+			if session[:login_senha] == ENV["COBRACORAL_API_KEY"] then
 				usuario = Usuario.new
 				usuario.id = 1
-				usuario.email = params[:session][:email]
-				usuario.password = params[:session][:senha]
+				usuario.email = session[:login_email]
+				usuario.password = session[:login_senha]
 				usuario.pronomes_usuario = :ela_dela
 				usuario.cargo_usuario = :coordenador
 				usuario.acessos_count = 0
@@ -30,10 +81,10 @@ class SessionsController < ApplicationController
 		
 		# Criando sessão para usuário existente
 		else
-			usuario = Usuario.find_by(email: params[:session][:email])
+			usuario = Usuario.find_by(email: session[:login_email])
 
 			if usuario then
-				if usuario.authenticate(params[:session][:senha]) then
+				if usuario.authenticate(session[:login_senha]) then
 					if (usuario.acessos_count == 0) then
 						Rails.logger.info "Primeiro acesso do usuário."
 						session[:primeiro_acesso] = usuario.id
@@ -58,6 +109,47 @@ class SessionsController < ApplicationController
 				end
 			end
 		end
+	end
+
+	def logar(usuario, sessionData)
+		@usuario_autenticado = usuario
+		@preferencias_usuario = PreferenciasUsuario.find_by(
+			usuario_id: @usuario_autenticado.id
+			)
+
+		Conteudo.all.each do |c|
+			ConteudoLiberadoJob.set(
+				wait_until: Date.tomorrow.at_beginning_of_day
+				).perform_later(Conteudo.find(c))
+		end
+
+		session[:login_email] = nil
+		session[:login_senha] = nil
+		session[:primeiro_acesso] = nil
+		session[:current_curso] = nil
+		session[:usuario_id] = usuario.id
+		session[:login_time] = Time.now
+		session[:pomodoris_quant] = @preferencias_usuario.pomodoro_pomodoris_quant
+
+		if sessionData != nil then
+			session[:login_device] = sessionData[:login_device]
+			session[:login_so] = sessionData[:login_so]
+			session[:login_browser] = sessionData[:login_browser]
+
+			if @preferencias_usuario.notificacao_novo_acesso then
+				SessionMailer.with(
+					usuario: usuario,
+					login_device: session[:login_device],
+					login_so: session[:login_so],
+					login_browser: session[:login_browser],
+					login_time: Time.now
+					).acesso_email.deliver_later
+			end
+		end
+		
+		Rails.logger.info "Criada sessão para o(a) usuário(a) com email " + usuario.email + "."
+		
+		redirect_to root_path
 	end
 
 	def primeiro_acesso

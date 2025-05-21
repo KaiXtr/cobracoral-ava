@@ -34,6 +34,13 @@
     </script>
   </head>
   <body>
+    <noscript>
+      <div class="cobra-javascript-disabled-warning">
+        <p>
+          Você não pode navegar na plataforma com o Javascript desativado. Por favor, ative o Javascript e desative extensões que possam estar causando mal funcionamento da plataforma.
+        </p>
+      </div>
+    </noscript>
     <% if @cobra_app_resting then %>
       <main class="cobra-app-resting">
         <%= render ContextMenuComponent.new() %>

@@ -46,13 +46,14 @@ class ComunicadosController < ApplicationController
   def reagir
     comunicado = Comunicado.find(params[:id])
     emoji = params[:emoji]
-    helpers.reagir_emoji(comunicado, emoji)
+    helpers.reagir_emoji_comunicado(comunicado, emoji)
     redirect_to "/comunicados"
   end
 
   # GET /comunicados/1 or /comunicados/1.json
   def show
     @comunicado = Comunicado.find(params[:id])
+
     Rails.logger.info "Acessando comunicado " + @comunicado.id.to_s + "."
   end
 
@@ -115,26 +116,14 @@ class ComunicadosController < ApplicationController
     @visibilidades = get_visibilidades()
     @turmas = Turma.all
     @disciplinas = Disciplina.all
-
-    if @comunicado.visibilidade_comunicado == "todos_curso" then
-      curso_comunicado = Curso.find_by(usuario_id: @usuario.id)
-      usuarios_list = Usuario.all.select(:id, :email).take
-    elsif @comunicado.visibilidade_comunicado == "todas_turmas" then
-      usuarios_list = Usuario.all.select(:id, :email).take
-    elsif @comunicado.visibilidade_comunicado == "todos_turma" then
-      usuarios_list = Usuario.all.select(:id, :email).take
-    elsif @comunicado.visibilidade_comunicado == "todos_disciplina" then
-      usuarios_list = Usuario.all.select(:id, :email).take
-    else
-      usuarios_list = Usuario.all.select(:id, :email).take
-    end
+    usuarios_list = helpers.get_lista_usuarios_notificados(@usuario, @comunicado)
 
     respond_to do |format|
       if @comunicado.save
         ComunicadoMailer.with(
           usuarios_list: usuarios_list,
           comunicado: @comunicado).novo_comunicado_email.deliver_later
-        
+
         logtxt = "Comunicado adicionado com sucesso."
         Rails.logger.info logtxt
         format.html { redirect_to comunicados_url(@comunicado), notice: logtxt }
