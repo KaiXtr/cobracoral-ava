@@ -53,6 +53,7 @@ class ComunicadosController < ApplicationController
   # GET /comunicados/1 or /comunicados/1.json
   def show
     @comunicado = Comunicado.find(params[:id])
+
     Rails.logger.info "Acessando comunicado " + @comunicado.id.to_s + "."
   end
 

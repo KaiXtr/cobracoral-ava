@@ -14,7 +14,7 @@ class SessionMailer < ApplicationMailer
 
         @senha_provisoria = params[:senha_provisoria]
         @instituicao_nome = params[:instituicao_nome]
-        @acesso_link = "http://localhost:3000/entrar"
+        @acesso_link = "#{@mailer_host}/entrar"
 
         begin
             mail(to: @usuario.email, subject: "Primeiro acesso no AVA")
@@ -60,7 +60,7 @@ class SessionMailer < ApplicationMailer
 
         hash_senha = @usuario.password_digest
 
-        @link_recuperacao = "http://localhost:3000/recuperar?h=" + hash_senha
+        @link_recuperacao = "#{@mailer_host}/recuperar?h=" + hash_senha
         
         begin
             mail(to: @usuario.email, subject: "Recuperação de senha solicitada para " + @usuario.email)

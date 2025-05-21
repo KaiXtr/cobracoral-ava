@@ -270,7 +270,9 @@ header#cobracoral-header {
     li {
       display: inline-block;
 
-      button.abrir-menu:hover #menu-perfil{
+      button.abrir-menu:hover #menu-perfil,
+      button.abrir-menu:focus #menu-perfil,
+      button.abrir-menu #menu-perfil:focus-within {
         visibility: visible;
         opacity: 100%;
       }

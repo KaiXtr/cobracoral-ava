@@ -7,7 +7,7 @@ class MensagemMailer < ApplicationMailer
   def nova_mensagem_email
     @mensagem = params[:mensagem]
     @autor_mensagem = Usuario.find(@mensagem.remetente_id).nome_completo
-    @link_mensagem = "http://localhost:3000/mensagens/" + @mensagem.remetente_id.to_s
+    @link_mensagem = "#{@mailer_host}/mensagens/" + @mensagem.remetente_id.to_s
 
     begin
       mail_usuario = Usuario.find(@mensagem.destinatario_id).email

@@ -7,7 +7,7 @@ class ComunicadoMailer < ApplicationMailer
   def novo_comunicado_email
     @comunicado = params[:comunicado]
     @autor_comunicado = Usuario.find(@comunicado.usuario_id).nome_completo
-    @link_comunicado = "http://localhost:3000/comunicados#c" + @comunicado.id.to_s
+    @link_comunicado = "#{@mailer_host}/comunicados#c" + @comunicado.id.to_s
 
     usuarios_notificados = Array.new()
     params[:usuarios_list].each do |u|
@@ -35,6 +35,34 @@ class ComunicadoMailer < ApplicationMailer
             subject: "Novo comunicado de " + @autor_comunicado
             )
         Rails.logger.info "[MAILER] Novo comunicado notificado aos usuários #{mail_usuarios}."
+      rescue Errno::ECONNREFUSED
+        Rails.logger.error "[MAILER] O cliente de email não está disponível."
+      end
+    end
+  end
+
+  def novo_conteudo_disponivel_email
+    @comunicado = params[:comunicado]
+    @autor_comunicado = Usuario.find(@comunicado.usuario_id).nome_completo
+    @link_conteudo = "#{@mailer_host}/conteudos/#{params[:conteudo_id]}"
+
+    usuarios_notificados = Array.new()
+    params[:usuarios_list].each do |u|
+      preferencias_usuario = PreferenciasUsuario.find_by(usuario_id: u.id)
+
+      if preferencias_usuario.notificacao_conteudo_liberado then
+        usuarios_notificados.push(u)
+      end
+    end
+
+    if usuarios_notificados.length > 0 then
+      begin
+        mail_usuarios = usuarios_notificados.collect(&:email).join(",")
+        mail(
+            to: mail_usuarios,
+            subject: "Novo conteúdo disponível de " + params[:nome_disciplina]
+            )
+        Rails.logger.info "[MAILER] Novo conteúdo disponível notificado aos usuários #{mail_usuarios}."
       rescue Errno::ECONNREFUSED
         Rails.logger.error "[MAILER] O cliente de email não está disponível."
       end

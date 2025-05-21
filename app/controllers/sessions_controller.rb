@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 		session[:login_email] = params[:session][:email]
 		session[:login_senha] = params[:session][:senha]
 
-		if Rails.env.development?
+		if Rails.env.test?
 			usuario = Usuario.find_by(email: params[:session][:email])
 			session[:auth_code] = (('0'..'9').to_a + ('A'..'Z').to_a).shuffle.first(6).join
 
@@ -116,6 +116,12 @@ class SessionsController < ApplicationController
 		@preferencias_usuario = PreferenciasUsuario.find_by(
 			usuario_id: @usuario_autenticado.id
 			)
+
+		Conteudo.all.each do |c|
+			ConteudoLiberadoJob.set(
+				wait_until: Date.tomorrow.at_beginning_of_day
+				).perform_later(Conteudo.find(c))
+		end
 
 		session[:login_email] = nil
 		session[:login_senha] = nil

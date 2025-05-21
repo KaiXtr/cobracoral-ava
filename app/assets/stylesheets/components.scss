@@ -498,10 +498,6 @@ footer.cobra-footer {
         &:hover, &:active, &:focus, &:visited {
             color: var(--gray-color);
         }
-
-        &:after {
-            content: '∙'
-        }
     }
 }
 

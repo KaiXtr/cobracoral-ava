@@ -1,5 +1,9 @@
 <header id="cobracoral-header" class="header-compacto">
-    <button id="header-open-nav-component" class="icon-button" onclick="abrirBarraLateral()">
+    <button class="icon-button"
+        id="header-open-nav-component"
+        onclick="abrirBarraLateral()"
+        tooltip-text="Menu de navegação"
+        aria-label="Abrir menu de navegação lateral">
         <i class="fa-solid fa-bars fa-2xl"></i>
     </button>
     <div class="header-logo">
@@ -7,7 +11,7 @@
         <%= helpers.show_svg('cobracoral-logo.svg') %>
     </div>
     <div class="header-logo-info">
-        <a href="/">
+        <a href="/" aria-label="Início">
             <h1>
                 <% if helpers.current_curso(@usuario_autenticado) %>
                     <%= helpers.current_curso(@usuario_autenticado).nome_curso %>
@@ -24,14 +28,14 @@
     <ul id="header-buttons">
         <li>
             <a href="/painel" tooltip-text="Painel">
-                <button class="icon-button">
+                <button class="icon-button" tabindex="-1">
                     <i class="fa-solid fa-square-poll-horizontal fa-2xl"></i>
                 </button>
             </a>
         </li>
         <li>
-            <a href="/comunicados" tooltip-text="Comunicados">
-                <button class="icon-button">
+            <a href="/comunicados" tooltip-text="Comunicados" aria-label="Comunicados">
+                <button class="icon-button" tabindex="-1">
                     <i class="fa-solid fa-bell fa-2xl"></i>
                     <% if @novos_comunicados > 0 %>
                         <span class="icon-button-counter">
@@ -42,29 +46,29 @@
             </a>
         </li>
         <li>
-            <a href="/cursos" tooltip-text="Cursos">
-                <button class="icon-button">
+            <a href="/cursos" tooltip-text="Cursos" aria-label="Cursos">
+                <button class="icon-button" tabindex="-1">
                     <i class="fa-solid fa-book-open fa-2xl"></i>
                 </button>
             </a>
         </li>
         <!--li>
             <a href="/ide" tooltip-text="Ambiente integrado de desenvolvimento">
-            <button class="icon-button">
+            <button class="icon-button" tabindex="-1">
                 <i class="fa-solid fa-code fa-2xl"></i>
             </button>
             </a>
         </li-->
         <li>
-            <a href="/tarefas" tooltip-text="Tarefas">
-                <button class="icon-button">
+            <a href="/tarefas" tooltip-text="Tarefas" aria-label="Tarefas">
+                <button class="icon-button" tabindex="-1">
                     <i class="fa-solid fa-list-check fa-2xl"></i>
                 </button>
             </a>
         </li>
         <li>
-            <a href="/mensagens" tooltip-text="Mensagens">
-                <button class="icon-button">
+            <a href="/mensagens" tooltip-text="Mensagens" aria-label="Mensagens">
+                <button class="icon-button" tabindex="-1">
                     <i class="fa-solid fa-comment fa-2xl"></i>
                     <% if @novas_mensagens > 0 %>
                         <span class="icon-button-counter">
@@ -75,7 +79,7 @@
             </a>
         </li>
         <li>
-            <button class="icon-button abrir-menu">
+            <button class="icon-button abrir-menu" aria-label="Usuário">
                 <i class="fa-solid fa-user fa-2xl"></i>
                 <%= render MenuPerfilComponent.new(usuario_autenticado: @usuario_autenticado) %>
             </button>
