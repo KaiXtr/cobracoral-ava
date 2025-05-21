@@ -28,10 +28,16 @@ class ComunicadoMailer < ApplicationMailer
     end
 
     if usuarios_notificados.length > 0 then
-      mail(
-          to: usuarios_notificados.collect(&:email).join(","),
-          subject: "Novo comunicado de " + @autor_comunicado
-          )
+      begin
+        mail_usuarios = usuarios_notificados.collect(&:email).join(",")
+        mail(
+            to: mail_usuarios,
+            subject: "Novo comunicado de " + @autor_comunicado
+            )
+        Rails.logger.info "[MAILER] Novo comunicado notificado aos usuários #{mail_usuarios}."
+      rescue Errno::ECONNREFUSED
+        Rails.logger.error "[MAILER] O cliente de email não está disponível."
+      end
     end
   end
 end

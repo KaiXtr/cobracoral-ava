@@ -115,28 +115,7 @@ class ComunicadosController < ApplicationController
     @visibilidades = get_visibilidades()
     @turmas = Turma.all
     @disciplinas = Disciplina.all
-    usuarios_list = Array.new()
-
-    if @comunicado.visibilidade_comunicado == "todos_curso" then
-      curso_comunicado = Curso.find_by(usuario_id: @usuario.id)
-      turmas_curso = Turma.where(curso_id: curso_comunicado.id)
-      turmas_curso.each do |t|
-        usuarios_list += Usuario.joins(:matricula).where(matricula: {turma_id: t.id})
-      end
-    elsif @comunicado.visibilidade_comunicado == "todas_turmas" then
-      usuarios_list = Usuario.all
-    elsif @comunicado.visibilidade_comunicado == "todos_turma" then
-      usuarios_list += Usuario.joins(:matricula).where(
-          matricula: { turma_id: @comunicado.turma_id }
-        )
-    elsif @comunicado.visibilidade_comunicado == "todos_disciplina" then
-      disciplina = Disciplina.find(@comunicado.disciplina_id)
-      usuarios_list += Usuario.joins(:matricula).where(
-          matricula: { turma_id: disciplina.turma_id }
-        )
-    else
-      usuarios_list = Usuario.all.select(:id, :email).take
-    end
+    usuarios_list = helpers.get_lista_usuarios_notificados(@usuario, @comunicado)
 
     respond_to do |format|
       if @comunicado.save

@@ -16,7 +16,12 @@ class SessionMailer < ApplicationMailer
         @instituicao_nome = params[:instituicao_nome]
         @acesso_link = "http://localhost:3000/entrar"
 
-        mail(to: @usuario.email, subject: "Primeiro acesso no AVA")
+        begin
+            mail(to: @usuario.email, subject: "Primeiro acesso no AVA")
+            Rails.logger.info "[MAILER] Primeiro acesso notificado ao usuário #{@usuario.email}."
+        rescue
+            Rails.logger.error "[MAILER] O cliente de email não está disponível."
+        end
     end
 
     def acesso_email
@@ -25,8 +30,13 @@ class SessionMailer < ApplicationMailer
         @login_so = params[:login_so]
         @login_browser = params[:login_browser]
         @login_time = params[:login_time].strftime("%d/%m/%Y às %H:%M")
-        
-        mail(to: @usuario.email, subject: "Novo acesso em " + @login_browser)
+
+        begin
+            mail(to: @usuario.email, subject: "Novo acesso em " + @login_browser)
+            Rails.logger.info "[MAILER] Novo acesso notificado ao usuário #{@usuario.email}."
+        rescue
+            Rails.logger.error "[MAILER] O cliente de email não está disponível."
+        end
     end
 
     def recuperacao_senha_email
@@ -40,6 +50,11 @@ class SessionMailer < ApplicationMailer
 
         @link_recuperacao = "http://localhost:3000/recuperar?h=" + hash_senha
         
-        mail(to: @usuario.email, subject: "Recuperação de senha solicitada para " + @usuario.email)
+        begin
+            mail(to: @usuario.email, subject: "Recuperação de senha solicitada para " + @usuario.email)
+            Rails.logger.info "[MAILER] Email de recuperação de senha enviada ao usuário #{@usuario.email}."
+        rescue
+            Rails.logger.error "[MAILER] O cliente de email não está disponível."
+        end
     end
 end

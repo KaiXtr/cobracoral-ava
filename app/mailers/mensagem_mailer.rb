@@ -9,11 +9,15 @@ class MensagemMailer < ApplicationMailer
     @autor_mensagem = Usuario.find(@mensagem.remetente_id).nome_completo
     @link_mensagem = "http://localhost:3000/mensagens/" + @mensagem.remetente_id.to_s
 
-    usuarios_list = params[:usuarios_list]
-
-    mail(
-        to: Usuario.find(@mensagem.destinatario_id).email,
-        subject: "Nova mensagem de " + @autor_mensagem
-        )
+    begin
+      mail_usuario = Usuario.find(@mensagem.destinatario_id).email
+      mail(
+          to: mail_usuario,
+          subject: "Nova mensagem de " + @autor_mensagem
+          )
+      Rails.logger.info "[MAILER] Nova mensagem notificada ao usuário #{mail_usuario}."
+    rescue
+      Rails.logger.error "[MAILER] O cliente de email não está disponível."
+    end
   end
 end

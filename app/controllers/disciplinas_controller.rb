@@ -38,7 +38,10 @@ class DisciplinasController < ApplicationController
           disciplina_id: @disciplina.id
         }
       )
-
+    @conteudos.each do |c|
+      ConteudoLiberadoJob.set(wait: 1.minute).perform_later(c)
+    end
+    
     Rails.logger.info "Acessando disciplina " + @disciplina.nome_disciplina + "."
   end
 
