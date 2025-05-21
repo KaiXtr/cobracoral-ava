@@ -42,38 +42,6 @@ class ApplicationController < ActionController::Base
 		@usuario_autenticado = get_usuario_autenticado
 	end
 
-	def logar(usuario, sessionData)
-		@usuario_autenticado = usuario
-		@preferencias_usuario = PreferenciasUsuario.find_by(
-			usuario_id: @usuario_autenticado.id
-			)
-
-		session[:current_curso] = nil
-		session[:usuario_id] = usuario.id
-		session[:login_time] = Time.now
-		session[:pomodoris_quant] = @preferencias_usuario.pomodoro_pomodoris_quant
-
-		if sessionData != nil then
-			session[:login_device] = sessionData[:login_device]
-			session[:login_so] = sessionData[:login_so]
-			session[:login_browser] = sessionData[:login_browser]
-
-			if @preferencias_usuario.notificacao_novo_acesso then
-				SessionMailer.with(
-					usuario: usuario,
-					login_device: session[:login_device],
-					login_so: session[:login_so],
-					login_browser: session[:login_browser],
-					login_time: Time.now
-					).acesso_email.deliver_later
-			end
-		end
-		
-		Rails.logger.info "Criada sessão para o(a) usuário(a) com email " + usuario.email + "."
-		
-		redirect_to root_path
-	end
-
 	def logar_EXT(usuario)
 		# USUÁRIO ADMINISTRADOR INFORMA API_KEY E SE LOGA COMO ADMINISTRADOR DO COBRACORAL
 

@@ -121,3 +121,20 @@ img.auth-help-image {
     margin-top: 3vh;
     padding-bottom: 2vh;
 }
+
+div.cobra-javascript-disabled-warning {
+    color: white;
+    background-color: var(--main-color);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 100;
+    align-content: center;
+
+    p {
+        font-weight: bold;
+        text-align: center;
+        padding: 0% 20% 0% 20%;
+        width: 60%;
+    }
+}

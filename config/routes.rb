@@ -12,11 +12,13 @@ Rails.application.routes.draw do
   root 'painel#index'
   
   get '/entrar', to: 'sessions#login'
-  post '/entrar', to: 'sessions#create'
+  post '/entrar', to: 'sessions#send_auth_code'
   get '/primeiro-acesso', to: 'sessions#primeiro_acesso'
   post '/primeiro-acesso', to: 'sessions#edit'
   get '/problemas-acesso', to: 'sessions#problemas-acesso'
   post '/problemas-acesso', to: 'sessions#recover_password'
+  get '/authcode', to: 'sessions#auth_code'
+  post '/authcode', to: 'sessions#validate_auth_code'
   get '/recuperar', to: 'sessions#recuperar'
   post '/recuperar', to: 'sessions#validate_recovery'
 

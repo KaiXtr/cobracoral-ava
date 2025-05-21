@@ -5,6 +5,9 @@
 <button
     type="<%= @type %>"
     class="cobra-button"
+    <% if @id %>
+        id="<%= @id %>"
+    <% end %>
     <% if @onclick %>
         onclick="<%= @onclick %>"
     <% end %>

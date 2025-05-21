@@ -18,7 +18,19 @@ class SessionMailer < ApplicationMailer
 
         begin
             mail(to: @usuario.email, subject: "Primeiro acesso no AVA")
-            Rails.logger.info "[MAILER] Primeiro acesso notificado ao usuário #{@usuario.email}."
+            Rails.logger.info "[MAILER] Primeiro acesso notificado ao email #{@usuario.email}."
+        rescue
+            Rails.logger.error "[MAILER] O cliente de email não está disponível."
+        end
+    end
+
+    def codigo_autenticacao_email
+        @usuario = params[:usuario]
+        @codigo = params[:codigo]
+
+        begin
+            mail(to: @usuario.email, subject: "Código de autenticação Cobracoral")
+            Rails.logger.info "[MAILER] Código de autenticação enviado ao email #{@usuario.email}."
         rescue
             Rails.logger.error "[MAILER] O cliente de email não está disponível."
         end
@@ -33,7 +45,7 @@ class SessionMailer < ApplicationMailer
 
         begin
             mail(to: @usuario.email, subject: "Novo acesso em " + @login_browser)
-            Rails.logger.info "[MAILER] Novo acesso notificado ao usuário #{@usuario.email}."
+            Rails.logger.info "[MAILER] Novo acesso notificado ao email #{@usuario.email}."
         rescue
             Rails.logger.error "[MAILER] O cliente de email não está disponível."
         end
@@ -52,7 +64,7 @@ class SessionMailer < ApplicationMailer
         
         begin
             mail(to: @usuario.email, subject: "Recuperação de senha solicitada para " + @usuario.email)
-            Rails.logger.info "[MAILER] Email de recuperação de senha enviada ao usuário #{@usuario.email}."
+            Rails.logger.info "[MAILER] Email de recuperação de senha enviada ao email #{@usuario.email}."
         rescue
             Rails.logger.error "[MAILER] O cliente de email não está disponível."
         end

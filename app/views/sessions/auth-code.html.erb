@@ -2,6 +2,10 @@
 	<div id="cobracoral-icon-container">
 		<%= show_svg('cobracoral-logo.svg') %>
 	</div>
+	<h2>Confirme sua identidade</h2>
+	<p>
+		Um código de autenticação de 6 dígitos foi enviado para seu email institucional.
+	</p>
 	<div class="login-errors">
 		<%= notice %>
 	</div>
@@ -9,34 +13,14 @@
 		<%= f.hidden_field :login_device,  id: 'input-device' %>
 		<%= f.hidden_field :login_so,	   id: 'input-so' %>
 		<%= f.hidden_field :login_browser, id: 'input-browser' %>
-
+		
 		<div class="form-group">
-			<%= f.label :email, 'Email institucional: '%>
-			<%= f.text_field :email,
-				placeholder: 'Email institucional',
-				class: 'input-text',
-				autocomplete: 'on',
-				required: 'true'
-			%>
-		</div>
-		<div class="form-group">
-			<%= f.label :senha, 'Senha: '%>
-			<span id="campo-caps">Caps Lock ativada</span>
-			<%= f.password_field :senha,
-				placeholder: 'Senha',
-				id: 'campo-senha',
-				class: 'input-text',
-				required: 'true'
-			%>
-		</div>
-		<div class="form-group">
-			<a id="problemas-link" href="/problemas-acesso">
-				Problemas para entrar?
-			</a>
+			<%= render AuthCodeFieldComponent.new() %>
 		</div>
 		<div class="button-group">
 			<%= render CobraButtonComponent.new(
-				text: 'Entrar',
+				id: 'code-verify-button',
+				text: 'Verificar',
 				onclick: 'triggerLoginSubmit')
 			%>
 		</div>

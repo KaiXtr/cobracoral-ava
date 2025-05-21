@@ -1,0 +1,39 @@
+<div id="cobra-auth-code-field">
+    <% for i in @auth_code_digits %>
+        <input type="text"
+            class="cobra-auth-code-input"
+            id="auth_code_digit_<%= i%>"
+            name="auth_code_digit_<%= i%>"
+            oninput="
+                this.value = this.value.toUpperCase();
+                let nextField = document.getElementById('auth_code_digit_<%= i + 1%>');
+                if (nextField) { nextField.focus(); }
+                else { document.getElementById('code-verify-button').focus(); }
+            "
+            onkeydown="
+                if ((event.keyCode == 8)||(event.keyCode == 46)) {
+                    if (this.value != '') {
+                        this.value = '';
+                    } else {
+                        let prevField = document.getElementById('auth_code_digit_<%= i - 1%>');
+                        if (prevField) { prevField.value = ''; prevField.focus(); }
+                    }
+                }
+                else if (event.keyCode == 37) {
+                    let prevField = document.getElementById('auth_code_digit_<%= i - 1%>');
+                    if (prevField) { prevField.focus(); }
+                }
+                else if (event.keyCode == 39) {
+                    let nextField = document.getElementById('auth_code_digit_<%= i + 1%>');
+                    if (nextField) { nextField.focus(); }
+                    else { document.getElementById('code-verify-button').focus(); }
+                }
+            "
+            onpaste="
+                console.log(event)
+            "
+            maxlength="1"
+            placeholder="*"
+            required />
+    <% end %>
+</div>
