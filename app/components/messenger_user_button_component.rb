@@ -9,6 +9,7 @@ class MessengerUserButtonComponent < ViewComponent::Base
 
     if @usuario_messenger.kind_of? Turma then
       @turma_url = '/turma'
+      @habilita_foto_perfil = false
       @usuario_nome = @usuario_messenger.nome_turma
       @mensagem_selecionada = action_name == 'turma' \
         && @usuario_messenger.id == selected_id \
@@ -17,6 +18,7 @@ class MessengerUserButtonComponent < ViewComponent::Base
       @mensagem_recente = ''
     else
       @turma_url = ''
+      @habilita_foto_perfil = true
       @usuario_nome = @usuario_messenger.nome_completo
       @mensagem_selecionada = action_name == 'index' \
         && @usuario_messenger.id == selected_id \

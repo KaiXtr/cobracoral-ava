@@ -79,7 +79,9 @@
             </a>
         </li>
         <li>
-            <button class="icon-button abrir-menu" aria-label="Usuário">
+            <button class="icon-button abrir-menu"
+                onclick="abrirMenuPerfil()"
+                aria-label="Perfil">
                 <i class="fa-solid fa-user fa-2xl"></i>
                 <%= render MenuPerfilComponent.new(usuario_autenticado: @usuario_autenticado) %>
             </button>

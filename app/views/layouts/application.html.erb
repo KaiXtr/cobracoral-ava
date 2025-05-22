@@ -9,29 +9,7 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <script src="https://kit.fontawesome.com/597fea8ed7.js" crossorigin="anonymous"></script>
     <%= javascript_importmap_tags %>
-    <script type="text/javascript">
-        function abrirBarraLateral() {
-            let barra = document.getElementById('barra-lateral');
-            if (barra.style.visibility == 'visible') {
-                barra.style.visibility = 'hidden';
-                barra.style.opacity = '0%';
-            } else {
-                barra.style.visibility = 'visible';
-                barra.style.opacity = '100%';
-            }
-        }
-
-        function abrirBarraPreferencias() {
-          let barra = document.getElementById('barra-lateral-preferencias');
-          if (barra.style.visibility == 'visible') {
-              barra.style.visibility = 'hidden';
-              barra.style.opacity = '0%';
-          } else {
-              barra.style.visibility = 'visible';
-              barra.style.opacity = '100%';
-          }
-      }
-    </script>
+    <%= javascript_include_tag 'components' %>
   </head>
   <body>
     <noscript>

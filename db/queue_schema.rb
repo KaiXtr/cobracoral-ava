@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_19_025729) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_22_035119) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -109,6 +109,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_19_025729) do
     t.datetime "updated_at", null: false
     t.index ["conteudo_id"], name: "index_leitura_conteudos_on_conteudo_id"
     t.index ["usuario_id"], name: "index_leitura_conteudos_on_usuario_id"
+  end
+
+  create_table "local_agendamentos", force: :cascade do |t|
+    t.string "edificio"
+    t.string "local"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "matriculas", force: :cascade do |t|

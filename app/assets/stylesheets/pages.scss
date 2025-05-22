@@ -23,6 +23,13 @@
         height: 8vw;
         display: block;
     }
+
+    .usuario-status {
+        font-size: 20pt;
+        position: relative;
+        top: -9vw;
+        left: 6vw;
+    }
 }
 
 .photo-upload {
@@ -236,7 +243,7 @@ nav.mensagens-nav {
 
 .mensagens-users {
     background-color: var(--container-bg);
-    padding: 3vw;
+    padding: 2vw 3vw 2vw 2vw;
     width: 30%;
     max-height: 70vh;
     display: inline-block;
@@ -265,18 +272,54 @@ nav.mensagens-nav {
             background-color: var(--textarea-background-color);
         }
 
-        .mensagem-recente {
-            color: var(--gray-color);
-            font-size: 10pt;
-            font-weight: lighter;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            width: 100%;
-            overflow: hidden;
-            display: block;
+        .mensagens-users-button-image {
+            text-align: center;
+            align-items: center;
+            vertical-align: top;
+            background-color: var(--main-color);
+            border-radius: 100%;
+            width: 3vw;
+            height: 3vw;
+            margin-right: 10px;
+            display: inline-block;
+            align-content: center;
 
-            action-text-attachment, br {
-                display: none;
+            i {
+                font-size: 20pt;
+                vertical-align: middle;
+            }
+
+            img {
+                border-radius: 100%;
+                width: 3vw;
+                height: 3vw;
+            }
+        }
+
+        .mensagens-users-button-info {
+            display: inline-block;
+            width: 80%;
+
+            .mensagem-user-nome {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                display: block;
+            }
+
+            .mensagem-recente {
+                color: var(--gray-color);
+                font-size: 10pt;
+                font-weight: lighter;
+                width: 100%;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                display: block;
+    
+                action-text-attachment, br {
+                    display: none;
+                }
             }
         }
     }

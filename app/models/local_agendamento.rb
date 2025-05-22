@@ -1,0 +1,2 @@
+class LocalAgendamento < ApplicationRecord
+end
