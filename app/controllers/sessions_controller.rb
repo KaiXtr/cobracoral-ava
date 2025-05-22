@@ -120,7 +120,7 @@ class SessionsController < ApplicationController
 		Conteudo.all.each do |c|
 			ConteudoLiberadoJob.set(
 				wait_until: Date.tomorrow.at_beginning_of_day
-				).perform_later(Conteudo.find(c))
+				).perform_later(Conteudo.find(c.id))
 		end
 
 		session[:login_email] = nil

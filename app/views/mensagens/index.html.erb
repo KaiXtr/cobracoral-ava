@@ -1,45 +1,23 @@
 <%= turbo_stream_from 'mensagens' %>
 <nav class="mensagens-nav">
   <div class="mensagens-users">
-   <div class="mensagens-users-button <%= mensagens_novas_usuario(@usuario_autenticado, Usuario.find(0)) %>">
-      <a href="/suporte">
+    <a href="/suporte">
+      <div class="mensagens-users-button <%= mensagens_novas_usuario(@usuario_autenticado, Usuario.find(0)) %>">
         Suporte técnico
-      </a>
-      <span class="mensagem-recente">
-        <%= mensagem_recente_usuario(@usuario_autenticado, Usuario.find(0)) %>
-      </span>
-    </div>
+        <span class="mensagem-recente">
+          <%= mensagem_recente_usuario(@usuario_autenticado, Usuario.find(0)) %>
+        </span>
+      </div>
+    </a>
 
-    <% for u in @mensagens_usuarios
-      @msg_select = ''
-      if @usuario_destinatario.to_i == u.id then
-        @msg_select = 'mensagem-selecionada'
-      end
-    %>
-      <a href="/mensagens/<%= u.id %>">
-        <div class="mensagens-users-button <%= mensagens_novas_usuario(@usuario_autenticado, u) %> <%= @msg_select %>">
-          <%= u.nome_completo %>
-          <span class="mensagem-recente">
-            <%= mensagem_recente_usuario(@usuario_autenticado, u) %>
-          </span>
-        </div>
-      </a>
-    <% end %>
-
-    <% for t in @mensagens_turmas
-      @msg_select = ''
-      if @turma_atual.to_i == t.id then
-        @msg_select = 'mensagem-selecionada'
-      end
-    %>
-      <a href="/mensagens/turma/<%= t.id %>">
-        <div class="mensagens-users-button <%= mensagens_novas_usuario(@usuario_autenticado, u) %> <%= @msg_select %>">
-          <%= t.nome_turma %>
-          <span class="mensagem-recente">
-            <%= mensagem_recente_usuario(@usuario_autenticado, u) %>
-          </span>
-        </div>
-      </a>
+    <% for u in @mensagens_usuarios %>
+      <%= render MessengerUserButtonComponent.new(
+        usuario_messenger: u,
+        usuario_autenticado: @usuario_autenticado,
+        selected_id: @id_param.to_i,
+        action_name: controller.action_name
+        )
+      %>
     <% end %>
   </div>
   <div class="mensagens-user">
@@ -56,12 +34,14 @@
         </span>
       <% end %>
     </div>
-    <% if @usuario_destinatario %>
+    <% if @id_param %>
       <div class="mensagem-input-form">
         <%= form_for Mensagem.new,
           url: @form_submit_link,
           html: { method: :post } do |form| %>
-          <%= form.rich_text_area :corpo %>
+          <%= form.rich_text_area :corpo,
+            placeholder: 'Escreva uma mensagem...'
+          %>
           <button id="mensagem-input-form-submit" type="submit">
             <i class="fa-solid fa-paper-plane fa-xl"></i>
           </button>

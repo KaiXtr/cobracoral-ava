@@ -8,7 +8,7 @@ class ConteudoLiberadoJob < ApplicationJob
   def perform(conteudo)
     liberacao = (conteudo.data_liberacao.to_date - DateTime.now.to_date).to_i
     vencimento = (conteudo.data_vencimento.to_date - DateTime.now.to_date).to_i
-    if liberacao <= 0 && vencimento > 0 then
+    if liberacao <= 0 && vencimento > 0 && conteudo.data_liberacao.to_date == Date.now then
       begin
         unidade_disciplina = UnidadeDisciplina.find_by(id: conteudo.unidade_disciplina_id)
         disciplina_conteudo = Disciplina.find_by(id: unidade_disciplina.disciplina_id)

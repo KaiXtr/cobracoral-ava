@@ -294,6 +294,8 @@ nav.mensagens-nav {
         max-height: 60vh;
         height: 60vh;
         overflow-x: scroll;
+        flex-direction: column-reverse;
+        display: flex;
 
         #mensagens-vazio {
             text-align: center;

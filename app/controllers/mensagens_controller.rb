@@ -4,32 +4,27 @@ class MensagensController < ApplicationController
   # GET /mensagens or /mensagens.json
   def index
     @usuario_autenticado = get_usuario_autenticado
-    @usuario_destinatario = nil
+    @mensagens_usuarios = set_mensagens_usuarios(@usuario_autenticado)
+    @form_submit_link = '/mensagens/'
+    @id_param = nil
     @mensagens = nil
 
-    @mensagens_turmas = Turma.all
-    @mensagens_usuarios = Usuario.where.not(id: @usuario_autenticado.id)
-    @mensagens_usuarios = @mensagens_usuarios.sort_by{|u| u[:updated_at]}
-    @mensagens_usuarios = @mensagens_usuarios.reverse
-
-    @form_submit_link = '/mensagens/'
-
     if (params) then
-      @usuario_destinatario = params[:id]
-      @form_submit_link = '/mensagens/' + @usuario_destinatario.to_s
+      @id_param = params[:id]
+      @form_submit_link = '/mensagens/' + @id_param.to_s
 
       @mensagens = Mensagem.where(
           remetente_id: @usuario_autenticado.id,
-          destinatario_id: @usuario_destinatario,
+          destinatario_id: @id_param,
           is_privada: true
           ) + 
         Mensagem.where(
-          remetente_id: @usuario_destinatario,
+          remetente_id: @id_param,
           destinatario_id: @usuario_autenticado.id,
           is_privada: true
           )
       @mensagens = @mensagens.uniq
-      @mensagens = @mensagens.sort_by{|m| m[:created_at]}
+      @mensagens = @mensagens.sort_by{|m| m[:created_at]}.reverse
     
       # Marcar visualização
       marcar_visualizacao_mensagens(@usuario_autenticado, @mensagens)
@@ -40,22 +35,18 @@ class MensagensController < ApplicationController
 
   def turma
     @usuario_autenticado = get_usuario_autenticado
-    @usuario_destinatario = nil
-    @turma_atual = nil
-    @mensagens = nil
-
-    @mensagens_turmas = Turma.all
-    @mensagens_usuarios = Usuario.where.not(id: @usuario_autenticado.id)
+    @mensagens_usuarios = set_mensagens_usuarios(@usuario_autenticado)
     @form_submit_link = '/mensagens/turma/'
+    @mensagens = nil
+    @id_param = nil
 
     if (params) then
-      @turma_atual = params[:id]
-      @form_submit_link = '/mensagens/turma/' + @turma_atual.to_s
+      @id_param = params[:id]
+      @form_submit_link = '/mensagens/turma/' + @id_param.to_s
 
-      @usuario_destinatario = @usuario_autenticado.id
       @usuarios_turma = Usuario.joins(:matricula).where(
         matricula: {
-          turma_id: @turma_atual
+          turma_id: @id_param
         }
       )
       @mensagens = Array.new()
@@ -72,7 +63,7 @@ class MensagensController < ApplicationController
             )
       end
       @mensagens = @mensagens.uniq
-      @mensagens = @mensagens.sort_by{|m| m[:created_at]}
+      @mensagens = @mensagens.sort_by{|m| m[:created_at]}.reverse
     
       # Marcar visualização
       marcar_visualizacao_mensagens(@usuario_autenticado, @mensagens)
@@ -145,8 +136,9 @@ class MensagensController < ApplicationController
       
         respond_to do |format|
           if mensagem.save
-            m.updated_at = Time.now
-            m.save
+            dest = Turma.find(m.turma_id)
+            dest.updated_at = Time.now
+            dest.save
 
             @preferencias_usuario = PreferenciasUsuario.find_by(usuario_id: m.usuario_id)
             if @preferencias_usuario.notificacao_nova_mensagem then
@@ -158,12 +150,13 @@ class MensagensController < ApplicationController
           else
             Rails.logger.error "Houve um erro ao enviar a mensagem da turma."
             Rails.logger.error mensagem.errors
-            format.html { render :index, status: :unprocessable_entity }
             format.json { render json: mensagem.errors, status: :unprocessable_entity }
           end
         end
       end
     end
+
+    render 'index'
   end
 
   # PATCH/PUT /mensagens/1 or /mensagens/1.json
@@ -198,6 +191,15 @@ class MensagensController < ApplicationController
     # Only allow a list of trusted parameters through.
     def mensagem_params
       params.require(:mensagem).permit(:remetente_id, :destinatario_id, :corpo, :is_privada)
+    end
+
+    def set_mensagens_usuarios(usuario_autenticado)
+      mensagens_usuarios = Usuario.where.not(id: usuario_autenticado.id)
+      mensagens_usuarios = mensagens_usuarios + Turma.all
+      mensagens_usuarios = mensagens_usuarios.sort_by{|m| m[:updated_at]}.reverse
+      mensagens_usuarios = [usuario_autenticado] + mensagens_usuarios
+
+      return mensagens_usuarios
     end
 
     def marcar_visualizacao_mensagens(usuario_autenticado, mensagens)
