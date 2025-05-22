@@ -1,0 +1,39 @@
+<%= form_with(model: agendamento) do |form| %>
+  <% if agendamento.errors.any? %>
+    <div style="color: red">
+      <ul>
+        <% agendamento.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= form.label :nome_agendamento, "Nome do agendamento" %>
+    <%= form.text_field :nome_agendamento, class: 'input-text' %>
+  </div>
+  <div class="form-group">
+    <%= form.label :data_inicio, "Data de início" %>
+    <%= form.text_field :data_inicio, class: 'input-text' %>
+  </div>
+  <div class="form-group">
+    <%= form.label :data_fim, "Data de fim" %>
+    <%= form.text_field :data_fim, class: 'input-text' %>
+  </div>
+  <div class="form-group">
+    <%= form.label :horario_inicio, "Horário de início" %>
+    <%= form.text_field :horario_inicio, class: 'input-text' %>
+  </div>
+  <div class="form-group">
+    <%= form.label :horario_fim, "Horário de fim" %>
+    <%= form.text_field :horario_fim, class: 'input-text' %>
+  </div>
+  <div class="form-group">
+    <%= form.label :repete, "Repete?" %>
+    <%= form.text_field :repete, class: 'input-text' %>
+  </div>
+  <%= render CancelarSalvarButtonsComponent.new(
+    submit_text: 'Adicionar',
+    close_modal: true)
+  %>
+<% end %>

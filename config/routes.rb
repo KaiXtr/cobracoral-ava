@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :conteudos
   resources :leitura_conteudos
   resources :preferencias_usuario
+  resources :agendamentos
   
   root 'painel#index'
   

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_22_035119) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_22_042102) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -47,6 +47,21 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_22_035119) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "agendamentos", force: :cascade do |t|
+    t.string "nome_agendamento", null: false
+    t.integer "usuario_id", null: false
+    t.integer "local_agendamento_id", null: false
+    t.date "data_inicio", null: false
+    t.date "data_fim", null: false
+    t.time "horario_inicio"
+    t.time "horario_fim"
+    t.string "repete"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["local_agendamento_id"], name: "index_agendamentos_on_local_agendamento_id"
+    t.index ["usuario_id"], name: "index_agendamentos_on_usuario_id"
   end
 
   create_table "cargo_usuarios", force: :cascade do |t|
@@ -220,6 +235,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_22_035119) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "agendamentos", "local_agendamentos"
+  add_foreign_key "agendamentos", "usuarios"
   add_foreign_key "comunicados", "disciplinas"
   add_foreign_key "comunicados", "turmas"
   add_foreign_key "comunicados", "usuarios"

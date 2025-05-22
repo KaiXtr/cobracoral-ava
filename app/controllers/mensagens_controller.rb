@@ -195,7 +195,15 @@ class MensagensController < ApplicationController
 
     def set_mensagens_usuarios(usuario_autenticado)
       mensagens_usuarios = Usuario.where.not(id: usuario_autenticado.id)
-      mensagens_usuarios = mensagens_usuarios + Turma.all
+      if usuario_autenticado.cargo_usuario == :coordenador then
+        curso_coordenador = Curso.find_by(usuario_id: usuario_autenticado.id)
+        mensagens_usuarios += Turma.where(curso_id: curso_coordenador.id)
+      elsif usuario_autenticado.cargo_usuario == :professor then
+        mensagens_usuarios += Turma.all
+      else
+        matricula_estudante = Matricula.find_by(usuario_id: usuario_autenticado.id)
+        mensagens_usuarios += [Turma.find(matricula_estudante.turma_id)]
+      end
       mensagens_usuarios = mensagens_usuarios.sort_by{|m| m[:updated_at]}.reverse
       mensagens_usuarios = [usuario_autenticado] + mensagens_usuarios
 
