@@ -262,13 +262,40 @@ Turma.create([
 
 puts "= turmas populada."
 
+LocalAgendamento.create([
+    { id: 1, edificio: "Bloco X", local: "Sala 101" },
+    { id: 2, edificio: "Bloco X", local: "Sala 102" },
+    { id: 3, edificio: "Bloco X", local: "Sala 201" },
+    { id: 4, edificio: "Bloco X", local: "Sala 202" },
+    { id: 5, edificio: "Bloco Y", local: "Lab 1" },
+    { id: 6, edificio: "Bloco Y", local: "Lab 2" },
+    { id: 7, edificio: "Bloco Y", local: "Lab 3" },
+    { id: 8, edificio: "Bloco Y", local: "Lab 4" },
+])
+
+puts "= locais de agendamentos populada."
+
+Agendamento.create(
+    id: 1,
+    usuario_id: 9,
+    local_agendamento_id: nil,
+    nome_agendamento: "2025/1",
+    data_inicio: DateTime.now,
+    data_fim: DateTime.now,
+    horario_inicio: nil,
+    horario_fim: nil,
+    repete: nil
+)
+
+puts "= agendamentos populada."
+
 Matricula.create([
-    { usuario_id: 1, turma_id: 1, semestre: '2025/1'},
-    { usuario_id: 5, turma_id: 4, semestre: '2025/1'},
-    { usuario_id: 6, turma_id: 3, semestre: '2025/1'},
-    { usuario_id: 7, turma_id: 3, semestre: '2025/1'},
-    { usuario_id: 8, turma_id: 5, semestre: '2025/1'},
-    { usuario_id: 12, turma_id: 3, semestre: '2025/1'}
+    { usuario_id: 1, turma_id: 1, semestre: '2025/1' },
+    { usuario_id: 5, turma_id: 4, semestre: '2025/1' },
+    { usuario_id: 6, turma_id: 3, semestre: '2025/1' },
+    { usuario_id: 7, turma_id: 3, semestre: '2025/1' },
+    { usuario_id: 8, turma_id: 5, semestre: '2025/1' },
+    { usuario_id: 12, turma_id: 3, semestre: '2025/1' }
 ])
 
 puts "= matriculas populada."

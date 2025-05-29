@@ -52,7 +52,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_22_042102) do
   create_table "agendamentos", force: :cascade do |t|
     t.string "nome_agendamento", null: false
     t.integer "usuario_id", null: false
-    t.integer "local_agendamento_id", null: false
+    t.integer "local_agendamento_id"
     t.date "data_inicio", null: false
     t.date "data_fim", null: false
     t.time "horario_inicio"

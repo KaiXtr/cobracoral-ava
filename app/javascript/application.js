@@ -9,6 +9,8 @@ import "./context-menu"
 function initHeader() {
     const header = document.getElementById('cobracoral-header');
 
+    const VLibrasWidget = new window.VLibras.Widget('https://vlibras.gov.br/app');
+
     if (header) {
         document.addEventListener('scroll', (e) => {
             if (window.pageYOffset >= 0) {

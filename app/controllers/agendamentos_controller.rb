@@ -1,16 +1,40 @@
 class AgendamentosController < ApplicationController
     before_action :set_agendamento, only: %i[ show edit update destroy ]
 
+    def index
+        @agendamentos = Agendamento.all
+        Rails.logger.info "Acessando todos os agendamentos."
+    end
+
     def new
         @agendamento = Agendamento.new
+        @edificios_select = LocalAgendamento.all.map{|l| l[:edificio]}.uniq        
+        @locais_select = LocalAgendamento.all.map{|l| l[:local]}
+
         Rails.logger.info "Criando novo agendamento."
     end
     
     def create
         @usuario_autenticado = get_usuario_autenticado
         params[:agendamento][:usuario_id] = @usuario_autenticado.id
-        params[:agendamento][:local_agendamento_id] = 1
+
+        if params["is-presencial"] then
+            local = LocalAgendamento.find_by(
+                edificio: params[:agendamento][:edificio],
+                local: params[:agendamento][:local],
+            )
+            params[:agendamento][:local_agendamento_id] = local.id
+        else
+            params[:agendamento][:local_agendamento_id] = nil
+        end
+
+        if !params["is-o-dia-todo"] then
+            params[:agendamento][:horario_inicio] = nil
+            params[:agendamento][:horario_fim] = nil
+        end
+
         @agendamento = Agendamento.new(agendamento_params)
+        @agendamentos = Agendamento.all
 
         respond_to do |format|
             if @agendamento.save
