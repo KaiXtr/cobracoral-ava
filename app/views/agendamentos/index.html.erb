@@ -3,5 +3,37 @@
   <a href="/agendamentos/new" data-turbo-frame="cobra-modal" data-remote="true">
     Criar agendamento
   </a>
-  <%= render @agendamentos %>
+  <a href=<%= "/agendamentos/#{@dia_ontem.mday}/#{@dia_ontem.month}/#{@dia_ontem.year}/" %>
+    aria-label="Semana anterior">
+    <i class="fa-solid fa-arrow-left fa-lg"></i>
+  </a>
+  <a href=<%= "/agendamentos/#{@dia_amanha.mday}/#{@dia_amanha.month}/#{@dia_amanha.year}/" %>
+    aria-label="Próxima semana">
+    <i class="fa-solid fa-arrow-right fa-lg"></i>
+  </a>
+  <div class="calendario-container" tabIndex="0" aria-label="Calendário">
+    <div class="calendario-horas">
+      <% for hora in 0..7 %>
+        <span>
+          <% if hora == 0 %>
+            <%= "0#{8 + (hora * 2)}:00" %>
+          <% else %>
+            <%= "#{8 + (hora * 2)}:00" %>
+          <% end %>
+        </span>
+      <% end %>
+    </div>
+    <% for dia in @dias_semana %>
+      <div class="calendario-coluna <%= @dia_atual == dia[:data_dia] ? 'data-hoje' : '' %>"
+        tabIndex="0" aria-label="Agendamentos de <%= dia[:nome_dia] %>">
+        <div class="calendario-coluna-data">
+          <h3><%= formatar_data_semana(dia[:data_dia]) %></h3>
+          <span><%= dia[:nome_dia] %></span>
+        </div>
+        <div class="calendario-coluna-agendamentos">
+          <%= render dia[:tarefas] %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </nav>

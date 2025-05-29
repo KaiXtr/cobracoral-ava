@@ -1,4 +1,8 @@
 module AgendamentosHelper
+    def formatar_data_semana(data)
+        return data.strftime("%d/%m")
+    end
+
     def formatar_data_hora_agendamento(agendamento)
         label_data_hora_inicio = agendamento.data_inicio.strftime("%d/%m/%Y")
         label_data_hora_fim = agendamento.data_fim.strftime("%d/%m/%Y")

@@ -20,7 +20,7 @@
       %>
     <% end %>
   </div>
-  <div class="mensagens-user">
+  <div class="mensagens-user" tabIndex="-1" aria-label="Lista de mensagens">
     <div id="mensagens-list">
       <% last_mensagem = nil %>
       <% if @mensagens.length > 0 %>
@@ -40,9 +40,10 @@
           url: @form_submit_link,
           html: { method: :post } do |form| %>
           <%= form.rich_text_area :corpo,
+            id: 'mensagem-input-form-textarea',
             placeholder: 'Escreva uma mensagem...'
           %>
-          <button id="mensagem-input-form-submit" type="submit">
+          <button id="mensagem-input-form-submit" type="submit" aria-label="Enviar mensagem">
             <i class="fa-solid fa-paper-plane fa-xl"></i>
           </button>
         <% end %>

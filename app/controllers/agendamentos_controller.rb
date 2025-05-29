@@ -2,8 +2,42 @@ class AgendamentosController < ApplicationController
     before_action :set_agendamento, only: %i[ show edit update destroy ]
 
     def index
-        @agendamentos = Agendamento.all
-        Rails.logger.info "Acessando todos os agendamentos."
+        if !params[:dia] then
+            dnow = DateTime.now.to_date
+            redirect_to "/agendamentos/#{dnow.mday}/#{dnow.month}/#{dnow.year}"
+        else
+            @usuario = get_usuario_autenticado
+            nomes_dias = [
+                "Segunda", "Terça", "Quarta", "Quinta", "Sexta"
+            ]
+
+            @dias_semana = []
+            @dia_atual = Date.new(params[:ano].to_i,params[:mes].to_i,params[:dia].to_i)
+            @dia_ontem = @dia_atual.yesterday
+            @dia_amanha = @dia_atual.tomorrow
+            @estaNoCalendario = true
+
+            for i in 0..4 do
+                data_dia = "2025-05-#{26 + i}".to_date
+                agendamentos_dia = Agendamento.where(data_inicio: data_dia)
+                conteudos_dia = Conteudo.where(
+                    data_vencimento: data_dia..data_dia.next
+                )
+
+                puts agendamentos_dia
+                puts conteudos_dia
+
+                @dias_semana.push({
+                    nome_dia: "#{nomes_dias[i]}-feira",
+                    data_dia: data_dia,
+                    tarefas: agendamentos_dia + conteudos_dia
+                })
+            end
+
+            @agendamentos = Agendamento.all
+
+            Rails.logger.info "Acessando todos os agendamentos."
+        end
     end
 
     def new
@@ -35,6 +69,7 @@ class AgendamentosController < ApplicationController
 
         @agendamento = Agendamento.new(agendamento_params)
         @agendamentos = Agendamento.all
+        @dias_semana = []
 
         respond_to do |format|
             if @agendamento.save

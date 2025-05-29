@@ -16,7 +16,7 @@ module ConteudosHelper
         dataVencimento = conteudo.data_vencimento
 
         if dataVencimento then
-            vencimento = (dataVencimento.to_date - dataAgora.to_date).to_i
+            vencimento = (dataVencimento.to_datetime - dataAgora.to_datetime).to_i
 
             if vencimento < 0 then
                 return true
@@ -24,7 +24,7 @@ module ConteudosHelper
                 dataLiberacao = conteudo.data_liberacao
 
                 if dataLiberacao then
-                    liberacao = (dataLiberacao.to_date - dataAgora.to_date).to_i
+                    liberacao = (dataLiberacao.to_datetime - dataAgora.to_datetime).to_i
 
                     if liberacao > 0 then
                         return true

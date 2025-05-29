@@ -27,14 +27,10 @@
     </div>
     <ul id="header-buttons">
         <li>
-            <a href="/painel" tooltip-text="Painel">
-                <button class="icon-button" tabindex="-1">
-                    <i class="fa-solid fa-square-poll-horizontal fa-2xl"></i>
-                </button>
-            </a>
-        </li>
-        <li>
-            <a href="/comunicados" tooltip-text="Comunicados" aria-label="Comunicados">
+            <a href="/comunicados" tooltip-text="Comunicados"
+                aria-label="<%=
+                    @novos_comunicados > 0 ? "#{@novos_comunicados} novos " : ''
+                    %> Comunicados">
                 <button class="icon-button" tabindex="-1">
                     <i class="fa-solid fa-bell fa-2xl"></i>
                     <% if @novos_comunicados > 0 %>
@@ -67,7 +63,17 @@
             </a>
         </li>
         <li>
-            <a href="/mensagens" tooltip-text="Mensagens" aria-label="Mensagens">
+            <a href="/agendamentos" tooltip-text="Calendário">
+                <button class="icon-button" tabindex="-1">
+                    <i class="fa-solid fa-calendar fa-2xl"></i>
+                </button>
+            </a>
+        </li>
+        <li>
+            <a href="/mensagens" tooltip-text="Mensagens"
+                aria-label="<%=
+                    @novas_mensagens > 0 ? "#{@novas_mensagens} novas " : ''
+                    %> Mensagens">
                 <button class="icon-button" tabindex="-1">
                     <i class="fa-solid fa-comment fa-2xl"></i>
                     <% if @novas_mensagens > 0 %>

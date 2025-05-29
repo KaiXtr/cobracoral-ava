@@ -184,6 +184,72 @@
     }
 }
 
+.calendario-container {
+    width: 80vw;
+    min-height: 80vh;
+    display: block;
+
+    .calendario-horas { 
+        vertical-align: top;
+        padding: 10px;
+        margin-top: 5vw;
+        width: 3vw;
+        min-height: 80vh;
+        display: inline-block;
+
+        span {
+            color: var(--gray-color);
+            margin: 2vw 0px 2vw 0px;
+            display: block;
+        }
+    }
+
+    .calendario-coluna {
+        vertical-align: top;
+        width: 14vw;
+        min-height: 80vh;
+        display: inline-block;
+
+        .calendario-coluna-data {
+            padding: 0px 10px 0px 10px;
+            height: 5vw;
+
+            h3 {
+                margin-bottom: 10px;
+            }
+        }
+
+        .calendario-coluna-agendamentos {
+            border-right: 2px solid var(--nav-bg-secondary);
+            padding: 10px;
+            height: 80vh;
+
+            .agendamento-button {
+                font-size: 10pt;
+                background-color: var(--container-bg);
+                border: none;
+                border-radius: 20px;
+                padding: 10px;
+                margin-bottom: 5px;
+
+                &:hover {
+                    background-color: var(--container-secondary);
+                    cursor: pointer;
+                }
+            }
+        }
+
+        &.data-hoje {
+            background-color: var(--nav-bg-secondary);
+
+            .calendario-coluna-data {
+                font-weight: bold;
+                border-bottom: 2px solid var(--main-color);
+            }
+        }
+    }
+}
+
 iframe#python-console-embedded {
     width: 100%;
     height: 50vh;

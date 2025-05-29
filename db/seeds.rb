@@ -275,17 +275,85 @@ LocalAgendamento.create([
 
 puts "= locais de agendamentos populada."
 
-Agendamento.create(
-    id: 1,
-    usuario_id: 9,
-    local_agendamento_id: nil,
-    nome_agendamento: "2025/1",
-    data_inicio: DateTime.now,
-    data_fim: DateTime.now,
-    horario_inicio: nil,
-    horario_fim: nil,
-    repete: nil
-)
+Agendamento.create([
+    {
+        id: 1,
+        usuario_id: 9,
+        local_agendamento_id: nil,
+        nome_agendamento: "Ano novo",
+        data_inicio: "2025-01-01",
+        data_fim: "2025-01-01",
+        horario_inicio: nil,
+        horario_fim: nil,
+        repete: :todo_ano
+    },
+    {
+        id: 2,
+        usuario_id: 9,
+        local_agendamento_id: nil,
+        nome_agendamento: "Tiradentes",
+        data_inicio: "2025-04-21",
+        data_fim: "2025-04-21",
+        horario_inicio: nil,
+        horario_fim: nil,
+        repete: :todo_ano
+    },
+    {
+        id: 3,
+        usuario_id: 9,
+        local_agendamento_id: nil,
+        nome_agendamento: "Dia do trabalho",
+        data_inicio: "2025-05-01",
+        data_fim: "2025-05-01",
+        horario_inicio: nil,
+        horario_fim: nil,
+        repete: :todo_ano
+    },
+    {
+        id: 4,
+        usuario_id: 9,
+        local_agendamento_id: nil,
+        nome_agendamento: "Independência do Brasil",
+        data_inicio: "2025-09-07",
+        data_fim: "2025-09-07",
+        horario_inicio: nil,
+        horario_fim: nil,
+        repete: :todo_ano
+    },
+    {
+        id: 5,
+        usuario_id: 9,
+        local_agendamento_id: nil,
+        nome_agendamento: "Dia de Finados",
+        data_inicio: "2025-11-02",
+        data_fim: "2025-11-02",
+        horario_inicio: nil,
+        horario_fim: nil,
+        repete: :todo_ano
+    },
+    {
+        id: 6,
+        usuario_id: 9,
+        local_agendamento_id: nil,
+        nome_agendamento: "Proclamação da República",
+        data_inicio: "2025-11-15",
+        data_fim: "2025-11-15",
+        horario_inicio: nil,
+        horario_fim: nil,
+        repete: :todo_ano
+    },
+    {
+        id: 7,
+        usuario_id: 9,
+        local_agendamento_id: nil,
+        nome_agendamento: "Natal",
+        data_inicio: "2025-12-25",
+        data_fim: "2025-12-25",
+        horario_inicio: nil,
+        horario_fim: nil,
+        repete: :todo_ano
+    },
+])
 
 puts "= agendamentos populada."
 

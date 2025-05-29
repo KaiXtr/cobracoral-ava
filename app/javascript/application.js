@@ -6,6 +6,27 @@ import "trix"
 import "controllers"
 import "./context-menu"
 
+function openCloseOption (elementName) {
+    let link = document.getElementById(elementName + '-link');
+    if (link) {
+        link.addEventListener('mouseover', (e) => {
+            let iconOpen = document.getElementById(elementName + '-open');
+            let iconClose = document.getElementById(elementName + '-close');
+            
+            iconOpen.style.display = "inline-block";
+            iconClose.style.display = "none";
+            
+        })
+        link.addEventListener('mouseleave', (e) => {
+            let iconOpen = document.getElementById(elementName + '-open');
+            let iconClose = document.getElementById(elementName + '-close');
+            
+            iconOpen.style.display = "none";
+            iconClose.style.display = "inline-block";
+        })
+    }
+}
+
 function initHeader() {
     const header = document.getElementById('cobracoral-header');
 
@@ -19,26 +40,14 @@ function initHeader() {
                 header.classList.remove('header-compacto');
             }
         })
-    
-        let linkSair = document.getElementById('menu-perfil-sair-link');
-        if (linkSair) {
-            linkSair.addEventListener('mouseover', (e) => {
-                let iconOpen = document.getElementById('menu-perfil-sair-open');
-                let iconClose = document.getElementById('menu-perfil-sair-close');
-                
-                iconOpen.style.display = "inline-block";
-                iconClose.style.display = "none";
-                
-            })
-            linkSair.addEventListener('mouseleave', (e) => {
-                let iconOpen = document.getElementById('menu-perfil-sair-open');
-                let iconClose = document.getElementById('menu-perfil-sair-close');
-                
-                iconOpen.style.display = "none";
-                iconClose.style.display = "inline-block";
-            })
-        }
+        
+        openCloseOption('menu-perfil-email');
+        openCloseOption('menu-perfil-sair');
     }
+
+	let elementMensagemFormFocus = documento.getElementById('mensagem-input-form-textarea');
+    if (elementMensagemFormFocus)
+        elementMensagemFormFocus.focus();
 }
 
 const header = document.getElementById('cobracoral-header');
