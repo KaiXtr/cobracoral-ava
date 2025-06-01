@@ -1,9 +1,13 @@
 <a href="<%= @href %>"
     tooltip-text="<%= @tooltip %>"
+    aria-label="<%= @tooltip %>"
 
     <% if @open_modal %>
         data-turbo-frame="cobra-modal"
         data-remote="true"
+    <% end %>
+    <% if !@selectable %>
+        tabIndex="-1"
     <% end %>
     >
     <div class="open-modal-button <%= @button_class %>">

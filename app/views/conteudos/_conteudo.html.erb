@@ -24,6 +24,12 @@
         </div>
       </div>
     </a>
+  <% elsif @estaNoCalendario %>
+    <button class="agendamento-button">
+      <strong>
+          <%= conteudo.nome_conteudo %>
+      </strong>
+    </button>
   <% else %>
     <a
       href="/conteudos/<%= conteudo.id %>"

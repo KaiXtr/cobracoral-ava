@@ -1,0 +1,16 @@
+<a href="<%= agendamento_url(agendamento) %>"
+    data-turbo-frame="cobra-modal"
+    data-remote="true">
+    <button class="agendamento-button" tabIndex="-1">
+        <strong>
+            <%= agendamento.nome_agendamento %>
+        </strong>
+        <span>
+            <%= formatar_hora_agendamento(agendamento) %>
+        </span>
+        <div id="<%= agendamento.id %>" class="agendamento-hover">
+            <h3><%= agendamento.nome_agendamento %></h3>
+            <span><%= formatar_data_hora_agendamento(agendamento) %></span>
+        </div>
+    </button>
+</a>

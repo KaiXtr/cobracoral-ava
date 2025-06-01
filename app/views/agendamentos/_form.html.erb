@@ -1,0 +1,147 @@
+<%= form_with(model: agendamento) do |form| %>
+  <% if agendamento.errors.any? %>
+    <div style="color: red">
+      <ul>
+        <% agendamento.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= form.label :nome_agendamento, "Nome do agendamento" %>
+    <%= form.text_field :nome_agendamento, class: 'input-text' %>
+  </div>
+  <div class="form-group">
+    <%= form.label :descricao_agendamento, "Descrição" %>
+    <%= form.rich_text_area :descricao_agendamento %>
+  </div>
+  <div class="form-group">
+    <div class="form-column">
+      <%= form.label :data_inicio, "Data de início" %>
+      <%= form.date_field :data_inicio,
+        class: 'input-text',
+        value: @agendamento.data_inicio
+      %>
+    </div>
+    <div class="form-column">
+      <%= form.label :horario_inicio, "Horário de início" %>
+      <%= form.time_field :horario_inicio,
+        id: 'horario-inicio-input',
+        class: 'input-text',
+        min: '06:00',
+        value: @agendamento.horario_inicio,
+        include_seconds: false
+      %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-column">
+      <%= form.label :data_fim, "Data de fim" %>
+      <%= form.date_field :data_fim,
+        class: 'input-text',
+        value: @agendamento.data_fim
+      %>
+    </div>
+    <div class="form-column">
+      <%= form.label :horario_fim, "Horário de fim" %>
+      <%= form.time_field :horario_fim,
+        id: 'horario-fim-input',
+        class: 'input-text',
+        min: '06:00',
+        value: @agendamento.horario_fim,
+        include_seconds: false
+      %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-column">
+      <input type="checkbox"
+        class="cobra-checkbox"
+        name="is-repete"
+        onclick="
+          let repeteFields = document.getElementById('repete-fields');
+          if (event.target.checked) {
+            repeteFields.style = 'display: block';
+          } else {
+            repeteFields.style = 'display: none';
+          }"
+          onkeypress=""
+        />
+      Repete?
+      <div id="repete-fields" style="display: none">
+        <%= form.label :repete, "Repete em:" %>
+        <div class="select-box">
+          <%= form.select :repete,
+              options_for_select([
+                ['Todo dia', 'todo_mes'],
+                ['Toda semana', 'toda_semana'],
+                ['Todo mês', 'todo_mes'],
+                ['Todo ano', 'todo_ano']
+                ])
+          %>
+        </div>
+      </div>
+    </div>
+    <div class="form-column">
+      <input type="checkbox"
+        class="cobra-checkbox"
+        name="is-o-dia-todo"
+        onclick="
+          let horarioInicioInput = document.getElementById('horario-inicio-input');
+          let horarioFimInput = document.getElementById('horario-fim-input');
+          if (event.target.checked) {
+            horarioInicioInput.disabled = true;
+            horarioFimInput.disabled = true;
+          } else {
+            horarioInicioInput.disabled = false;
+            horarioFimInput.disabled = false;
+          }"
+          onkeypress=""
+        />
+      O dia todo
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="checkbox"
+      class="cobra-checkbox"
+      name="is-presencial"
+      onclick="
+        let localFields = document.getElementById('local-fields');
+        if (event.target.checked) {
+          localFields.style = 'display: block';
+        } else {
+          localFields.style = 'display: none';
+        }
+        let horarioInicioInput = document.getElementById('horario-inicio-input');
+        let horarioFimInput = document.getElementById('horario-fim-input');
+        horarioInicioInput.disabled = false;
+        horarioFimInput.disabled = false;
+        "
+        onkeypress=""
+      />
+    Presencial?
+    <div id="local-fields" style="display: none">
+      <div class="form-column">
+        <%= form.label :edificio, "Edifício:" %>
+        <div class="select-box">
+          <%= form.select :edificio,
+              options_for_select(@edificios_select)
+          %>
+        </div>
+      </div>
+      <div class="form-column">
+        <%= form.label :local, "Local:" %>
+        <div class="select-box">
+          <%= form.select :local,
+              options_for_select(@locais_select)
+          %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render CancelarSalvarButtonsComponent.new(
+    submit_text: 'Adicionar',
+    close_modal: true)
+  %>
+<% end %>

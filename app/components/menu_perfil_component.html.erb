@@ -12,7 +12,8 @@
             <% if @preferencias_usuario.pomodoro_ativar %>
                 <%= render PomodoroToolComponent.new(
                     preferencias_usuario: @preferencias_usuario,
-                    login_time: session[:login_time]
+                    login_time: session[:login_time],
+                    pomodoris_quant: session[:pomodoris_quant]
                     ) %>
             <% end %>
         </div>
@@ -26,7 +27,12 @@
         </li>
         <li>
             <a href="/usuarios/:id/caixa" target="_blank">
-                <i class="fa-solid fa-envelope fa-xl"></i>
+                <i id="menu-perfil-email-open"
+                    class="fa-solid fa-envelope-open-text fa-xl"
+                    style="display: none"></i>
+                <i id="menu-perfil-email-close"
+                    class="fa-solid fa-envelope fa-xl"
+                    style="display: inline-block"></i>
                 <span>Abrir caixa de entrada</span>
             </a>
         </li>
@@ -39,7 +45,7 @@
             </li>
         <% end %>
         <li>
-            <a onclick="abrirBarraPreferencias()" style="cursor: pointer;">
+            <a onclick="abrirBarraPreferencias()" style="cursor: pointer;" tabindex="0">
                 <i class="fa-solid fa-gear fa-xl"></i>
                 <span>Preferências</span>
             </a>

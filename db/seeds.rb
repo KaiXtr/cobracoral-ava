@@ -262,13 +262,108 @@ Turma.create([
 
 puts "= turmas populada."
 
+LocalAgendamento.create([
+    { id: 1, edificio: "Bloco X", local: "Sala 101" },
+    { id: 2, edificio: "Bloco X", local: "Sala 102" },
+    { id: 3, edificio: "Bloco X", local: "Sala 201" },
+    { id: 4, edificio: "Bloco X", local: "Sala 202" },
+    { id: 5, edificio: "Bloco Y", local: "Lab 1" },
+    { id: 6, edificio: "Bloco Y", local: "Lab 2" },
+    { id: 7, edificio: "Bloco Y", local: "Lab 3" },
+    { id: 8, edificio: "Bloco Y", local: "Lab 4" },
+])
+
+puts "= locais de agendamentos populada."
+
+Agendamento.create([
+    {
+        id: 1,
+        usuario_id: 9,
+        local_agendamento_id: nil,
+        nome_agendamento: "Ano novo",
+        data_inicio: "2025-01-01",
+        data_fim: "2025-01-01",
+        horario_inicio: nil,
+        horario_fim: nil,
+        repete: :todo_ano
+    },
+    {
+        id: 2,
+        usuario_id: 9,
+        local_agendamento_id: nil,
+        nome_agendamento: "Tiradentes",
+        data_inicio: "2025-04-21",
+        data_fim: "2025-04-21",
+        horario_inicio: nil,
+        horario_fim: nil,
+        repete: :todo_ano
+    },
+    {
+        id: 3,
+        usuario_id: 9,
+        local_agendamento_id: nil,
+        nome_agendamento: "Dia do trabalho",
+        data_inicio: "2025-05-01",
+        data_fim: "2025-05-01",
+        horario_inicio: nil,
+        horario_fim: nil,
+        repete: :todo_ano
+    },
+    {
+        id: 4,
+        usuario_id: 9,
+        local_agendamento_id: nil,
+        nome_agendamento: "Independência do Brasil",
+        data_inicio: "2025-09-07",
+        data_fim: "2025-09-07",
+        horario_inicio: nil,
+        horario_fim: nil,
+        repete: :todo_ano
+    },
+    {
+        id: 5,
+        usuario_id: 9,
+        local_agendamento_id: nil,
+        nome_agendamento: "Dia de Finados",
+        data_inicio: "2025-11-02",
+        data_fim: "2025-11-02",
+        horario_inicio: nil,
+        horario_fim: nil,
+        repete: :todo_ano
+    },
+    {
+        id: 6,
+        usuario_id: 9,
+        local_agendamento_id: nil,
+        nome_agendamento: "Proclamação da República",
+        data_inicio: "2025-11-15",
+        data_fim: "2025-11-15",
+        horario_inicio: nil,
+        horario_fim: nil,
+        repete: :todo_ano
+    },
+    {
+        id: 7,
+        usuario_id: 9,
+        local_agendamento_id: nil,
+        nome_agendamento: "Natal",
+        data_inicio: "2025-12-25",
+        data_fim: "2025-12-25",
+        horario_inicio: nil,
+        horario_fim: nil,
+        repete: :todo_ano
+    },
+])
+
+puts "= agendamentos populada."
+
 Matricula.create([
-    { usuario_id: 1, turma_id: 1, semestre: '2025/1'},
-    { usuario_id: 5, turma_id: 4, semestre: '2025/1'},
-    { usuario_id: 6, turma_id: 3, semestre: '2025/1'},
-    { usuario_id: 7, turma_id: 3, semestre: '2025/1'},
-    { usuario_id: 8, turma_id: 5, semestre: '2025/1'},
-    { usuario_id: 12, turma_id: 3, semestre: '2025/1'}
+    { usuario_id: 1, turma_id: 1, semestre: '2025/1' },
+    { usuario_id: 5, turma_id: 4, semestre: '2025/1' },
+    { usuario_id: 6, turma_id: 3, semestre: '2025/1' },
+    { usuario_id: 7, turma_id: 3, semestre: '2025/1' },
+    { usuario_id: 8, turma_id: 5, semestre: '2025/1' },
+    { usuario_id: 12, turma_id: 3, semestre: '2025/1' }
 ])
 
 puts "= matriculas populada."

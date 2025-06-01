@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :conteudos
   resources :leitura_conteudos
   resources :preferencias_usuario
+  resources :agendamentos
   
   root 'painel#index'
   
@@ -62,6 +63,8 @@ Rails.application.routes.draw do
   get '/conteudos/:id/salvar', to: 'conteudos#salvar'
   get '/conteudos/:id/deletar', to: 'conteudos#delete'
   get '/conteudos/:id/destroy', to: 'conteudos#destroy'
+
+  get '/agendamentos/:dia/:mes/:ano', to: 'agendamentos#index'
 
   get '/mensagens', to: 'mensagens#index'
   get '/mensagens/:id', to: 'mensagens#index'

@@ -46,18 +46,20 @@ a {
   text-decoration: none;
 }
 
-main.cobra-app-resting svg.cobracoral-icon {
+div#cobra-app-resting-bar {
+  background-color: var(--main-color);
   width: 100%;
-  margin-top: 35vh;
-  transform: scale(200%);
-}
+  height: 10vh;
+  padding-top: 5vh;
 
-main.cobra-app-resting h1 {
-  text-align: center;
-  width: 100%;
-  margin-top: 10vh;
-}
+  svg.cobracoral-icon {
+    transform: scale(100%);
+  }
 
+  h2 {
+    text-align: center;
+  }
+}
 
 div.cobra-javascript-disabled-warning {
   color: white;
@@ -100,7 +102,7 @@ div.cobra-javascript-disabled-warning {
   position: absolute;
 }
 
-[tooltip-text]:hover:after {
+[tooltip-text]:hover:after,[tooltip-text]:focus:after  {
   opacity: 100%;
   transition-duration: .2s;
   visibility: visible;
@@ -192,7 +194,8 @@ header#cobracoral-header {
   display: flex;
   z-index: 60;
 
-  button.icon-button {
+  .icon-button {
+    font-size: 8pt;
     background: none;
     color: black;
     border: none;
@@ -214,8 +217,9 @@ header#cobracoral-header {
       top: 5px;
     }
 
-    &:hover {
+    &:hover, &:focus {
       color: var(--white-main);
+      outline: none;
 
       .icon-button-counter {
         color: black;
@@ -249,8 +253,9 @@ header#cobracoral-header {
         font-size: 26pt;
         margin: 0px;
         
-        &:hover {
+        &:hover, &:focus {
           filter: brightness(200%);
+          outline: none;
         }
       }
 
@@ -269,13 +274,6 @@ header#cobracoral-header {
 
     li {
       display: inline-block;
-
-      button.abrir-menu:hover #menu-perfil,
-      button.abrir-menu:focus #menu-perfil,
-      button.abrir-menu #menu-perfil:focus-within {
-        visibility: visible;
-        opacity: 100%;
-      }
 
       #menu-perfil {
         color: var(--white-main);
@@ -353,8 +351,10 @@ header#cobracoral-header {
                 margin-right: 10px;
               }
             }
-            a:hover {
+
+            a:hover, a:focus {
               color: var(--red-dark);
+              outline: none;
             }
           }
         }
@@ -370,7 +370,7 @@ header#cobracoral-header {
   &.header-compacto {
     padding: 0vw 10vw 0vw 3vw;
     width: calc(100% - 13vw);
-    max-height: 10vh;
+    height: 10vh;
 
     button#header-open-nav-component {
       font-size: 8pt;
@@ -390,11 +390,13 @@ header#cobracoral-header {
       bottom: -200%;
     }
     
-    ul#header-buttons button.icon-button {
+    ul#header-buttons .icon-button {
       font-size: 8pt;
+      text-align: center;
       width: 4vw;
-      height: 3vw;
+      height: fit-content;
       margin: 0px;
+      display: inline-block;
 
       #menu-perfil {
         font-size: 10pt;
