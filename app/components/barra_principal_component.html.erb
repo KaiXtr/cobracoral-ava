@@ -94,5 +94,11 @@
         </li>
     </ul>
 </header>
+<% if @cobra_app_resting %>
+    <div id="cobra-app-resting-bar">
+        <h2>Hora de uma pausa.</h2>
+        <span>Retorne dentro de <%= @pomodoro_tempo_descanso %> minutos.</span>
+    </div>
+<% end %>
 <div id="cobracoral-header-spacing">
 </div>

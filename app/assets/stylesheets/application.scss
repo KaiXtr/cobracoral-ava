@@ -46,18 +46,20 @@ a {
   text-decoration: none;
 }
 
-main.cobra-app-resting svg.cobracoral-icon {
+div#cobra-app-resting-bar {
+  background-color: var(--main-color);
   width: 100%;
-  margin-top: 35vh;
-  transform: scale(200%);
-}
+  height: 10vh;
+  padding-top: 5vh;
 
-main.cobra-app-resting h1 {
-  text-align: center;
-  width: 100%;
-  margin-top: 10vh;
-}
+  svg.cobracoral-icon {
+    transform: scale(100%);
+  }
 
+  h2 {
+    text-align: center;
+  }
+}
 
 div.cobra-javascript-disabled-warning {
   color: white;
