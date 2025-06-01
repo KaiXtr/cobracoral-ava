@@ -189,6 +189,8 @@ textarea {
     padding: 25px;
     overflow: auto;
     scrollbar-width: none;
+    visibility: hidden;
+    margin-top: 10px;
 }
 
 #anotacoes-paleta {
@@ -211,6 +213,12 @@ textarea {
         width: 26px;
         height: 26px;
         border-radius: 50%;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .paleta-circle:hover {
+        transform: scale(1.2);
     }
 }
 
