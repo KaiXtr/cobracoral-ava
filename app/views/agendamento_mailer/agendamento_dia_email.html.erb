@@ -1,0 +1,13 @@
+<h1>Agendamento próximo</h1>
+<p>
+  Um agendamento criado por <%= @autor_agendamento %> no AVA irá vencer:
+</p>
+<div>
+    <h2><%= @agendamento.nome_agendamento %></h2>
+    <strong><%= @data_hora_agendamento %></strong>
+</div>
+<p>
+  Veja o agendamento completo em: <a href="<%= @link_agendamento %>" target="_blank">
+    <%= @link_agendamento %>
+  </a>
+</p>

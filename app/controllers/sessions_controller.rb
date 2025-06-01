@@ -146,7 +146,13 @@ class SessionsController < ApplicationController
 		Conteudo.all.each do |c|
 			ConteudoLiberadoJob.set(
 				wait_until: Date.tomorrow.at_beginning_of_day
-				).perform_later(Conteudo.find(c.id))
+				).perform_later(c)
+		end
+
+		Agendamento.all.each do |a|
+			AgendamentoDiaJob.set(
+				wait_until: a.data_inicio.at_beginning_of_day
+				).perform_later(a)
 		end
 
 		session[:login_email] = nil

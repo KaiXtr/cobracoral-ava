@@ -36,7 +36,7 @@ class MedidorGraficoComponent < ViewComponent::Base
         @label_entrada = @label_entrada.to_s + 'm'
       end
 
-      if @valor_entrada > 0 then
+      if @valor_entrada > 0 && @valor_max > 0 then
         @valor_entrada = 100/(@valor_max/@valor_entrada)
       end
     end
