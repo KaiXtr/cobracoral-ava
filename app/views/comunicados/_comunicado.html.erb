@@ -17,7 +17,9 @@
   <div class="comunicado-info">
     <% usuario = usuario_comunicado(comunicado.usuario_id) %>
     <div class="usuario-button">
-      <a href="/usuarios/<%= usuario.id %>" tabindex="-1">
+      <a href="/usuarios/<%= usuario.id %>"
+        aria-label="Publicado por <%= usuario.nome_completo %>"
+        tabindex="-1" >
         <div class="usuario-button-icon icon-larger">
           <% if usuario.avatar.attached? %>
             <%= image_tag(usuario.avatar) %>

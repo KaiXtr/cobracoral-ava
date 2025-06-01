@@ -29,7 +29,9 @@
       <%= form.time_field :horario_inicio,
         id: 'horario-inicio-input',
         class: 'input-text',
-        value: @agendamento.horario_inicio
+        min: '06:00',
+        value: @agendamento.horario_inicio,
+        include_seconds: false
       %>
     </div>
   </div>
@@ -46,7 +48,9 @@
       <%= form.time_field :horario_fim,
         id: 'horario-fim-input',
         class: 'input-text',
-        value: @agendamento.horario_fim
+        min: '06:00',
+        value: @agendamento.horario_fim,
+        include_seconds: false
       %>
     </div>
   </div>

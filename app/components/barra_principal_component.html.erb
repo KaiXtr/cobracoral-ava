@@ -7,7 +7,7 @@
         <i class="fa-solid fa-bars fa-2xl"></i>
     </button>
     <div class="header-logo">
-    <div class="header-logo-svg">
+    <div class="header-logo-svg" alt="Logotipo">
         <%= helpers.show_svg('cobracoral-logo.svg') %>
     </div>
     <div class="header-logo-info">
@@ -27,61 +27,57 @@
     </div>
     <ul id="header-buttons">
         <li>
-            <a href="/comunicados" tooltip-text="Comunicados"
+            <a href="/comunicados"
+                class="icon-button"
+                tooltip-text="Comunicados"
                 aria-label="<%=
                     @novos_comunicados > 0 ? "#{@novos_comunicados} novos " : ''
                     %> Comunicados">
-                <button class="icon-button" tabindex="-1">
-                    <i class="fa-solid fa-bell fa-2xl"></i>
-                    <% if @novos_comunicados > 0 %>
-                        <span class="icon-button-counter">
-                            <%= @novos_comunicados %>
-                        </span>
-                    <% end %>
-                </button>
+                <i class="fa-solid fa-bell fa-2xl"></i>
+                <% if @novos_comunicados > 0 %>
+                    <span class="icon-button-counter">
+                        <%= @novos_comunicados %>
+                    </span>
+                <% end %>
             </a>
         </li>
         <li>
-            <a href="/cursos" tooltip-text="Cursos" aria-label="Cursos">
-                <button class="icon-button" tabindex="-1">
-                    <i class="fa-solid fa-book-open fa-2xl"></i>
-                </button>
-            </a>
-        </li>
-        <!--li>
-            <a href="/ide" tooltip-text="Ambiente integrado de desenvolvimento">
-            <button class="icon-button" tabindex="-1">
-                <i class="fa-solid fa-code fa-2xl"></i>
-            </button>
-            </a>
-        </li-->
-        <li>
-            <a href="/tarefas" tooltip-text="Tarefas" aria-label="Tarefas">
-                <button class="icon-button" tabindex="-1">
-                    <i class="fa-solid fa-list-check fa-2xl"></i>
-                </button>
+            <a href="/cursos"
+                class="icon-button"
+                tooltip-text="Cursos"
+                aria-label="Cursos">
+                <i class="fa-solid fa-book-open fa-2xl"></i>
             </a>
         </li>
         <li>
-            <a href="/agendamentos" tooltip-text="Calendário">
-                <button class="icon-button" tabindex="-1">
-                    <i class="fa-solid fa-calendar fa-2xl"></i>
-                </button>
+            <a href="/tarefas"
+                class="icon-button"
+                tooltip-text="Tarefas"
+                aria-label="Tarefas">
+                <i class="fa-solid fa-list-check fa-2xl"></i>
             </a>
         </li>
         <li>
-            <a href="/mensagens" tooltip-text="Mensagens"
+            <a href="/agendamentos"
+                class="icon-button"
+                tooltip-text="Calendário"
+                aria-label="Agendamentos">
+                <i class="fa-solid fa-calendar fa-2xl"></i>
+            </a>
+        </li>
+        <li>
+            <a href="/mensagens"
+                class="icon-button"
+                tooltip-text="Mensagens"
                 aria-label="<%=
                     @novas_mensagens > 0 ? "#{@novas_mensagens} novas " : ''
                     %> Mensagens">
-                <button class="icon-button" tabindex="-1">
-                    <i class="fa-solid fa-comment fa-2xl"></i>
-                    <% if @novas_mensagens > 0 %>
-                        <span class="icon-button-counter">
-                            <%= @novas_mensagens %>
-                        </span>
-                    <% end %>
-                </button>
+                <i class="fa-solid fa-comment fa-2xl"></i>
+                <% if @novas_mensagens > 0 %>
+                    <span class="icon-button-counter">
+                        <%= @novas_mensagens %>
+                    </span>
+                <% end %>
             </a>
         </li>
         <li>

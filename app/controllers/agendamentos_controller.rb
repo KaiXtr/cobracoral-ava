@@ -66,20 +66,26 @@ class AgendamentosController < ApplicationController
                         data_dia.year, data_dia.month, data_dia.day,
                         9 + (hora * 2), 59
                     )
+                    tarefas_horario = Array.new()
 
-                    agendamento_hora = Agendamento.where(
+                    tarefas_horario += Agendamento.where(
                         data_inicio: data_dia,
                         horario_inicio: time_start..time_end,
                     )
-                    if agendamento_hora != nil && agendamento_hora.length > 0 then
-                        tarefas_buttons.push(agendamento_hora)
+                    tarefas_horario += Conteudo.where(
+                        data_vencimento: time_start..time_end
+                    )
+
+                    if tarefas_horario == nil || tarefas_horario.length == 0 then
+                        if DateTime.now.to_time.to_i < data_dia.to_time.to_i then
+                            tarefas_buttons.push(0)
+                        else
+                            tarefas_buttons.push(nil)
+                        end
                     else
-                        tarefas_buttons.push(nil)
+                        tarefas_buttons.push(tarefas_horario)
                     end
                 end
-
-                puts nome_dia
-                puts tarefas_buttons
 
                 @dias_semana.push({
                     nome_dia: nome_dia,
@@ -225,6 +231,6 @@ class AgendamentosController < ApplicationController
   
       # Only allow a list of trusted parameters through.
       def agendamento_params
-        params.require(:agendamento).permit(:nome_agendamento, :usuario_id, :local_agendamento_id, :data_inicio, :data_fim, :horario_inicio, :horario_fim, :repete)
+        params.require(:agendamento).permit(:nome_agendamento, :usuario_id, :local_agendamento_id, :data_inicio, :data_fim, :horario_inicio, :horario_fim, :repete, :descricao_agendamento)
       end
 end

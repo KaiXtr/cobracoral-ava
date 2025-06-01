@@ -536,17 +536,17 @@ textarea {
 
 footer.cobra-footer {
     font-size: 8pt;
-    color: var(--gray-color);
+    color: var(--container-gray-text);
     text-align: center;
     padding: 1vh 10vw 1vh 10vw;
     border-top: 1px solid var(--nav-bg-secondary);
     background-color: var(--nav-bg);
 
     a {
-        color: var(--gray-color);
+        color: var(--container-gray-text);
 
         &:hover, &:active, &:focus, &:visited {
-            color: var(--gray-color);
+            color: var(--container-gray-text);
         }
     }
 }

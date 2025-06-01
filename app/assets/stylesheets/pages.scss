@@ -77,13 +77,13 @@
 
     .comunicado-usuario-info {
         font-size: 10pt;
-        color: var(--gray-color);
+        color: var(--container-gray-text);
         display: block;
     }
 
     .comunicado-data {
         font-size: 10pt;
-        color: var(--gray-color);
+        color: var(--container-gray-text);
         display: block;
         margin-bottom: 10px;
     }
@@ -198,6 +198,10 @@ nav.calendario-nav {
     .calendario-tools {
         margin-left: 2vw;
         display: inline-block;
+
+        i {
+            min-width: 24px;
+        }
     }
 }
 
@@ -214,7 +218,7 @@ nav.calendario-nav {
         display: inline-block;
 
         span {
-            color: var(--gray-color);
+            color: var(--container-gray-text);
             margin: 2vh 0px 4.6vh 0px;
             display: block;
         }
@@ -449,7 +453,7 @@ nav.mensagens-nav {
             }
 
             .mensagem-recente {
-                color: var(--gray-color);
+                color: var(--container-gray-text);
                 font-size: 10pt;
                 font-weight: lighter;
                 width: 100%;
@@ -483,7 +487,7 @@ nav.mensagens-nav {
 
         #mensagens-vazio {
             text-align: center;
-            color: var(--gray-color);
+            color: var(--container-gray-text);
             width: 100%;
             margin-top: 40%;
             display: block;

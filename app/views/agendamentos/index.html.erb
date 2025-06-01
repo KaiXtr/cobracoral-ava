@@ -16,7 +16,7 @@
           console.log(form.action)
           form.submit();
         ">
-        <select>
+        <select aria-label="Mês atual do calendário">
           <% @meses_ano.each_with_index do |m, i| %>
             <% if @dia_atual.month == i + 1 %>
               <option value="<%= i + 1 %>" selected>
@@ -62,16 +62,21 @@
       <div class="calendario-coluna
         <%= @dia_atual == dia[:data_dia] ? 'data-hoje' : '' %>
         <%= (dia[:data_dia].wday == 0) || (dia[:data_dia].wday == 6) ? 'data-descanso' : '' %>
-      "
-        tabIndex="0" aria-label="Agendamentos de <%= dia[:nome_dia] %>">
+      ">
         <div class="calendario-coluna-data">
-          <h3><%= formatar_data_semana(dia[:data_dia]) %></h3>
-          <span><%= dia[:nome_dia] %></span>
+          <a href="/agendamentos/
+            <%= dia[:data_dia].mday %>/
+            <%= dia[:data_dia].month %>/
+            <%= dia[:data_dia].year %>"
+            aria-label="Agendamentos de <%= dia[:nome_dia] %>">
+            <h3><%= formatar_data_semana(dia[:data_dia]) %></h3>
+            <span><%= dia[:nome_dia] %></span>
+          </a>
         </div>
         <div class="calendario-coluna-agendamentos">
           <% for hora in 0..7 %>
             <div class="calendario-coluna-agendamentos-horario">
-              <% if dia[:tarefas_buttons][hora] == nil %>
+              <% if dia[:tarefas_buttons][hora] == 0 %>
                 <% if policy(@agendamento).new? %>
                   <%= render OpenModalButtonComponent.new(
                     href: "/agendamentos/new?" +
@@ -84,7 +89,7 @@
                     selectable: false)
                   %>
                 <% end %>
-              <% else %>
+              <% elsif dia[:tarefas_buttons][hora] != nil %>
                 <%= render dia[:tarefas_buttons][hora] %>
               <% end %>
             </div>
