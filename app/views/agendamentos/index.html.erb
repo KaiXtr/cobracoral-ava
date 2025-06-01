@@ -1,37 +1,94 @@
-<nav>
-  <h1>Calendário</h1>
-  <a href="/agendamentos/new" data-turbo-frame="cobra-modal" data-remote="true">
-    Criar agendamento
-  </a>
-  <a href=<%= "/agendamentos/#{@dia_ontem.mday}/#{@dia_ontem.month}/#{@dia_ontem.year}/" %>
-    aria-label="Semana anterior">
-    <i class="fa-solid fa-arrow-left fa-lg"></i>
-  </a>
-  <a href=<%= "/agendamentos/#{@dia_amanha.mday}/#{@dia_amanha.month}/#{@dia_amanha.year}/" %>
-    aria-label="Próxima semana">
-    <i class="fa-solid fa-arrow-right fa-lg"></i>
-  </a>
+<nav class="calendario-nav">
+  <div class="calendario-header">
+    <form id="select-month-form" method="get">
+      <div class="select-header"
+        onchange="
+          let form = document.getElementById('select-month-form');
+          let option = this.firstElementChild.children[0];
+          for (let i=0; i<this.firstElementChild.children.length; i++) {
+            if (this.firstElementChild.children[i].selected) {
+              option = this.firstElementChild.children[i];
+            }
+          }
+          form.action = '/agendamentos/<%= @dia_atual.mday %>/'
+          form.action += option.value;
+          form.action += '/<%= @dia_atual.year %>'
+          console.log(form.action)
+          form.submit();
+        ">
+        <select>
+          <% @meses_ano.each_with_index do |m, i| %>
+            <% if @dia_atual.month == i + 1 %>
+              <option value="<%= i + 1 %>" selected>
+                <%= m %>
+              </option>
+            <% else %>
+              <option value="<%= i + 1 %>">
+                <%= m %>
+              </option>
+            <% end %>
+          <% end %>
+        </select>
+      </div>
+    </form>
+    <div class="calendario-tools">
+      <a href=<%=
+        "/agendamentos/#{@dia_ontem.mday}/#{@dia_ontem.month}/#{@dia_ontem.year}/"
+        %>
+        aria-label="Semana anterior">
+        <i class="fa-solid fa-arrow-left fa-lg"></i>
+      </a>
+      <a href=<%=
+        "/agendamentos/#{@dia_amanha.mday}/#{@dia_amanha.month}/#{@dia_amanha.year}/"
+        %>
+        aria-label="Próxima semana">
+        <i class="fa-solid fa-arrow-right fa-lg"></i>
+      </a>
+    </div>
+  </div>
   <div class="calendario-container" tabIndex="0" aria-label="Calendário">
     <div class="calendario-horas">
       <% for hora in 0..7 %>
         <span>
           <% if hora == 0 %>
-            <%= "0#{8 + (hora * 2)}:00" %>
+            <%= "0#{@start_hora + (hora * 2)}:00" %>
           <% else %>
-            <%= "#{8 + (hora * 2)}:00" %>
+            <%= "#{@start_hora + (hora * 2)}:00" %>
           <% end %>
         </span>
       <% end %>
     </div>
     <% for dia in @dias_semana %>
-      <div class="calendario-coluna <%= @dia_atual == dia[:data_dia] ? 'data-hoje' : '' %>"
+      <div class="calendario-coluna
+        <%= @dia_atual == dia[:data_dia] ? 'data-hoje' : '' %>
+        <%= (dia[:data_dia].wday == 0) || (dia[:data_dia].wday == 6) ? 'data-descanso' : '' %>
+      "
         tabIndex="0" aria-label="Agendamentos de <%= dia[:nome_dia] %>">
         <div class="calendario-coluna-data">
           <h3><%= formatar_data_semana(dia[:data_dia]) %></h3>
           <span><%= dia[:nome_dia] %></span>
         </div>
         <div class="calendario-coluna-agendamentos">
-          <%= render dia[:tarefas] %>
+          <% for hora in 0..7 %>
+            <div class="calendario-coluna-agendamentos-horario">
+              <% if dia[:tarefas_buttons][hora] == nil %>
+                <% if policy(@agendamento).new? %>
+                  <%= render OpenModalButtonComponent.new(
+                    href: "/agendamentos/new?" +
+                      "d=#{dia[:data_dia].mday}&" +
+                      "m=#{dia[:data_dia].month}&" +
+                      "y=#{dia[:data_dia].year}&" +
+                      "h=#{@start_hora + (hora * 2)}",
+                    button_class: 'open-modal-agendamento',
+                    tooltip: "Criar agendamento às #{@start_hora + (hora * 2)}h",
+                    selectable: false)
+                  %>
+                <% end %>
+              <% else %>
+                <%= render dia[:tarefas_buttons][hora] %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>

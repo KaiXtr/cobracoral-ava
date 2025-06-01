@@ -5,6 +5,9 @@
         data-turbo-frame="cobra-modal"
         data-remote="true"
     <% end %>
+    <% if !@selectable %>
+        tabIndex="-1"
+    <% end %>
     >
     <div class="open-modal-button <%= @button_class %>">
         <i class="fa-solid fa-square-plus fa-xl"></i>

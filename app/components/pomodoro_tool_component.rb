@@ -15,6 +15,11 @@ class PomodoroToolComponent < ViewComponent::Base
         )
 
         pomodoris_max = preferencias_usuario.pomodoro_pomodoris_quant
-        @pomodoro_label = "#{pomodoris_max - pomodoris_quant + 1}/#{pomodoris_max}"
+
+        if @cobra_app_resting then
+            @pomodoro_label = "Em descanso"
+        else
+            @pomodoro_label = "#{pomodoris_max - pomodoris_quant + 1}/#{pomodoris_max}"
+        end
     end
 end

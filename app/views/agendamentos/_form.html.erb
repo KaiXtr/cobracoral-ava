@@ -13,23 +13,41 @@
     <%= form.text_field :nome_agendamento, class: 'input-text' %>
   </div>
   <div class="form-group">
+    <%= form.label :descricao_agendamento, "Descrição" %>
+    <%= form.rich_text_area :descricao_agendamento %>
+  </div>
+  <div class="form-group">
     <div class="form-column">
       <%= form.label :data_inicio, "Data de início" %>
-      <%= form.date_field :data_inicio, class: 'input-text', value: Date.today %>
+      <%= form.date_field :data_inicio,
+        class: 'input-text',
+        value: @agendamento.data_inicio
+      %>
     </div>
     <div class="form-column">
       <%= form.label :horario_inicio, "Horário de início" %>
-      <%= form.time_field :horario_inicio, id: 'horario-inicio-input', class: 'input-text' %>
+      <%= form.time_field :horario_inicio,
+        id: 'horario-inicio-input',
+        class: 'input-text',
+        value: @agendamento.horario_inicio
+      %>
     </div>
   </div>
   <div class="form-group">
     <div class="form-column">
       <%= form.label :data_fim, "Data de fim" %>
-      <%= form.date_field :data_fim, class: 'input-text', value: Date.today %>
+      <%= form.date_field :data_fim,
+        class: 'input-text',
+        value: @agendamento.data_fim
+      %>
     </div>
     <div class="form-column">
       <%= form.label :horario_fim, "Horário de fim" %>
-      <%= form.time_field :horario_fim, id: 'horario-fim-input', class: 'input-text' %>
+      <%= form.time_field :horario_fim,
+        id: 'horario-fim-input',
+        class: 'input-text',
+        value: @agendamento.horario_fim
+      %>
     </div>
   </div>
   <div class="form-group">
@@ -90,7 +108,12 @@
           localFields.style = 'display: block';
         } else {
           localFields.style = 'display: none';
-        }"
+        }
+        let horarioInicioInput = document.getElementById('horario-inicio-input');
+        let horarioFimInput = document.getElementById('horario-fim-input');
+        horarioInicioInput.disabled = false;
+        horarioFimInput.disabled = false;
+        "
         onkeypress=""
       />
     Presencial?

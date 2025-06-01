@@ -255,6 +255,36 @@ textarea {
     }
 }
 
+.select-header {
+    display: inline-block;
+    position: relative;
+    
+    select {
+        color: var(--select-box-color);
+        background-color: var(--nav-bg);
+        border: 2px solid var(--nav-bg);
+        font-size: 22pt;
+        font-weight: bold;
+        border-radius: 10px;
+        transition-duration: .2s;
+        padding: 1vw;
+    
+        &:hover {
+            background-color: var(--nav-bg-secondary);
+            cursor: pointer;
+        }
+    
+        &:focus {
+            border: 2px solid var(--main-color);
+            outline: none;
+        }
+
+        option {
+            font-size: 16pt;
+        }
+    }
+}
+
 .form-group input[type="date"],
 .form-group input[type="time"] {
     font-family: sans-serif;

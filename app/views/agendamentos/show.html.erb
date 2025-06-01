@@ -1,11 +1,17 @@
 <%= render CobraModalComponent.new() do %>
-    <strong>
-        <%= agendamento.nome_agendamento %>
-    </strong>
+    <h1>
+        <%= @agendamento.nome_agendamento %>
+    </h1>
     <div>
-        <%= formatar_data_hora_agendamento(agendamento) %>
+        <%= formatar_data_hora_agendamento(@agendamento) %>
     </div>
     <div>
-        <%= local_agendamento_label(agendamento) %>
+        <%= local_agendamento_label(@agendamento) %>
+    </div>
+    <div class="form-group">
+        <%= render CobraButtonComponent.new(
+            text: 'Fechar',
+            close_modal: true
+        ) %>
     </div>
 <% end %>

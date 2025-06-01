@@ -45,7 +45,7 @@ function initHeader() {
         openCloseOption('menu-perfil-sair');
     }
 
-	let elementMensagemFormFocus = documento.getElementById('mensagem-input-form-textarea');
+	let elementMensagemFormFocus = document.getElementById('mensagem-input-form-textarea');
     if (elementMensagemFormFocus)
         elementMensagemFormFocus.focus();
 }
