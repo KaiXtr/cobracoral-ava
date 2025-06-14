@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_22_042102) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_14_034045) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -62,6 +62,18 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_22_042102) do
     t.datetime "updated_at", null: false
     t.index ["local_agendamento_id"], name: "index_agendamentos_on_local_agendamento_id"
     t.index ["usuario_id"], name: "index_agendamentos_on_usuario_id"
+  end
+
+  create_table "assunto_solicitacaos", force: :cascade do |t|
+    t.string "enum_assunto"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "assunto_solicitacoes", force: :cascade do |t|
+    t.string "enum_assunto"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cargo_usuarios", force: :cascade do |t|
@@ -199,6 +211,22 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_22_042102) do
     t.index ["usuario_id"], name: "index_reacao_mensagens_on_usuario_id"
   end
 
+  create_table "solicitacao_denuncia", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "solicitacoes", force: :cascade do |t|
+    t.string "situacao"
+    t.text "observacoes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "usuario_id", null: false
+    t.integer "assunto_solicitacoes_id", null: false
+    t.index ["assunto_solicitacoes_id"], name: "index_solicitacoes_on_assunto_solicitacoes_id"
+    t.index ["usuario_id"], name: "index_solicitacoes_on_usuario_id"
+  end
+
   create_table "turmas", force: :cascade do |t|
     t.string "nome_turma"
     t.string "senha_acesso"
@@ -256,6 +284,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_22_042102) do
   add_foreign_key "reacao_comunicados", "usuarios"
   add_foreign_key "reacao_mensagens", "mensagens", column: "mensagem_id"
   add_foreign_key "reacao_mensagens", "usuarios"
+  add_foreign_key "solicitacoes", "assunto_solicitacoes", column: "assunto_solicitacoes_id"
+  add_foreign_key "solicitacoes", "usuarios"
   add_foreign_key "turmas", "cursos"
   add_foreign_key "unidade_disciplinas", "disciplinas"
 end

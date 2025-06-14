@@ -1,0 +1,53 @@
+<%= form_with(model: @solicitacao, url: solicitacoes_path) do |f| %>
+  <nav>
+    <a href="/solicitacoes" style="color: #AB0000;">
+      <i class="fa-solid fa-arrow-left"></i>
+      <small>Votar a minhas solicitações</small>
+    </a>
+    <div class="solicitacao-header">
+      <h1>Nova solicitação</h1>
+      <p>Mussum Ipsum, cacilds vidis litro abertis.  Manduma pindureta quium dia nois paga. Casamentiss faiz malandris se pirulitá. Detraxit consequat et quo num tendi nada. Mais vale um bebadis conhecidiss, que um alcoolatra anonimis.</p>
+    </div>
+    <div class="tipo-solicitacao">
+      <div class="tipo-solicitacao-select">
+        <h4>Tipo de solicitação:</h4>
+        <div class="select">
+            <%= f.select :assunto, @assunto_solicitacao.map {|a| a.enum_assunto.capitalize}%>
+        </div>
+      </div>
+      <p>
+      Mussum Ipsum, cacilds vidis litro abertis.  Manduma pindureta quium dia nois paga. Casamentiss faiz malandris se pirulitá. Detraxit consequat et quo num tendi nada. Mais vale um bebadis conhecidiss, que um alcoolatra anonimis.
+      </p>
+    </div>
+
+    <div class="detalhes detalhes-solicitacao">
+      <h2>Detalhes da solicitação</h2>
+      <hr class="separator-gray"/> 
+      <p><strong>Requerente:</strong> <span><%= @usuario.nome_completo%></span></p>
+      <p><strong>Curso:</strong> <span>Ciência da Computação</span></p>
+      <p><strong>Cargo:</strong> <span><%= @usuario.cargo_usuario.capitalize%></span></p>
+      <p><strong>Data da solicitação:</strong> <span><%= Date.today.strftime("%d/%m/%Y")%></span></p>
+      <p><strong>Previsão de atendimento:</strong> <span>3 dias</span></p>
+    </div>
+
+    <div id="atendimento" class="d-none">
+      <%= render "atendimento"%>
+    </div>
+
+    <div id="denuncia" class="d-none">
+      <%= render "denuncia"%>
+    </div>
+
+    <div id="utilizacao" class="d-none">
+      <%= render "utilizacao"%>
+    </div>
+
+    <div id="cadastro" class="d-none">
+      <%= render "cadastro"%>
+    </div>
+
+    <div id="atividades" class="d-none">
+      <%= render "atividades"%>
+    </div> 
+  </nav>
+<% end %>

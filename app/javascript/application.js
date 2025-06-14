@@ -5,6 +5,7 @@ import "trix"
 
 import "controllers"
 import "./context-menu"
+import "./solicitacoes"
 
 function openCloseOption (elementName) {
     let link = document.getElementById(elementName + '-link');

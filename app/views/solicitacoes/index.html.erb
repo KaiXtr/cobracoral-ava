@@ -1,0 +1,34 @@
+<nav>
+  <a href="/cursos" style="color: #AB0000;">
+    <i class="fa-solid fa-arrow-left"></i>
+    <small>Votar ao curso</small>
+  </a>
+  <h1>Minhas Solicitações</h1>
+  <p>Mussum Ipsum, cacilds vidis litro abertis.  Manduma pindureta quium dia nois paga. Casamentiss faiz malandris se pirulitá. Detraxit consequat et quo num tendi nada. Mais vale um bebadis conhecidiss, que um alcoolatra anonimis.</p>
+  <div class="nova-solicitacao">
+    <%= link_to "Nova solicitação", "/solicitacoes/new", class: "button-solicitacao", data:{turbo:false} %>
+    <div class="nova-solicitacao-icons">
+      <div class="separator"></div>
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <i class="fa-solid fa-arrow-up"></i>
+      <i class="fa-solid fa-ellipsis"></i>
+      <i class="fa-solid fa-sliders"></i>
+    </div>
+  </div>
+  <% @solicitacoes.each do |s|%>
+    <a href="/solicitacoes/<%= s.id%>" class="solicitacao-card">
+      <div class="solicitacao-card-info">
+        <strong><%= get_assunto(s.assunto_solicitacoes_id)%></strong>
+        <p><%= get_code%> - Aberto em <%= s.created_at.strftime("%d/%m/%Y às %H:%M")%></p>
+      </div>
+
+      <div class="status-container">
+        <span>Solicitada</span>
+
+        <div style="background: <%= get_status(s.situacao) %>" class="solicitacao-status">
+          <div class="solicitacao-status-overlay"></div>
+        </div>
+      </div>
+    </a>
+  <%end%>
+</nav>
