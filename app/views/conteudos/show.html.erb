@@ -19,8 +19,25 @@
       <%= formatar_data_vencimento(@conteudo.data_vencimento) %>
     </span>
 
-    <div class="conteudo-elementos">
+    <div class="conteudo-elementos" id="content">
       <%= @conteudo.corpo %>
+    </div>
+
+
+    <div id="annotation-area">
+      <div id="anotacoes-paleta">
+        <img src="/assets/pencil.png" />
+        <div class="paleta-circle" id="lightcoral" style="background-color: red;"></div>
+        <div class="paleta-circle" id="lightsalmon" style="background-color: orange;"></div>
+        <div class="paleta-circle" id="yellow" style="background-color: yellow;"></div>
+        <div class="paleta-circle" id="lightgreen" style="background-color: green;"></div>
+        <div class="paleta-circle" id="cyan" style="background-color: cyan;"></div>
+        <div class="paleta-circle" id="lightskyblue" style="background-color: darkblue;"></div>
+        <div class="paleta-circle" id="darkorchid" style="background-color: purple;"></div>
+        <div class="paleta-circle" id="lightpink" style="background-color: pink;"></div>
+        <div class="paleta-circle" id="delete" style="background-color: white;"></div>
+      </div>
+      <textarea placeholder="Insira texto..." id="text-area-anotacao"></textarea>
     </div>
     
     <%= render ConteudoNavButtonComponent.new(
@@ -29,3 +46,75 @@
     %>
   </div>
 </nav>
+
+<script>
+  const content = document.getElementById('content')
+  const anottationArea = document.getElementById('annotation-area')
+  const textAreaAnnotation = document.getElementById('text-area-anotacao')
+  const range = null;
+  let actualSelection = null;
+
+
+  content.addEventListener('mouseup', (event) => {
+    actualSelection = window.getSelection();
+    
+    if(actualSelection && !actualSelection.isCollapsed && content.contains(actualSelection.anchorNode)){
+      anottationArea.classList.add('visible');
+    }else{
+      anottationArea.classList.remove('visible');
+      actualSelection = null;
+    }
+  })
+
+  const paletaCircles = document.querySelectorAll('.paleta-circle');
+
+  paletaCircles.forEach((p) => {
+    p.addEventListener('mousedown', (event) => {
+      const color = p.id;
+      if(actualSelection && !actualSelection.isCollapsed && content.contains(actualSelection.anchorNode)){
+          if(color === 'delete'){
+            removeHighlight();
+            textAreaAnnotation.style.visibility = 'hidden';
+            return;
+          }
+          highlightText(color)
+          textAreaAnnotation.style.visibility = 'visible';
+      }
+    })
+  })
+
+  function highlightText(color){
+    if (actualSelection.rangeCount > 0) {
+      const range = actualSelection.getRangeAt(0);
+      if (!range.collapsed) {
+        const mark = document.createElement("mark");
+        mark.style.backgroundColor = color;
+
+        try {
+          range.surroundContents(mark);
+        } catch (e) {
+          const span = document.createElement("span");
+          span.innerHTML = range.toString();
+          span.style.backgroundColor = color;
+          range.deleteContents();
+          range.insertNode(span);
+        }
+
+        actualSelection.removeAllRanges();
+      }
+    }
+  }
+
+  function removeHighlight() {
+    const range = actualSelection.getRangeAt(0);
+    const container = range.commonAncestorContainer;
+
+    if (container.nodeType === 3) {
+      const mark = container.parentElement;
+      if (mark.tagName === 'MARK') {
+        const parent = mark.parentNode;
+        parent.replaceChild(document.createTextNode(mark.textContent), mark);
+      }
+    }
+  }
+</script>

@@ -49,6 +49,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_14_034045) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "anotacaos", force: :cascade do |t|
+    t.integer "leitura_conteudo_id", null: false
+    t.integer "ln"
+    t.integer "col"
+    t.string "cor_anotacao"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["leitura_conteudo_id"], name: "index_anotacaos_on_leitura_conteudo_id"
+  end
+
   create_table "agendamentos", force: :cascade do |t|
     t.string "nome_agendamento", null: false
     t.integer "usuario_id", null: false
