@@ -1,0 +1,49 @@
+<%= form_with(model: @solicitacao_denuncia, url: solicitacoes_path) do |f| %>
+  <div class="detalhes detalhes-denuncia">
+    <h2>Detalhes da denúncia</h2>
+    <hr class="separator-gray" />
+    <div class="solicitacao-form w-50 mt-1">
+      <%= f.label :nome_envolvido, "Nome do envolvido: " %>
+      <%= f.text_field :nome_envolvido, placeholder: "Texto..." %>
+    </div>
+    <div class="flex">
+      <div>
+        <div class="solicitacao-form mt-1">
+          <%= f.label :data, "Data do Ocorrido: " %>
+          <%= f.date_field :data %>
+        </div>
+      </div>
+      <div>
+        <div class="select select-denuncia mt-1">
+          <%= f.label :data, "Tipo de denúncia: " %>
+          <%= f.select :tipo, ["Assédio sexual", "Abuso de autoridade"] %>
+        </div>
+      </div>
+    </div>
+
+    <div class="solicitacao-form mt-1">
+      <%= f.label :descricao, "Descrição: " %>
+      <%= f.text_field :descricao, placeholder: "Texto..." %>
+    </div>
+
+    <div class="solicitacao-form mt-1 d-none">
+      <%= f.hidden_field :assunto_solicitacao, value: 1 %>
+    </div>
+
+    <div class="solicitacao-form mt-1">
+      <%= f.label :observacoes, "Observações: " %>
+      <%= f.text_field :observacoes, placeholder: "Texto..." %>
+    </div>
+    <div class="solicitacao-checkbox">
+      <%= f.check_box :termo1 %>
+      <%= f.label :termo1, "Declaro que todas as informações acima são factíveis com o ocorrido." %>
+    </div>
+    <div class="solicitacao-checkbox">
+      <%= f.check_box :termo2 %>
+      <%= f.label :termo2, "Estou ciente de que denúncias falsas podem me causar prejuízos com a minha instituição de ensino superior." %>
+    </div>
+    <div class="solicitacao-submit">
+        <%= f.submit "Enviar denúncia", disabled: true, id: "denuncia_submit" %>
+      </div> 
+  </div>
+<%end%>

@@ -1,0 +1,22 @@
+<%= form_with(model: @solicitacao, url: solicitacoes_path) do |f| %>
+  <div class="detalhes detalhes-atendimento">
+    <h2>Detalhes do atendimento</h2>
+    <hr class="separator-gray" />
+    <h4>Razão do atendimento: </h4>
+    <div class="select"> 
+      <%= f.select :atendimento, ["Ausências"] %>
+    </div>
+    <h4>Observações: </h4>
+    <div class="solicitacao-form">
+      <%= f.text_field :observacoes, placeholder: "Texto..." %>
+    </div>
+    <h4>Anexos: </h4>
+    <div id="anexo_atendimentos" class="open-modal-button solicitacao-modal mt-3"> 
+      <%= f.file_field :anexos, multiples: true, class: "d-none"%>
+      <i class="fa-solid fa-square-plus fa-xl"></i>
+    </div>
+    <div class="solicitacao-submit">
+      <%= f.submit "Enviar solicitação", disabled: true%>
+    </div> 
+  </div>
+<%end%>

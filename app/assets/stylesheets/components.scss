@@ -28,7 +28,8 @@
         z-index: -1;
     }
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         color: var(--cobra-button-color-hover);
 
         &:before {
@@ -164,7 +165,7 @@
 #cobra-auth-code-field {
     text-align: center;
     margin: 2vw;
-    
+
     .cobra-auth-code-input {
         font-size: 26pt;
         font-weight: bold;
@@ -218,7 +219,7 @@ textarea {
             background-color: var(--form-input-hover-bg-color);
             cursor: pointer;
         }
-    
+
         &:focus {
             box-shadow: 0px 0px 10px var(--main-color);
             outline: none;
@@ -258,7 +259,7 @@ textarea {
 .select-header {
     display: inline-block;
     position: relative;
-    
+
     select {
         color: var(--select-box-color);
         background-color: var(--nav-bg);
@@ -268,12 +269,12 @@ textarea {
         border-radius: 10px;
         transition-duration: .2s;
         padding: 1vw;
-    
+
         &:hover {
             background-color: var(--nav-bg-secondary);
             cursor: pointer;
         }
-    
+
         &:focus {
             border: 2px solid var(--main-color);
             outline: none;
@@ -644,9 +645,11 @@ footer.cobra-footer {
     a {
         color: var(--container-gray-text);
 
-        &:hover, &:active, &:focus, &:visited {
+        &:hover,
+        &:active,
+        &:focus,
+        &:visited {
             color: var(--container-gray-text);
         }
     }
 }
-

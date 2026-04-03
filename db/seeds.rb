@@ -713,3 +713,70 @@ for i in 1..5 do
 end
 
 puts "= mensagens populada."
+
+AssuntoSolicitacao.create(
+    [
+        {
+            id: 1,
+            enum_assunto: "denúncia"
+        },
+        {
+            id: 2,
+            enum_assunto: "atendimento psicopedagógico"
+        },
+        {
+            id: 3,
+            enum_assunto: "utilização sala de aula"
+        },
+        {
+            id: 4,
+            enum_assunto: "cadastro disciplina"
+        },
+        {
+            id: 5,
+            enum_assunto: "recuperação de senha"
+        },
+        {
+            id: 6,
+            enum_assunto: "Atividades complementares"
+        }
+    ]
+)
+
+puts "= assunto solicitação populada."
+
+Solicitacao.create(
+    [
+        {
+            id: 1,
+            usuario_id: 2,
+            assunto_solicitacoes_id: 1,
+            situacao: "Deferida",
+            observacoes: "Aquela"
+        },
+        {
+            id: 2,
+            usuario_id: 2,
+            assunto_solicitacoes_id: 2,
+            situacao: "Solicitada",
+            observacoes: "Aquela"
+        },
+        {
+            id: 3,
+            usuario_id: 2,
+            assunto_solicitacoes_id: 3,
+            situacao: "Aguardando Resposta",
+            observacoes: "Aquela"
+        },
+        {
+            id: 4,
+            usuario_id: 2,
+            assunto_solicitacoes_id: 4,
+            situacao: "Indeferida",
+            observacoes: "Aquela"
+        }
+    ]
+)
+
+puts "= solicitações populada."
+

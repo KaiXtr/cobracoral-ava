@@ -1,0 +1,42 @@
+<%= form_with(model: @solicitacao, url: solicitacoes_path) do |f| %>
+  <div class="detalhes detalhes-utilizacao">
+    <h2>Detalhes da atividade</h2>
+    <hr class="separator-gray" />
+    <div class="flex">
+      <div class="select">
+        <%= f.label :edificio, "Tipo de atividade: " %>
+        <%= f.select :edificio, ["Participação em banca de TCC"] %>
+      </div>
+      <div class="select w-100 ml-2 select-w-100">
+        <%= f.label :sala, "Atividade realizada: " %>
+        <%= f.select :sala, ["Ouvinte de banca de TCC com duração de até 1h"] %>
+      </div>
+    </div>
+
+    <div class="flex gap mt-3">
+      <div class="solicitacao-form">
+        <%= f.label :inicio, "Data de início da atividade: " %>
+        <%= f.date_field :inicio %>
+      </div>
+      <div class="solicitacao-form">
+        <%= f.label :fim, "Data de fim da atividade: " %>
+        <%= f.date_field :fim %>
+      </div>
+    </div>
+
+    <div class="solicitacao-form mt-3">
+      <%= f.label :observacoes, "Observacoes: " %>
+      <%= f.text_field :observacoes, placeholder: "Texto..." %>
+    </div>
+    <h4>Anexos: </h4>
+    <div id="anexo_atividades" class="open-modal-button solicitacao-modal mt-3"> 
+      <%= f.file_field :anexos, multiples: true, class: "d-none"%>
+      <i class="fa-solid fa-square-plus fa-xl"></i>
+    </div>
+
+    <div class="solicitacao-submit">
+      <%= f.submit "Enviar solicitação", disabled: true%>
+    </div> 
+
+  </div>
+<%end%>

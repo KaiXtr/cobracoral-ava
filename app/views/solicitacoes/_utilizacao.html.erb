@@ -1,0 +1,52 @@
+<%= form_with(model: @solicitacao, url: solicitacoes_path) do |f| %>
+  <div class="detalhes detalhes-utilizacao">
+    <h2>Detalhes do pedido</h2>
+    <hr class="separator-gray" />
+    <div class="flex">
+      <div class="select">
+        <%= f.label :edificio, "Edifício: " %>
+        <%= f.select :edificio, ["Bloco A"] %>
+      </div>
+      <div class="select">
+        <%= f.label :sala, "Sala: " %>
+        <%= f.select :sala, ["Lab 2"] %>
+      </div>
+      <div class="select">
+        <%= f.label :finalidade, "Finalidade: " %>
+        <%= f.select :finalidade, ["Aula da disciplina"] %>
+      </div>
+    </div>
+
+    <div class="flex gap mt-3">
+      <div class="solicitacao-form">
+        <%= f.label :horario, "Horário do uso da sala: " %>
+        <%= f.time_field :horario %>
+      </div>
+      <div class="solicitacao-form">
+        <%= f.label :dias_semana, "Dias da semana: " %>
+        <%= f.time_field :dias_semana %>
+      </div>
+    </div>
+
+    <div class="flex gap mt-3">
+      <div class="solicitacao-form">
+        <%= f.label :inicio, "Início do uso da sala: " %>
+        <%= f.date_field :inicio %>
+      </div>
+      <div class="solicitacao-form">
+        <%= f.label :fim, "Fim do uso sala: " %>
+        <%= f.date_field :fim %>
+      </div>
+    </div>
+
+    <div class="solicitacao-form mt-3">
+      <%= f.label :observacoes, "Observacoes: " %>
+      <%= f.text_field :observacoes, placeholder: "Texto..." %>
+    </div>
+
+    <div class="solicitacao-submit">
+      <%= f.submit "Enviar solicitação", disabled: true%>
+      <%= f.submit "Enviar e pedir nova", disabled: true%>
+    </div> 
+  </div>
+<%end%>

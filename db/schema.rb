@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema[7.2].define(version: 2025_06_01_133454) do
-=======
-ActiveRecord::Schema[7.2].define(version: 2025_05_22_042102) do
->>>>>>> v1-corallinus
+ActiveRecord::Schema[7.2].define(version: 2025_06_14_034045) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -76,6 +72,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_22_042102) do
     t.datetime "updated_at", null: false
     t.index ["local_agendamento_id"], name: "index_agendamentos_on_local_agendamento_id"
     t.index ["usuario_id"], name: "index_agendamentos_on_usuario_id"
+  end
+
+  create_table "assunto_solicitacoes", force: :cascade do |t|
+    t.string "enum_assunto"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cargo_usuarios", force: :cascade do |t|
@@ -213,6 +215,28 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_22_042102) do
     t.index ["usuario_id"], name: "index_reacao_mensagens_on_usuario_id"
   end
 
+  create_table "solicitacao_denuncia", force: :cascade do |t|
+    t.string "nome_envolvido"
+    t.date "data_ocorrido"
+    t.string "tipo_denuncia"
+    t.text "descricao"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "solicitacoes_id", null: false
+    t.index ["solicitacoes_id"], name: "index_solicitacao_denuncia_on_solicitacoes_id"
+  end
+
+  create_table "solicitacoes", force: :cascade do |t|
+    t.string "situacao"
+    t.text "observacoes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "usuario_id", null: false
+    t.integer "assunto_solicitacoes_id", null: false
+    t.index ["assunto_solicitacoes_id"], name: "index_solicitacoes_on_assunto_solicitacoes_id"
+    t.index ["usuario_id"], name: "index_solicitacoes_on_usuario_id"
+  end
+
   create_table "turmas", force: :cascade do |t|
     t.string "nome_turma"
     t.string "senha_acesso"
@@ -247,15 +271,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_22_042102) do
     t.integer "acessos_count"
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "anotacaos", "leitura_conteudos"
-  add_foreign_key "agendamentos", "local_agendamentos"
-  add_foreign_key "agendamentos", "usuarios"
-  add_foreign_key "comunicados", "disciplinas"
-  add_foreign_key "comunicados", "turmas"
-  add_foreign_key "comunicados", "usuarios"
-  add_foreign_key "conteudos", "unidade_disciplinas"
   add_foreign_key "cursos", "usuarios"
   add_foreign_key "disciplinas", "cursos"
   add_foreign_key "disciplinas", "turmas"
@@ -271,6 +286,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_22_042102) do
   add_foreign_key "reacao_comunicados", "usuarios"
   add_foreign_key "reacao_mensagens", "mensagens", column: "mensagem_id"
   add_foreign_key "reacao_mensagens", "usuarios"
+  add_foreign_key "solicitacao_denuncia", "solicitacoes", column: "solicitacoes_id"
+  add_foreign_key "solicitacoes", "assunto_solicitacoes", column: "assunto_solicitacoes_id"
+  add_foreign_key "solicitacoes", "usuarios"
   add_foreign_key "turmas", "cursos"
   add_foreign_key "unidade_disciplinas", "disciplinas"
 end
