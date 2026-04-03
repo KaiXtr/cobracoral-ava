@@ -5,58 +5,39 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= favicon_link_tag asset_path('favicon.png') %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <script src="https://kit.fontawesome.com/597fea8ed7.js" crossorigin="anonymous"></script>
-
     <%= javascript_importmap_tags %>
-    <script type="text/javascript">
-        function abrirBarraLateral() {
-            let barra = document.getElementById('barra-lateral');
-            if (barra.style.visibility == 'visible') {
-                barra.style.visibility = 'hidden';
-                barra.style.opacity = '0%';
-            } else {
-                barra.style.visibility = 'visible';
-                barra.style.opacity = '100%';
-            }
-        }
-
-        function abrirBarraPreferencias() {
-          let barra = document.getElementById('barra-lateral-preferencias');
-          if (barra.style.visibility == 'visible') {
-              barra.style.visibility = 'hidden';
-              barra.style.opacity = '0%';
-          } else {
-              barra.style.visibility = 'visible';
-              barra.style.opacity = '100%';
-          }
-      }
-    </script>
+    <%= javascript_include_tag 'components' %>
   </head>
   <body>
-    <% if @cobra_app_resting then %>
-      <main class="cobra-app-resting">
-        <%= render ContextMenuComponent.new() %>
-		    <%= show_svg('cobracoral-logo.svg') %>
-        <h1>Hora de uma pausa.</h1>
-        <span>Retorne dentro de <%= @pomodoro_tempo_descanso %> minutos.</span>
-      </main>
-    <% else %>
-      <main class="cobra-app">
-        <%= turbo_frame_tag "cobra-modal", id: "cobra-modal" %>
-        <%= render ContextMenuComponent.new() %>
-        <%= render BarraPrincipalComponent.new(usuario_autenticado: @usuario_autenticado) %>
-        <%= render BarraLateralNavegacaoComponent.new(usuario_autenticado: @usuario_autenticado) %>
-        <%= render BarraLateralPreferenciasComponent.new(
-          preferencias_usuario: @preferencias_usuario,
-          usuario_autenticado: @usuario_autenticado
-        ) %>
-        <%= render NotificacaoComponent.new(mensagem: notice) %>
-        <%= yield %>
-        <%= render RodapeComponent.new() %>
-      </main>
-    <% end %>
+    <noscript>
+      <div class="cobra-javascript-disabled-warning">
+        <p>
+          Você não pode navegar na plataforma com o Javascript desativado. Por favor, ative o Javascript e desative extensões que possam estar causando mal funcionamento da plataforma.
+        </p>
+      </div>
+    </noscript>
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <main class="cobra-app">
+      <%= turbo_frame_tag "cobra-modal", id: "cobra-modal" %>
+      <%= render ContextMenuComponent.new() %>
+      <%= render BarraPrincipalComponent.new(usuario_autenticado: @usuario_autenticado) %>
+      <%= render BarraLateralNavegacaoComponent.new(usuario_autenticado: @usuario_autenticado) %>
+      <%= render BarraLateralPreferenciasComponent.new(
+        preferencias_usuario: @preferencias_usuario,
+        usuario_autenticado: @usuario_autenticado
+      ) %>
+      <%= render NotificacaoComponent.new(mensagem: notice) %>
+      <%= yield %>
+      <%= render RodapeComponent.new() %>
+    </main>
   </body>
 </html>

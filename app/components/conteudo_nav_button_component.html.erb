@@ -1,15 +1,15 @@
 <div class="button-group">
     <% if @conteudoAtual.id - 1 > 0 %>
-        <a href="/conteudos/<%= @conteudoAtual.id - 1 %>">
-        <button class="cobra-button">Conteúdo anterior</button>
+        <a href="/conteudos/<%= @conteudoAtual.id - 1 %>" tabIndex="-1">
+            <button class="cobra-button">Conteúdo anterior</button>
         </a>
     <% end %>
-    <a href="/conteudos/<%= @conteudoAtual.id %>/salvar">
+    <a href="/conteudos/<%= @conteudoAtual.id %>/salvar" tabIndex="-1">
         <button class="cobra-button">
             <% if @proximoConteudo %>
-            Próximo conteúdo: <%= @proximoConteudo.nome_conteudo %>
+                Próximo conteúdo: <%= @proximoConteudo.nome_conteudo %>
             <% else %>
-            Voltar à disciplina
+                Voltar à disciplina
             <% end %>
         </button>
     </a>

@@ -2,6 +2,7 @@
     <% if @usuario.avatar.attached? %>
         <div class="usuario-banner-photo">
             <%= image_tag(@usuario.avatar) %>
+            <span class="usuario-status">💭</span>
         </div>
     <% else %>
         <div class="usuario-banner-icon">

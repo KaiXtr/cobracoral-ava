@@ -3,6 +3,7 @@
 class CobraButtonComponent < ViewComponent::Base
   def initialize(
       text:,
+      id: nil,
       submit: false,
       href: nil,
       onclick: nil,
@@ -12,6 +13,7 @@ class CobraButtonComponent < ViewComponent::Base
     )
     @type = submit ? 'submit' : 'button'
     @text = text
+    @id = id
     @href = href
     @onclick = onclick
     @enable_turbo = enable_turbo

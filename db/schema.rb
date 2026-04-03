@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.2].define(version: 2025_06_01_133454) do
+=======
+ActiveRecord::Schema[7.2].define(version: 2025_05_22_042102) do
+>>>>>>> v1-corallinus
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -24,8 +28,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_01_133454) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -44,7 +48,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_01_133454) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -59,12 +63,36 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_01_133454) do
     t.index ["leitura_conteudo_id"], name: "index_anotacaos_on_leitura_conteudo_id"
   end
 
+  create_table "agendamentos", force: :cascade do |t|
+    t.string "nome_agendamento", null: false
+    t.integer "usuario_id", null: false
+    t.integer "local_agendamento_id"
+    t.date "data_inicio", null: false
+    t.date "data_fim", null: false
+    t.time "horario_inicio"
+    t.time "horario_fim"
+    t.string "repete"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["local_agendamento_id"], name: "index_agendamentos_on_local_agendamento_id"
+    t.index ["usuario_id"], name: "index_agendamentos_on_usuario_id"
+  end
+
+  create_table "cargo_usuarios", force: :cascade do |t|
+    t.string "enumCargoFeminino"
+    t.string "enumCargoMasculino"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "comunicados", force: :cascade do |t|
     t.integer "usuario_id", null: false
-    t.integer "turma_id", null: false
+    t.integer "turma_id"
+    t.integer "disciplina_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "visibilidade_comunicado", null: false
+    t.index ["disciplina_id"], name: "index_comunicados_on_disciplina_id"
     t.index ["turma_id"], name: "index_comunicados_on_turma_id"
     t.index ["usuario_id"], name: "index_comunicados_on_usuario_id"
   end
@@ -112,6 +140,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_01_133454) do
     t.index ["usuario_id"], name: "index_leitura_conteudos_on_usuario_id"
   end
 
+  create_table "local_agendamentos", force: :cascade do |t|
+    t.string "edificio"
+    t.string "local"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "matriculas", force: :cascade do |t|
     t.integer "turma_id", null: false
     t.integer "usuario_id", null: false
@@ -122,30 +157,40 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_01_133454) do
     t.index ["usuario_id"], name: "index_matriculas_on_usuario_id"
   end
 
-  create_table "preferencias_usuario", force: :cascade do |t|
-    t.integer "usuario_id", null: false
-    t.string "idioma"
-    t.string "tema"
-    t.boolean "avaliacao_exibir_tempo"
-    t.boolean "avaliacao_exibir_progresso"
-    t.boolean "pomodoro_ativar"
-    t.integer "pomodoro_pomodoris_tempo"
-    t.integer "pomodoro_descanso"
-    t.integer "pomodoro_pomodoris_quant"
-    t.boolean "pomodoro_hibernar"
-    t.boolean "pomodoro_logoff"
-    t.boolean "notificacao_novo_acesso"
-    t.boolean "notificacao_comunicados_coordenacao"
-    t.boolean "notificacao_comunicados_turma"
-    t.boolean "notificacao_agendamentos"
-    t.boolean "notificacao_avaliacao_liberada"
-    t.boolean "notificacao_conteudo_liberado"
-    t.boolean "notificacao_nota_lancada"
-    t.boolean "notificacao_nova_mensagem"
-    t.boolean "notificacao_situacao_solicitacao"
+  create_table "mensagens", force: :cascade do |t|
+    t.integer "remetente_id", null: false
+    t.integer "destinatario_id", null: false
+    t.boolean "is_privada", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["usuario_id"], name: "index_preferencias_usuario_on_user_id"
+    t.index ["destinatario_id"], name: "index_mensagens_on_destinatario_id"
+    t.index ["remetente_id"], name: "index_mensagens_on_remetente_id"
+  end
+
+  create_table "preferencias_usuario", force: :cascade do |t|
+    t.integer "usuario_id", null: false
+    t.string "idioma", default: "pt-BR"
+    t.string "tema", default: "default"
+    t.boolean "avaliacao_exibir_tempo", default: true
+    t.boolean "avaliacao_exibir_progresso", default: true
+    t.boolean "pomodoro_ativar", default: true
+    t.integer "pomodoro_pomodoris_tempo", default: 25
+    t.integer "pomodoro_descanso", default: 5
+    t.integer "pomodoro_pomodoris_quant", default: 4
+    t.boolean "pomodoro_hibernar", default: true
+    t.boolean "pomodoro_logoff", default: false
+    t.boolean "notificacao_novo_acesso", default: true
+    t.boolean "notificacao_comunicados_coordenacao", default: true
+    t.boolean "notificacao_comunicados_turma", default: true
+    t.boolean "notificacao_agendamentos", default: true
+    t.boolean "notificacao_avaliacao_liberada", default: true
+    t.boolean "notificacao_conteudo_liberado", default: true
+    t.boolean "notificacao_nota_lancada", default: true
+    t.boolean "notificacao_nova_mensagem", default: true
+    t.boolean "notificacao_situacao_solicitacao", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["usuario_id"], name: "index_preferencias_usuario_on_usuario_id"
   end
 
   create_table "reacao_comunicados", force: :cascade do |t|
@@ -156,6 +201,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_01_133454) do
     t.datetime "updated_at", null: false
     t.index ["comunicado_id"], name: "index_reacao_comunicados_on_comunicado_id"
     t.index ["usuario_id"], name: "index_reacao_comunicados_on_usuario_id"
+  end
+
+  create_table "reacao_mensagens", force: :cascade do |t|
+    t.integer "mensagem_id", null: false
+    t.integer "usuario_id", null: false
+    t.string "emoji"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mensagem_id"], name: "index_reacao_mensagens_on_mensagem_id"
+    t.index ["usuario_id"], name: "index_reacao_mensagens_on_usuario_id"
   end
 
   create_table "turmas", force: :cascade do |t|
@@ -195,6 +250,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_01_133454) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "anotacaos", "leitura_conteudos"
+  add_foreign_key "agendamentos", "local_agendamentos"
+  add_foreign_key "agendamentos", "usuarios"
+  add_foreign_key "comunicados", "disciplinas"
   add_foreign_key "comunicados", "turmas"
   add_foreign_key "comunicados", "usuarios"
   add_foreign_key "conteudos", "unidade_disciplinas"
@@ -206,9 +264,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_01_133454) do
   add_foreign_key "leitura_conteudos", "usuarios"
   add_foreign_key "matriculas", "turmas"
   add_foreign_key "matriculas", "usuarios"
+  add_foreign_key "mensagens", "usuarios", column: "destinatario_id"
+  add_foreign_key "mensagens", "usuarios", column: "remetente_id"
   add_foreign_key "preferencias_usuario", "usuarios"
   add_foreign_key "reacao_comunicados", "comunicados"
   add_foreign_key "reacao_comunicados", "usuarios"
+  add_foreign_key "reacao_mensagens", "mensagens", column: "mensagem_id"
+  add_foreign_key "reacao_mensagens", "usuarios"
   add_foreign_key "turmas", "cursos"
   add_foreign_key "unidade_disciplinas", "disciplinas"
 end

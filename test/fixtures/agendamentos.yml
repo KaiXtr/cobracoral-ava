@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  usuario: one
+  local_agendamento: one
+  data_inicio: 2025-05-22
+  data_fim: 2025-05-22
+  horario_inicio: 2025-05-22 01:21:02
+  horario_fim: 2025-05-22 01:21:02
+  repete: MyString
+
+two:
+  usuario: two
+  local_agendamento: two
+  data_inicio: 2025-05-22
+  data_fim: 2025-05-22
+  horario_inicio: 2025-05-22 01:21:02
+  horario_fim: 2025-05-22 01:21:02
+  repete: MyString

@@ -10,30 +10,32 @@
         </span>
         <ul>
             <% helpers.disciplinas_turma(@usuario_autenticado, @matricula_estudante).each do |disciplina| %>
-                <li>
-                    <a href="/disciplinas/<%= disciplina.id %>">
-                        <h3><%= disciplina.nome_disciplina %></h3>
-                        <ol>
-                            <% helpers.unidades_disciplina(disciplina).each do |unidade| %>
-                                <a href="/disciplinas/<%= disciplina.id %>#<%= unidade.id %>">
-                                    <li>
-                                        <h4><%= unidade.nome_unidade %></h4>
-                                        <ul>
-                                            <% helpers.conteudos_unidade(unidade).each do |conteudo| %>
-                                                <a href="/conteudos/<%= conteudo.id %>">
-                                                    <li>
-                                                        <h5><%= conteudo.nome_conteudo %></h5>
-                                                    </li>
-                                                </a>
-                                            <% end %>
-                                        </ul>
-                                    </li>
-                                </a>
-                            <% end %>
-                        </ol>
-                    </a>
-                </li>
+                <li><a href="/disciplinas/<%= disciplina.id %>">
+                    <h3><%= disciplina.nome_disciplina %></h3>
+                    <ol>
+                        <% helpers.unidades_disciplina(disciplina).each do |unidade| %>
+                            <a href="/disciplinas/<%= disciplina.id %>#<%= unidade.id %>"><li>
+                                <h4><%= unidade.nome_unidade %></h4>
+                                <ul>
+                                    <% helpers.conteudos_unidade(unidade).each do |conteudo| %>
+                                        <a href="/conteudos/<%= conteudo.id %>"><li>
+                                            <h5><%= conteudo.nome_conteudo %></h5>
+                                        </li></a>
+                                    <% end %>
+                                </ul>
+                            </li></a>
+                        <% end %>
+                    </ol>
+                </a></li>
             <% end %>
         </ul>
+    </div>
+<% else %>
+    <div id="barra-lateral" style="visibility: hidden; opacity: 0%;" onclick="abrirBarraLateral()">
+        <h2>
+            <a href="/cursos/<%= helpers.current_curso(@usuario_autenticado).id %>">
+                <%= helpers.current_curso(@usuario_autenticado).nome_curso %>
+            </a>
+        </h2>
     </div>
 <% end %>

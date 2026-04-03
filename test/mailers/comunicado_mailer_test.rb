@@ -2,7 +2,10 @@ require "test_helper"
 
 class ComunicadoMailerTest < ActionMailer::TestCase
   test "novo_comunicado_email" do
-    mail = ComunicadoMailer.novo_comunicado_email
+    mail = ComunicadoMailer.novo_comunicado_email(
+      usuarios_list: Usuario.all,
+      comunicado: Comunicado.find(1)
+    )
     assert_equal "Novo comunicado email", mail.subject
     assert_equal [ "to@example.org" ], mail.to
     assert_equal [ "from@example.com" ], mail.from

@@ -16,6 +16,11 @@ module UsuarioHelper
         end
     end
 
+    def enum_cargo_feminino(cargo)
+        hashFeminino = Usuario.cargo_usuario_feminino_strings.transform_keys(&:to_s)
+        return hashFeminino[cargo + '_feminino_string']
+    end
+
     def select_pronomes
         Usuario.pronomes_usuarios.map{ |t| [
             enum_pronomes(t[0]), t[0], {
@@ -24,12 +29,20 @@ module UsuarioHelper
         ]}
     end
 
-    def select_cargo_usuario(usuario)
-        Usuario.cargo_usuarios.map{ |t| [
-            enum_cargo_usuario(usuario), t[0], {
-                'cargo-id' => t[0]
-            }
-        ]}
+    def select_cargo_usuario(usuario: nil)
+        if usuario then
+            Usuario.cargo_usuarios.map{ |t| [
+                enum_cargo_usuario(usuario), t[0], {
+                    'cargo-id' => t[0]
+                }
+            ]}
+        else
+            Usuario.cargo_usuarios.map{ |t| [
+                enum_cargo_feminino(t[0]), t[0], {
+                    'cargo-id' => t[0]
+                }
+            ]}
+            end
     end
 
     def isUsuarioDiscente(usuario)

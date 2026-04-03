@@ -12,6 +12,10 @@ class UsuarioPolicy
     @usuario_atual = usuario_atual
   end
 
+  def new?
+    @usuario.cargo_usuario == 'administrador'
+  end
+
   def show?
     usuario.matricula_cargo.id == 2
   end

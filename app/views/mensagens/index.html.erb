@@ -1,0 +1,53 @@
+<%= turbo_stream_from 'mensagens' %>
+<nav class="mensagens-nav">
+  <div class="mensagens-users">
+    <a href="/suporte">
+      <div class="mensagens-users-button <%= mensagens_novas_usuario(@usuario_autenticado, Usuario.find(0)) %>">
+        Suporte técnico
+        <span class="mensagem-recente">
+          <%= mensagem_recente_usuario(@usuario_autenticado, Usuario.find(0)) %>
+        </span>
+      </div>
+    </a>
+
+    <% for u in @mensagens_usuarios %>
+      <%= render MessengerUserButtonComponent.new(
+        usuario_messenger: u,
+        usuario_autenticado: @usuario_autenticado,
+        selected_id: @id_param.to_i,
+        action_name: controller.action_name
+        )
+      %>
+    <% end %>
+  </div>
+  <div class="mensagens-user" tabIndex="-1" aria-label="Lista de mensagens">
+    <div id="mensagens-list">
+      <% last_mensagem = nil %>
+      <% if @mensagens.length > 0 %>
+        <% @mensagens.each do |mensagem| %>
+          <%= render mensagem, last_mensagem: last_mensagem %>
+          <% last_mensagem = mensagem %>
+        <% end %>
+      <% else %>
+        <span id="mensagens-vazio">
+          Dê um oi 
+        </span>
+      <% end %>
+    </div>
+    <% if @id_param %>
+      <div class="mensagem-input-form">
+        <%= form_for Mensagem.new,
+          url: @form_submit_link,
+          html: { method: :post } do |form| %>
+          <%= form.rich_text_area :corpo,
+            id: 'mensagem-input-form-textarea',
+            placeholder: 'Escreva uma mensagem...'
+          %>
+          <button id="mensagem-input-form-submit" type="submit" aria-label="Enviar mensagem">
+            <i class="fa-solid fa-paper-plane fa-xl"></i>
+          </button>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</nav>

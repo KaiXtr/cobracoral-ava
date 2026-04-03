@@ -1,0 +1,34 @@
+<div id="login-form-container" class="form-login-submit-in">
+	<div id="cobracoral-icon-container">
+		<%= show_svg('cobracoral-logo.svg') %>
+	</div>
+	<h2>Confirme sua identidade</h2>
+	<p>
+		Um código de autenticação de 6 dígitos foi enviado para seu email institucional.
+	</p>
+	<div class="login-errors">
+		<%= notice %>
+	</div>
+	<%= form_for :session, html: { id: 'login-form' } do |f| %>
+		<%= f.hidden_field :login_device,  id: 'input-device' %>
+		<%= f.hidden_field :login_so,	   id: 'input-so' %>
+		<%= f.hidden_field :login_browser, id: 'input-browser' %>
+		
+		<div class="form-group">
+			<%= render AuthCodeFieldComponent.new() %>
+		</div>
+		<div class="button-group">
+			<%= render CobraButtonComponent.new(
+				id: 'code-verify-button',
+				text: 'Verificar',
+				onclick: 'triggerLoginSubmit')
+			%>
+		</div>
+		<div class="login-info">
+            <%= ENV["COBRACORAL_VERSION"] %> | 
+            <%= ENV["COBRACORAL_AUTHOR"] %> - 
+			<%= ENV["COBRACORAL_YEAR"] %>, 
+			Todos os direitos reservados
+		</div>
+	<% end %>
+</div>

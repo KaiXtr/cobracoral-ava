@@ -1,0 +1,12 @@
+<h1>Novas mensagens</h1>
+<p>
+  Você tem novas mensagens de <%= @autor_mensagem %> no AVA:
+</p>
+<div class="mail-mensagem">
+  <%= @mensagem.corpo %>
+</div>
+<p>
+  Leias as mensagens em: <a href="<%= @link_mensagem %>" target="_blank">
+    <%= @link_mensagem %>
+  </a>
+</p>

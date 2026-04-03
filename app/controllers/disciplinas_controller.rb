@@ -6,7 +6,7 @@ class DisciplinasController < ApplicationController
   def index
 		@usuario = get_usuario_autenticado
     @disciplina = Disciplina.new
-		matricula = Matricula.find_by(usuario_id: usuario_autenticado.id)
+		matricula = Matricula.find_by(usuario_id: @usuario.id)
     if matricula then
       @disciplinas = Disciplina.where(
         turma_id: matricula.turma_id,
@@ -38,7 +38,7 @@ class DisciplinasController < ApplicationController
           disciplina_id: @disciplina.id
         }
       )
-
+    
     Rails.logger.info "Acessando disciplina " + @disciplina.nome_disciplina + "."
   end
 

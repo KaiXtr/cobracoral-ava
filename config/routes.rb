@@ -8,15 +8,18 @@ Rails.application.routes.draw do
   resources :conteudos
   resources :leitura_conteudos
   resources :preferencias_usuario
+  resources :agendamentos
   
-  root 'comunicados#index'
+  root 'painel#index'
   
   get '/entrar', to: 'sessions#login'
-  post '/entrar', to: 'sessions#create'
+  post '/entrar', to: 'sessions#send_auth_code'
   get '/primeiro-acesso', to: 'sessions#primeiro_acesso'
   post '/primeiro-acesso', to: 'sessions#edit'
   get '/problemas-acesso', to: 'sessions#problemas-acesso'
   post '/problemas-acesso', to: 'sessions#recover_password'
+  get '/authcode', to: 'sessions#auth_code'
+  post '/authcode', to: 'sessions#validate_auth_code'
   get '/recuperar', to: 'sessions#recuperar'
   post '/recuperar', to: 'sessions#validate_recovery'
 
@@ -29,7 +32,6 @@ Rails.application.routes.draw do
   get '/cursos', to: 'cursos#index'
   get '/ide', to: 'ide#index'
   get '/tarefas', to: 'leitura_conteudos#index'
-  get '/mensagens', to: 'cursos#index'
 
   get '/usuarios/:usuario_id/editar', to: 'usuarios#edit'
   get '/usuarios/:usuario_id/:turma_id/matricular', to: 'usuarios#matricular'
@@ -61,6 +63,15 @@ Rails.application.routes.draw do
   get '/conteudos/:id/salvar', to: 'conteudos#salvar'
   get '/conteudos/:id/deletar', to: 'conteudos#delete'
   get '/conteudos/:id/destroy', to: 'conteudos#destroy'
+
+  get '/agendamentos/:dia/:mes/:ano', to: 'agendamentos#index'
+
+  get '/mensagens', to: 'mensagens#index'
+  get '/mensagens/:id', to: 'mensagens#index'
+  post '/mensagens/:id', to: 'mensagens#create'
+  get '/mensagens/:id/reagir/:emoji', to: 'mensagens#reagir'
+  get '/mensagens/turma/:id', to: 'mensagens#turma'
+  post '/mensagens/turma/:id', to: 'mensagens#turmaCreate'
 
   get '/sobre', to: 'sobre#index'
   get '/instalar', to: 'sobre#instalar'

@@ -14,9 +14,26 @@ class SessionMailer < ApplicationMailer
 
         @senha_provisoria = params[:senha_provisoria]
         @instituicao_nome = params[:instituicao_nome]
-        @acesso_link = "http://localhost:3000/entrar"
+        @acesso_link = "#{@mailer_host}/entrar"
 
-        mail(to: @usuario.email, subject: "Primeiro acesso no AVA")
+        begin
+            mail(to: @usuario.email, subject: "Primeiro acesso no AVA")
+            Rails.logger.info "[MAILER] Primeiro acesso notificado ao email #{@usuario.email}."
+        rescue
+            Rails.logger.error "[MAILER] O cliente de email não está disponível."
+        end
+    end
+
+    def codigo_autenticacao_email
+        @usuario = params[:usuario]
+        @codigo = params[:codigo]
+
+        begin
+            mail(to: @usuario.email, subject: "Código de autenticação Cobracoral")
+            Rails.logger.info "[MAILER] Código de autenticação enviado ao email #{@usuario.email}."
+        rescue
+            Rails.logger.error "[MAILER] O cliente de email não está disponível."
+        end
     end
 
     def acesso_email
@@ -25,8 +42,13 @@ class SessionMailer < ApplicationMailer
         @login_so = params[:login_so]
         @login_browser = params[:login_browser]
         @login_time = params[:login_time].strftime("%d/%m/%Y às %H:%M")
-        
-        mail(to: @usuario.email, subject: "Novo acesso em " + @login_browser)
+
+        begin
+            mail(to: @usuario.email, subject: "Novo acesso em " + @login_browser)
+            Rails.logger.info "[MAILER] Novo acesso notificado ao email #{@usuario.email}."
+        rescue
+            Rails.logger.error "[MAILER] O cliente de email não está disponível."
+        end
     end
 
     def recuperacao_senha_email
@@ -38,8 +60,13 @@ class SessionMailer < ApplicationMailer
 
         hash_senha = @usuario.password_digest
 
-        @link_recuperacao = "http://localhost:3000/recuperar?h=" + hash_senha
+        @link_recuperacao = "#{@mailer_host}/recuperar?h=" + hash_senha
         
-        mail(to: @usuario.email, subject: "Recuperação de senha solicitada para " + @usuario.email)
+        begin
+            mail(to: @usuario.email, subject: "Recuperação de senha solicitada para " + @usuario.email)
+            Rails.logger.info "[MAILER] Email de recuperação de senha enviada ao email #{@usuario.email}."
+        rescue
+            Rails.logger.error "[MAILER] O cliente de email não está disponível."
+        end
     end
 end

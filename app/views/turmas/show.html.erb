@@ -1,27 +1,29 @@
 <nav>
     <div class="deslizar-transition">
-        <h1>
-            <%= @turma.nome_turma %>
-            <% if policy(@turma).edit? %>
-                <a href="/turmas/<%= @turma.id %>/editar" tooltip-text="Editar turma">
-                    <i class="fa-solid fa-pen fa-sm icon-button"></i>
+        <div class="cobra-container">
+            <h1>
+                <%= @turma.nome_turma %>
+                <% if policy(@turma).edit? %>
+                    <a href="/turmas/<%= @turma.id %>/editar" tooltip-text="Editar turma">
+                        <i class="fa-solid fa-pen fa-sm icon-button"></i>
+                    </a>
+                <% end %>
+            </h1>
+            <h3>
+                <a href='/cursos/<%= @curso_turma.id %>' class="goback-button">
+                    <%= @curso_turma.nome_curso %>
                 </a>
-            <% end %>
-        </h1>
-        <h3>
-            <a href='/cursos/<%= @curso_turma.id %>' class="goback-button">
-                <%= @curso_turma.nome_curso %>
-            </a>
-        </h3>
-        <div>
+            </h3>
             <div>
-                Turno: <%= enum_turno(@turma.turno_turma) %>
+                <div>
+                    Turno: <%= enum_turno(@turma.turno_turma) %>
+                </div>
+                <div>
+                    Modalidade: <%= enum_modalidade(@turma.modalidade_turma) %>
+                </div>
             </div>
-            <div>
-                Modalidade: <%= enum_modalidade(@turma.modalidade_turma) %>
-            </div>
-            </div>
-        <div>
+        </div>
+        <div class="cobra-container">
             <h2>Estudantes da turma</h2>
             <div>
                 <%= render @estudantes_turma %>

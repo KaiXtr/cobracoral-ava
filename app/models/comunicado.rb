@@ -1,13 +1,13 @@
 class Comunicado < ApplicationRecord
-  belongs_to :turma
   belongs_to :usuario
+  belongs_to :turma, optional: true
+  belongs_to :disciplina, optional: true
 
   has_many :reacao_comunicado
   has_many_attached :imagens
   has_rich_text :corpo
 
   validates_presence_of :usuario
-  validates_presence_of :turma
 
   after_create_commit { :broadcast_comunicado_create }
 

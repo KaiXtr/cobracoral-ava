@@ -1,0 +1,19 @@
+<a href="/mensagens<%= @turma_url %>/<%= @usuario_messenger.id %>">
+    <div class="mensagens-users-button <%= @mensagens_novas %> <%= @mensagem_selecionada %>">
+		<div class="mensagens-users-button-image">
+			<% if @habilita_foto_perfil && @usuario_messenger.avatar.attached? %>
+				<%= image_tag(@usuario_messenger.avatar) %>
+			<% else %>
+				<i class="fa-solid fa-user fa-lg"></i>
+			<% end %>
+		</div>
+		<div class="mensagens-users-button-info">
+			<span class="mensagem-user-nome">
+            	<%= @usuario_nome %>
+			</span>
+            <span class="mensagem-recente">
+                <%= @mensagem_recente %>
+            </span>
+        </div>
+    </div>
+</a>

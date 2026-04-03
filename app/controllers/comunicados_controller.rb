@@ -11,12 +11,30 @@ class ComunicadosController < ApplicationController
     # Marcar visualização
     if @comunicados then
       for c in @comunicados do
-        if !ReacaoComunicado.find_by(usuario_id: @usuario.id, comunicado_id: c.id) then
-          reacao = ReacaoComunicado.new(
+        if !ReacaoComunicado.find_by(
+          usuario_id: @usuario.id,
+          comunicado_id: c.id,
+          emoji: 'x') then
+
+          if !ReacaoComunicado.find_by(
+          usuario_id: @usuario.id,
+          comunicado_id: c.id,
+          emoji: nil) then
+            reacao = ReacaoComunicado.new(
+                usuario_id: @usuario.id,
+                comunicado_id: c.id,
+                emoji: nil
+            )
+            reacao.save
+          else
+            reacao = ReacaoComunicado.find_by(
               usuario_id: @usuario.id,
-              comunicado_id: c.id
-          )
-          reacao.save
+              comunicado_id: c.id,
+              emoji: nil
+            )
+            reacao.emoji = 'x'
+            reacao.save
+          end
         end
       end
       Rails.logger.info "Acessando todos os comunicados."
@@ -28,13 +46,14 @@ class ComunicadosController < ApplicationController
   def reagir
     comunicado = Comunicado.find(params[:id])
     emoji = params[:emoji]
-    helpers.reagir_emoji(comunicado, emoji)
+    helpers.reagir_emoji_comunicado(comunicado, emoji)
     redirect_to "/comunicados"
   end
 
   # GET /comunicados/1 or /comunicados/1.json
   def show
     @comunicado = Comunicado.find(params[:id])
+
     Rails.logger.info "Acessando comunicado " + @comunicado.id.to_s + "."
   end
 
@@ -52,18 +71,26 @@ class ComunicadosController < ApplicationController
     authorize(@comunicado)
 
     @turmas = Array.new()
-    disciplinas = Disciplina.where(usuario_id: @usuario.id)
-    if (disciplinas) then
-      for d in disciplinas do
-        t = Turma.find(d.turma_id)
-        if (t) then
-          @turmas.push(t)
+    @disciplinas = Array.new()
+    
+    if (professorTurma?) then
+      disciplinas_docente = Disciplina.where(usuario_id: @usuario.id)
+      if (disciplinas_docente) then
+        for d in disciplinas_docente do
+          @disciplinas.push(d)
+          t = Turma.find(d.turma_id)
+          if (t) then
+            @turmas.push(t)
+          end
         end
       end
+    elsif (representanteTurma?) then
+      matriculaRepresentante = Matricula.find_by(usuario_id: @usuario.id)
+      turmaRepresentante = Turma.find(matriculaRepresentante.turma_id)
+      @turmas.push(turmaRepresentante)
     end
 
     @visibilidades = get_visibilidades()
-    @visibilidades = Comunicado.visibilidade_comunicados
       
 		Rails.logger.info "Criando novo comunicado."
   end
@@ -74,8 +101,10 @@ class ComunicadosController < ApplicationController
     @comunicado = Comunicado.find(params[:id])
     authorize(@comunicado)
 
-    @turmas = Turma.all
     @visibilidades = get_visibilidades()
+    @turmas = Turma.all
+    @disciplinas = Disciplina.all
+
 		Rails.logger.info "Editando comunicado " + @comunicado.id.to_s + "."
   end
 
@@ -84,26 +113,17 @@ class ComunicadosController < ApplicationController
     @usuario = get_usuario_autenticado
     @comunicado = Comunicado.new(comunicado_params)
     @comunicado.usuario_id = @usuario.id
-
-    if @comunicado.visibilidade_comunicado == "todos_curso" then
-      curso_comunicado = Curso.find_by(usuario_id: @usuario.id)
-      usuarios_list = Usuario.all.select(:id, :email).take
-    elsif @comunicado.visibilidade_comunicado == "todas_turmas" then
-      usuarios_list = Usuario.all.select(:id, :email).take
-    elsif @comunicado.visibilidade_comunicado == "todos_turma" then
-      usuarios_list = Usuario.all.select(:id, :email).take
-    elsif @comunicado.visibilidade_comunicado == "todos_disciplina" then
-      usuarios_list = Usuario.all.select(:id, :email).take
-    else
-      usuarios_list = Usuario.all.select(:id, :email).take
-    end
+    @visibilidades = get_visibilidades()
+    @turmas = Turma.all
+    @disciplinas = Disciplina.all
+    usuarios_list = helpers.get_lista_usuarios_notificados(@usuario, @comunicado)
 
     respond_to do |format|
       if @comunicado.save
         ComunicadoMailer.with(
           usuarios_list: usuarios_list,
           comunicado: @comunicado).novo_comunicado_email.deliver_later
-        
+
         logtxt = "Comunicado adicionado com sucesso."
         Rails.logger.info logtxt
         format.html { redirect_to comunicados_url(@comunicado), notice: logtxt }
@@ -117,6 +137,7 @@ class ComunicadosController < ApplicationController
         }
       else
         Rails.logger.error "Houve um erro ao criar o comunicado."
+        Rails.logger.error @comunicado.errors
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @comunicado.errors, status: :unprocessable_entity }
       end
@@ -125,6 +146,11 @@ class ComunicadosController < ApplicationController
 
   # PATCH/PUT /comunicados/1 or /comunicados/1.json
   def update
+    @usuario = get_usuario_autenticado
+    @visibilidades = get_visibilidades()
+    @turmas = Turma.all
+    @disciplinas = Disciplina.all
+    
     respond_to do |format|
       if @comunicado.update(comunicado_params)
         logtxt = "Comunicado atualizado com sucesso."
@@ -163,7 +189,7 @@ class ComunicadosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def comunicado_params
-      params.require(:comunicado).permit(:usuario_id, :turma_id, :visibilidade_comunicado, :corpo, imagens: [])
+      params.require(:comunicado).permit(:usuario_id, :turma_id, :disciplina_id, :visibilidade_comunicado, :corpo, imagens: [])
     end
 
     def get_comunicados(usuario_autenticado)
@@ -174,38 +200,113 @@ class ComunicadosController < ApplicationController
       curso_atual = helpers.current_curso(usuario_autenticado)
 
       if curso_atual then
-        comunicados += Comunicado.where(usuario_id: curso_atual.usuario_id)
-      end
+        comunicados += Comunicado.where(
+          usuario_id: curso_atual.usuario_id,
+          visibilidade_comunicado: :todos_curso
+          )
 
-      # Obtendo todos os comunicados de professores (deve haver uma forma mais eficiente)
-      comunicados_de_professores = Array.new()
+        # Obtendo todos os comunicados de turmas
+        turmas_curso = Turma.where(curso_id: curso_atual.id)
+        turmas_curso.each do |t|
+          # Coordenadores podem ver comunicados de todas as turmas de seu curso
+          if usuario_autenticado.cargo_usuario == 'coordenador' then
+            curso_coordena = Curso.find_by(usuario_id: usuario_autenticado.id)
+            if curso_coordena.id == curso_atual.id then
+              comunicados += Comunicado.where(
+                turma_id: t.id,
+                visibilidade_comunicado: :todos_turma
+                )
+            end
+          end
 
-      if curso_atual then
-        disciplinas_do_curso = Disciplina.where(curso_id: curso_atual.id)
-        disciplinas_do_curso.each do |d|
-          comunicados_de_professores += Comunicado.where(usuario_id: d.usuario_id)
+          # Discentes podem ver comunicados de turmas onde estão matriculados
+          matricula_estudante = Matricula.find_by(
+            usuario_id: usuario_autenticado.id,
+            turma_id: t.id
+            )
+          if matricula_estudante then
+            comunicados += Comunicado.where(
+              turma_id: t.id,
+              visibilidade_comunicado: :todos_turma
+              )
+          end
+
+          # Obtendo todos os comunicados de disciplinas
+          disciplinas_turma = Disciplina.where(turma_id: t.id)
+          disciplinas_turma.each do |d|
+            # Coordenadores podem ver comunicados de todas as disciplinas de seu curso
+            if usuario_autenticado.cargo_usuario == 'coordenador' then
+              if curso_coordena.id == curso_atual.id then
+                comunicados += Comunicado.where(
+                  disciplina_id: d.id,
+                  visibilidade_comunicado: :todos_disciplina
+                  )
+              end
+            end
+
+            # Discentes podem ver comunicados de turmas onde estão matriculados
+            if matricula_estudante then
+              comunicados += Comunicado.where(
+                disciplina_id: d.id,
+                visibilidade_comunicado: :todos_disciplina
+                )
+            end
+
+            # Professores podem ver comunicados de várias turmas onde leciona
+            if usuario_autenticado.cargo_usuario == 'coordenador' then
+              if curso_coordena.id == curso_atual.id then
+                docente_disciplina = Usuario.find_by(id: d.usuario_id)
+                comunicados += Comunicado.where(
+                  usuario_id: docente_disciplina.id,
+                  visibilidade_comunicado: :todas_turmas
+                  )
+              end
+            end
+
+            # Comunicados visíveis para professores
+            if (usuario_autenticado.cargo_usuario == 'professor') then
+              # Professores podem ver comunicados de turmas ondes lecionam
+              docente_disciplina = Usuario.find_by(id: d.usuario_id)
+              if (usuario_autenticado.id == docente_disciplina.id) then
+                comunicados += Comunicado.where(
+                  usuario_id: docente_disciplina.id,
+                  turma_id: t.id,
+                  visibilidade_comunicado: :todos_turma,
+                  )
+              end
+
+              # Professores podem ver comunicados de disciplinas onde lecionam
+              if (usuario_autenticado.id == docente_disciplina.id) then
+                comunicados += Comunicado.where(
+                  usuario_id: docente_disciplina.id,
+                  disciplina_id: d.id,
+                  visibilidade_comunicado: :todos_disciplina
+                  )
+              end
+            end
+          end
         end
       end
-      
-      comunicados += comunicados_de_professores
 
-      return comunicados
+      comunicados = comunicados.sort_by{|c| c[:updated_at]}
+      comunicados = comunicados.reverse
+      return comunicados.uniq
     end
 
     def get_visibilidades
-      visibilidades = Array.new()
+      visibilidades = {}
 
       if (visivelTodosCurso?)
-        visibilidades.push(Comunicado.visibilidade_comunicados[:todos_curso])
+        visibilidades['todos_curso'] =  Comunicado.visibilidade_comunicados[:todos_curso]
       end
       if (visivelTodasTurmas?)
-        visibilidades.push(Comunicado.visibilidade_comunicados[:todas_turmas])
+        visibilidades['todas_turmas'] =  Comunicado.visibilidade_comunicados[:todas_turmas]
       end
       if (visivelTodosTurma?)
-        visibilidades.push(Comunicado.visibilidade_comunicados[:todos_turma])
+        visibilidades['todos_turma'] =  Comunicado.visibilidade_comunicados[:todos_turma]
       end
       if (visivelTodosDisciplinas?)
-        visibilidades.push(Comunicado.visibilidade_comunicados[:todos_disciplina])
+        visibilidades['todos_disciplina'] =  Comunicado.visibilidade_comunicados[:todos_disciplina]
       end
 
       return visibilidades
@@ -216,36 +317,37 @@ class ComunicadosController < ApplicationController
     end
 
     def visivelTodasTurmas?
-      !coordenadorCurso? && professorTurma?
+      professorTurma?
     end
 
     def visivelTodosTurma?
-      !coordenadorCurso? && (professorTurma? || representanteTurma?)
+      professorTurma? || representanteTurma?
     end
 
     def visivelTodosDisciplinas?
-      !coordenadorCurso? && (professorTurma?)
+      professorTurma?
     end
   
     def coordenadorCurso?
-      curso = Curso.find_by(usuario_id: @usuario.id)
-      if curso
-        true
-      else
-        false
-      end
+      Usuario.cargo_usuarios[@usuario.cargo_usuario] == 1
     end
   
     def professorTurma?
-      disciplina = Disciplina.find_by(usuario_id: @usuario.id)
-      if (disciplina)
-        true
-      else
-        false
+      # Professor de uma turma
+      if Usuario.cargo_usuarios[@usuario.cargo_usuario] == 2 then
+        return true
+      # Coordenador que leciona
+      elsif Usuario.cargo_usuarios[@usuario.cargo_usuario] == 1 then
+        d = Disciplina.where(usuario_id: @usuario.id)
+        if d.length > 0 then
+          return true
+        else
+          return false
+        end
       end
     end
   
     def representanteTurma?
-      Usuario.cargo_usuarios[usuario.cargo_usuario] == 3
+      Usuario.cargo_usuarios[@usuario.cargo_usuario] == 3
     end
 end

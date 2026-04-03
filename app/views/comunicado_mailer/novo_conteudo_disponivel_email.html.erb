@@ -1,0 +1,12 @@
+<h1>Novo conteúdo disponível</h1>
+<p>
+  Um novo conteúdo foi disponibilizado no AVA por <%= @autor_comunicado %>:
+</p>
+<div class="mail-comunicado">
+  <%= @comunicado.corpo %>
+</div>
+<p>
+  Acesse o conteúdo disponibilizado no AVA em: <a href="<%= @link_conteudo %>" target="_blank">
+    <%= @link_conteudo %>
+  </a>
+</p>

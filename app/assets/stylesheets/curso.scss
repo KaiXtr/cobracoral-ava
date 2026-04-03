@@ -156,6 +156,11 @@ div.disciplinas-banner {
 }
 
 .disciplina_info_container {
+    background-color: var(--container-bg);
+    border-radius: 50px;
+    padding: 2vw;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
     display: block;
 
     .disciplina_info {
@@ -164,14 +169,10 @@ div.disciplinas-banner {
     }
 
     .disciplina_medidores {
-        width: 20%;
+        margin-top: 5vh;
+        width: fit-content;
         display: inline-block;
         vertical-align: top;
-
-        h5 {
-            min-width: 5vw;
-            margin: none;
-        }
     }
 }
 
@@ -184,6 +185,10 @@ div.disciplinas-banner {
 
     &:hover {
         transform: translateX(10px);
+    }
+
+    .usuario-button:hover {
+        transform: none;
     }
 
     .conteudo-button-info {
@@ -207,7 +212,7 @@ div.disciplinas-banner {
         position: relative;
 
         .conteudo-button-conclusao-max {
-            border: 5px solid gray;
+            border: 5px solid var(--gray-color);
             border-radius: 100%;
             position: absolute;
             min-width: 1.5vw;
@@ -242,7 +247,7 @@ a.conteudo-disabled {
 
 .conteudo-data {
     font-size: 10pt;
-    color: gray;
+    color: var(--gray-color);
     display: block;
     margin-bottom: 10px;
 }

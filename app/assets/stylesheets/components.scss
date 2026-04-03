@@ -28,19 +28,24 @@
         z-index: -1;
     }
 
-    &:hover {
+    &:hover, &:focus {
         color: var(--cobra-button-color-hover);
 
         &:before {
             width: 100%;
         }
     }
+
+    &:focus {
+        box-shadow: 0px 0px 10px var(--main-color);
+        outline: none;
+    }
 }
 
 .open-modal-button {
     text-align: center;
-    color: gray;
-    border: 3px dashed gray;
+    color: var(--gray-color);
+    border: 3px dashed var(--gray-color);
     border-radius: 50px;
     padding: 1rem;
 
@@ -108,6 +113,84 @@
     width: 100%;
     margin-top: 10px;
     display: block;
+    transition-duration: .2s;
+
+    &:focus {
+        outline-color: var(--main-color);
+    }
+}
+
+.password-field-input {
+    color: var(--text-color);
+    background-color: var(--container-bg);
+    font-size: 12pt;
+    border: none;
+    border-bottom: 2px solid black;
+    padding: 0.5vw 0px 0.5vw 0px;
+    width: 90%;
+    margin-top: 10px;
+    display: inline-block;
+    transition-duration: .2s;
+
+    &:focus {
+        outline-color: var(--main-color);
+    }
+}
+
+.password-field-button {
+    color: var(--text-color);
+    background-color: var(--container-bg);
+    font-size: 12pt;
+    border: none;
+    border-bottom: 2px solid black;
+    border-radius: 0px;
+    padding: 0.5vw 0px 0.5vw 0px;
+    width: 10%;
+    margin-top: 10px;
+    display: inline-block;
+    transition-duration: .2s;
+
+    &:hover {
+        background-color: var(--container-bg);
+        color: var(--gray-color);
+        cursor: pointer;
+    }
+
+    &:focus {
+        outline-color: var(--main-color);
+    }
+}
+
+#cobra-auth-code-field {
+    text-align: center;
+    margin: 2vw;
+    
+    .cobra-auth-code-input {
+        font-size: 26pt;
+        font-weight: bold;
+        text-align: center;
+        font-family: monospace;
+        text-transform: uppercase;
+        background-color: var(--container-bg);
+        border: none;
+        border-bottom: 2px solid var(--form-input-hover-bg-color);
+        padding: 0vw 0.5vw 0.5vw 0.5vw;
+        width: 2vw;
+
+        &:focus {
+            outline-color: var(--main-color);
+        }
+    }
+}
+
+.cobra-checkbox {
+    background-color: var(--container-bg);
+    border-color: var(--main-color);
+    transition-duration: .2s;
+
+    &:checked {
+        background-color: var(--main-color);
+    }
 }
 
 textarea {
@@ -132,8 +215,13 @@ textarea {
         padding: 1vw;
 
         &:hover {
-            background-color: #ff7272;
+            background-color: var(--form-input-hover-bg-color);
             cursor: pointer;
+        }
+    
+        &:focus {
+            box-shadow: 0px 0px 10px var(--main-color);
+            outline: none;
         }
     }
 }
@@ -156,9 +244,54 @@ textarea {
         height: 47px;
 
         &:hover {
-            background-color: #ff7272;
+            background-color: var(--form-input-hover-bg-color);
             cursor: pointer;
         }
+
+        &:focus {
+            box-shadow: 0px 0px 10px var(--main-color);
+            outline: none;
+        }
+    }
+}
+
+.select-header {
+    display: inline-block;
+    position: relative;
+    
+    select {
+        color: var(--select-box-color);
+        background-color: var(--nav-bg);
+        border: 2px solid var(--nav-bg);
+        font-size: 22pt;
+        font-weight: bold;
+        border-radius: 10px;
+        transition-duration: .2s;
+        padding: 1vw;
+    
+        &:hover {
+            background-color: var(--nav-bg-secondary);
+            cursor: pointer;
+        }
+    
+        &:focus {
+            border: 2px solid var(--main-color);
+            outline: none;
+        }
+
+        option {
+            font-size: 16pt;
+        }
+    }
+}
+
+.form-group input[type="date"],
+.form-group input[type="time"] {
+    font-family: sans-serif;
+    transition-duration: .2s;
+
+    &[disabled] {
+        opacity: 50%;
     }
 }
 
@@ -229,7 +362,7 @@ textarea {
     width: 30vw;
     height: 100%;
     position: fixed;
-    padding-top: 5vh;
+    padding-top: 10vh;
     padding-left: 2vw;
     top: 0px;
     z-index: 20;
@@ -268,10 +401,10 @@ textarea {
     width: 30vw;
     height: 100%;
     position: fixed;
-    padding-top: 5vh;
+    padding-top: 10vh;
     padding-left: 2vw;
     padding-right: 2vw;
-    padding-bottom: 2vw;
+    padding-bottom: 5vw;
     top: 0px;
     right: 0px;
     z-index: 10;
@@ -287,13 +420,13 @@ textarea {
 }
 
 .notificacao-conteiner {
-    color: ghostwhite;
+    color: var(--nav-bg);
     font-weight: bold;
     font-size: 10pt;
     background-color: var(--main-color);
     margin-left: 1vw;
     margin-top: 70vh;
-    border: 2px solid ghostwhite;
+    border: 2px solid var(--nav-bg);
     border-radius: 25px;
     padding: 1vw;
     position: fixed;
@@ -327,7 +460,7 @@ textarea {
     z-index: 90;
 
     ul {
-        color: ghostwhite;
+        color: var(--nav-bg);
         background-color: rgb(15, 15, 15);
         border-radius: 10px;
         padding: 1vw;
@@ -442,34 +575,37 @@ textarea {
 }
 
 .medidor-grafico {
-    min-width: 5vw;
-    min-height: 5vw;
+    min-width: 6vw;
+    min-height: 6vw;
     position: relative;
 
     .medidor-grafico-max {
-        border: 10px solid gray;
+        background-color: var(--container-bg);
+        border: none;
         border-radius: 100%;
         position: absolute;
         min-width: 5vw;
         min-height: 5vw;
-        top: 0px;
+        vertical-align: middle;
+        align-self: center;
+        top: 0.5vw;
+        left: 0.5vw;
     }
 
     .medidor-grafico-atual {
-        border: 10px solid var(--main-color);
-        border-radius: 100%;
+        border: none;
+        border-radius: 50%;
         position: absolute;
-        min-width: 5vw;
-        min-height: 5vw;
-        top: 0px;
+        min-width: 6vw;
+        min-height: 6vw;
     }
 
     .medidor-grafico-valor {
         text-align: center;
         font-weight: bold;
         min-width: 5vw;
-        top: 2.5vw;
-        left: 0.7vw;
+        top: 2.3vw;
+        left: 0.5vw;
         position: absolute;
     }
 }
@@ -481,41 +617,36 @@ textarea {
     margin: 1vw;
 
     .medidor-grafico {
-        min-width: 5vw;
-        min-height: 5vw;
         position: relative;
 
         .medidor-grafico-max {
-            border: 10px solid rgb(255, 255, 255);
-            border-radius: 100%;
-            position: absolute;
-            min-width: 5vw;
-            min-height: 5vw;
-            top: 0px;
+            background-color: var(--main-color);
         }
 
         .medidor-grafico-atual {
-            border: 10px solid var(--white-main);
-            border-radius: 100%;
-            position: absolute;
-            min-width: 5vw;
-            min-height: 5vw;
             top: 0px;
         }
 
         .medidor-grafico-valor {
-            text-align: center;
-            font-weight: bold;
-            min-width: 5vw;
-            top: 2.5vw;
-            left: 0.7vw;
-            position: absolute;
+            color: var(--white-main);
         }
     }
 }
 
 footer.cobra-footer {
+    font-size: 8pt;
+    color: var(--container-gray-text);
     text-align: center;
-    padding: 10vh 10vw 10vh 10vw;
-    background-color: var(--main-color);
+    padding: 1vh 10vw 1vh 10vw;
+    border-top: 1px solid var(--nav-bg-secondary);
+    background-color: var(--nav-bg);
+
+    a {
+        color: var(--container-gray-text);
+
+        &:hover, &:active, &:focus, &:visited {
+            color: var(--container-gray-text);
+        }
+    }
 }
+
