@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  leitura_conteudo: one
+  ln: 1
+  col: 1
+  cor_anotacao: MyString
+
+two:
+  leitura_conteudo: two
+  ln: 1
+  col: 1
+  cor_anotacao: MyString

@@ -10,7 +10,7 @@
     font-family: "Rubik", sans-serif;
     font-weight: bold;
     border: 3px solid var(--main-color);
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
     padding: 1rem;
     cursor: pointer;
     transition-duration: .2s;
@@ -31,7 +31,7 @@
     &:hover, &:focus {
         color: var(--cobra-button-color-hover);
 
-        &:before{
+        &:before {
             width: 100%;
         }
     }
@@ -203,7 +203,7 @@ textarea {
 .select-box {
     display: inline-block;
     position: relative;
-    
+
     select {
         color: var(--select-box-color);
         background-color: var(--select-box-bg-color);
@@ -213,7 +213,7 @@ textarea {
         border-radius: 10px;
         transition-duration: .2s;
         padding: 1vw;
-    
+
         &:hover {
             background-color: var(--form-input-hover-bg-color);
             cursor: pointer;
@@ -229,7 +229,7 @@ textarea {
 .select-box-preferencias {
     display: inline-block;
     position: relative;
-    
+
     select {
         color: var(--select-box-color);
         background-color: var(--select-box-bg-color);
@@ -239,7 +239,7 @@ textarea {
         border-radius: 20px;
         padding-left: 10px;
         transition-duration: .2s;
-        
+
         width: 218px;
         height: 47px;
 
@@ -295,6 +295,66 @@ textarea {
     }
 }
 
+#annotation-area{
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease;
+}
+
+#annotation-area.visible{
+    position: absolute;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease;
+}
+
+#text-area-anotacao {
+    background-color: #343434;
+    color: white;
+    width: 227px;
+    height: 255px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    resize: none;
+    padding: 25px;
+    overflow: auto;
+    scrollbar-width: none;
+    visibility: hidden;
+    margin-top: 10px;
+}
+
+#anotacoes-paleta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #343434;
+    width: 409px;
+    height: 53px;
+    border-radius: 50px;
+    padding-right: 15px;
+
+    img {
+        width: 25px;
+        height: 25px;
+        padding: 20px;
+    }
+
+    .paleta-circle {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .paleta-circle:hover {
+        transform: scale(1.2);
+    }
+}
+
 #barra-lateral {
     color: var(--white-main);
     background-color: black;
@@ -309,7 +369,7 @@ textarea {
 
     ul {
         padding-left: 2vw;
-        
+
         li {
             width: fit-content;
             margin-bottom: 1vh;
@@ -349,8 +409,10 @@ textarea {
     right: 0px;
     z-index: 10;
     overflow: scroll;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE e Edge antigos */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE e Edge antigos */
 
     .button-group {
         margin-bottom: 50px;
@@ -374,10 +436,23 @@ textarea {
 }
 
 @keyframes notification-in {
-    0% { opacity: 0%; transform: translateX(-30px); }
-    25% { opacity: 100%; transform: translateX(0px);}
-    95% { opacity: 100%; }
-    100% { opacity: 0%; }
+    0% {
+        opacity: 0%;
+        transform: translateX(-30px);
+    }
+
+    25% {
+        opacity: 100%;
+        transform: translateX(0px);
+    }
+
+    95% {
+        opacity: 100%;
+    }
+
+    100% {
+        opacity: 0%;
+    }
 }
 
 #context-menu-component {
@@ -391,7 +466,7 @@ textarea {
         padding: 1vw;
         transition-duration: .2s;
         margin: 0px;
-    
+
 
         li {
             font-weight: 600;
@@ -418,8 +493,13 @@ textarea {
 }
 
 @keyframes cobra-modal-background-transition {
-    0%   { opacity: 0%; }
-    100% { opacity: 50%; }
+    0% {
+        opacity: 0%;
+    }
+
+    100% {
+        opacity: 50%;
+    }
 }
 
 #cobra-modal div[role="dialog"] {
@@ -433,7 +513,8 @@ textarea {
     position: fixed;
     z-index: 80;
 
-    h1, h2 {
+    h1,
+    h2 {
         margin-top: 0px;
     }
 }
@@ -449,15 +530,33 @@ textarea {
 }
 
 @keyframes modal-transition-in-animation {
-    0% { margin-top: 50vh; opacity: 0%; }
-    50% { opacity: 100%; }
-    100% { margin-top: 8vh }
+    0% {
+        margin-top: 50vh;
+        opacity: 0%;
+    }
+
+    50% {
+        opacity: 100%;
+    }
+
+    100% {
+        margin-top: 8vh
+    }
 }
 
 @keyframes modal-transition-out-animation {
-    0% { margin-top: 8vh; }
-    50% { opacity: 100%; }
-    100% { margin-top: -50vh; opacity: 0%; }
+    0% {
+        margin-top: 8vh;
+    }
+
+    50% {
+        opacity: 100%;
+    }
+
+    100% {
+        margin-top: -50vh;
+        opacity: 0%;
+    }
 }
 
 .goback-button {
