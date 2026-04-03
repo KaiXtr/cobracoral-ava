@@ -262,6 +262,94 @@ Turma.create([
 
 puts "= turmas populada."
 
+Matricula.create([
+    { usuario_id: 1, turma_id: 1, semestre: '2025/1' },
+    { usuario_id: 5, turma_id: 4, semestre: '2025/1' },
+    { usuario_id: 6, turma_id: 3, semestre: '2025/1' },
+    { usuario_id: 7, turma_id: 3, semestre: '2025/1' },
+    { usuario_id: 8, turma_id: 5, semestre: '2025/1' },
+    { usuario_id: 12, turma_id: 3, semestre: '2025/1' }
+])
+
+puts "= matriculas populada."
+
+Disciplina.create([
+    {
+        id: 1,
+        curso_id: 1,
+        turma_id: 1,
+        usuario_id: 2,
+        nome_disciplina: 'Teoria dos Autômatos',
+        sala_aula: 'Bloco A Sala 202',
+        semestre: '2025/1',
+    },
+    {
+        id: 2,
+        curso_id: 1,
+        turma_id: 1,
+        usuario_id: 3,
+        nome_disciplina: 'Interface Humano Computador',
+        sala_aula: 'Bloco A Sala 204',
+        semestre: '2025/2',
+    },
+    {
+        id: 3,
+        curso_id: 1,
+        turma_id: 1,
+        usuario_id: 9,
+        nome_disciplina: 'Programação Orientada a Objetos',
+        sala_aula: 'Bloco A Sala 204',
+        semestre: '2025/2',
+    },
+    {
+        id: 4,
+        curso_id: 1,
+        turma_id: 3,
+        usuario_id: 9,
+        nome_disciplina: 'Programação Orientada a Objetos',
+        sala_aula: 'Bloco A Sala 204',
+        semestre: '2025/2',
+    },
+    {
+        id: 5,
+        curso_id: 2,
+        turma_id: 6,
+        usuario_id: 4,
+        nome_disciplina: 'Design UI/UX',
+        sala_aula: 'Bloco AC Sala 201',
+        semestre: '2025/1',
+    },
+    {
+        id: 6,
+        curso_id: 2,
+        turma_id: 7,
+        usuario_id: 4,
+        nome_disciplina: 'Design UI/UX',
+        sala_aula: 'Bloco AC Sala 201',
+        semestre: '2025/1',
+    },
+    {
+        id: 7,
+        curso_id: 1,
+        turma_id: 2,
+        usuario_id: 2,
+        nome_disciplina: 'Teoria dos Autômatos',
+        sala_aula: 'Bloco A Sala 202',
+        semestre: '2025/1',
+    },
+    {
+        id: 8,
+        curso_id: 2,
+        turma_id: 5,
+        usuario_id: 3,
+        nome_disciplina: 'Interface Humano Computador',
+        sala_aula: 'Bloco B Sala 204',
+        semestre: '2025/2',
+    }
+])
+
+puts "= disciplinas populada."
+
 LocalAgendamento.create([
     { id: 1, edificio: "Bloco X", local: "Sala 101" },
     { id: 2, edificio: "Bloco X", local: "Sala 102" },
@@ -353,97 +441,20 @@ Agendamento.create([
         horario_fim: nil,
         repete: :todo_ano
     },
+    {
+        id: 8,
+        usuario_id: 3,
+        local_agendamento_id: 3,
+        nome_agendamento: "Interface Humano Computador",
+        data_inicio: "2025-03-06",
+        data_fim: "2025-07-05",
+        horario_inicio: "08:30",
+        horario_fim: "12:15",
+        repete: :toda_semana
+    },
 ])
 
 puts "= agendamentos populada."
-
-Matricula.create([
-    { usuario_id: 1, turma_id: 1, semestre: '2025/1' },
-    { usuario_id: 5, turma_id: 4, semestre: '2025/1' },
-    { usuario_id: 6, turma_id: 3, semestre: '2025/1' },
-    { usuario_id: 7, turma_id: 3, semestre: '2025/1' },
-    { usuario_id: 8, turma_id: 5, semestre: '2025/1' },
-    { usuario_id: 12, turma_id: 3, semestre: '2025/1' }
-])
-
-puts "= matriculas populada."
-
-Disciplina.create([
-    {
-        id: 1,
-        curso_id: 1,
-        turma_id: 1,
-        usuario_id: 2,
-        nome_disciplina: 'Teoria dos Autômatos',
-        sala_aula: 'Bloco A Sala 202',
-        semestre: '2025/1',
-    },
-    {
-        id: 2,
-        curso_id: 1,
-        turma_id: 1,
-        usuario_id: 3,
-        nome_disciplina: 'Interface Humano Computador',
-        sala_aula: 'Bloco A Sala 204',
-        semestre: '2025/2',
-    },
-    {
-        id: 3,
-        curso_id: 1,
-        turma_id: 1,
-        usuario_id: 9,
-        nome_disciplina: 'Programação Orientada a Objetos',
-        sala_aula: 'Bloco A Sala 204',
-        semestre: '2025/2',
-    },
-    {
-        id: 4,
-        curso_id: 1,
-        turma_id: 3,
-        usuario_id: 9,
-        nome_disciplina: 'Programação Orientada a Objetos',
-        sala_aula: 'Bloco A Sala 204',
-        semestre: '2025/2',
-    },
-    {
-        id: 5,
-        curso_id: 2,
-        turma_id: 6,
-        usuario_id: 4,
-        nome_disciplina: 'Design UI/UX',
-        sala_aula: 'Bloco AC Sala 201',
-        semestre: '2025/1',
-    },
-    {
-        id: 6,
-        curso_id: 2,
-        turma_id: 7,
-        usuario_id: 4,
-        nome_disciplina: 'Design UI/UX',
-        sala_aula: 'Bloco AC Sala 201',
-        semestre: '2025/1',
-    },
-    {
-        id: 7,
-        curso_id: 1,
-        turma_id: 2,
-        usuario_id: 2,
-        nome_disciplina: 'Teoria dos Autômatos',
-        sala_aula: 'Bloco A Sala 202',
-        semestre: '2025/1',
-    },
-    {
-        id: 8,
-        curso_id: 2,
-        turma_id: 5,
-        usuario_id: 3,
-        nome_disciplina: 'Interface Humano Computador',
-        sala_aula: 'Bloco B Sala 204',
-        semestre: '2025/2',
-    }
-])
-
-puts "= disciplinas populada."
 
 UnidadeDisciplina.create([
     {
