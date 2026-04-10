@@ -114,6 +114,7 @@ class ConteudosController < ApplicationController
   # GET /conteudos/1/edit
   def edit
     authorize(@conteudo)
+    professor = get_usuario_autenticado
     @disciplina_conteudo = Disciplina.find_by(usuario_id: professor.id)
     Rails.logger.info "Editando conteúdo " + @conteudo.nome_conteudo + "."
   end

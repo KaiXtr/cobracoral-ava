@@ -28,16 +28,16 @@
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <main class="cobra-app">
       <%= turbo_frame_tag "cobra-modal", id: "cobra-modal" %>
-      <%= render ContextMenuComponent.new() %>
-      <%= render BarraPrincipalComponent.new(usuario_autenticado: @usuario_autenticado) %>
-      <%= render BarraLateralNavegacaoComponent.new(usuario_autenticado: @usuario_autenticado) %>
-      <%= render BarraLateralPreferenciasComponent.new(
+      <%= render ContextMenu::ContextMenuComponent.new() %>
+      <%= render BarraPrincipal::BarraPrincipalComponent.new(usuario_autenticado: @usuario_autenticado) %>
+      <%= render BarraLateralNavegacao::BarraLateralNavegacaoComponent.new(usuario_autenticado: @usuario_autenticado) %>
+      <%= render BarraLateralPreferencias::BarraLateralPreferenciasComponent.new(
         preferencias_usuario: @preferencias_usuario,
         usuario_autenticado: @usuario_autenticado
       ) %>
-      <%= render NotificacaoComponent.new(mensagem: notice) %>
+      <%= render Notificacao::NotificacaoComponent.new(mensagem: notice) %>
       <%= yield %>
-      <%= render RodapeComponent.new() %>
+      <%= render Rodape::RodapeComponent.new() %>
     </main>
   </body>
 </html>

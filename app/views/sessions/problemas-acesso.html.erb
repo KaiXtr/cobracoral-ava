@@ -24,11 +24,11 @@
 			<%= f.email_field :email, required: 'true', class: 'input-text' %>
 		</div>
 		<div class="button-group">
-			<%= render CobraButtonComponent.new(
+			<%= render CobraButton::CobraButtonComponent.new(
 				text: 'Voltar',
                 href: '/entrar')
 			%>
-			<%= render CobraButtonComponent.new(
+			<%= render CobraButton::CobraButtonComponent.new(
 				text: 'Enviar',
 				onclick: 'triggerLoginSubmit')
 			%>

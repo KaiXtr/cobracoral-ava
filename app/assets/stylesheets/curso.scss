@@ -1,5 +1,6 @@
 .usuario-button {
     display: block;
+    width: fit-content;
     margin-bottom: 10px;
     transition-duration: .2s;
 
@@ -115,15 +116,23 @@ div.disciplinas-banner {
         width: 30vw;
         margin: 5px;
 
+        a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+        }
+
         &:hover {
             transform: translateY(-10px);
+            cursor: pointer;
         }
 
         .disciplina-thumbnail-img {
             background-color: black;
             border-radius: 50px 50px 0px 0px;
             min-width: 100%;
-            min-height: 10vw;
+            max-height: 10vw;
             overflow: hidden;
 
             img {

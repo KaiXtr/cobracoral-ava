@@ -1,5 +1,5 @@
-<a href="/usuarios/<%= usuario.id %>">
-	<div class="usuario-button">
+<div class="usuario-button">
+	<a href="/usuarios/<%= usuario.id %>">
 		<div class="usuario-button-icon">
 			<% if usuario.avatar.attached? %>
 				<%= image_tag(usuario.avatar) %>
@@ -12,5 +12,5 @@
 				<%= usuario.nome_completo %>
 			</div>
 		<% end %>
-	</div>
-</a>
+	</a>
+</div>

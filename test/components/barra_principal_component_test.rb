@@ -6,7 +6,7 @@ class BarraPrincipalComponentTest < ViewComponent::TestCase
   def test_component_renders_something_useful
     # assert_equal(
     #   %(<span>Hello, components!</span>),
-    #   render_inline(BarraPrincipalComponent.new(message: "Hello, components!")).css("span").to_html
+    #   render_inline(BarraPrincipal::BarraPrincipalComponent.new(message: "Hello, components!")).css("span").to_html
     # )
   end
 end

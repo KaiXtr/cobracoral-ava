@@ -37,17 +37,19 @@
         Semestre: <%= @disciplina.semestre %>
       </div>
       <div class="disciplina_medidores">
-        <%= render MedidorGraficoComponent.new(
+        <%= render MedidorGrafico::MedidorGraficoComponent.new(
           medidor_titulo: 'Presenças',
           valor_entrada: 80,
           valor_tipo: 'porcento',
-          modal_href: '/disciplinas/new')
+          modal_href: '/disciplinas/new',
+          policy: policy(@disciplina).new?)
         %>
-        <%= render MedidorGraficoComponent.new(
+        <%= render MedidorGrafico::MedidorGraficoComponent.new(
           medidor_titulo: 'Notas',
           valor_entrada: 6.5,
           valor_tipo: 'nota',
-          modal_href: '/disciplinas/new')
+          modal_href: '/disciplinas/new',
+          policy: policy(@disciplina).new?)
         %>
       </div>
     </div>

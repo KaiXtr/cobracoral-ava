@@ -85,7 +85,7 @@
                 onclick="abrirMenuPerfil()"
                 aria-label="Perfil">
                 <i class="fa-solid fa-user fa-2xl"></i>
-                <%= render MenuPerfilComponent.new(usuario_autenticado: @usuario_autenticado) %>
+                <%= render MenuPerfil::MenuPerfilComponent.new(usuario_autenticado: @usuario_autenticado) %>
             </button>
         </li>
     </ul>

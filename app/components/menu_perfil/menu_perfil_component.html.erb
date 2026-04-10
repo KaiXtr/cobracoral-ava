@@ -10,7 +10,7 @@
         </div>
         <div class="menu-perfil-usuario-column">
             <% if @preferencias_usuario.pomodoro_ativar %>
-                <%= render PomodoroToolComponent.new(
+                <%= render PomodoroTool::PomodoroToolComponent.new(
                     preferencias_usuario: @preferencias_usuario,
                     login_time: session[:login_time],
                     pomodoris_quant: session[:pomodoris_quant]

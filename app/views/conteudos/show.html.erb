@@ -40,7 +40,7 @@
       <textarea placeholder="Insira texto..." id="text-area-anotacao"></textarea>
     </div>
     
-    <%= render ConteudoNavButtonComponent.new(
+    <%= render ConteudoNavButton::ConteudoNavButtonComponent.new(
       conteudoAtual: @conteudo,
       proximoConteudo: @proximoConteudo)
     %>

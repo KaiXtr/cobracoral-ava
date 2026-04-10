@@ -29,7 +29,7 @@
                 <%= render @estudantes_turma %>
             </div>
             <% if policy(@turma).matricular? %>
-                <%= render CobraButtonComponent.new(
+                <%= render CobraButton::CobraButtonComponent.new(
                     text: 'Matricular estudantes',
                     href: '/turmas/' + @turma.id.to_s + '/matricular')
                 %>

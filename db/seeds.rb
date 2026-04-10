@@ -263,12 +263,12 @@ Turma.create([
 puts "= turmas populada."
 
 Matricula.create([
-    { usuario_id: 1, turma_id: 1, semestre: '2025/1' },
-    { usuario_id: 5, turma_id: 4, semestre: '2025/1' },
-    { usuario_id: 6, turma_id: 3, semestre: '2025/1' },
-    { usuario_id: 7, turma_id: 3, semestre: '2025/1' },
-    { usuario_id: 8, turma_id: 5, semestre: '2025/1' },
-    { usuario_id: 12, turma_id: 3, semestre: '2025/1' }
+    { usuario_id: 1, turma_id: 1, semestre: '2026/1' },
+    { usuario_id: 5, turma_id: 4, semestre: '2026/1' },
+    { usuario_id: 6, turma_id: 3, semestre: '2026/1' },
+    { usuario_id: 7, turma_id: 3, semestre: '2026/1' },
+    { usuario_id: 8, turma_id: 5, semestre: '2026/1' },
+    { usuario_id: 12, turma_id: 3, semestre: '2026/1' }
 ])
 
 puts "= matriculas populada."
@@ -281,7 +281,7 @@ Disciplina.create([
         usuario_id: 2,
         nome_disciplina: 'Teoria dos Autômatos',
         sala_aula: 'Bloco A Sala 202',
-        semestre: '2025/1',
+        semestre: '2026/1',
     },
     {
         id: 2,
@@ -290,7 +290,7 @@ Disciplina.create([
         usuario_id: 3,
         nome_disciplina: 'Interface Humano Computador',
         sala_aula: 'Bloco A Sala 204',
-        semestre: '2025/2',
+        semestre: '2026/2',
     },
     {
         id: 3,
@@ -299,7 +299,7 @@ Disciplina.create([
         usuario_id: 9,
         nome_disciplina: 'Programação Orientada a Objetos',
         sala_aula: 'Bloco A Sala 204',
-        semestre: '2025/2',
+        semestre: '2026/2',
     },
     {
         id: 4,
@@ -308,7 +308,7 @@ Disciplina.create([
         usuario_id: 9,
         nome_disciplina: 'Programação Orientada a Objetos',
         sala_aula: 'Bloco A Sala 204',
-        semestre: '2025/2',
+        semestre: '2026/2',
     },
     {
         id: 5,
@@ -317,7 +317,7 @@ Disciplina.create([
         usuario_id: 4,
         nome_disciplina: 'Design UI/UX',
         sala_aula: 'Bloco AC Sala 201',
-        semestre: '2025/1',
+        semestre: '2026/1',
     },
     {
         id: 6,
@@ -326,7 +326,7 @@ Disciplina.create([
         usuario_id: 4,
         nome_disciplina: 'Design UI/UX',
         sala_aula: 'Bloco AC Sala 201',
-        semestre: '2025/1',
+        semestre: '2026/1',
     },
     {
         id: 7,
@@ -335,7 +335,7 @@ Disciplina.create([
         usuario_id: 2,
         nome_disciplina: 'Teoria dos Autômatos',
         sala_aula: 'Bloco A Sala 202',
-        semestre: '2025/1',
+        semestre: '2026/1',
     },
     {
         id: 8,
@@ -344,7 +344,7 @@ Disciplina.create([
         usuario_id: 3,
         nome_disciplina: 'Interface Humano Computador',
         sala_aula: 'Bloco B Sala 204',
-        semestre: '2025/2',
+        semestre: '2026/2',
     }
 ])
 
@@ -369,8 +369,8 @@ Agendamento.create([
         usuario_id: 9,
         local_agendamento_id: nil,
         nome_agendamento: "Ano novo",
-        data_inicio: "2025-01-01",
-        data_fim: "2025-01-01",
+        data_inicio: "2026-01-01",
+        data_fim: "2026-01-01",
         horario_inicio: nil,
         horario_fim: nil,
         repete: :todo_ano
@@ -380,8 +380,8 @@ Agendamento.create([
         usuario_id: 9,
         local_agendamento_id: nil,
         nome_agendamento: "Tiradentes",
-        data_inicio: "2025-04-21",
-        data_fim: "2025-04-21",
+        data_inicio: "2026-04-21",
+        data_fim: "2026-04-21",
         horario_inicio: nil,
         horario_fim: nil,
         repete: :todo_ano
@@ -391,8 +391,8 @@ Agendamento.create([
         usuario_id: 9,
         local_agendamento_id: nil,
         nome_agendamento: "Dia do trabalho",
-        data_inicio: "2025-05-01",
-        data_fim: "2025-05-01",
+        data_inicio: "2026-05-01",
+        data_fim: "2026-05-01",
         horario_inicio: nil,
         horario_fim: nil,
         repete: :todo_ano
@@ -402,8 +402,8 @@ Agendamento.create([
         usuario_id: 9,
         local_agendamento_id: nil,
         nome_agendamento: "Independência do Brasil",
-        data_inicio: "2025-09-07",
-        data_fim: "2025-09-07",
+        data_inicio: "2026-09-07",
+        data_fim: "2026-09-07",
         horario_inicio: nil,
         horario_fim: nil,
         repete: :todo_ano
@@ -413,8 +413,8 @@ Agendamento.create([
         usuario_id: 9,
         local_agendamento_id: nil,
         nome_agendamento: "Dia de Finados",
-        data_inicio: "2025-11-02",
-        data_fim: "2025-11-02",
+        data_inicio: "2026-11-02",
+        data_fim: "2026-11-02",
         horario_inicio: nil,
         horario_fim: nil,
         repete: :todo_ano
@@ -424,8 +424,8 @@ Agendamento.create([
         usuario_id: 9,
         local_agendamento_id: nil,
         nome_agendamento: "Proclamação da República",
-        data_inicio: "2025-11-15",
-        data_fim: "2025-11-15",
+        data_inicio: "2026-11-15",
+        data_fim: "2026-11-15",
         horario_inicio: nil,
         horario_fim: nil,
         repete: :todo_ano
@@ -435,8 +435,8 @@ Agendamento.create([
         usuario_id: 9,
         local_agendamento_id: nil,
         nome_agendamento: "Natal",
-        data_inicio: "2025-12-25",
-        data_fim: "2025-12-25",
+        data_inicio: "2026-12-25",
+        data_fim: "2026-12-25",
         horario_inicio: nil,
         horario_fim: nil,
         repete: :todo_ano
@@ -446,8 +446,8 @@ Agendamento.create([
         usuario_id: 3,
         local_agendamento_id: 3,
         nome_agendamento: "Interface Humano Computador",
-        data_inicio: "2025-03-06",
-        data_fim: "2025-07-05",
+        data_inicio: "2026-03-06",
+        data_fim: "2026-07-05",
         horario_inicio: "08:30",
         horario_fim: "12:15",
         repete: :toda_semana

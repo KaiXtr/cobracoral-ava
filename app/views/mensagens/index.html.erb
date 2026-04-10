@@ -11,7 +11,7 @@
     </a>
 
     <% for u in @mensagens_usuarios %>
-      <%= render MessengerUserButtonComponent.new(
+      <%= render MessengerUserButton::MessengerUserButtonComponent.new(
         usuario_messenger: u,
         usuario_autenticado: @usuario_autenticado,
         selected_id: @id_param.to_i,

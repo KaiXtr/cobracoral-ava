@@ -1,8 +1,10 @@
-<a href='/disciplinas/<%= disciplina.id %>'>
-	<div class="disciplina-thumbnail">
+<div class="disciplina-thumbnail">
+	<a href='/disciplinas/<%= disciplina.id %>'>
 		<div class="disciplina-thumbnail-img">
 			<% if disciplina.banner.attached? %>
 				<%= image_tag(disciplina.banner) %>
+			<% else %>
+				<%= image_tag("disciplina-default-thumbnail.png") %>
 			<% end %>
 		</div>
 		<div class="disciplina-thumbnail-info">
@@ -24,5 +26,5 @@
 				<%= disciplina.sala_aula %>
 			</p>
 		</div>
-	</div>
-</a>
+	</a>
+</div>

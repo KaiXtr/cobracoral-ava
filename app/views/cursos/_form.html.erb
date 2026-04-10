@@ -12,18 +12,18 @@
 
   <div class="button-group">
     <% if params[:action] == 'new' %>
-      <%= render CobraButtonComponent.new(
+      <%= render CobraButton::CobraButtonComponent.new(
           text: 'Cancelar',
           href: '/cursos')
       %>
     <% end %>
     <% if params[:action] == 'edit' %>
-      <%= render CobraButtonComponent.new(
+      <%= render CobraButton::CobraButtonComponent.new(
           text: 'Cancelar',
           href: '/cursos/' + @curso.id.to_s)
       %>
     <% end %>
-    <%= render CobraButtonComponent.new(
+    <%= render CobraButton::CobraButtonComponent.new(
         text: 'Salvar',
         submit: true)
     %>

@@ -17,7 +17,7 @@
     </div>
     <h5>
         <%= @medidor_titulo %>
-        <% if @modal_href %>
+        <% if @modal_href && @is_link_enabled %>
             <a
                 href="<%= @modal_href %>"
                 tooltip-text="Abrir gráfico"

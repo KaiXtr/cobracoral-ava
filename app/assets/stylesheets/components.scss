@@ -458,7 +458,7 @@ textarea {
 
 #context-menu-component {
     position: fixed;
-    z-index: 90;
+    z-index: -90;
 
     ul {
         color: var(--nav-bg);
