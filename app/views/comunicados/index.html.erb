@@ -3,7 +3,7 @@
     <h2>Comunicados</h2>
     <% if @comunicados %>
       <% if policy(@comunicado).new? %>
-        <%= render OpenModalButtonComponent.new(
+        <%= render OpenModalButton::OpenModalButtonComponent.new(
           href: new_comunicado_path,
           button_class: 'open-modal-comunicado',
           tooltip: 'Criar comunicado')

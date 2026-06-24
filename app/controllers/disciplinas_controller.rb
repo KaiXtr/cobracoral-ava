@@ -38,6 +38,31 @@ class DisciplinasController < ApplicationController
           disciplina_id: @disciplina.id
         }
       )
+    @avaliacoes = Avaliacao.joins(:unidade_disciplina)
+      .where(
+        unidade_disciplina: {
+          disciplina_id: @disciplina.id
+        }
+      )
+
+    @nota_usuario = 0
+    if (isUsuarioEstudante(@usuario)) then
+      for u in @unidades_disciplina do
+        avaliacoes_unidade = Avaliacao.where(unidade_disciplina_id: u.id)
+
+        for a in avaliacoes_unidade do
+          tentativas_avaliacao = TentativaAvaliacao.where(avaliacao_id: a.id, usuario_id: @usuario.id)
+          m_nota = 0
+
+          for t in tentativas_avaliacao do
+            if t.nota != nil && t.nota > m_nota then
+              m_nota = t.nota
+            end
+          end
+          @nota_usuario += m_nota
+        end
+      end
+    end
     
     Rails.logger.info "Acessando disciplina " + @disciplina.nome_disciplina + "."
   end

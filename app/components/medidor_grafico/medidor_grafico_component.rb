@@ -19,7 +19,7 @@ module MedidorGrafico
       @is_link_enabled = policy
 
       if @valor_tipo == 'nota' then
-        @valor_entrada = @valor_entrada * 10
+        @valor_entrada = @valor_entrada
       elsif @valor_tipo == 'porcento' then
         @label_entrada = @valor_entrada.to_s + '%'
       elsif @valor_tipo == 'minuto' then

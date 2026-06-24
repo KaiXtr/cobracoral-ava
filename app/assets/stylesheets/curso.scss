@@ -260,3 +260,90 @@ a.conteudo-disabled {
     display: block;
     margin-bottom: 10px;
 }
+
+nav.avaliacao-nav {
+    background-color: var(--login-bg);
+    padding: 5vh 10vw 5vh 10vw;
+    min-height: 100vh;
+
+    h1 {
+        font-size: 26pt;
+    }
+
+    .avaliacao-data {
+        font-size: 10pt;
+        color: var(--gray-color);
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    section {
+        line-height: 25pt;
+        padding-bottom: 5vh;
+        margin-bottom: 5vh;
+        border-bottom: 1px #ffbfbf solid;
+    }
+
+    .avaliacao-conteiner {
+        background-color: var(--container-bg);
+        border-radius: 20px;
+        padding: 5vw;
+    }
+
+    .avaliacao-questoes-conteiner {
+        margin: 3vw;
+
+        .avaliacao-questao-thumbnail {
+            background-color: var(--container-secondary);
+            font-weight: bold;
+            border: none;
+            border: 20px;
+            display: inline-block;
+            padding: 1vw;
+        }
+    }
+
+    .avaliacao-tentativas-table {
+        border: 1px solid var(--gray-color);
+        border-collapse: collapse;
+        width: 30vw;
+        margin: 1vh;
+        font-size: 10pt;
+
+        tr {
+            margin: 0px;
+        }
+
+        th {
+            background-color: var(--gray-color);
+            border: 1px solid var(--gray-color);
+        }
+
+        td {
+            border: 1px solid var(--gray-color);
+        }
+    }
+
+    .avaliacao-alternativas-conteiner {
+        margin: 2vh;
+        padding: 2vw;
+
+        .avaliacao-alternativa {
+            background-color: var(--container-secondary);
+            border-radius: 50px;
+            transition-duration: .2s;
+            padding: 20px 50px 20px 50px;
+            margin-bottom: 10px;
+
+            &:hover {
+                transform: translateX(10px);
+                cursor: pointer;
+            }
+
+            &.alternativa-selecionada {
+                background-color: var(--main-color);
+                color: var(--white-main)
+            }
+        }
+    }
+}

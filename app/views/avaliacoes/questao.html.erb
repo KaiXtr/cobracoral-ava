@@ -1,0 +1,33 @@
+<nav class="avaliacao-nav">
+  <div class="avaliacao-conteiner">
+    <h1><%= @avaliacao.nome_avaliacao %></h1>
+    <div class="avaliacao-elementos" id="content">
+      <%= @questao_avaliacao.corpo_questao %>
+
+      <div class="avaliacao-alternativas-conteiner">
+        <% for q in @alternativas_questao %>
+          <a href="/avaliacoes/<%= @avaliacao.id %>/<%= @questao_avaliacao.id %>/<%= q.id %>/salvar" tabIndex="-1" data-turbo-prefetch="false">
+            <% if q.id == @alternativa_selecionada %>
+              <div class="avaliacao-alternativa alternativa-selecionada">
+                <%= q.label_alternativa %>
+              </div>
+            <% else %>
+              <div class="avaliacao-alternativa">
+                <%= q.label_alternativa %>
+              </div>
+            <% end %>
+          </a>
+        <% end %>
+        <%= render MedidorBarra::MedidorBarraComponent.new(
+          valor_entrada: @avaliacao_pagina - 1,
+          valor_max: @max_questoes - 1)
+        %>
+      </div>
+      <%= render AvaliacaoNavButton::AvaliacaoNavButtonComponent.new(
+        avaliacao: @avaliacao,
+        questao: @questao_avaliacao,
+        pagina: @avaliacao_pagina)
+      %>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,57 @@
+<% if @estaEditando %>
+  <a href="/avaliacoes/<%= avaliacao.id %>/edit">
+    <div id="<%= dom_id avaliacao %>" class="avaliacao-button">
+      <div class="conteudo-button-info">
+        <h5><%= avaliacao.nome_avaliacao %></h5>
+      </div>
+      <div class="conteudo-button-conclusao">
+        Editar
+      </div>
+    </div>
+  </a>
+<% else %>
+  <% if @estaNoKanban %>
+    <a href="/avaliacoes/<%= avaliacao.id %>">
+      <div id="<%= dom_id avaliacao %>" class="avaliacao-button">
+        <div class="conteudo-button-info">
+          <h5>
+            <%= avaliacao.nome_avaliacao %>
+          </h5>
+          <span class="conteudo-data">
+            <%= get_vencimento_restante(avaliacao) %>
+          </span>
+          <%= render @usuario %>
+        </div>
+      </div>
+    </a>
+  <% elsif @estaNoCalendario %>
+    <button class="agendamento-button">
+      <strong>
+          <%= avaliacao.nome_avaliacao %>
+      </strong>
+    </button>
+  <% else %>
+    <a
+      href="/avaliacoes/<%= avaliacao.id %>"
+      class="<%=
+        is_avaliacao_indisponivel(avaliacao) ? 'conteudo-disabled' : ''
+      %>">
+      <div id="<%= dom_id avaliacao %>" class="conteudo-button">
+        <div class="conteudo-button-info">
+          <h5>
+            <%= avaliacao.nome_avaliacao %>
+          </h5>
+          <span>
+            <%= get_vencimento_restante(avaliacao) %>
+          </span>
+        </div>
+        <div class="conteudo-button-conclusao">
+          <div class="conteudo-button-conclusao-max"></div>
+          <% if conclusao_avaliacao(avaliacao) %>
+            <div class="conteudo-button-conclusao-atual"></div>
+          <% end %>
+        </div>
+      </div>
+    </a>
+  <% end %>
+<% end %>

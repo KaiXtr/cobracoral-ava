@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_14_034045) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_23_200355) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -49,16 +49,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_14_034045) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "anotacaos", force: :cascade do |t|
-    t.integer "leitura_conteudo_id", null: false
-    t.integer "ln"
-    t.integer "col"
-    t.string "cor_anotacao"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["leitura_conteudo_id"], name: "index_anotacaos_on_leitura_conteudo_id"
-  end
-
   create_table "agendamentos", force: :cascade do |t|
     t.string "nome_agendamento", null: false
     t.integer "usuario_id", null: false
@@ -74,10 +64,43 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_14_034045) do
     t.index ["usuario_id"], name: "index_agendamentos_on_usuario_id"
   end
 
+  create_table "alternativa_questoes", force: :cascade do |t|
+    t.integer "questao_avaliacao_id", null: false
+    t.boolean "is_correta"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["questao_avaliacao_id"], name: "index_alternativa_questoes_on_questao_avaliacao_id"
+  end
+
+  create_table "anotacaos", force: :cascade do |t|
+    t.integer "leitura_conteudo_id", null: false
+    t.integer "ln"
+    t.integer "col"
+    t.string "cor_anotacao"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["leitura_conteudo_id"], name: "index_anotacaos_on_leitura_conteudo_id"
+  end
+
   create_table "assunto_solicitacoes", force: :cascade do |t|
     t.string "enum_assunto"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "avaliacoes", force: :cascade do |t|
+    t.integer "unidade_disciplina_id", null: false
+    t.string "nome_avaliacao"
+    t.integer "nota_total"
+    t.datetime "data_liberacao"
+    t.datetime "data_vencimento"
+    t.integer "tempo_limite"
+    t.integer "quant_questoes"
+    t.integer "quant_tentativas"
+    t.boolean "is_recuperacao"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["unidade_disciplina_id"], name: "index_avaliacoes_on_unidade_disciplina_id"
   end
 
   create_table "cargo_usuarios", force: :cascade do |t|
@@ -195,6 +218,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_14_034045) do
     t.index ["usuario_id"], name: "index_preferencias_usuario_on_usuario_id"
   end
 
+  create_table "questao_avaliacoes", force: :cascade do |t|
+    t.integer "avaliacao_id", null: false
+    t.integer "peso_questao"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["avaliacao_id"], name: "index_questao_avaliacoes_on_avaliacao_id"
+  end
+
   create_table "reacao_comunicados", force: :cascade do |t|
     t.integer "comunicado_id", null: false
     t.integer "usuario_id", null: false
@@ -213,6 +244,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_14_034045) do
     t.datetime "updated_at", null: false
     t.index ["mensagem_id"], name: "index_reacao_mensagens_on_mensagem_id"
     t.index ["usuario_id"], name: "index_reacao_mensagens_on_usuario_id"
+  end
+
+  create_table "resposta_tentativas", force: :cascade do |t|
+    t.integer "tentativa_avaliacao_id", null: false
+    t.integer "questao_avaliacao_id", null: false
+    t.integer "alternativa_questao_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["alternativa_questao_id"], name: "index_resposta_tentativas_on_alternativa_questao_id"
+    t.index ["questao_avaliacao_id"], name: "index_resposta_tentativas_on_questao_avaliacao_id"
+    t.index ["tentativa_avaliacao_id"], name: "index_resposta_tentativas_on_tentativa_avaliacao_id"
   end
 
   create_table "solicitacao_denuncia", force: :cascade do |t|
@@ -235,6 +277,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_14_034045) do
     t.integer "assunto_solicitacoes_id", null: false
     t.index ["assunto_solicitacoes_id"], name: "index_solicitacoes_on_assunto_solicitacoes_id"
     t.index ["usuario_id"], name: "index_solicitacoes_on_usuario_id"
+  end
+
+  create_table "tentativa_avaliacoes", force: :cascade do |t|
+    t.integer "usuario_id", null: false
+    t.integer "avaliacao_id", null: false
+    t.integer "nota"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["avaliacao_id"], name: "index_tentativa_avaliacoes_on_avaliacao_id"
+    t.index ["usuario_id"], name: "index_tentativa_avaliacoes_on_usuario_id"
   end
 
   create_table "turmas", force: :cascade do |t|
@@ -271,6 +323,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_14_034045) do
     t.integer "acessos_count"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "agendamentos", "local_agendamentos"
+  add_foreign_key "agendamentos", "usuarios"
+  add_foreign_key "alternativa_questoes", "questao_avaliacoes", column: "questao_avaliacao_id"
+  add_foreign_key "anotacaos", "leitura_conteudos"
+  add_foreign_key "avaliacoes", "unidade_disciplinas"
+  add_foreign_key "comunicados", "disciplinas"
+  add_foreign_key "comunicados", "turmas"
+  add_foreign_key "comunicados", "usuarios"
+  add_foreign_key "conteudos", "unidade_disciplinas"
   add_foreign_key "cursos", "usuarios"
   add_foreign_key "disciplinas", "cursos"
   add_foreign_key "disciplinas", "turmas"
@@ -282,13 +345,19 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_14_034045) do
   add_foreign_key "mensagens", "usuarios", column: "destinatario_id"
   add_foreign_key "mensagens", "usuarios", column: "remetente_id"
   add_foreign_key "preferencias_usuario", "usuarios"
+  add_foreign_key "questao_avaliacoes", "avaliacoes", column: "avaliacao_id"
   add_foreign_key "reacao_comunicados", "comunicados"
   add_foreign_key "reacao_comunicados", "usuarios"
   add_foreign_key "reacao_mensagens", "mensagens", column: "mensagem_id"
   add_foreign_key "reacao_mensagens", "usuarios"
+  add_foreign_key "resposta_tentativas", "alternativa_questoes", column: "alternativa_questao_id"
+  add_foreign_key "resposta_tentativas", "questao_avaliacoes", column: "questao_avaliacao_id"
+  add_foreign_key "resposta_tentativas", "tentativa_avaliacoes", column: "tentativa_avaliacao_id"
   add_foreign_key "solicitacao_denuncia", "solicitacoes", column: "solicitacoes_id"
   add_foreign_key "solicitacoes", "assunto_solicitacoes", column: "assunto_solicitacoes_id"
   add_foreign_key "solicitacoes", "usuarios"
+  add_foreign_key "tentativa_avaliacoes", "avaliacoes", column: "avaliacao_id"
+  add_foreign_key "tentativa_avaliacoes", "usuarios"
   add_foreign_key "turmas", "cursos"
   add_foreign_key "unidade_disciplinas", "disciplinas"
 end

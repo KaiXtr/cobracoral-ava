@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <title>Cobracoral</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= favicon_link_tag asset_path('favicon.png') %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <%= javascript_include_tag 'login-forms' %>
+    
+    <script src="https://kit.fontawesome.com/597fea8ed7.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <main class="cobra-app">
+      <noscript>
+        <div class="cobra-javascript-disabled-warning">
+          <p>
+            Você não pode se autenticar na plataforma com o Javascript desativado. Por favor, ative o Javascript e desative extensões que possam estar causando mal funcionamento da plataforma.
+          </p>
+        </div>
+      </noscript>
+      <%= render ContextMenu::ContextMenuComponent.new() %>
+      <%= yield %>
+    </main>
+  </body>
+</html>

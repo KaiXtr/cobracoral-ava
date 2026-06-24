@@ -5,6 +5,9 @@
       <%=
         render @conteudos.where(unidade_disciplina_id: unidade_disciplina.id)
       %>
+      <%=
+        render @avaliacoes.where(unidade_disciplina_id: unidade_disciplina.id)
+      %>
     </div>
   </div>
 </li>

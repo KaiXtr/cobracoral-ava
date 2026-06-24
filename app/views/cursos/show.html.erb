@@ -31,7 +31,7 @@
                 <div>
                     <%= render @turmas %>
                     <% if policy(@curso).adicionar_turma? %>
-                        <%= render OpenModalButtonComponent.new(
+                        <%= render OpenModalButton::OpenModalButtonComponent.new(
                             href: new_turma_path(@turma_nova),
                             button_class: 'open-modal-turma',
                             tooltip: 'Adicionar turma')
@@ -41,7 +41,7 @@
             <% else %>
                 <p>Não há nenhuma turma cadastrada neste curso.</p>
                 <% if policy(@curso).adicionar_turma? %>
-                    <%= render OpenModalButtonComponent.new(
+                    <%= render OpenModalButton::OpenModalButtonComponent.new(
                         href: new_turma_path(@turma_nova),
                         button_class: 'open-modal-turma',
                         tooltip: 'Adicionar turma')
@@ -59,7 +59,7 @@
                 <div class="disciplinas-container">
                     <%= render @disciplinas %>
                     <% if policy(@curso).adicionar_disciplina? %>
-                        <%= render OpenModalButtonComponent.new(
+                        <%= render OpenModalButton::OpenModalButtonComponent.new(
                             href: new_disciplina_path(@disciplina_nova),
                             button_class: 'open-modal-disciplina',
                             tooltip: 'Adicionar disciplina')
@@ -69,7 +69,7 @@
             <% else %>
                 <p>Não há nenhuma disciplina cadastrada neste curso.</p>
                 <% if policy(@curso).adicionar_disciplina? %>
-                    <%= render OpenModalButtonComponent.new(
+                    <%= render OpenModalButton::OpenModalButtonComponent.new(
                         href: new_disciplina_path(@disciplina_nova),
                         button_class: 'open-modal-disciplina',
                         tooltip: 'Adicionar disciplina')

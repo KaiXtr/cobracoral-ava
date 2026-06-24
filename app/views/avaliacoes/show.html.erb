@@ -1,0 +1,80 @@
+<nav class="avaliacao-nav">
+  <div class="avaliacao-conteiner">
+    <a href="/disciplinas/<%= @disciplina_avaliacao.id %>" class="goback-button">
+      <i class="fa-solid fa-arrow-left fa-sm"></i>
+      Voltar para <strong><%= @disciplina_avaliacao.nome_disciplina %></strong>
+    </a>
+    <h1>
+      <%= @avaliacao.nome_avaliacao %>
+      <% if policy(@avaliacao).edit? %>
+        <a href="/avaliacao/<%= @avaliacao.id %>/editar" tooltip-text="Editar avaliação">
+            <i class="fa-solid fa-pen fa-sm icon-button"></i>
+        </a>
+      <% end %>
+    </h1>
+    <span class="avaliacao-data">
+      Pontuação: <%= @avaliacao.nota_total / 10 %>
+    </span>
+    <span class="avaliacao-data">
+      <%= formatar_data_liberacao(@avaliacao.data_liberacao) %>
+    </span>
+    <span class="avaliacao-data">
+      <%= formatar_data_vencimento(@avaliacao.data_vencimento) %>
+    </span>
+    <div class="avaliacao-elementos" id="content">
+      <%= @avaliacao.corpo %>
+
+      
+      <% if @respostas_tentativa != nil %>
+        <div class="avaliacao-questoes-conteiner">
+          <% for q in @respostas_tentativa %>
+            <a href=<%= "/avaliacoes/" + @avaliacao.id.to_s + "/" + @questao_index.to_s %>>
+              <div class="avaliacao-questao-thumbnail">
+                <%= @questao_index %>
+              </div>
+            </a>
+            <% @questao_index += 1 %>
+          <% end %>
+        </div>
+      <% end %>
+      
+      <table class="avaliacao-tentativas-table">
+        <tr>
+          <th>Tentativa</th>
+          <th>Nota</th>
+        </tr>
+        <% if @tentativas_avaliacao %>
+          <% for t in @tentativas_avaliacao %>
+            <tr>
+              <td><%= @tentativa_index %></td>
+              <% if t.nota != nil %>
+                <td><%= t.nota / 10 %>/<%= @avaliacao.nota_total / 10 %></td>
+              <% else %>
+                <td>Aguardando finalização...</td>
+              <% end %>
+            </tr>
+            <% @tentativa_index += 1 %>
+          <% end %>
+        <% end %>
+        <% if @tentativas_avaliacao.length < @avaliacao.quant_tentativas %>
+          <tr>
+            <td><%= @tentativa_index %></td>
+            <td>--</td>
+          </tr>
+        <% end %>
+      </table>
+
+      <% if @respostas_tentativa != nil && @respostas_tentativa.length > 0 %>
+        <%= render CobraButton::CobraButtonComponent.new(
+          text: 'Finalizar avaliação',
+          href: '/avaliacoes/finalizar/' + @avaliacao.id.to_s)
+        %>
+      <% elsif @tentativas_avaliacao.length < @avaliacao.quant_tentativas %>
+        <%= render CobraButton::CobraButtonComponent.new(
+          text: 'Iniciar avaliação',
+          href: '/avaliacoes/iniciar/' + @avaliacao.id.to_s)
+        %>
+      <% end %>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,16 @@
+<div class="button-group">
+    <% if @pagina - 1 > 0 %>
+        <a href="/avaliacoes/<%= @avaliacao.id %>/<%= @pagina - 1 %>" tabIndex="-1">
+            <button class="cobra-button">Questão anterior</button>
+        </a>
+    <% end %>
+    <% if @pagina + 1 <= @max_questoes %>
+        <a href="/avaliacoes/<%= @avaliacao.id %>/<%= @pagina + 1 %>" tabIndex="-1">
+            <button class="cobra-button">Próxima questão</button>
+        </a>
+    <% else %>
+        <a href="/avaliacoes/<%= @avaliacao.id %>" tabIndex="-1">
+            <button class="cobra-button">Ir para resumo</button>
+        </a>
+    <% end %>
+</div>

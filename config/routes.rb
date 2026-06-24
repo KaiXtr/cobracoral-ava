@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :unidade_disciplinas
   resources :conteudos
   resources :leitura_conteudos
+  resources :avaliacoes
   resources :preferencias_usuario
   resources :agendamentos
   
@@ -64,6 +65,12 @@ Rails.application.routes.draw do
   get '/conteudos/:id/salvar', to: 'conteudos#salvar'
   get '/conteudos/:id/deletar', to: 'conteudos#delete'
   get '/conteudos/:id/destroy', to: 'conteudos#destroy'
+
+  get '/avaliacoes/:id', to: 'avaliacoes#show'
+  get '/avaliacoes/iniciar/:id', to: 'avaliacoes#iniciar'
+  get '/avaliacoes/finalizar/:id', to: 'avaliacoes#finalizar'
+  get '/avaliacoes/:id/:pagina', to: 'avaliacoes#questao'
+  get '/avaliacoes/:id/:questao/:alternativa/salvar', to: 'avaliacoes#salvar'
 
   get '/agendamentos/:dia/:mes/:ano', to: 'agendamentos#index'
 

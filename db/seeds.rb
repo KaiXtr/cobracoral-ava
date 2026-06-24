@@ -549,6 +549,332 @@ Conteudo.create([
 
 puts "= conteudos populada."
 
+a = Avaliacao.create(
+    id: 1,
+    unidade_disciplina_id: 1,
+    nome_avaliacao: 'Avaliação I',
+    nota_total: 30,
+    data_liberacao: DateTime.now,
+    data_vencimento: DateTime.now,
+    tempo_limite: 60,
+    quant_questoes: 5,
+    quant_tentativas: 2,
+    is_recuperacao: false
+)
+a.corpo.body = "Este é um exercício de resumo para a prova da semana que vem, valendo ponto."
+a.save
+
+a = Avaliacao.create(
+    id: 2,
+    unidade_disciplina_id: 2,
+    nome_avaliacao: 'Avaliação II',
+    nota_total: 50,
+    data_liberacao: DateTime.now,
+    data_vencimento: DateTime.now,
+    tempo_limite: 60,
+    quant_questoes: 5,
+    quant_tentativas: 2,
+    is_recuperacao: false
+)
+a.corpo.body = "Esta é a avaliação final desta disciplina."
+a.save
+
+puts "= avaliacoes populada."
+
+q = QuestaoAvaliacao.create( id: 1, avaliacao_id: 1, peso_questao: 1 )
+q.corpo_questao.body = "Qual o nome do matemático que descobriu a Máquina de Turing?"
+q.save
+
+q = QuestaoAvaliacao.create( id: 2, avaliacao_id: 1, peso_questao: 1 )
+q.corpo_questao.body = "Por que o problema da decisão, conhecido como <b>entscheidungsproblem</b>, é considerado não computável?"
+q.save
+
+q = QuestaoAvaliacao.create( id: 3, avaliacao_id: 1, peso_questao: 1 )
+q.corpo_questao.body = "O problema da parada, conhecido como <b>halting problem</b>, é considerado um problema:"
+q.save
+
+q = QuestaoAvaliacao.create( id: 4, avaliacao_id: 1, peso_questao: 1 )
+q.corpo_questao.body = "De que forma a parábola do quarto chinês de John Searle se relaciona com o jogo da imitação de Alan Turing?"
+q.save
+
+q = QuestaoAvaliacao.create( id: 5, avaliacao_id: 1, peso_questao: 1 )
+q.corpo_questao.body = "Qual é a relação entre o Teorema da Incompletude de Gödel e o conceito de Máquina Universal de Turing?"
+q.save
+
+q = QuestaoAvaliacao.create( id: 6, avaliacao_id: 2, peso_questao: 1 )
+q.corpo_questao.body = "Marque duas alternativas que apresentam autômatos finitos determinísticos"
+q.save
+
+q = QuestaoAvaliacao.create( id: 7, avaliacao_id: 2, peso_questao: 1 )
+q.corpo_questao.body = "Qual o tipo correspondente de linguagem associado aos autômatos de pilha?"
+q.save
+
+q = QuestaoAvaliacao.create( id: 8, avaliacao_id: 2, peso_questao: 1 )
+q.corpo_questao.body = "É possível construir um algoritmo que descubra se uma equação diofantina possui solução?"
+q.save
+
+q = QuestaoAvaliacao.create( id: 9, avaliacao_id: 2, peso_questao: 1 )
+q.corpo_questao.body = "Qual o nome do sistema de funções recursivas computáveis descoberto por Alonzo Church?"
+q.save
+
+q = QuestaoAvaliacao.create( id: 10, avaliacao_id: 2, peso_questao: 1 )
+q.corpo_questao.body = "Em qual ano foi publicada a tese de Church-Turing?"
+q.save
+
+puts "= questao avaliacoes populada."
+
+a = AlternativaQuestao.create(id: 1, questao_avaliacao_id: 1, is_correta: false )
+a.label_alternativa.body = "Kurt Gödel"
+a.explicacao_alternativa.body = "Kurt Gödel não descobriu a máquina de Turing, mas formulou o Teorema da Incompletude de Gödel, importante para a elaboração da tese de Church-Turing e a resolução do problema nº10 de David Hilbert."
+a.save
+
+a = AlternativaQuestao.create(id: 2, questao_avaliacao_id: 1, is_correta: false )
+a.label_alternativa.body = "John Von Neumann"
+a.explicacao_alternativa.body = "John Von Neumann não descobriu a máquina de Turing, mas elaborou o modelo de Von Neumann, crucial para padronizar a construção de computadores práticos reais."
+a.save
+
+a = AlternativaQuestao.create(id: 3, questao_avaliacao_id: 1, is_correta: true )
+a.label_alternativa.body = "Alan Turing"
+a.explicacao_alternativa.body = "Alan Turing foi o responsável por desenvolver a tese de Church-Turing, junto de Alonzo Church, em 1936, onde são relacionados a máquina de Turing e o cálculo lambda."
+a.save
+
+a = AlternativaQuestao.create(id: 4, questao_avaliacao_id: 1, is_correta: false )
+a.label_alternativa.body = "David Hilbert"
+a.explicacao_alternativa.body = "David Hilbert não descobriu a máquina de Turing, mas apresentou o problema nº10, que seria posteriormente resolvido pela tese de Church-Turing."
+a.save
+
+a = AlternativaQuestao.create(id: 5, questao_avaliacao_id: 1, is_correta: false )
+a.label_alternativa.body = "Alonzo Church"
+a.explicacao_alternativa.body = "Alonzo Church descobriu o cálculo lambda, também presente na tese de Church-Turing, mas não descobriu a máquina de Turing."
+a.save
+
+a = AlternativaQuestao.create(id: 6, questao_avaliacao_id: 2, is_correta: false )
+a.label_alternativa.body = "Porque exige uma quantidade infinita de memória para ser resolvido por qualquer computador real"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 7, questao_avaliacao_id: 2, is_correta: true )
+a.label_alternativa.body = "Porque não existe um algoritmo geral capaz de determinar, em tempo finito, se qualquer proposição lógica é verdadeira ou falsa"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 8, questao_avaliacao_id: 2, is_correta: false )
+a.label_alternativa.body = "Porque sua solução depende exclusivamente da velocidade de processamento disponível no computador"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 9, questao_avaliacao_id: 2, is_correta: false )
+a.label_alternativa.body = "Porque só pode ser resolvido para proposições escritas em linguagens naturais, e não em linguagens formais"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 10, questao_avaliacao_id: 2, is_correta: false )
+a.label_alternativa.body = "Porque foi demonstrado que apenas computadores quânticos podem resolver esse tipo de problema"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 11, questao_avaliacao_id: 3, is_correta: false )
+a.label_alternativa.body = "NP-Completo"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 12, questao_avaliacao_id: 3, is_correta: false )
+a.label_alternativa.body = "P"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 13, questao_avaliacao_id: 3, is_correta: false )
+a.label_alternativa.body = "NP-Fácil"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 14, questao_avaliacao_id: 3, is_correta: false )
+a.label_alternativa.body = "NP-Equivalente"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 15, questao_avaliacao_id: 3, is_correta: true )
+a.label_alternativa.body = "NP-Difícil"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 16, questao_avaliacao_id: 4, is_correta: false )
+a.label_alternativa.body = "A parábola do quarto chinês reforça a ideia de Turing de que a compreensão da linguagem é suficiente para demonstrar inteligência genuína"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 17, questao_avaliacao_id: 4, is_correta: false )
+a.label_alternativa.body = "A parábola do quarto chinês propõe um método alternativo ao jogo da imitação para medir a velocidade de processamento dos computadores"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 18, questao_avaliacao_id: 4, is_correta: true )
+a.label_alternativa.body = "A parábola do quarto chinês critica a conclusão de que um sistema que passa no jogo da imitação necessariamente compreende o significado do que comunica"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 19, questao_avaliacao_id: 4, is_correta: false )
+a.label_alternativa.body = "A parábola do quarto chinês demonstra que apenas seres humanos são capazes de participar do jogo da imitação"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 20, questao_avaliacao_id: 4, is_correta: false )
+a.label_alternativa.body = "A parábola do quarto chinês e o jogo da imitação defendem que a inteligência depende exclusivamente da capacidade de realizar cálculos matemáticos complexos"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 21, questao_avaliacao_id: 5, is_correta: false )
+a.label_alternativa.body = "O teorema de Gödel demonstra que uma Máquina Universal de Turing é logicamente impossível de ser construída"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 22, questao_avaliacao_id: 5, is_correta: false )
+a.label_alternativa.body = "O teorema de Gödel prova que uma Máquina Universal de Turing pode resolver qualquer problema matemático existente"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 23, questao_avaliacao_id: 5, is_correta: true )
+a.label_alternativa.body = "O teorema de Gödel mostra que existem verdades matemáticas que não podem ser demonstradas em certos sistemas formais, enquanto a Máquina Universal de Turing evidencia os limites do que pode ser computado, revelando restrições fundamentais ao raciocínio mecânico"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 24, questao_avaliacao_id: 5, is_correta: false )
+a.label_alternativa.body = "O teorema de Gödel estabelece que toda computação realizada por uma Máquina Universal de Turing é necessariamente incompleta e incorreta"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 25, questao_avaliacao_id: 5, is_correta: false )
+a.label_alternativa.body = "O teorema de Gödel e a Máquina Universal de Turing demonstram que qualquer problema matemático pode ser resolvido por meio de algoritmos suficientemente complexos"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 26, questao_avaliacao_id: 6, is_correta: true )
+a.label_alternativa.body = "Máquina de Moore"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 27, questao_avaliacao_id: 6, is_correta: false )
+a.label_alternativa.body = "Máquina de Kleene"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 28, questao_avaliacao_id: 6, is_correta: false )
+a.label_alternativa.body = "Máquina de Turing"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 29, questao_avaliacao_id: 6, is_correta: true )
+a.label_alternativa.body = "Máquina de Mealy"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 30, questao_avaliacao_id: 6, is_correta: false )
+a.label_alternativa.body = "Máquina de Church"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 31, questao_avaliacao_id: 7, is_correta: false )
+a.label_alternativa.body = "Linguagem recursivamente enumerada"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 32, questao_avaliacao_id: 7, is_correta: true )
+a.label_alternativa.body = "Linguagem livre de contexto"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 33, questao_avaliacao_id: 7, is_correta: false )
+a.label_alternativa.body = "Linguagem sensível ao contexto"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 34, questao_avaliacao_id: 7, is_correta: false )
+a.label_alternativa.body = "Linguagem regular"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 35, questao_avaliacao_id: 7, is_correta: false )
+a.label_alternativa.body = "Liguagem irregular"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 36, questao_avaliacao_id: 8, is_correta: false )
+a.label_alternativa.body = "Sim, pois toda equação diofantina pode ser resolvida por meio de um procedimento computacional geral"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 37, questao_avaliacao_id: 8, is_correta: true )
+a.label_alternativa.body = "Não, pois foi demonstrado que não existe um algoritmo geral capaz de decidir, para toda equação diofantina, se ela possui ou não solução inteira"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 38, questao_avaliacao_id: 8, is_correta: false )
+a.label_alternativa.body = "Sim, desde que a equação possua apenas duas incógnitas"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 39, questao_avaliacao_id: 8, is_correta: false )
+a.label_alternativa.body = "Não, porque computadores não conseguem realizar cálculos com números inteiros muito grandes"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 40, questao_avaliacao_id: 8, is_correta: false )
+a.label_alternativa.body = "Sim, pois o Teorema da Incompletude de Gödel fornece um método para determinar a existência de soluções."
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 41, questao_avaliacao_id: 9, is_correta: false )
+a.label_alternativa.body = "Cálculo Theta"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 42, questao_avaliacao_id: 9, is_correta: false )
+a.label_alternativa.body = "Cálculo Gamma"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 43, questao_avaliacao_id: 9, is_correta: false )
+a.label_alternativa.body = "Cálculo Sigma"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 44, questao_avaliacao_id: 9, is_correta: false )
+a.label_alternativa.body = "Cálculo Ômega"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 45, questao_avaliacao_id: 9, is_correta: true )
+a.label_alternativa.body = "Cálculo Lambda"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 46, questao_avaliacao_id: 10, is_correta: false )
+a.label_alternativa.body = "1940"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 47, questao_avaliacao_id: 10, is_correta: true )
+a.label_alternativa.body = "1936"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 48, questao_avaliacao_id: 10, is_correta: false )
+a.label_alternativa.body = "1935"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 49, questao_avaliacao_id: 10, is_correta: false )
+a.label_alternativa.body = "1937"
+a.explicacao_alternativa.body = ""
+a.save
+
+a = AlternativaQuestao.create(id: 50, questao_avaliacao_id: 10, is_correta: false )
+a.label_alternativa.body = "1939"
+a.explicacao_alternativa.body = ""
+a.save
+
+puts "= alternativa questoes populada."
+
 c = Comunicado.create(
     id: 1,
     usuario_id: 9,                             # Coordenadora do curso de ciência da computação

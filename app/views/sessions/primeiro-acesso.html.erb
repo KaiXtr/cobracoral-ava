@@ -69,7 +69,7 @@
 		<div class="form-group">
 			<%= f.label :new_password, 'Nova senha: '%>
 			<span id="campo-caps">Caps Lock ativada</span>
-			<%= render PasswordFieldComponent.new(
+			<%= render PasswordField::PasswordFieldComponent.new(
 				id: 'campo-senha',
 				form: f,
 				val: :new_password,
@@ -79,7 +79,7 @@
 		</div>
 		<div class="form-group">
 			<%= f.label :repeat_password, 'Repita a senha: '%>
-			<%= render PasswordFieldComponent.new(
+			<%= render PasswordField::PasswordFieldComponent.new(
 				id: 'campo-senha-repetir',
 				form: f,
 				val: :repeat_password,

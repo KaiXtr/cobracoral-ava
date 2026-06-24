@@ -7,22 +7,18 @@ class SessionsController < ApplicationController
 		session[:login_email] = params[:session][:email]
 		session[:login_senha] = params[:session][:senha]
 
-		if Rails.env.test?
-			usuario = Usuario.find_by(email: params[:session][:email])
-			session[:auth_code] = (('0'..'9').to_a + ('A'..'Z').to_a).shuffle.first(6).join
+		usuario = Usuario.find_by(email: params[:session][:email])
+		session[:auth_code] = (('0'..'9').to_a + ('A'..'Z').to_a).shuffle.first(6).join
 
-			if (usuario && usuario.acessos_count == 0) then
-				create()
-			else
-				SessionMailer.with(
-					usuario: usuario,
-					codigo: session[:auth_code]
-					).codigo_autenticacao_email.deliver_later
-				
-				redirect_to '/authcode'
-			end
-		else
+		if (usuario && usuario.acessos_count == 0) then
 			create()
+		else
+			SessionMailer.with(
+				usuario: usuario,
+				codigo: session[:auth_code]
+				).codigo_autenticacao_email.deliver_later
+			
+			redirect_to '/authcode'
 		end
 	end
 

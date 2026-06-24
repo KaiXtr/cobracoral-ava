@@ -611,6 +611,21 @@ textarea {
     }
 }
 
+progress.medidor-barra {
+    background-color: var(--container-secondary);
+    border: none;
+    border-radius: 20px;
+    margin: 3vh 3vw 1vh 3vw;
+    width: 90%;
+
+    &::-moz-progress-bar {
+        background: var(--main-color);
+    }
+
+    &::-webkit-progress-value {
+        background: var(--main-color);
+    }
+}
 
 #pomodoro-tool-component .medidor-container {
     text-align: center;

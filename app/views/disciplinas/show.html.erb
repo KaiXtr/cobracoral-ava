@@ -46,7 +46,7 @@
         %>
         <%= render MedidorGrafico::MedidorGraficoComponent.new(
           medidor_titulo: 'Notas',
-          valor_entrada: 6.5,
+          valor_entrada: @nota_usuario,
           valor_tipo: 'nota',
           modal_href: '/disciplinas/new',
           policy: policy(@disciplina).new?)
@@ -55,7 +55,7 @@
     </div>
     <div class="disciplina_conteudos_container">
       <% if policy(@disciplina).new_conteudo? %>
-        <%= render OpenModalButtonComponent.new(
+        <%= render OpenModalButton::OpenModalButtonComponent.new(
           href: new_conteudo_path,
           button_class: 'open-modal-comunicado',
           tooltip: 'Adicionar conteúdo',
