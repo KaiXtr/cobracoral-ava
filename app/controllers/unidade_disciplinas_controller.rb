@@ -29,12 +29,12 @@ class UnidadeDisciplinasController < ApplicationController
 
     respond_to do |format|
       if @unidade_disciplina.save
-        logtxt = "Unidade " + @unidade_disciplina.nome_unidade + " da disciplina " + disciplina.nome_disciplina + " criada com sucesso."
+        logtxt = "Unidade " + @unidade_disciplina.nome_unidade + " da disciplina " + disciplina.id + " criada com sucesso."
         Rails.logger.info logtxt
         format.html { redirect_to unidade_disciplina_url(@unidade_disciplina), notice: logtxt }
         format.json { render :show, status: :created, location: @unidade_disciplina }
       else
-			  Rails.logger.error "Houve um erro ao criar a unidade" + @unidade_disciplina.nome_unidade + " da disciplina " + disciplina.nome_disciplina + "."
+			  Rails.logger.error "Houve um erro ao criar a unidade" + @unidade_disciplina.nome_unidade + " da disciplina " + disciplina.id + "."
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @unidade_disciplina.errors, status: :unprocessable_entity }
       end
@@ -45,12 +45,12 @@ class UnidadeDisciplinasController < ApplicationController
   def update
     respond_to do |format|
       if @unidade_disciplina.update(unidade_disciplina_params)
-        logtxt = "Unidade " + @unidade_disciplina.nome_unidade + " da disciplina " + disciplina.nome_disciplina + " atualizada com sucesso."
+        logtxt = "Unidade " + @unidade_disciplina.nome_unidade + " da disciplina " + disciplina.id + " atualizada com sucesso."
         Rails.logger.info logtxt
         format.html { redirect_to unidade_disciplina_url(@unidade_disciplina), notice: logtxt }
         format.json { render :show, status: :ok, location: @unidade_disciplina }
       else
-			  Rails.logger.error "Houve um erro ao atualizar a unidade" + @unidade_disciplina.nome_unidade + " da disciplina " + disciplina.nome_disciplina + "."
+			  Rails.logger.error "Houve um erro ao atualizar a unidade" + @unidade_disciplina.nome_unidade + " da disciplina " + disciplina.id + "."
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @unidade_disciplina.errors, status: :unprocessable_entity }
       end
@@ -62,7 +62,7 @@ class UnidadeDisciplinasController < ApplicationController
     @unidade_disciplina.destroy
 
     respond_to do |format|
-      logtxt = "Unidade " + @unidade_disciplina.nome_unidade + " da disciplina " + disciplina.nome_disciplina + " deletada com sucesso."
+      logtxt = "Unidade " + @unidade_disciplina.nome_unidade + " da disciplina " + disciplina.id + " deletada com sucesso."
       Rails.logger.info logtxt
       format.html { redirect_to unidade_disciplinas_url, notice: logtxt }
       format.json { head :no_content }

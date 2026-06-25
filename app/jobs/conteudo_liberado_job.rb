@@ -57,12 +57,13 @@ class ConteudoLiberadoJob < ApplicationJob
         Rails.logger.info "[JOB] Conteúdo \"#{conteudo.nome_conteudo}\" foi liberado e comunicado para o AVA."
 
         usuario_comunicado = Usuario.find_by(id: comunicado.usuario_id)
+        ementa_disciplina = Ementa.find_by(id: disciplina_conteudo.ementa_id)
         ComunicadoMailer.with(
           usuarios_list: get_lista_usuarios_notificados(
             usuario_comunicado,
             comunicado),
           comunicado: comunicado,
-          nome_disciplina: disciplina_conteudo.nome_disciplina,
+          nome_disciplina: ementa_disciplina.nome_ementa,
           conteudo_id: conteudo.id).novo_conteudo_disponivel_email.deliver_now
 
       rescue SQLite3::BusyException

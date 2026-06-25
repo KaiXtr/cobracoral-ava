@@ -1,5 +1,6 @@
 class Turma < ApplicationRecord
     belongs_to :curso
+	belongs_to :semestre
 
     has_many :matricula
     has_many :disciplina

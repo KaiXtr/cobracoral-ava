@@ -10,7 +10,7 @@ class DisciplinasController < ApplicationController
     if matricula then
       @disciplinas = Disciplina.where(
         turma_id: matricula.turma_id,
-        semestre: matricula.semestre
+        semestre_id: matricula.semestre_id
       )
     else
       @disciplinas = Disciplina.all
@@ -28,6 +28,9 @@ class DisciplinasController < ApplicationController
     @usuario = get_usuario_autenticado
     @disciplina = Disciplina.find(params[:id])
     authorize @disciplina
+
+    @semestre_disciplina = Semestre.find_by(id: @disciplina.semestre_id)
+    @ementa_disciplina = Ementa.find_by(id: @disciplina.ementa_id)
 
     @turma = Turma.find(@disciplina.turma_id)
     @curso = Curso.find_by(id: @disciplina.curso_id)
@@ -64,7 +67,7 @@ class DisciplinasController < ApplicationController
       end
     end
     
-    Rails.logger.info "Acessando disciplina " + @disciplina.nome_disciplina + "."
+    Rails.logger.info "Acessando disciplina " + @disciplina.id.to_s + "."
   end
 
   # GET /disciplinas/new
@@ -118,14 +121,14 @@ class DisciplinasController < ApplicationController
         }
       )
       
-    Rails.logger.info "Editando disciplina " + @disciplina.nome_disciplina + "."
+    Rails.logger.info "Editando disciplina " + @disciplina.id.to_s + "."
   end
 
 	def delete
 		@usuario = get_usuario_autenticado
 		@disciplina = Disciplina.find(params[:id])
 
-		Rails.logger.info "Confirmando deleção da disciplina " + @disciplina.nome_disciplina + "."
+		Rails.logger.info "Confirmando deleção da disciplina " + @disciplina.id.to_s + "."
 	end
 
   # POST /disciplinas or /disciplinas.json
@@ -136,12 +139,12 @@ class DisciplinasController < ApplicationController
 
     respond_to do |format|
       if @disciplina.save
-        logtxt = "Disciplina " + @disciplina.nome_disciplina + " adicionada com sucesso."
+        logtxt = "Disciplina " + @disciplina.id.to_s + " adicionada com sucesso."
         Rails.logger.info logtxt
         format.html { redirect_to disciplina_url(@disciplina), notice: logtxt }
         format.json { render :show, status: :created, location: @disciplina }
       else
-			  Rails.logger.error "Houve um erro ao criar a disciplina " + @disciplina.nome_disciplina + "."
+			  Rails.logger.error "Houve um erro ao criar a disciplina " + @disciplina.id.to_s + "."
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @disciplina.errors, status: :unprocessable_entity }
       end
@@ -155,12 +158,12 @@ class DisciplinasController < ApplicationController
 
     respond_to do |format|
       if @disciplina.update(disciplina_params)
-        logtxt = "Disciplina " + @disciplina.nome_disciplina + " atualizada com sucesso."
+        logtxt = "Disciplina " + @disciplina.id.to_s + " atualizada com sucesso."
         Rails.logger.info logtxt
         format.html { redirect_to disciplina_url(@disciplina), notice: logtxt }
         format.json { render :show, status: :ok, location: @disciplina }
       else
-			  Rails.logger.error "Houve um erro ao atualizar a disciplina " + @disciplina.nome_disciplina + "."
+			  Rails.logger.error "Houve um erro ao atualizar a disciplina " + @disciplina.id.to_s + "."
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @disciplina.errors, status: :unprocessable_entity }
       end
@@ -172,7 +175,7 @@ class DisciplinasController < ApplicationController
     @disciplina.destroy
 
     respond_to do |format|
-      logtxt = "Disciplina " + @disciplina.nome_disciplina + " deletada com sucesso."
+      logtxt = "Disciplina " + @disciplina.id.to_s + " deletada com sucesso."
       Rails.logger.info logtxt
       format.html { redirect_to disciplinas_url, notice: logtxt }
       format.json { head :no_content }
@@ -187,7 +190,7 @@ class DisciplinasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def disciplina_params
-      params.require(:disciplina).permit(:nome_disciplina, :curso, :turma, :usuario, :banner, :sala_aula, :semestre)
+      params.require(:disciplina).permit(:id, :curso, :turma, :usuario, :banner, :sala_aula, :semestre)
     end
     
     def isUsuarioEstudante(usuario)

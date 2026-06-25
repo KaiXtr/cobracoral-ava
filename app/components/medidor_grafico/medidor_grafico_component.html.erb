@@ -15,16 +15,18 @@
             <%= @label_entrada %>
         </span>
     </div>
-    <h5>
-        <%= @medidor_titulo %>
-        <% if @modal_href && @is_link_enabled %>
-            <a
-                href="<%= @modal_href %>"
-                tooltip-text="Abrir gráfico"
-                data-turbo-frame="cobra-modal"
-                data-remote="true">
-                <i class="fa-solid fa-pie-chart fa-lg icon-button"></i>
-            </a>
-        <% end %>
-    </h5>
+    <% if @medidor_titulo != nil %>
+        <h5>
+            <%= @medidor_titulo %>
+            <% if @modal_href && @is_link_enabled %>
+                <a
+                    href="<%= @modal_href %>"
+                    tooltip-text="Abrir gráfico"
+                    data-turbo-frame="cobra-modal"
+                    data-remote="true">
+                    <i class="fa-solid fa-pie-chart fa-lg icon-button"></i>
+                </a>
+            <% end %>
+        </h5>
+    <% end %>
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_23_200355) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_25_093932) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -72,10 +72,14 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_23_200355) do
     t.index ["questao_avaliacao_id"], name: "index_alternativa_questoes_on_questao_avaliacao_id"
   end
 
-  create_table "assunto_solicitacaos", force: :cascade do |t|
-    t.string "enum_assunto"
+  create_table "anotacaos", force: :cascade do |t|
+    t.integer "leitura_conteudo_id", null: false
+    t.integer "ln"
+    t.integer "col"
+    t.string "cor_anotacao"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["leitura_conteudo_id"], name: "index_anotacaos_on_leitura_conteudo_id"
   end
 
   create_table "assunto_solicitacoes", force: :cascade do |t|
@@ -138,17 +142,32 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_23_200355) do
   end
 
   create_table "disciplinas", force: :cascade do |t|
-    t.string "nome_disciplina"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "curso_id", null: false
-    t.string "semestre"
     t.string "sala_aula"
     t.integer "turma_id", null: false
     t.integer "usuario_id", null: false
+    t.integer "ementa_id", null: false
+    t.integer "semestre_id", null: false
     t.index ["curso_id"], name: "index_disciplinas_on_curso_id"
+    t.index ["ementa_id"], name: "index_disciplinas_on_ementa_id"
+    t.index ["semestre_id"], name: "index_disciplinas_on_semestre_id"
     t.index ["turma_id"], name: "index_disciplinas_on_turma_id"
     t.index ["usuario_id"], name: "index_disciplinas_on_usuario_id"
+  end
+
+  create_table "ementas", force: :cascade do |t|
+    t.integer "matriz_curricular_id", null: false
+    t.integer "semestre_id", null: false
+    t.string "nome_ementa"
+    t.integer "carga_horaria"
+    t.text "objetivos"
+    t.text "metodologia"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["matriz_curricular_id"], name: "index_ementas_on_matriz_curricular_id"
+    t.index ["semestre_id"], name: "index_ementas_on_semestre_id"
   end
 
   create_table "leitura_conteudos", force: :cascade do |t|
@@ -173,9 +192,18 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_23_200355) do
     t.integer "usuario_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "semestre"
+    t.integer "semestre_id", null: false
+    t.index ["semestre_id"], name: "index_matriculas_on_semestre_id"
     t.index ["turma_id"], name: "index_matriculas_on_turma_id"
     t.index ["usuario_id"], name: "index_matriculas_on_usuario_id"
+  end
+
+  create_table "matriz_curriculars", force: :cascade do |t|
+    t.integer "curso_id", null: false
+    t.string "nome_matriz"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["curso_id"], name: "index_matriz_curriculars_on_curso_id"
   end
 
   create_table "mensagens", force: :cascade do |t|
@@ -253,9 +281,23 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_23_200355) do
     t.index ["tentativa_avaliacao_id"], name: "index_resposta_tentativas_on_tentativa_avaliacao_id"
   end
 
-  create_table "solicitacao_denuncia", force: :cascade do |t|
+  create_table "semestres", force: :cascade do |t|
+    t.string "nome_semestre"
+    t.datetime "dia_inicio"
+    t.datetime "dia_fim"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "solicitacao_denuncia", force: :cascade do |t|
+    t.string "nome_envolvido"
+    t.date "data_ocorrido"
+    t.string "tipo_denuncia"
+    t.text "descricao"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "solicitacoes_id", null: false
+    t.index ["solicitacoes_id"], name: "index_solicitacao_denuncia_on_solicitacoes_id"
   end
 
   create_table "solicitacoes", force: :cascade do |t|
@@ -287,7 +329,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_23_200355) do
     t.integer "curso_id", null: false
     t.integer "turno_turma", null: false
     t.integer "modalidade_turma", null: false
+    t.integer "semestre_id", null: false
     t.index ["curso_id"], name: "index_turmas_on_curso_id"
+    t.index ["semestre_id"], name: "index_turmas_on_semestre_id"
   end
 
   create_table "unidade_disciplinas", force: :cascade do |t|
@@ -317,7 +361,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_23_200355) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "agendamentos", "local_agendamentos"
   add_foreign_key "agendamentos", "usuarios"
-  add_foreign_key "alternativa_questoes", "questao_avaliacaos"
+  add_foreign_key "alternativa_questoes", "questao_avaliacoes"
+  add_foreign_key "anotacaos", "leitura_conteudos"
   add_foreign_key "avaliacoes", "unidade_disciplinas"
   add_foreign_key "comunicados", "disciplinas"
   add_foreign_key "comunicados", "turmas"
@@ -325,27 +370,35 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_23_200355) do
   add_foreign_key "conteudos", "unidade_disciplinas"
   add_foreign_key "cursos", "usuarios"
   add_foreign_key "disciplinas", "cursos"
+  add_foreign_key "disciplinas", "ementas"
+  add_foreign_key "disciplinas", "semestres"
   add_foreign_key "disciplinas", "turmas"
   add_foreign_key "disciplinas", "usuarios"
+  add_foreign_key "ementas", "matriz_curriculars"
+  add_foreign_key "ementas", "semestres"
   add_foreign_key "leitura_conteudos", "conteudos"
   add_foreign_key "leitura_conteudos", "usuarios"
+  add_foreign_key "matriculas", "semestres"
   add_foreign_key "matriculas", "turmas"
   add_foreign_key "matriculas", "usuarios"
+  add_foreign_key "matriz_curriculars", "cursos"
   add_foreign_key "mensagens", "usuarios", column: "destinatario_id"
   add_foreign_key "mensagens", "usuarios", column: "remetente_id"
   add_foreign_key "preferencias_usuario", "usuarios"
-  add_foreign_key "questao_avaliacoes", "avaliacaos"
+  add_foreign_key "questao_avaliacoes", "avaliacoes"
   add_foreign_key "reacao_comunicados", "comunicados"
   add_foreign_key "reacao_comunicados", "usuarios"
-  add_foreign_key "reacao_mensagens", "mensagens", column: "mensagem_id"
+  add_foreign_key "reacao_mensagens", "mensagens"
   add_foreign_key "reacao_mensagens", "usuarios"
-  add_foreign_key "resposta_tentativas", "alternativa_questaos"
-  add_foreign_key "resposta_tentativas", "questao_avaliacaos"
-  add_foreign_key "resposta_tentativas", "tentativa_avaliacaos"
+  add_foreign_key "resposta_tentativas", "alternativa_questoes"
+  add_foreign_key "resposta_tentativas", "questao_avaliacoes"
+  add_foreign_key "resposta_tentativas", "tentativa_avaliacoes"
+  add_foreign_key "solicitacao_denuncia", "solicitacoes", column: "solicitacoes_id"
   add_foreign_key "solicitacoes", "assunto_solicitacoes", column: "assunto_solicitacoes_id"
   add_foreign_key "solicitacoes", "usuarios"
-  add_foreign_key "tentativa_avaliacoes", "avaliacaos"
+  add_foreign_key "tentativa_avaliacoes", "avaliacoes"
   add_foreign_key "tentativa_avaliacoes", "usuarios"
   add_foreign_key "turmas", "cursos"
+  add_foreign_key "turmas", "semestres"
   add_foreign_key "unidade_disciplinas", "disciplinas"
 end

@@ -2,7 +2,7 @@
   <div class="deslizar-transition">
     <a href="/disciplinas/<%= @disciplina_conteudo.id %>" class="goback-button">
       <i class="fa-solid fa-arrow-left fa-sm"></i>
-      Voltar para <strong><%= @disciplina_conteudo.nome_disciplina %></strong>
+      Voltar para <strong><%= nome_disciplina(@disciplina_conteudo) %></strong>
     </a>
     <h1>
       <%= @conteudo.nome_conteudo %>
@@ -18,11 +18,9 @@
     <span class="conteudo-data">
       <%= formatar_data_vencimento(@conteudo.data_vencimento) %>
     </span>
-
     <div class="conteudo-elementos" id="content">
       <%= @conteudo.corpo %>
     </div>
-
 
     <div id="annotation-area">
       <div id="anotacoes-paleta">

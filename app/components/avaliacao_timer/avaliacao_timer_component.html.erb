@@ -1,0 +1,9 @@
+<div class="avaliacao-column avaliacao-timer">
+    <%= render MedidorGrafico::MedidorGraficoComponent.new(
+        medidor_titulo: nil,
+        valor_entrada: @tempo_atual,
+        valor_tipo: 'minuto',
+        valor_max: @tempo_limite,
+        theme: 1)
+    %>
+</div>

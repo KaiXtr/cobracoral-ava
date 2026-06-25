@@ -39,16 +39,22 @@ module ApplicationHelper
 		end
 	end
 
+	def nome_disciplina(disciplina)
+		e = Ementa.find_by(id: disciplina.ementa_id)
+		return e.nome_ementa
+	end
+
 	def nome_disciplina_com_turma(disciplina)
+		e = Ementa.find_by(id: disciplina.ementa_id)
 		t = Turma.find_by(id: disciplina.turma_id)
-		return disciplina.nome_disciplina + " | " + t.nome_turma
+		return ementa.nome_ementa + " | " + t.nome_turma
 	end
 
 	def disciplinas_turma(usuario_autenticado, matricula)
 		if matricula then
 			return Disciplina.where(
 				turma_id: matricula.turma_id,
-				semestre: matricula.semestre
+				semestre_id: matricula.semestre_id
 				)
 		else
 			return nil

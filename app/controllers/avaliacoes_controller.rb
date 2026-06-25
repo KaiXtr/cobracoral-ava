@@ -68,23 +68,32 @@ class AvaliacoesController < ApplicationController
 
     @avaliacao_pagina = 0
     @max_questoes = @avaliacao.quant_questoes
+    
+    @avaliacao_disabled = false
+    hora_atual = Time.now
+    tempo_inicial = session[:tentativa_inicio].to_time
+    tempo_max = session[:tentativa_inicio].to_time + @avaliacao.tempo_limite
+    tempo_atual = (
+        (hora_atual.to_time - tempo_inicial.to_time).to_i/60
+    )
+    if (tempo_atual > 60) then
+      @avaliacao_disabled = true
+    end
 
-    if (params[:pagina]) then
-      @avaliacao_pagina = params[:pagina].to_i
-      questoes_avaliacao = QuestaoAvaliacao.where(avaliacao_id: @avaliacao.id).order(:id)
-      @questao_avaliacao = questoes_avaliacao[@avaliacao_pagina - 1]
-      @alternativas_questao = AlternativaQuestao.where(questao_avaliacao: @questao_avaliacao.id)
-      @alternativa_selecionada = 0
+    @avaliacao_pagina = params[:pagina].to_i
+    questoes_avaliacao = QuestaoAvaliacao.where(avaliacao_id: @avaliacao.id).order(:id)
+    @questao_avaliacao = questoes_avaliacao[@avaliacao_pagina - 1]
+    @alternativas_questao = AlternativaQuestao.where(questao_avaliacao: @questao_avaliacao.id)
+    @alternativa_selecionada = 0
 
-      tentativa_avaliacao = TentativaAvaliacao.find_by(id: session[:tentativa_index])
-      if tentativa_avaliacao then
-        resposta_alternativa = RespostaTentativa.find_by(
-          tentativa_avaliacao_id: tentativa_avaliacao.id,
-          questao_avaliacao_id: @questao_avaliacao.id
-        )
-        if resposta_alternativa != nil then
-          @alternativa_selecionada = resposta_alternativa.alternativa_questao_id
-        end
+    tentativa_avaliacao = TentativaAvaliacao.find_by(id: session[:tentativa_index])
+    if tentativa_avaliacao then
+      resposta_alternativa = RespostaTentativa.find_by(
+        tentativa_avaliacao_id: tentativa_avaliacao.id,
+        questao_avaliacao_id: @questao_avaliacao.id
+      )
+      if resposta_alternativa != nil then
+        @alternativa_selecionada = resposta_alternativa.alternativa_questao_id
       end
     end
   end

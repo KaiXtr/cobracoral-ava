@@ -17,5 +17,13 @@
 
 
 ActiveSupport::Inflector.inflections(:en) do |inflect|
+  inflect.irregular "alternativa_questao", "alternativa_questoes"
+  inflect.irregular "assunto_solicitacao", "assunto_solicitacoes"
+  inflect.irregular "avaliacao", "avaliacoes"
+  inflect.irregular "ementa", "ementas"
+  inflect.irregular "mensagem", "mensagens"
+  inflect.irregular "questao_avaliacao", "questao_avaliacoes"
+  inflect.irregular "reacao_mensagem", "reacao_mensagens"
   inflect.irregular "solicitacao", "solicitacoes"
+  inflect.irregular "tentativa_avaliacao", "tentativa_avaliacoes"
 end

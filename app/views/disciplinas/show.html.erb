@@ -15,18 +15,13 @@
     <div class="disciplina_info_container">
       <div class="disciplina_info">
         <h1 class="titulo-disciplina">
-          <%= @disciplina.nome_disciplina %>
+          <%= @ementa_disciplina.nome_ementa %>
           <% if policy(@disciplina).edit? %>
             <a href="/disciplinas/<%= @disciplina.id %>/editar" tooltip-text="Editar disciplina">
                 <i class="fa-solid fa-pen fa-sm icon-button"></i>
             </a>
           <% end %>
         </h1>
-        <span>
-          <i class="fa-solid fa-arrow-right fa-sm"></i>
-          <strong>Plano de ensino</strong>
-          <%= render "dados_disciplina", disciplina: @disciplina %>
-        </span>
 				<%= render professor_disciplina(@disciplina) %>
         <a href="/turmas/<%= turma_disciplina(@disciplina).id %>">
           <%= turma_disciplina(@disciplina).nome_turma %>
@@ -34,7 +29,15 @@
         <br>
         <%= @disciplina.sala_aula %>
         <br>
-        Semestre: <%= @disciplina.semestre %>
+        Semestre: <%= @semestre_disciplina.nome_semestre %>
+        <br>
+        <span>
+          <button class="dados-disciplina-button" onclick="abrirDadosDisciplina()">
+            <i class="fa-solid fa-arrow-right fa-sm"></i>
+            <strong>Plano de ensino</strong>
+          </button>
+          <%= render "dados_disciplina", disciplina: @disciplina %>
+        </span>
       </div>
       <div class="disciplina_medidores">
         <%= render MedidorGrafico::MedidorGraficoComponent.new(

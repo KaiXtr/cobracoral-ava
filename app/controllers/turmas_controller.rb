@@ -30,7 +30,7 @@ class TurmasController < ApplicationController
 		if matricula then
 			@disciplinas_turma = Disciplina.where(
 				turma_id: @turma.id,
-				semestre: matricula.semestre
+				semestre_id: matricula.semestre_id
 			)
 		else
 			@disciplinas_turma = Disciplina.all

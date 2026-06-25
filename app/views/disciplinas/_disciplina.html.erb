@@ -9,7 +9,7 @@
 		</div>
 		<div class="disciplina-thumbnail-info">
 			<h3>
-				<%= disciplina.nome_disciplina %>
+				<%= nome_disciplina(disciplina) %>
 			</h3>
 			<p>
 				<a href='/usuarios/<%= professor_disciplina(disciplina).id %>'>
@@ -17,13 +17,11 @@
 						<%= professor_disciplina(disciplina).nome_completo %>
 					</strong>
 				</a>
-				<br>
 				<a href="/turmas/<%= turma_disciplina(disciplina).id %>">
-					<%= turma_disciplina(disciplina).nome_turma
-				 %>
-				</a> |
-				<%= disciplina.semestre %> |
-				<%= disciplina.sala_aula %>
+					<%= turma_disciplina(disciplina).nome_turma %> |
+					<%= semestre_disciplina(disciplina).nome_semestre %> |
+					<%= disciplina.sala_aula %>
+				</a>
 			</p>
 		</div>
 	</a>

@@ -1,7 +1,22 @@
-<div>
-    Unidade responsável:
-    Carga horária:
-    Pré-requisitos:
-    Ementa:
-    Referências:
+<div id="dados-disciplina-conteiner" style="visibility: hidden; opacity: 0%; display: none;">
+    <ul>
+        <li>
+            <strong>Unidade responsável:</strong> Sede
+        </li>
+        <li>
+            <strong>Carga horária:</strong> <%= @ementa_disciplina.carga_horaria %>h
+        </li>
+        <li>
+            <strong>Objetivos:</strong> <%= @ementa_disciplina.objetivos %>
+        </li>
+        <li>
+            <strong>Metodologia:</strong> <%= @ementa_disciplina.metodologia %>
+        </li>
+        <li>
+            <strong>Anexos:</strong>
+            <p>
+                <%= @ementa_disciplina.anexo %>
+            </p>
+        </li>
+    </ul>
 </div>

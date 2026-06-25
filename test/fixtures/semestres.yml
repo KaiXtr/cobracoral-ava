@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dia_inicio: 2026-06-25 04:57:28
+  dia_fim: 2026-06-25 04:57:28
+
+two:
+  dia_inicio: 2026-06-25 04:57:28
+  dia_fim: 2026-06-25 04:57:28

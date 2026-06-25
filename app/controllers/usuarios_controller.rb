@@ -75,6 +75,11 @@ class UsuariosController < ApplicationController
 		@usuario = Usuario.find(params[:id])
         @link_lattes = "https://lattes.cnpq.br/" + @usuario.lattes_id.to_s
         @link_orcid = "https://orcid.org/" + @usuario.orcid_id.to_s
+        
+        @disciplinas = nil
+        if Usuario.cargo_usuarios[@usuario.cargo_usuario] == 2 then
+            @disciplinas = Disciplina.where(usuario_id: @usuario.id)
+        end
         Rails.logger.info "Acessando perfil do(a) usuário(a) " + @usuario.nome_completo + "."
     end
 

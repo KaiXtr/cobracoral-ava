@@ -88,7 +88,7 @@ class ConteudosController < ApplicationController
       redirect_to conteudo_path(id: @proximoConteudo.id)
     else
       @disciplina_conteudo = Disciplina.find_by(id: unidade_do_conteudo.disciplina_id)
-      Rails.logger.info "Voltando para todos os conteúdos da disciplina " + @disciplina_conteudo.nome_disciplina + "."
+      Rails.logger.info "Voltando para todos os conteúdos da disciplina " + @disciplina_conteudo.id + "."
       redirect_to disciplina_path(@disciplina_conteudo)
     end
   end

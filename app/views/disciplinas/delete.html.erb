@@ -1,5 +1,5 @@
 <%= render CobraModalComponent.new() do %>
-    <h2>Deseja realmente apagar a disciplina <%= @disciplina.nome_disciplina %>?</h2>
+    <h2>Deseja realmente apagar a disciplina <%= helpers.nome_disciplina(@disciplina) %>?</h2>
     <p>
         Não será possível desfazer as alterações.
     </p>

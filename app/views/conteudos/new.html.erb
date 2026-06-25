@@ -1,7 +1,7 @@
 <nav>
   <a href="/disciplinas/<%= @disciplina_conteudo.id %>">
     <i class="fa-solid fa-arrow-left fa-sm"></i>
-    Voltar para <strong><%= @disciplina_conteudo.nome_disciplina %></strong>
+    Voltar para <strong><%= helpers.nome_disciplina(@disciplina_conteudo) %></strong>
   </a>
   <%= render "form", conteudo: @conteudo %>
 </nav>

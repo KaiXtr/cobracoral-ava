@@ -1,7 +1,44 @@
 <div>
     <h2>Formação acadêmica</h2>
+    <div>
+        <p>
+            Universidade de Brasília, Bacharelado em Ciência da Computação. 2002-2007.
+        </p>
+        <p>
+            Dr. Orientador. TÍTULO: subtítulo. 2007.
+        </p>
+    </div>
     <h2>Produção intelectual</h2>
+    <div>
+        <p>
+            SOBRENOME, Nome. Título: subtítulo. 2007.
+        </p>
+        <p>
+            SOBRENOME, Nome. Título: subtítulo. 2007.
+        </p>
+    </div>
     <h2>Disciplinas ministradas</h2>
+    <div id="disciplinas" class="disciplinas-container">
+        <% @disciplinas.each do |disciplina| %>
+        <%= render disciplina %>
+        <% end %>
+    </div>
     <h2>Projetos de pesquisa e orientações</h2>
+    <div>
+        <p>
+            SOBRENOME, Nome. Título: subtítulo. 2007.
+        </p>
+        <p>
+            SOBRENOME, Nome. Título: subtítulo. 2007.
+        </p>
+    </div>
     <h2>Atividades de extensão</h2>
+    <div>
+        <p>
+            SOBRENOME, Nome. Título: subtítulo. 2007.
+        </p>
+        <p>
+            SOBRENOME, Nome. Título: subtítulo. 2007.
+        </p>
+    </div>
 </div>

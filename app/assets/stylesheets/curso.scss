@@ -175,6 +175,24 @@ div.disciplinas-banner {
     .disciplina_info {
         width: 70%;
         display: inline-block;
+
+        .dados-disciplina-button {
+            background-color: var(--container-bg);
+            border: none;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        #dados-disciplina-conteiner {
+            background-color: var(--container-secondary);
+            border-radius: 50px;
+            padding: 2vw;
+            margin-top: 1vh;
+            margin-bottom: 1vh;
+            width: 80%;
+        }
     }
 
     .disciplina_medidores {
@@ -288,6 +306,15 @@ nav.avaliacao-nav {
         background-color: var(--container-bg);
         border-radius: 20px;
         padding: 5vw;
+
+        .avaliacao-column {
+            display: inline-block;
+            width: 80%;
+
+            &.avaliacao-timer {
+                width: 10%;
+            }
+        }
     }
 
     .avaliacao-questoes-conteiner {

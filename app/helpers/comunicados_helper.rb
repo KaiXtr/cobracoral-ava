@@ -35,7 +35,8 @@ module ComunicadosHelper
             elsif visibilidade == 'todos_disciplina'
                 disciplina_comunicado = Disciplina.find_by(id: comunicado.disciplina_id)
                 if disciplina_comunicado then
-                    nome_disciplina = disciplina_comunicado.nome_disciplina
+                    ementa_disciplina = Ementa.find_by(id: disciplina_comunicado.ementa_id)
+                    nome_disciplina = ementa_disciplina.nome_ementa
                     turma_disciplina = Turma.find_by(id: disciplina_comunicado.turma_id)
                     return nome_disciplina + " | " + turma_disciplina.nome_turma
                 else

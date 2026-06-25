@@ -80,7 +80,7 @@ class DisciplinaPolicy
     if Usuario.cargo_usuarios[usuario.cargo_usuario] > 2 then
       matricula = Matricula.find_by(usuario_id: usuario.id)
       if matricula then
-        return @disciplina.semestre == matricula.semestre
+        return @disciplina.semestre_id == matricula.semestre_id
       else
         return true
       end

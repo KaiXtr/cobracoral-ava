@@ -2,7 +2,7 @@
   <div class="avaliacao-conteiner">
     <a href="/disciplinas/<%= @disciplina_avaliacao.id %>" class="goback-button">
       <i class="fa-solid fa-arrow-left fa-sm"></i>
-      Voltar para <strong><%= @disciplina_avaliacao.nome_disciplina %></strong>
+      Voltar para <strong><%= nome_disciplina(@disciplina_avaliacao) %></strong>
     </a>
     <h1>
       <%= @avaliacao.nome_avaliacao %>

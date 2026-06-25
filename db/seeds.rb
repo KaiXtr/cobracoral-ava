@@ -225,37 +225,48 @@ Curso.create([
 
 puts "= cursos populada."
 
+Semestre.create([
+    {
+        id: 1,
+        nome_semestre: '2026/1',
+        dia_inicio: Time.now,
+        dia_fim: Time.now
+    }
+])
+
+puts "= semestres populada."
+
 Turma.create([
     {
-        id: 1, curso_id: 1, turno_turma: :diurno,
+        id: 1, curso_id: 1, turno_turma: :diurno, semestre_id: 1,
         modalidade_turma: :presencial, nome_turma: 'CC1 Diurno', senha_acesso: '12345678'
     },
 	{
-        id: 2, curso_id: 1, turno_turma: :noturno,
+        id: 2, curso_id: 1, turno_turma: :noturno, semestre_id: 1,
         modalidade_turma: :presencial, nome_turma: 'CC1 Noturno', senha_acesso: '12345678'
     },
 	{
-        id: 3, curso_id: 1, turno_turma: :vespertino,
+        id: 3, curso_id: 1, turno_turma: :vespertino, semestre_id: 1,
         modalidade_turma: :presencial, nome_turma: 'CC2 Vespertino', senha_acesso: '12345678'
     },
 	{
-        id: 4, curso_id: 1, turno_turma: :noturno,
+        id: 4, curso_id: 1, turno_turma: :noturno, semestre_id: 1,
         modalidade_turma: :presencial, nome_turma: 'CC2 Noturno', senha_acesso: '12345678'
     },
 	{
-        id: 5, curso_id: 2, turno_turma: :diurno,
+        id: 5, curso_id: 2, turno_turma: :diurno, semestre_id: 1,
         modalidade_turma: :ead, nome_turma: 'DG1 Diurno', senha_acesso: '12345678'
     },
 	{
-        id: 6, curso_id: 2, turno_turma: :noturno,
+        id: 6, curso_id: 2, turno_turma: :noturno, semestre_id: 1,
         modalidade_turma: :ead, nome_turma: 'DG1 Noturno', senha_acesso: '12345678'
     },
 	{
-        id: 7, curso_id: 2, turno_turma: :vespertino,
+        id: 7, curso_id: 2, turno_turma: :vespertino, semestre_id: 1,
         modalidade_turma: :ead, nome_turma: 'DG2 Vespertino', senha_acesso: '12345678'
     },
 	{
-        id: 8, curso_id: 2, turno_turma: :noturno,
+        id: 8, curso_id: 2, turno_turma: :noturno, semestre_id: 1,
         modalidade_turma: :ead, nome_turma: 'DG2 Noturno', senha_acesso: '12345678'
     }
 ])
@@ -263,89 +274,81 @@ Turma.create([
 puts "= turmas populada."
 
 Matricula.create([
-    { usuario_id: 1, turma_id: 1, semestre: '2026/1' },
-    { usuario_id: 5, turma_id: 4, semestre: '2026/1' },
-    { usuario_id: 6, turma_id: 3, semestre: '2026/1' },
-    { usuario_id: 7, turma_id: 3, semestre: '2026/1' },
-    { usuario_id: 8, turma_id: 5, semestre: '2026/1' },
-    { usuario_id: 12, turma_id: 3, semestre: '2026/1' }
+    { usuario_id: 1, turma_id: 1, semestre_id: 1 },
+    { usuario_id: 5, turma_id: 4, semestre_id: 1 },
+    { usuario_id: 6, turma_id: 3, semestre_id: 1 },
+    { usuario_id: 7, turma_id: 3, semestre_id: 1 },
+    { usuario_id: 8, turma_id: 5, semestre_id: 1 },
+    { usuario_id: 12, turma_id: 3, semestre_id: 1 }
 ])
 
 puts "= matriculas populada."
 
-Disciplina.create([
+MatrizCurricular.create([
     {
         id: 1,
         curso_id: 1,
-        turma_id: 1,
-        usuario_id: 2,
-        nome_disciplina: 'Teoria dos Autômatos',
-        sala_aula: 'Bloco A Sala 202',
-        semestre: '2026/1',
+        nome_matriz: 'Ciência da Computação'
     },
     {
         id: 2,
-        curso_id: 1,
-        turma_id: 1,
-        usuario_id: 3,
-        nome_disciplina: 'Interface Humano Computador',
-        sala_aula: 'Bloco A Sala 204',
-        semestre: '2026/2',
+        curso_id: 2,
+        nome_matriz: 'Design Gráfico' 
+    }
+])
+
+puts "= matriz curricular populada."
+
+Ementa.create([
+    {
+        id: 1,
+        semestre_id: 1,
+        matriz_curricular_id: 1,
+        nome_ementa: 'Teoria dos Autômatos',
+        carga_horaria: 48,
+        objetivos: 'Introduzir conceitos de autômatos e linguagens formais.',
+        metodologia: 'Conteúdo didático, exercícios práticos, simuladores virtuais e prolog.'
+    },
+    {
+        id: 2,
+        semestre_id: 1,
+        matriz_curricular_id: 1,
+        nome_ementa: 'Interface Humano Computador',
+        carga_horaria: 48,
+        objetivos: 'Introduzir conceitos de IHC, design, psciologia gestáltica e ergonomia.',
+        metodologia: 'Conteúdo didático, exercícios práticos e Figma.'
     },
     {
         id: 3,
-        curso_id: 1,
-        turma_id: 1,
-        usuario_id: 9,
-        nome_disciplina: 'Programação Orientada a Objetos',
-        sala_aula: 'Bloco A Sala 204',
-        semestre: '2026/2',
+        semestre_id: 1,
+        matriz_curricular_id: 1,
+        nome_ementa: 'Programação Orientada a Objetos',
+        carga_horaria: 48,
+        objetivos: 'Introduzir conceitos de programação orientada a objetos em Java.',
+        metodologia: 'Conteúdo didático, exercícios práticos, Visual Studio Code e Eclipse.'
     },
     {
         id: 4,
-        curso_id: 1,
-        turma_id: 3,
-        usuario_id: 9,
-        nome_disciplina: 'Programação Orientada a Objetos',
-        sala_aula: 'Bloco A Sala 204',
-        semestre: '2026/2',
-    },
-    {
-        id: 5,
-        curso_id: 2,
-        turma_id: 6,
-        usuario_id: 4,
-        nome_disciplina: 'Design UI/UX',
-        sala_aula: 'Bloco AC Sala 201',
-        semestre: '2026/1',
-    },
-    {
-        id: 6,
-        curso_id: 2,
-        turma_id: 7,
-        usuario_id: 4,
-        nome_disciplina: 'Design UI/UX',
-        sala_aula: 'Bloco AC Sala 201',
-        semestre: '2026/1',
-    },
-    {
-        id: 7,
-        curso_id: 1,
-        turma_id: 2,
-        usuario_id: 2,
-        nome_disciplina: 'Teoria dos Autômatos',
-        sala_aula: 'Bloco A Sala 202',
-        semestre: '2026/1',
-    },
-    {
-        id: 8,
-        curso_id: 2,
-        turma_id: 5,
-        usuario_id: 3,
-        nome_disciplina: 'Interface Humano Computador',
-        sala_aula: 'Bloco B Sala 204',
-        semestre: '2026/2',
+        semestre_id: 1,
+        matriz_curricular_id: 2,
+        nome_ementa: 'Design UI/UX',
+        carga_horaria: 48,
+        objetivos: 'Introduzir conceitos de cores, tipografia e formatos de arquivos de áudio, vídeo e imagem.',
+        metodologia: 'Conteúdo didático, exercícios práticos, Canva e Figma.'
     }
+])
+
+puts "= ementas populada."
+
+Disciplina.create([
+    { id: 1, curso_id: 1, turma_id: 1, ementa_id: 1, usuario_id: 2, semestre_id: 1, sala_aula: 'Bloco A Sala 202' },
+    { id: 2, curso_id: 1, turma_id: 1, ementa_id: 2, usuario_id: 3, semestre_id: 1, sala_aula: 'Bloco A Sala 204' },
+    { id: 3, curso_id: 1, turma_id: 1, ementa_id: 3, usuario_id: 9, semestre_id: 1, sala_aula: 'Bloco A Sala 204' },
+    { id: 4, curso_id: 1, turma_id: 3, ementa_id: 3, usuario_id: 9, semestre_id: 1, sala_aula: 'Bloco A Sala 204' },
+    { id: 5, curso_id: 2, turma_id: 6, ementa_id: 4, usuario_id: 4, semestre_id: 1, sala_aula: 'Bloco AC Sala 201' },
+    { id: 6, curso_id: 2, turma_id: 7, ementa_id: 4, usuario_id: 4, semestre_id: 1, sala_aula: 'Bloco AC Sala 201' },
+    { id: 7, curso_id: 1, turma_id: 2, ementa_id: 1, usuario_id: 2, semestre_id: 1, sala_aula: 'Bloco A Sala 202' },
+    { id: 8, curso_id: 2, turma_id: 5, ementa_id: 2, usuario_id: 3, semestre_id: 1, sala_aula: 'Bloco B Sala 204' }
 ])
 
 puts "= disciplinas populada."

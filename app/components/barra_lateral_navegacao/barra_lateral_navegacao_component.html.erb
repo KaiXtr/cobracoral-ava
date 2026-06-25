@@ -6,12 +6,12 @@
             </a>
         </h2>
         <span>
-            Semestre <%= @matricula_estudante.semestre %>
+            Semestre <%= @matricula_estudante.semestre_id %>
         </span>
         <ul>
             <% helpers.disciplinas_turma(@usuario_autenticado, @matricula_estudante).each do |disciplina| %>
                 <li><a href="/disciplinas/<%= disciplina.id %>">
-                    <h3><%= disciplina.nome_disciplina %></h3>
+                    <h3><%= helpers.nome_disciplina(disciplina) %></h3>
                     <ol>
                         <% helpers.unidades_disciplina(disciplina).each do |unidade| %>
                             <a href="/disciplinas/<%= disciplina.id %>#<%= unidade.id %>"><li>
